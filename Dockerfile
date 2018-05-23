@@ -44,7 +44,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-harvest/pip-requirements.txt" && \
     # c3charts
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git#egg=ckanext-c3charts"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git#egg=ckanext-c3charts" && \
+    # disqus
+    pip install -e git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus
 
 
 
@@ -53,7 +55,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
-ENV CKAN__PLUGINS stats text_view image_view recline_view spatial_metadata spatial_query geo_view geojson_view qa archiver report showcase harvest ckan_harvester c3charts
+ENV CKAN__PLUGINS disqus stats text_view image_view recline_view spatial_metadata spatial_query geo_view geojson_view qa archiver report showcase harvest ckan_harvester c3charts
 
 USER ckan
 # Load envvars plugin on ini file
@@ -66,5 +68,7 @@ RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext-archiver
 # ckanext-harverst
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.harvest.mq.type = redis"
 
+# disqus - set up the real doman here (match with the domain set up at disqus.com)
+RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "disqus.name = data.gov.mk"
 
 CMD ["/srv/app/start_ckan.sh"]
