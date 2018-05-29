@@ -9,7 +9,7 @@ gulp.task('default', ['less', 'watch']);
 
 // Rebuild CSS from LESS
 gulp.task('less', function () {
-  return gulp.src('less/*.less')
+  return gulp.src('less/main.less')
     // .pipe(sourcemaps.init()) - Uncomment when developing
     .pipe(less())
     .pipe(cleanCSS({
