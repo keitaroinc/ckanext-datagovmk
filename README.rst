@@ -164,3 +164,18 @@ To publish a new version to PyPI follow these steps:
 
        git tag 0.0.2
        git push --tags
+
+
+-------------------------------------
+Building and running the docker image
+-------------------------------------
+
+To build the docker image, run the following::
+
+    docker build -t keitaro/datagovmk:latest .
+
+
+To run the docker instance (assuming you have PostgreSQL and Solr servers already running on your computer)::
+
+    HOST_IP=$(hostname -I |cut -f1 -d' ')
+    docker run -it -e CKAN_SQLALCHEMY_URL=postgresql://ckan_default:ckan_default@${HOST_IP}/ckan_default -e CKAN_SOLR_URL=http://${HOST_IP}:8983/solr/ckan -p 5000:5000 keitaro/datagovmk:latest
