@@ -1,0 +1,25 @@
+{% set stats = h.get_site_statistics() %}
+
+<div class="quick-stats">
+  <a href="{{ h.url_for(controller='package', action='search') }}">
+    <i class="fa fa-database"></i>
+    <span class="wrap">
+      <span class="value">{{ h.SI_number_span(stats.dataset_count) }}</span>
+      <span class="title">{{ _('dataset') if stats.dataset_count == 1 else _('datasets') }}</span>
+    </span>
+  </a>
+  <a href="{{ h.url_for(controller='organization', action='index') }}">
+    <i class="fa fa-university"></i>
+    <span class="wrap">
+      <span class="value">{{ h.SI_number_span(stats.organization_count) }}</span>
+      <span class="title">{{ _('organization') if stats.organization_count == 1 else _('organizations') }}</span>
+    </span>
+  </a>
+  <a href="{{ h.url_for(controller='group', action='index') }}">
+    <i class="fa fa-th"></i>
+    <span class="wrap">
+        <span class="value">{{ h.SI_number_span(stats.group_count) }}</span>
+        <span class="title">{{ _('group') if stats.group_count == 1 else _('groups') }}</span>
+    </span>
+  </a>
+</div>
