@@ -1,0 +1,340 @@
+@bootstrap-path: '../node_modules/bootstrap/less/';
+@gray-line: #ececec;
+@text-gray: #99938B;
+// @imagePath: "../../../../base/images";
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+// Core variables and mixins
+@import "bootstrap-variables.less";
+@import "@{bootstrap-path}mixins.less";
+// Reset and dependencies
+@import "@{bootstrap-path}normalize.less";
+@import "@{bootstrap-path}print.less";
+// @import "@{bootstrap-path}glyphicons.less";
+// Core CSS
+@import "@{bootstrap-path}scaffolding.less";
+@import "@{bootstrap-path}type.less";
+@import "@{bootstrap-path}code.less";
+@import "@{bootstrap-path}grid.less";
+@import "@{bootstrap-path}tables.less";
+@import "@{bootstrap-path}forms.less";
+@import "@{bootstrap-path}buttons.less";
+// Components
+@import "@{bootstrap-path}component-animations.less";
+@import "@{bootstrap-path}dropdowns.less";
+@import "@{bootstrap-path}button-groups.less";
+@import "@{bootstrap-path}input-groups.less";
+@import "@{bootstrap-path}navs.less";
+@import "@{bootstrap-path}navbar.less";
+@import "@{bootstrap-path}breadcrumbs.less";
+@import "@{bootstrap-path}pagination.less";
+@import "@{bootstrap-path}pager.less";
+@import "@{bootstrap-path}labels.less";
+@import "@{bootstrap-path}badges.less";
+@import "@{bootstrap-path}jumbotron.less";
+@import "@{bootstrap-path}thumbnails.less";
+@import "@{bootstrap-path}alerts.less";
+@import "@{bootstrap-path}progress-bars.less";
+@import "@{bootstrap-path}media.less";
+@import "@{bootstrap-path}list-group.less";
+@import "@{bootstrap-path}panels.less";
+@import "@{bootstrap-path}responsive-embed.less";
+@import "@{bootstrap-path}wells.less";
+@import "@{bootstrap-path}close.less";
+// Components w/ JavaScript
+@import "@{bootstrap-path}modals.less";
+@import "@{bootstrap-path}tooltip.less";
+@import "@{bootstrap-path}popovers.less";
+@import "@{bootstrap-path}carousel.less";
+// Utility classes
+@import "@{bootstrap-path}utilities.less";
+@import "@{bootstrap-path}responsive-utilities.less";
+/* Custom CSS */
+
+@import "_flex.less";
+@import "mixins.less";
+.btn {
+  .text-uppercase;
+}
+
+/* .toolbar */
+
+.toolbar {
+  .breadcrumb {
+    font-size: @font-size-base;
+  }
+}
+
+/* .account-masthead */
+
+.account-masthead {
+  padding-top: @grid-gutter-width/5;
+  background: @white;
+  .account {
+    ul {
+      li {
+        border-left: none;
+        a {
+          color: @text-gray;
+          &:hover {
+            color: @gray-base;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+    .notifications {
+      a {
+        span {
+          &.badge {
+            background-color: @gray-base;
+            color: @white;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* .masthead */
+
+.masthead {
+  background: @white;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom-color: darken(@brand-primary, 5%);
+  color: inherit;
+  .debug {
+    top: 0;
+    .text-muted;
+  }
+  hgroup {
+    h2 {
+      .text-muted;
+      position: static;
+      margin: (@grid-gutter-width - 10) @grid-gutter-width/2;
+    }
+  }
+  a {
+    color: @brand-primary;
+  }
+  input[type="text"] {
+    border-color: @input-border;
+    &:focus {
+      border-color: @input-border-focus;
+    }
+  }
+  .site-search {
+    margin-top: (@grid-gutter-width/6)*2;
+  }
+  .navigation {
+    .nav-pills {
+      li {
+        &.active {
+          a {
+            .custom-nav-pills(@brand-primary, transparent, @brand-primary);
+          }
+        }
+        a {
+          .custom-nav-pills(@border-bottom-color: transparent);
+          &:hover,
+          &:focus,
+          &:active {
+            .custom-nav-pills();
+          }
+        }
+      }
+    }
+  }
+}
+
+[role="main"] {
+  background: @white;
+}
+
+.navbar-toggle {
+  color: lighten(@brand-primary, 60%);
+  background-color: @brand-primary;
+  &:hover {
+    background-color: darken(@brand-primary, 5%);
+  }
+}
+
+.homepage {
+  .hero {
+    // Override must be more specific.
+    padding: 0;
+  }
+}
+
+.hero {
+  padding: 0;
+  color: lighten(@brand-primary, 70%);
+  min-height: auto;
+  // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
+  background: darken(@brand-primary, 20%) url("../img/Brücke_Skopje_modified.jpg") center no-repeat;
+  background-blend-mode: multiply; // Not supported in Internet Explorer
+  background-size: cover;
+  .intro {
+    background: @brand-primary url("../img/datagovmk-bg-pattern.png") center no-repeat;
+    background-size: cover;
+    .module-content {
+      .flex;
+      .flex-column;
+      .align-items-center;
+      .justify-content-center;
+      min-height: 100%;
+    }
+    header {
+      :first-child {
+        margin-top: 0;
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      .text-uppercase;
+    }
+    p {
+      font-size: @font-size-large;
+    }
+    .btn {
+      align-self: flex-start;
+      margin-top: @grid-gutter-width/2;
+      border-color: transparent;
+    }
+  }
+  .accent {
+    background-color: fade(@brand-primary, 75%);
+  }
+  .intro,
+  .accent {
+    padding: @grid-gutter-width*2 @grid-gutter-width;
+  }
+  .accent {
+    .flex;
+    .flex-wrap;
+    .flex-column;
+    .justify-content-center;
+  }
+  .module-search {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: @grid-gutter-width/2 0;
+    .module-content {
+      padding-bottom: 0;
+      .heading {
+        .text-uppercase;
+      }
+    }
+    &,
+    .tags,
+    .module-content {
+      background-color: transparent;
+    }
+    .tags {
+      padding-top: 0;
+    }
+    .search-giant {
+      border: @grid-gutter-width/3 solid @brand-secondary;
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.accent {
+  .lists {
+    margin-top: @grid-gutter-width/2;
+    font-size: @font-size-base + 2;
+    .fa {
+      margin-right: @grid-gutter-width/6;
+    }
+    a {
+      color: inherit;
+    }
+    .title {
+      .text-uppercase;
+      padding-bottom: @grid-gutter-width/3;
+      border-bottom: 2px solid darken(@brand-primary, 10%);
+      .fa {
+        color: @brand-secondary;
+      }
+    }
+  }
+  .list-unstyled{
+    a{
+      display: block;
+      padding-top: @grid-gutter-width/6;
+      padding-bottom: @grid-gutter-width/6;
+    }
+  }
+}
+
+.quick-stats {
+  .flex;
+  .flex-wrap;
+  .justify-content-between;
+  a {
+    padding: @grid-gutter-width/2 @grid-gutter-width*2;
+    border-radius: @border-radius-large;
+    .flex;
+    .justify-content-between;
+    color: inherit;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+    &:hover {
+      background: darken(@brand-primary, 15%);
+    }
+  }
+  .value {
+    font-weight: 700;
+    font-size: @font-size-h3*2;
+    line-height: 1;
+  }
+  .title {
+    font-size: @font-size-h4;
+    line-height: 1;
+  }
+  .fa {
+    margin-right: @grid-gutter-width;
+    font-size: @font-size-h2*2;
+  }
+  .wrap {
+    .flex;
+    .flex-column;
+    justify-content: center;
+  }
+}
+
+/* .site-footer */
+
+.site-footer {
+  background: @gray-darker;
+  a {
+    color: inherit;
+  }
+}
+
+/* Media queries */
+
+/* Up to the small size breakpoint */
+
+@media (max-width: @screen-sm-max) {
+  .intro,
+  .accent {
+    flex-basis: 100%;
+  }
+}
