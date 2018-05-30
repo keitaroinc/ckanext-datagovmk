@@ -108,6 +108,13 @@
   padding-bottom: 0;
   border-bottom-color: darken(@brand-primary, 5%);
   color: inherit;
+  .logo{
+    display: inline-block;
+    margin: (@grid-gutter-width/2 + 5) 0;
+    img{
+      max-height: @grid-gutter-width*2;
+    }
+  }
   .debug {
     top: 0;
     .text-muted;
