@@ -49,7 +49,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus" && \
     # dcat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dcat/requirements.txt"
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dcat/requirements.txt" && \
+    # odata
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata"
+
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -57,7 +60,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
-ENV CKAN__PLUGINS disqus stats text_view image_view recline_view spatial_metadata spatial_query geo_view geojson_view qa archiver report showcase harvest ckan_harvester dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data c3charts
+ENV CKAN__PLUGINS disqus stats text_view image_view recline_view odata spatial_metadata spatial_query geo_view geojson_view qa archiver report showcase harvest ckan_harvester dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data c3charts
 
 USER ckan
 # Load envvars plugin on ini file
