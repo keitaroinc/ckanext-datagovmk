@@ -26,21 +26,23 @@
             <span class="fa fa-bars"></span>
           </button>
         </div>
-        <hgroup class="{{ g.header_class }} navbar-left">
-          {% block header_logo %}
+        <div class="flex flex-wrap align-items-end justify-content-between">
+          <hgroup class="{{ g.header_class }} navbar-left">
+            {% block header_logo %}
             {{ super() }}
-          {% endblock %}
-        </hgroup>
-        <div class="collapse navbar-collapse" id="main-navigation-toggle">
-          {% block header_site_navigation %}
+            {% endblock %}
+          </hgroup>
+          <div class="collapse navbar-collapse" id="main-navigation-toggle">
+            {% block header_site_navigation %}
             {{ super() }}
-          {% endblock %}
+            {% endblock %}
 
-          {% block header_site_search %}
-          {% if request.host_url != request.url %}
+            {% block header_site_search %}
+            {% if request.host_url != request.url %}
             {{ super() }}
-          {% endif %}
-          {% endblock %}
+            {% endif %}
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
