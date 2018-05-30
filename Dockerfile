@@ -50,9 +50,12 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # dcat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dcat/requirements.txt" && \
+    # odata
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata" && \
     # mk dcat-ap
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-mk_dcatap#egg=ckanext-mk_dcatap" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt"
+    
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -65,6 +68,7 @@ ENV CKAN__PLUGINS disqus \
                   text_view \
                   image_view \
                   recline_view \
+                  odata \
                   spatial_metadata \
                   spatial_query \
                   geo_view \
@@ -82,6 +86,7 @@ ENV CKAN__PLUGINS disqus \
                   structured_data \
                   c3charts \
                   mk_dcatap
+
 
 USER ckan
 # Load envvars plugin on ini file
