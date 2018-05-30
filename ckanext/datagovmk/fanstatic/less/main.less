@@ -174,8 +174,7 @@
 .hero {
   padding: 0;
   color: lighten(@brand-primary, 70%);
-  min-height: auto;
-  // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
+  min-height: auto; // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
   background: darken(@brand-primary, 20%) url("../img/Brücke_Skopje_modified.jpg") center no-repeat;
   background-blend-mode: multiply; // Not supported in Internet Explorer
   background-size: cover;
@@ -212,7 +211,7 @@
     }
   }
   .accent {
-    background-color: fade(@brand-primary, 75%);
+    background-color: fade(@brand-primary, 50%);
   }
   .intro,
   .accent {
@@ -271,8 +270,8 @@
       }
     }
   }
-  .list-unstyled{
-    a{
+  .list-unstyled {
+    a {
       display: block;
       padding-top: @grid-gutter-width/6;
       padding-bottom: @grid-gutter-width/6;
@@ -288,7 +287,6 @@
     padding: @grid-gutter-width/2 @grid-gutter-width*2;
     border-radius: @border-radius-large;
     .flex;
-    .justify-content-between;
     color: inherit;
     &:hover,
     &:focus,
@@ -296,12 +294,12 @@
       text-decoration: none;
     }
     &:hover {
-      background: darken(@brand-primary, 15%);
+      background: fade(@brand-primary, 50%);
     }
   }
   .value {
     font-weight: 700;
-    font-size: @font-size-h3*2;
+    font-size: @font-size-h4*2;
     line-height: 1;
   }
   .title {
@@ -322,9 +320,48 @@
 /* .site-footer */
 
 .site-footer {
+  padding-top: @grid-gutter-width;
+  padding-bottom: @grid-gutter-width;
   background: @gray-darker;
   a {
     color: inherit;
+  }
+  hr {
+    border-top-color: @gray-light;
+  }
+  dt {
+    margin-bottom: @grid-gutter-width/6;
+  }
+  dd {
+    margin-bottom: @grid-gutter-width/3;
+  }
+  .title {
+    color: @white;
+    margin-bottom: @grid-gutter-width/2;
+  }
+  .btn{
+    border-color: transparent;
+  }
+}
+
+.footer-links {
+  dt {
+    &:after {
+      content: ':'
+    }
+  }
+}
+
+.footer-nav {
+  .text-uppercase;
+}
+
+.attribution {
+  .text-right;
+  .ckan-footer-logo {
+    text-align: left;
+    display: inline-block;
+    margin: 0 @grid-gutter-width/3;
   }
 }
 
