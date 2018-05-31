@@ -15,13 +15,13 @@
         {% endblock %}
         <div class="lists">
           {% set recent_datasets = h.datagovmk_get_recently_updated_datasets() %}
-          {% set popular_organizations = [] %}
+          {% set popular_organizations = h.datagovmk_get_most_active_organizations() %}
           <div class="col-md-6">
             <h4 class="title"><i class="fa fa-clock-o"></i> {{_('Recent datasets')}}</h4>
             {% if recent_datasets %}
             <ul class="list-unstyled">
               {% for dataset in recent_datasets %}
-                <li><a href="{{ h.url_for(controller='package', action='read', id=dataset.name) }}"><i class="fa fa-database"></i> {{ dataset.title }}</a></li>
+                <li><i class="fa fa-database"></i> <a href="{{ h.url_for(controller='package', action='read', id=dataset.name) }}">{{ dataset.title }}</a></li>
               {% endfor %}
             </ul>
             {% else %}
@@ -31,13 +31,11 @@
           <div class="col-md-6">
             <h4 class="title"><i class="fa fa-star"></i> {{_('Most active institutions')}}</h4>
             {% if popular_organizations %}
-            <!-- <ul class="list-unstyled">
-              <li><a href="#"><i class="fa fa-university"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-              <li><a href="#"><i class="fa fa-university"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-              <li><a href="#"><i class="fa fa-university"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-              <li><a href="#"><i class="fa fa-university"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-              <li><a href="#"><i class="fa fa-university"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-            </ul> -->
+            <ul class="list-unstyled">
+              {% for organization in popular_organizations %}
+                <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.name) }}">{{ organization.display_name }}</a></li>
+              {% endfor %}
+            </ul>
             {% else %}
               <p>{{ _('No organizations available.') }}</p>
             {% endif %}
