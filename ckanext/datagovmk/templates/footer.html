@@ -79,9 +79,12 @@
                   <h3 class="title text-uppercase">{{ _('Subscribe to our newsletter') }}</h3>
                   <p>{{ _('Stay updated with ') + g.site_title + '. Subscribe to our free newsletter.' }}</p>
                   <hr>
-                  <div class="form-group">
-                    <label for="mce-EMAIL">{{ _('E-mail') }}</label>
-                    <input type="email" required="required" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" placeholder="{{ _('Your e-mail address') }}">
+                  <label class="sr-only" for="mce-EMAIL">{{ _('E-mail') }}</label>
+                  <div class="input-group">
+                    <input type="email" required="required" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="{{ _('Your e-mail address') }}">
+                    <div class="input-group-btn">
+                      <input type="submit" value="{{ _('Subscribe') }}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">
+                    </div>
                   </div>
                   <div id="mce-responses" class="clear">
                     <div class="response" id="mce-error-response" style="display:none"></div>
@@ -91,7 +94,6 @@
                   <div style="position: absolute; left: -5000px;" aria-hidden="true">
                     <input type="text" name="b_d6f1b227acbdd8d88316c37fa_f17b9b49bf" tabindex="-1" value="">
                   </div>
-                  <input type="submit" value="{{ _('Subscribe') }}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
                 </div>
               </form>
             </div>
