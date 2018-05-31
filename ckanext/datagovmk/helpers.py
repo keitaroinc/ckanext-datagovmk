@@ -28,3 +28,17 @@ def get_recently_updated_datasets(limit=5):
             package['days_ago_modified'] = ((datetime.now() - modified).days)
             pkgs.append(package)
         return pkgs
+
+def get_most_active_organizations(limit=5):
+    '''
+    Returns most active organizations by number of datasets published
+
+    :param limit: Number of organizations to be returned
+    :return list
+    '''
+    organizatons = toolkit.get_action('organization_list')(data_dict={
+        'all_fields': True,
+        'order_by': 'packages',
+        'limit': limit
+    })
+    return organizatons
