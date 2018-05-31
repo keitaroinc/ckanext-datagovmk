@@ -112,7 +112,7 @@
     display: inline-block;
     margin: (@grid-gutter-width/2 + 5) 0;
     img{
-      max-height: @grid-gutter-width*2;
+      max-height: @grid-gutter-width*2.125;
     }
   }
   .debug {
@@ -279,7 +279,7 @@
   }
   .list-unstyled {
     a {
-      display: block;
+      display: inline-block;
       padding-top: @grid-gutter-width/6;
       padding-bottom: @grid-gutter-width/6;
     }
@@ -330,6 +330,7 @@
   padding-top: @grid-gutter-width;
   padding-bottom: @grid-gutter-width;
   background: @gray-darker;
+  color: @gray-lighter;
   a {
     color: inherit;
   }
