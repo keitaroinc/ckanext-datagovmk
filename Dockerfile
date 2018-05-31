@@ -105,4 +105,7 @@ RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "disqus.name = da
 # DCAT profiles
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext.dcat.rdf.profiles = euro_dcat_ap mk_dcat_ap"
 
+# Locale configuration
+RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini " ckan.locales_offered = mk"
+
 CMD ["/srv/app/start_ckan.sh"]
