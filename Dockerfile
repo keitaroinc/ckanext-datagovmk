@@ -51,8 +51,11 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dcat/requirements.txt" && \
     # odata
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata"
-
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata" && \
+    # mk dcat-ap
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-mk_dcatap#egg=ckanext-mk_dcatap" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt"
+    
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -60,7 +63,30 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
-ENV CKAN__PLUGINS disqus stats text_view image_view recline_view odata spatial_metadata spatial_query geo_view geojson_view qa archiver report showcase harvest ckan_harvester dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data c3charts
+ENV CKAN__PLUGINS disqus \
+                  stats \
+                  text_view \
+                  image_view \
+                  recline_view \
+                  odata \
+                  spatial_metadata \
+                  spatial_query \
+                  geo_view \
+                  geojson_view \
+                  qa \
+                  archiver \
+                  report \
+                  showcase \
+                  harvest \
+                  ckan_harvester \
+                  dcat \
+                  dcat_rdf_harvester \
+                  dcat_json_harvester \
+                  dcat_json_interface \
+                  structured_data \
+                  c3charts \
+                  mk_dcatap
+
 
 USER ckan
 # Load envvars plugin on ini file
@@ -76,5 +102,10 @@ RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.harvest.mq.
 # disqus - set up the real doman here (match with the domain set up at disqus.com)
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "disqus.name = data.gov.mk"
 
+# DCAT profiles
+RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext.dcat.rdf.profiles = euro_dcat_ap mk_dcat_ap"
+
+# Locale configuration
+RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini " ckan.locales_offered = mk"
 
 CMD ["/srv/app/start_ckan.sh"]
