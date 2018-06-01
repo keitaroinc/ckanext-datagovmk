@@ -63,7 +63,7 @@
 
 .btn-primary-outline {
   &,
-  &:hover{
+  &:hover {
     border-color: @white;
   }
 }
@@ -168,6 +168,9 @@
 
 [role="main"] {
   background: @white;
+  &:nth-child(odd) {
+    background: @gray-lighter;
+  }
 }
 
 .navbar-toggle {
@@ -382,12 +385,10 @@
 .news,
 .blog {
   .panel {
+    border-color: @hr-border;
     .item {
       color: inherit;
       padding: @grid-gutter-width/2;
-      &:not(:last-child) {
-        border-bottom: 1px solid @hr-border;
-      }
       &:hover,
       &:focus {
         text-decoration: none;
@@ -452,6 +453,9 @@
 .blog {
   .panel {
     .item {
+      &:not(:last-child) {
+        border-bottom: 1px solid @hr-border;
+      }
       .body {
         .flex;
         .flex-column;
