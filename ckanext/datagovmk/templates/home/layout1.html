@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-6 accent">
         {% block stats %}
-          {% snippet 'home/snippets/stats.html' %}
+          {% snippet 'home/snippets/stats_alt.html' %}
         {% endblock %}
         {% block search %}
           {% snippet 'home/snippets/search.html' %}
@@ -49,6 +49,103 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+          <div class="col-md-12 col-lg-6 news">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2 class="panel-title">
+                  <span class="fa fa-newspaper-o"></span>
+                  <span>{{ _('News') }}</span>
+                </h2>
+                <a href="#" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+              </div>
+              <div class="panel-body">
+                <a class="item" href="#">
+                  <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/42380028792_25310bd0cb_o.jpg" alt="photo">
+                  <span class="body">
+                    <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                    <span class="date" role="text">12 June 2018</span>
+                    <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                      porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id enim
+                      sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue velit.
+                      Suspendisse potenti.
+                    </span>
+                  </span>
+                </a>
+                <a class="item" href="#">
+                  <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/d40262d2-2532-4cbd-8b36-33023f7ae9eb.jpg" alt="photo">
+                  <span class="body">
+                    <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                    <span class="date" role="text">2 June 2018</span>
+                    <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                      porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id enim
+                      sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue velit.
+                      Suspendisse potenti.
+                    </span>
+                  </span>
+                </a>
+                <a class="item" href="#">
+                  <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/dsc_2401.jpg" alt="photo">
+                  <span class="body">
+                    <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                    <span class="date" role="text">17 March 2018</span>
+                    <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                      porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id enim
+                      sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue velit.
+                      Suspendisse potenti.
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 blog">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h2 class="panel-title">
+                    <span class="fa fa-sticky-note"></span>
+                    <span>{{ _('Blog') }}</span>
+                  </h2>
+                  <a href="#" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+                </div>
+                <div class="panel-body">
+                  <a class="item" href="#">
+                    <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/42380028792_25310bd0cb_o.jpg" alt="photo">
+                    <span class="body">
+                      <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                      <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                        porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id
+                        enim sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue
+                        velit. Suspendisse potenti.
+                      </span>
+                    </span>
+                  </a>
+                  <a class="item" href="#">
+                    <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/d40262d2-2532-4cbd-8b36-33023f7ae9eb.jpg" alt="photo">
+                    <span class="body">
+                      <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                      <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                        porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id
+                        enim sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue
+                        velit. Suspendisse potenti.
+                      </span>
+                    </span>
+                  </a>
+                  <a class="item" href="#">
+                    <img class="image" src="http://vlada.mk/sites/default/files/img/2018/05/29/dsc_2401.jpg" alt="photo">
+                    <span class="body">
+                      <span class="title" role="heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                      <span class="description" role="text">Nunc leo neque, ornare sed lorem non, lobortis volutpat magna. Vivamus id rutrum lacus, non pellentesque massa. Curabitur
+                        porttitor mauris id nisl laoreet congue. Nunc scelerisque ornare est, a tincidunt metus blandit non. Mauris id
+                        enim sit amet dolor egestas lobortis quis et elit. Sed tempor metus et justo elementum maximus. In quis congue
+                        velit. Suspendisse potenti.
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+          </div>
+        </div>
         <div class="row row2">
           <div class="col-md-6 col1">
             {# Note: this featured_group block is used as an example in the theming
@@ -56,13 +153,13 @@
                whether you need to update the docs. #}
             {# Start template block example. #}
             {% block featured_group %}
-              {% snippet 'home/snippets/featured_group.html' %}
+              {# snippet 'home/snippets/featured_group.html' #}
             {% endblock %}
             {# End template block example. #}
           </div>
           <div class="col-md-6 col2">
             {% block featured_organization %}
-              {% snippet 'home/snippets/featured_organization.html' %}
+              {# snippet 'home/snippets/featured_organization.html' #}
             {% endblock %}
           </div>
         </div>
