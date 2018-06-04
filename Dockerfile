@@ -89,6 +89,7 @@ ENV CKAN__PLUGINS envvars \
                   dcat_json_interface \
                   structured_data \
                   c3charts \
+                  datagovmk \
                   mk_dcatap
 
 
