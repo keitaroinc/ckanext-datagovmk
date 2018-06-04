@@ -38,9 +38,7 @@
             {% endblock %}
 
             {% block header_site_search %}
-            {% if request.host_url != request.url %}
-            {{ super() }}
-            {% endif %}
+            {# No need for two search inputs on the front page. #}
             {% endblock %}
           </div>
         </div>
