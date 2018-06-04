@@ -178,4 +178,7 @@ To build the docker image, run the following::
 To run the docker instance (assuming you have PostgreSQL and Solr servers already running on your computer)::
 
     HOST_IP=$(hostname -I |cut -f1 -d' ')
-    docker run -it -e CKAN_SQLALCHEMY_URL=postgresql://ckan_default:ckan_default@${HOST_IP}/ckan_default -e CKAN_SOLR_URL=http://${HOST_IP}:8983/solr/ckan -p 5000:5000 keitaro/datagovmk:latest
+    docker run -it -e CKAN_SQLALCHEMY_URL=postgresql://ckan_default:ckan_default@${HOST_IP}/ckan_default \
+                   -e CKAN_SOLR_URL=http://${HOST_IP}:8983/solr/ckan \
+                   -e CKAN__REDIS__URL="redis://${HOST_IP}:6379/1"\
+                   -p 5000:5000 keitaro/datagovmk:latest
