@@ -54,7 +54,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata" && \
     # mk dcat-ap
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-mk_dcatap#egg=ckanext-mk_dcatap" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt"
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt" && \
+    # envvars
+    pip install --no-cache-dir -e "git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt"
     
 
 
@@ -63,7 +66,8 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
-ENV CKAN__PLUGINS disqus \
+ENV CKAN__PLUGINS envvars \
+                  disqus \
                   stats \
                   text_view \
                   image_view \
@@ -85,27 +89,12 @@ ENV CKAN__PLUGINS disqus \
                   dcat_json_interface \
                   structured_data \
                   c3charts \
+                  datagovmk \
                   mk_dcatap
 
 
 USER ckan
 # Load envvars plugin on ini file
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
-# configure spatial to use solr as search backend
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext.spatial.search_backend = solr"
-# ckanext-archiver configuration
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext-archiver.cache_url_root = http://example.com"
-
-# ckanext-harverst
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.harvest.mq.type = redis"
-
-# disqus - set up the real doman here (match with the domain set up at disqus.com)
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "disqus.name = data.gov.mk"
-
-# DCAT profiles
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckanext.dcat.rdf.profiles = euro_dcat_ap mk_dcat_ap"
-
-# Locale configuration
-RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini " ckan.locales_offered = mk"
 
 CMD ["/srv/app/start_ckan.sh"]
