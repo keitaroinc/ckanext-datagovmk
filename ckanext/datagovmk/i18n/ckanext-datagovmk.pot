@@ -1,0 +1,158 @@
+# Translations template for ckanext-datagovmk.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the ckanext-datagovmk
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-datagovmk 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-06-04 16:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ckanext/datagovmk/templates/footer.html:16
+msgid "Address"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:20
+#: ckanext/datagovmk/templates/footer.html:82
+msgid "E-mail"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:22
+msgid "Phone"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:24
+msgid "Fax"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:28
+msgid "Terms of use"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:29
+msgid "Privacy Policy"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:39
+msgid "Datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:40
+msgid "Organizations"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:41
+msgid "Groups"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:42
+msgid "About"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:79
+msgid "Subscribe to our newsletter"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:80
+msgid "Stay updated with "
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:84
+msgid "Your e-mail address"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:86
+msgid "Subscribe"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:105
+msgid ""
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:109
+msgid "CKAN API"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:110
+msgid "CKAN Association"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:20
+msgid "Recent datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:28
+msgid "No datasets available."
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:32
+msgid "Most active institutions"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:40
+msgid "No organizations available."
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:60
+msgid "News"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:62
+#: ckanext/datagovmk/templates/home/layout1.html:90
+msgid "Archive"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/layout1.html:88
+msgid "Blog"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/promoted.html:8
+msgid "Welcome to CKAN"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/promoted.html:10
+msgid ""
+"This is a nice introductory paragraph about CKAN or the site in general. We "
+"don't have any copy to go here yet but soon we will "
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/promoted.html:17
+msgid "Learn more"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+msgid "dataset"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+msgid "datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+msgid "organization"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+msgid "organizations"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+msgid "group"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+msgid "groups"
+msgstr ""
+
