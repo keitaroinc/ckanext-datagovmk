@@ -474,23 +474,6 @@
   }
 }
 
-/* CKAN spatial extension*/
-
-.dataset-map-expanded {
-  #dataset-map {
-    top: -@navbar-height;
-    height: 394px;
-    z-index: @zindex-modal;
-  }
-}
-#dataset-search-form {
-  .search-input-group{
-    opacity: 0.999;  /* This is the giant search field, which due to `position:relative` and the
-                        `z-index` set on the children was always displayed on top of the map 
-                        irrelevant of the maps `z-index`. */
-  }
-}
-
 /* Media queries */
 
 /* Up to the small size breakpoint */
