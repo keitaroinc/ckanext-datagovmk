@@ -57,7 +57,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt" && \
     # envvars
     pip install --no-cache-dir -e "git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt"
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt" && \
+    # scheming
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt"
     
 
 
@@ -90,7 +93,8 @@ ENV CKAN__PLUGINS envvars \
                   structured_data \
                   c3charts \
                   datagovmk \
-                  mk_dcatap
+                  mk_dcatap \
+                  scheming_datasets
 
 
 USER ckan
