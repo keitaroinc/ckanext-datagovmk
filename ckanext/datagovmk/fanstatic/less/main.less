@@ -483,6 +483,34 @@
   }
 }
 
+/* Spatial Map styling */
+
+.dataset-map-expanded {
+  .primary,
+  .secondary {
+    margin-top: @grid-gutter-width*13.5;
+  }
+  .secondary {
+    position: static;
+  }
+  #dataset-map {
+    width: 100%;
+    background: @white;
+    top: @grid-gutter-width*1.5;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    #dataset-map-container {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+  .dataset-map {
+    height: 75%;
+  }
+}
+
 /* Media queries */
 
 /* Up to the small size breakpoint */
