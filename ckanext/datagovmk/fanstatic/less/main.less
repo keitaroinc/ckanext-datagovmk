@@ -68,6 +68,15 @@
   }
 }
 
+// Override Bootstrap 3 default
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: static;
+  margin-left: auto;
+}
+
 /* .toolbar */
 
 .toolbar {
@@ -471,6 +480,34 @@
         max-width: @grid-gutter-width*5;
       }
     }
+  }
+}
+
+/* Spatial Map styling */
+
+.dataset-map-expanded {
+  .primary,
+  .secondary {
+    margin-top: @grid-gutter-width*13.5;
+  }
+  .secondary {
+    position: static;
+  }
+  #dataset-map {
+    width: 100%;
+    background: @white;
+    top: @grid-gutter-width*1.5;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    #dataset-map-container {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+  .dataset-map {
+    height: 75%;
   }
 }
 

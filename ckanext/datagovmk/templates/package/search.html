@@ -1,7 +1,6 @@
 {% ckan_extends %}
 
 {% block secondary_content %}
-  {{ super() }}
-  {# snippet "spatial/snippets/spatial_query.html" #}
-
+    {% snippet "spatial/snippets/spatial_query.html" %}
+    {{ super() }}
 {% endblock %}

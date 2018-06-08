@@ -29,7 +29,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
     # Install extensions
     # ckanext-spatial and related
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@ckan-2.8#egg=ckanext-spatial" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
     pip install --no-cache-dir ckanext-geoview && \
     pip install --no-cache-dir -e "git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report" && \
@@ -58,9 +58,13 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # envvars
     pip install --no-cache-dir -e "git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt" && \
+    # pages
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@news#egg=ckanext-pages" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-pages/dev-requirements.txt" && \
     # scheming
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt"
+
     
 
 
@@ -92,6 +96,7 @@ ENV CKAN__PLUGINS envvars \
                   dcat_json_interface \
                   structured_data \
                   c3charts \
+                  pages \
                   datagovmk \
                   mk_dcatap \
                   scheming_datasets
