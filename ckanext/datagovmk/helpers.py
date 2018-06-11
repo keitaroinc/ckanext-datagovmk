@@ -42,3 +42,18 @@ def get_most_active_organizations(limit=5):
         'limit': limit
     })
     return organizatons
+
+
+def get_related_datasets(id, limit=3):
+    """ Return related datasets for a specific dataset
+
+    :param id: Dataset id
+    :param limit: Number of datasets to return. Default is 3.
+    :return list of datasets
+    """
+
+    related_datasets = toolkit.get_action('datagovmk_get_related_datasets')(
+        data_dict={'id': id, 'limit': limit}
+    )
+
+    return related_datasets

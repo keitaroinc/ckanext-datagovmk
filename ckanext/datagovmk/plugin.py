@@ -1,11 +1,15 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
+from ckanext.datagovmk import actions
+from ckanext.datagovmk import auth
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IActions)
+    plugins.implements(plugins.IAuthFunctions)
 
     # IConfigurer
 
@@ -20,5 +24,21 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
             'datagovmk_get_recently_updated_datasets':
                 helpers.get_recently_updated_datasets,
             'datagovmk_get_most_active_organizations':
-                helpers.get_most_active_organizations
+                helpers.get_most_active_organizations,
+            'datagovmk_get_related_datasets':
+                helpers.get_related_datasets,
+        }
+
+    # IActions
+
+    def get_actions(self):
+        return {
+            'datagovmk_get_related_datasets': actions.get_related_datasets
+        }
+
+    # IAuthFunctions
+
+    def get_auth_functions(self):
+        return {
+            'datagovmk_get_related_datasets': auth.get_related_datasets
         }
