@@ -42,14 +42,14 @@
 @import "@{bootstrap-path}media.less";
 @import "@{bootstrap-path}list-group.less";
 @import "@{bootstrap-path}panels.less";
-@import "@{bootstrap-path}responsive-embed.less";
+// @import "@{bootstrap-path}responsive-embed.less";
 @import "@{bootstrap-path}wells.less";
 @import "@{bootstrap-path}close.less";
 // Components w/ JavaScript
-@import "@{bootstrap-path}modals.less";
-@import "@{bootstrap-path}tooltip.less";
-@import "@{bootstrap-path}popovers.less";
-@import "@{bootstrap-path}carousel.less";
+// @import "@{bootstrap-path}modals.less";
+// @import "@{bootstrap-path}tooltip.less";
+// @import "@{bootstrap-path}popovers.less";
+// @import "@{bootstrap-path}carousel.less";
 // Utility classes
 @import "@{bootstrap-path}utilities.less";
 @import "@{bootstrap-path}responsive-utilities.less";
@@ -66,6 +66,15 @@
   &:hover {
     border-color: @white;
   }
+}
+
+// Override Bootstrap 3 default
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: static;
+  margin-left: auto;
 }
 
 /* .toolbar */
@@ -424,6 +433,7 @@
     .flex-wrap;
     .align-items-center;
     .justify-content-between;
+    padding: @grid-gutter-width/2 @grid-gutter-width;
     .fa {
       color: @brand-secondary;
       margin-right: @grid-gutter-width/5;
@@ -471,6 +481,34 @@
         max-width: @grid-gutter-width*5;
       }
     }
+  }
+}
+
+/* Spatial Map styling */
+
+.dataset-map-expanded {
+  .primary,
+  .secondary {
+    margin-top: @grid-gutter-width*13.5;
+  }
+  .secondary {
+    position: static;
+  }
+  #dataset-map {
+    width: 100%;
+    background: @white;
+    top: @grid-gutter-width*1.5;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    #dataset-map-container {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+  .dataset-map {
+    height: 75%;
   }
 }
 
