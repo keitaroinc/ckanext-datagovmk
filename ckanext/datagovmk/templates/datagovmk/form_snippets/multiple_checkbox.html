@@ -39,4 +39,5 @@ fieldset.checkboxes label input {
             </label>
         {%- endfor -%}
     </fieldset>
+    {%- snippet 'datagovmk/form_snippets/help_text.html', field=field -%}
 {%- endcall -%}

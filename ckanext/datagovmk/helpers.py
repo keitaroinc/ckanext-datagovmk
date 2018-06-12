@@ -3,7 +3,7 @@ from ckan.lib import search
 from ckan.lib.i18n import get_lang
 from datetime import datetime
 import ckanext.datagovmk.loader as loader
-from ckan.common import config
+from ckan.common import config, request
 from jinja2.runtime import Undefined
 from ckanext.datagovmk.schema import PRESETS
 
@@ -105,7 +105,7 @@ def get_form_field_required(field):
 def get_preset(field):
     if field.get('preset'):
         return PRESETS.get(field['preset'])
-    return None
+    return PRESETS.get('_generic_field')
 
 def get_field_choices(field):
     """
@@ -118,3 +118,13 @@ def get_field_choices(field):
         from ckantoolkit import h
         choices_fn = getattr(h, field['choices_helper'])
         return choices_fn(field)
+
+def has_query_param(param):
+    # Checks if the provided parameter is part of the current URL query params
+
+    params = dict(request.params)
+
+    if param in params:
+        return True
+
+    return False

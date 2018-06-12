@@ -1,7 +1,8 @@
 
 PRESETS = {
     "_generic_field":{
-        "form_macro": "input"
+        "form_macro": "input",
+        "classes": ["control-full", "control-large"],
     },
     "title": {
         "validators": "if_empty_same_as(name) unicode",
@@ -9,11 +10,12 @@ PRESETS = {
             "data-module": "slug-preview-target",
             "class": "form-control"
         },
+        "classes": ["control-full", "control-large"],
         "form_macro": "input"
     },
     "dataset_slug": {
         "validators": "not_empty unicode name_validator package_name_validator",
-        "form_macro": "input"
+        "form_snippet": "slug.html"
     },
     "multiple_checkbox": {
         "form_snippet": "multiple_checkbox.html",
@@ -23,12 +25,13 @@ PRESETS = {
     },
     "dataset_organization": {
         "validators": "owner_org_validator unicode",
+        "classes": ["control-full", "control-large"],
         "form_snippet": "organization.html"
     },
     "tag_string_autocomplete": {
         "validators": "ignore_missing tag_string_convert",
-        "classes": ["control-full"],
-        "form_attrs": {
+        "classes": ["control-full", "control-large"],
+        "form-attrs": {
           "data-module": "autocomplete",
           "data-module-tags": "",
           "data-module-source": "/api/2/util/tag/autocomplete?incomplete=?"
