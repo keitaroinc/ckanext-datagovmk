@@ -4,7 +4,7 @@
     {{ super() }}
 
     {% block related_datasets %}
-        {% set related_datasets = h.datagovmk_get_related_datasets(pkg.id, limit=3) %}
+        {% set related_datasets = h.datagovmk_get_related_datasets(pkg.id, limit=5) %}
 
         <h3>{{ _('Related datasets') }}</h3>
 
