@@ -15,14 +15,14 @@ fieldset.checkboxes label input {
 </style>
 
 {%- call form.input_block(
-    label=h.datagovmk_language_text(field.label),
+    label=h.datagovmk_get_language_text(field.label),
     classes=['control-medium'],
     error=errors[field.field_name],
     is_required=h.datagovmk_field_required(field)) -%}
   {%- set choices = [] -%}
   {%- for c in h.datagovmk_field_choices(field) -%}
     {%- do choices.append(
-      (c.value, h.datagovmk_language_text(c.label))) -%}
+      (c.value, h.datagovmk_get_language_text(c.label))) -%}
   {%- endfor -%}
   {%- if field.get('sorted_choices') -%}
     {%- set choices = choices|sort(case_sensitive=false, attribute=1) -%}

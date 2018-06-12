@@ -13,21 +13,28 @@
             {# Render based on the preset type #}
             {%- set preset = h.datagovmk_get_preset(field) or {} -%}
             {%- set field_macro = preset.field_macro or 'input' -%}
-            {%- call form[field_macro](
-                        field.field_name,
-                        id='field-' + field.field_name,
-                        label=h.datagovmk_get_language_text(field.label),
-                        placeholder=h.datagovmk_get_language_text(field.form_placeholder),
-                        type=preset.field_type if 'field_type' in preset else none,
-                        value=data.get(field.field_name, '').split()[0],
-                        error=errors[field.field_name],
-                        classes=preset.classes if 'classes' in preset else ['control-medium'],
-                        attrs=field.form_attrs if 'form_attrs' in field else {"class": "form-control"},
-                        is_required=h.datagovmk_field_required(field),
-            ) -%}
-            <div>Field Macro: [{{ field_macro }}]</div>
-            {%- snippet 'datagovmk/form_snippets/help_text.html', field=field -%}
-            {%- endcall -%}
+            {%- if preset.get('form_snippet') is not none -%}
+                {# Render the form snippet #}
+                <div>SNIPPET[preset]: {{ preset['form_snippet'] }}</div>
+                {%- snippet 'datagovmk/form_snippets/' + preset['form_snippet'], field=field, data=data, errors=errors -%}
+                {%- snippet 'datagovmk/form_snippets/help_text.html', field=field -%}
+            {%- else -%}
+                {%- call form[field_macro](
+                            field.field_name,
+                            id='field-' + field.field_name,
+                            label=h.datagovmk_get_language_text(field.label),
+                            placeholder=h.datagovmk_get_language_text(field.form_placeholder),
+                            type=preset['field_type'] if 'field_type' in preset else none,
+                            value=data.get(field.field_name, '').split()[0],
+                            error=errors[field.field_name],
+                            classes=preset['classes'] if 'classes' in preset else ['control-medium'],
+                            attrs=field.form_attrs if 'form_attrs' in field else {"class": "form-control"},
+                            is_required=h.datagovmk_field_required(field),
+                ) -%}
+                <div>Field Macro: [{{ field_macro }}]</div>
+                {%- snippet 'datagovmk/form_snippets/help_text.html', field=field -%}
+                {%- endcall -%}
+            {%- endif -%}
         {% endif %}
         
     {%- endfor -%}

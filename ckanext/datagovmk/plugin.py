@@ -39,7 +39,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
             'datagovmk_field_required':
                 helpers.get_form_field_required,
             'datagovmk_get_preset':
-                helpers.get_preset
+                helpers.get_preset,
+            'datagovmk_field_choices':
+                helpers.get_field_choices
         }
 
     # IValidators

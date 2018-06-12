@@ -106,3 +106,15 @@ def get_preset(field):
     if field.get('preset'):
         return PRESETS.get(field['preset'])
     return None
+
+def get_field_choices(field):
+    """
+    :param field: scheming field definition
+    :returns: choices iterable or None if not found.
+    """
+    if 'choices' in field:
+        return field['choices']
+    if 'choices_helper' in field:
+        from ckantoolkit import h
+        choices_fn = getattr(h, field['choices_helper'])
+        return choices_fn(field)
