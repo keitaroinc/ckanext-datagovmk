@@ -512,6 +512,41 @@
   }
 }
 
+.featured-charts{
+  margin: @grid-gutter-width -@grid-gutter-width/2;
+  .flex;
+  .flex-wrap;
+  .item{
+    .flex;
+    .flex-column;
+    flex-basis: 30%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: @grid-gutter-width/2;
+    background-color: @white;
+    padding: @grid-gutter-width;
+    min-height: @grid-gutter-width*10;
+  }
+  .title{
+    .flex;
+    .fa{
+      color: @brand-secondary;
+      margin-right: @grid-gutter-width/2;
+    }
+    font-size: @font-size-h4;
+    font-weight: 400;
+    margin: 0 0 @grid-gutter-width;
+    text-transform: uppercase;
+  }
+  iframe{
+    width: 100%;
+    height: 100%;
+  }
+  .btn-group-export{
+    display: none;
+  }
+}
+
 /* Media queries */
 
 /* Up to the small size breakpoint */
