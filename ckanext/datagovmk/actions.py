@@ -8,8 +8,9 @@ get_action = toolkit.get_action
 @toolkit.side_effect_free
 def get_related_datasets(context, data_dict):
     id = data_dict.get('id')
-    limit = data_dict.get('limit', 3)
+    limit = int(data_dict.get('limit', 3))
     related_datasets = []
+    related_datasets_ids = []
 
     if id is None:
         raise ValidationError(_('Missing dataset id'))
@@ -19,23 +20,36 @@ def get_related_datasets(context, data_dict):
     groups = dataset.get('groups')
     tags = dataset.get('tags')
 
-    if len(groups) > 0:
-        for group in groups:
-            data_dict = {
-                'id': group.get('id'),
-                'include_datasets': True
-            }
-            group_dict = get_action('group_show')(data_dict=data_dict)
+    for group in groups:
+        data_dict = {
+            'id': group.get('id'),
+            'include_datasets': True
+        }
+        group_dict = get_action('group_show')(data_dict=data_dict)
 
-            if group_dict.get('package_count') > 1:
-                group_datasets = group_dict.get('packages')
+        group_datasets = group_dict.get('packages')
 
-                for group_dataset in group_datasets:
-                    if group_dataset.get('id') != dataset.get('id'):
-                        related_datasets.append(group_dataset)
+        for group_dataset in group_datasets:
+            group_dataset_id = group_dataset.get('id')
+            if group_dataset_id != dataset.get('id') and \
+               group_dataset_id not in related_datasets_ids:
+                related_datasets.append(group_dataset)
+                related_datasets_ids.append(group_dataset_id)
 
-    if len(tags) > 0:
-        for tag in tags:
-            pass
+    for tag in tags:
+        data_dict = {
+            'id': tag.get('id'),
+            'include_datasets': True
+        }
+        tag_dict = get_action('tag_show')(data_dict=data_dict)
+
+        tag_datasets = tag_dict.get('packages')
+
+        for tag_dataset in tag_datasets:
+            tag_dataset_id = tag_dataset.get('id')
+            if tag_dataset_id != dataset.get('id') and \
+               tag_dataset_id not in related_datasets_ids:
+                related_datasets.append(tag_dataset)
+                related_datasets_ids.append(tag_dataset_id)
 
     return related_datasets[:limit]
