@@ -1,9 +1,11 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
+from ckan.lib.plugins import DefaultTranslation
 
 
-class DatagovmkPlugin(plugins.SingletonPlugin):
+class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
 

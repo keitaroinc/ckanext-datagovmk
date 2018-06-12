@@ -9,151 +9,155 @@ msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-06-04 16:30+0200\n"
-"PO-Revision-Date: 2018-06-04 16:30+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Language: mk\n"
 "Language-Team: mk <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.0.8\n"
 
 #: ckanext/datagovmk/templates/footer.html:16
 msgid "Address"
-msgstr ""
+msgstr "Адреса"
 
 #: ckanext/datagovmk/templates/footer.html:20
 #: ckanext/datagovmk/templates/footer.html:82
 msgid "E-mail"
-msgstr ""
+msgstr "Е-пошта"
 
 #: ckanext/datagovmk/templates/footer.html:22
 msgid "Phone"
-msgstr ""
+msgstr "Телефон"
 
 #: ckanext/datagovmk/templates/footer.html:24
 msgid "Fax"
-msgstr ""
+msgstr "Факс"
 
 #: ckanext/datagovmk/templates/footer.html:28
 msgid "Terms of use"
-msgstr ""
+msgstr "Услови за користење"
 
 #: ckanext/datagovmk/templates/footer.html:29
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Политика за приватност"
 
 #: ckanext/datagovmk/templates/footer.html:39
 msgid "Datasets"
-msgstr ""
+msgstr "Податочни сетови"
 
 #: ckanext/datagovmk/templates/footer.html:40
 msgid "Organizations"
-msgstr ""
+msgstr "Организации"
 
 #: ckanext/datagovmk/templates/footer.html:41
 msgid "Groups"
-msgstr ""
+msgstr "Групи"
 
 #: ckanext/datagovmk/templates/footer.html:42
 msgid "About"
-msgstr ""
+msgstr "За"
 
 #: ckanext/datagovmk/templates/footer.html:79
 msgid "Subscribe to our newsletter"
-msgstr ""
+msgstr "Претплатете се на нашиот билтен"
 
 #: ckanext/datagovmk/templates/footer.html:80
 msgid "Stay updated with "
-msgstr ""
+msgstr "Бидете во тек со "
 
 #: ckanext/datagovmk/templates/footer.html:84
 msgid "Your e-mail address"
-msgstr ""
+msgstr "Вашата е-пошта"
 
 #: ckanext/datagovmk/templates/footer.html:86
 msgid "Subscribe"
-msgstr ""
+msgstr "Претплатете се"
 
 #: ckanext/datagovmk/templates/footer.html:105
 msgid ""
-"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
-"href=\"http://ckan.org\">CKAN</a>"
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\">CKAN</a>"
 msgstr ""
+"<strong>Поддржано од</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
 
 #: ckanext/datagovmk/templates/footer.html:109
 msgid "CKAN API"
-msgstr ""
+msgstr "CKAN API"
 
 #: ckanext/datagovmk/templates/footer.html:110
 msgid "CKAN Association"
-msgstr ""
+msgstr "CKAN Асоцијација"
 
 #: ckanext/datagovmk/templates/home/layout1.html:20
 msgid "Recent datasets"
-msgstr ""
+msgstr "Неодамнешни податочни сетови"
 
 #: ckanext/datagovmk/templates/home/layout1.html:28
 msgid "No datasets available."
-msgstr ""
+msgstr "Нема достапни податочни сетови."
 
 #: ckanext/datagovmk/templates/home/layout1.html:32
 msgid "Most active institutions"
-msgstr ""
+msgstr "Најактивни институции"
 
 #: ckanext/datagovmk/templates/home/layout1.html:40
 msgid "No organizations available."
-msgstr ""
+msgstr "Нема достапни организации."
 
 #: ckanext/datagovmk/templates/home/layout1.html:60
 msgid "News"
-msgstr ""
+msgstr "Новости"
 
 #: ckanext/datagovmk/templates/home/layout1.html:62
 #: ckanext/datagovmk/templates/home/layout1.html:90
 msgid "Archive"
-msgstr ""
+msgstr "Архива"
 
 #: ckanext/datagovmk/templates/home/layout1.html:88
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:8
 msgid "Welcome to CKAN"
-msgstr ""
+msgstr "Добредојдовте во CKAN"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:10
 msgid ""
 "This is a nice introductory paragraph about CKAN or the site in general. "
 "We don't have any copy to go here yet but soon we will "
 msgstr ""
+"Ова е убав воведен параграф за CKAN или за сајтот воопшто. Ние немаме "
+"никаков текст за тука, но наскоро ќе имаме "
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
-msgstr ""
+msgstr "Дознај повеќе"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
 msgid "dataset"
-msgstr ""
+msgstr "податочен сет"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
 msgid "datasets"
-msgstr ""
+msgstr "податочни сетови"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
 msgid "organization"
-msgstr ""
+msgstr "организација"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
 msgid "organizations"
-msgstr ""
+msgstr "организации"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "group"
-msgstr ""
+msgstr "група"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "groups"
-msgstr ""
-
+msgstr "групи"
