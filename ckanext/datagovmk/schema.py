@@ -45,7 +45,8 @@ PRESETS = {
     "date": {
         "form_snippet": "date.html",
         "display_snippet": "date.html",
-        "validators": "datagovmk_required isodate convert_to_json_if_date"
+        "validators": "datagovmk_required isodate convert_to_json_if_date",
+        "classes": ["control-full", "control-large"],
     },
     "resource_url_upload": {
         "validators": "ignore_missing unicode remove_whitespace",

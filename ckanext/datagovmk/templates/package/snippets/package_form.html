@@ -4,16 +4,16 @@
 {%- set dataset_type = 'requestdata-metadata-only' if h.datagovmk_has_query_param('metadata') else 'dataset' -%}
 {% block basic_fields %}
     {%- for field in h.datagovmk_load_dataset_schema({})['dataset_fields'] -%}
+        {%- set preset = h.datagovmk_get_preset(field) or {} -%}
         {% if field.get('form_snippet') is not none %}
             {# Render the form snippet #}
-            {%- snippet 'datagovmk/form_snippets/' + field['form_snippet'], field=field, data=data, errors=errors -%}
+            {%- snippet 'datagovmk/form_snippets/' + field['form_snippet'], field=field, data=data, errors=errors, preset=preset -%}
         {% else %}
             {# Render based on the preset type #}
-            {%- set preset = h.datagovmk_get_preset(field) or {} -%}
             {%- set form_macro = preset.form_macro or 'input' -%}
             {%- if preset.get('form_snippet') is not none -%}
                 {# Render the form snippet #}
-                {%- snippet 'datagovmk/form_snippets/' + preset['form_snippet'], field=field, data=data, errors=errors, object_type=dataset_type -%}
+                {%- snippet 'datagovmk/form_snippets/' + preset['form_snippet'], field=field, data=data, errors=errors, object_type=dataset_type, preset=preset -%}
             {%- else -%}
                 {%- set call_args = {
                     'id': 'field-' + field.field_name,
