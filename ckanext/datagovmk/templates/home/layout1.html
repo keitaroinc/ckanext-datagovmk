@@ -45,6 +45,36 @@
     </div>
   </div>
 </div>
+{% set groups = h.datagovmk_get_groups() %}
+{% if groups %}
+<div class="container-fluid featured-groups-wrap">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <ul class="featured-groups">
+        {% for group in groups %}
+          {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
+
+          {% if group.image_display_url %}
+            {% set group_image = group.image_display_url %}
+          {% else %}
+            {% set group_image = '/base/images/placeholder-group.png' %}
+          {% endif %}
+
+          <li>
+            <a href="{{ group_url }}" class="group">
+              <span role="img" class="icon-wrap">
+                <i class="fa fa-3x fa-files-o icon" alt="{{ group.title }}"></i>
+              </span>
+              <span role="heading" class="title">{{ group.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
