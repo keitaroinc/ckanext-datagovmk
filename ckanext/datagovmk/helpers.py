@@ -54,7 +54,7 @@ def get_most_active_organizations(limit=5):
 def load_dataset_schema(data_dict, default_schema):
     # check in extras, if specific dataset schema was set
     for extra in data_dict.get('extras', []):
-        if extra['name'] == 'dataset_schema':
+        if extra['key'] == 'dataset_schema':
             try:
                 return loader.load_schema_module_path(extra['value'])
             except:

@@ -14,7 +14,7 @@
     'source'
     ] -%}
 
-{%- set schema = h.datagovmk_load_dataset_schema({}) -%}
+{%- set schema = h.datagovmk_load_dataset_schema(pkg_dict) -%}
 {% ckan_extends %}
 {% block package_additional_info %}
   {%- for field in schema.dataset_fields -%}
@@ -27,10 +27,8 @@
           h.datagovmk_get_language_text(field.label) }}</th>
         <td class="dataset-details"{% if field.display_property %} property="{{ field.display_property }}"{% endif %}>
           {%- if display_snippet -%}
-            display_snippet: {{ display_snippet }}
             {%- snippet 'datagovmk/display_snippets/' + display_snippet, field=field, data=pkg_dict, schema=schema -%}
           {%- else -%}
-            Raw value:
             {{ pkg_dict[field.field_name] }}
           {%- endif -%}
         </td>
@@ -44,3 +42,5 @@
     </tr>
   {% endif %}
 {% endblock %}
+
+<h3> ETE: </h3>

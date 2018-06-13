@@ -1,4 +1,3 @@
-
 PRESETS = {
     "_generic_field":{
         "form_macro": "input",
@@ -65,3 +64,4 @@ PRESETS = {
         }
     }
 }
+

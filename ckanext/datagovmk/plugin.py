@@ -3,12 +3,19 @@ import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
 import ckanext.datagovmk.loader as loader
 import ckanext.datagovmk.validators as validators
+from ckanext.datagovmk.logic import (override_package_create,
+                                     override_package_show)
+from ckan.logic import get_action, chained_action
+
+from ckantoolkit import get_validator
 
 
-class DatagovmkPlugin(plugins.SingletonPlugin):
+class DatagovmkPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IValidators)
+    plugins.implements(plugins.IDatasetForm, inherit=True)
+    plugins.implements(plugins.IActions)
 
     _DEFAULT_DATASET_SCHEMA = {}
 
@@ -57,5 +64,25 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
             'datagovmk_multiple_choice': validators.datagovmk_multiple_choice,
             'datagovmk_multiple_choice_output': validators.datagovmk_multiple_choice_output,
             'datagovmk_required': validators.datagovmk_required,
-            'datagovmk_choices': validators.datagovmk_choices
+            'datagovmk_choices': validators.datagovmk_choices,
+            'convert_to_json_if_date': validators.convert_to_json_if_date,
+            'convert_to_json_if_datetime': validators.convert_to_json_if_datetime
         }
+    
+    # IDatasetForm
+    def package_types(self):
+        return ['dataset']
+    
+    def validate(self, *args, **kwargs):
+        pass
+
+    # IActions
+
+    def get_actions(self):
+        orig_package_create = get_action('package_create')
+        orig_package_show = get_action('package_show')
+        return {
+            'package_create': override_package_create(orig_package_create, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA),
+            'package_show': override_package_show(orig_package_show, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA)
+        }
+    
