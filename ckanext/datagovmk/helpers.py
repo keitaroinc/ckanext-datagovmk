@@ -7,6 +7,8 @@ from ckan.common import config, request
 from jinja2.runtime import Undefined
 from ckanext.datagovmk.schema import PRESETS
 
+def _get_action(action, context_dict, data_dict):
+    return toolkit.get_action(action)(context_dict, data_dict)
 
 def get_recently_updated_datasets(limit=5):
     '''
@@ -97,15 +99,18 @@ def get_form_field_type(field):
     else:
         return 'text'
 
+
 def get_form_field_required(field):
     if 'required' in field:
         return field['required']
     return 'not_empty' in field.get('validators', '').split()
 
+
 def get_preset(field):
     if field.get('preset'):
         return PRESETS.get(field['preset'])
     return PRESETS.get('_generic_field')
+
 
 def get_field_choices(field):
     """
@@ -119,6 +124,7 @@ def get_field_choices(field):
         choices_fn = getattr(h, field['choices_helper'])
         return choices_fn(field)
 
+
 def has_query_param(param):
     # Checks if the provided parameter is part of the current URL query params
 
@@ -128,6 +134,7 @@ def has_query_param(param):
         return True
 
     return False
+
 
 def get_choices_label(choices, value):
     """
@@ -142,3 +149,16 @@ def get_choices_label(choices, value):
         if c['value'] == value:
             return get_language_text(c.get('label', value))
     return get_language_text(value)
+
+
+def get_groups():
+    # Helper used on the homepage for showing groups
+
+    data_dict = {
+        'sort': 'package_count',
+        'all_fields': True
+    }
+    groups = _get_action('group_list', {}, data_dict)
+    groups = [group for group in groups if group.get('package_count') > 0]
+
+    return groups

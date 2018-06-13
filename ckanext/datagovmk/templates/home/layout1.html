@@ -45,6 +45,56 @@
     </div>
   </div>
 </div>
+{% set groups = h.datagovmk_get_groups() %}
+{% if groups %}
+<div class="container-fluid featured-groups-wrap">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <ul class="featured-groups">
+        {% for group in groups %}
+          {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
+
+          {% if group.image_display_url %}
+            {% set group_image = group.image_display_url %}
+          {% else %}
+            {% set group_image = '/base/images/placeholder-group.png' %}
+          {% endif %}
+
+          <li>
+            <a href="{{ group_url }}" class="group">
+              <span role="img" class="icon-wrap">
+                <i class="fa fa-3x fa-files-o icon" alt="{{ group.title }}"></i>
+              </span>
+              <span role="heading" class="title">{{ group.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="featured-charts">
+        <div class="item">
+          <h4 class="title"><i class="fa fa-database"></i><a href="#">Chart builder view title</a></h4>
+          <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/db871b96-17e9-418f-8c43-aeadbf59baaf"></iframe>
+        </div>
+        <div class="item">
+            <h4 class="title"><i class="fa fa-database"></i><a href="#">Another chart builder view title</a></h4>
+            <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/a5263200-9890-4e5b-bc8c-85c12ed8948c"></iframe>
+        </div>
+        <div class="item">
+            <h4 class="title"><i class="fa fa-database"></i><a href="#">This is a very long chart builder view title which should wrap</a></h4>
+            <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/5d2a343f-40c6-40a7-a416-2579a52dae4e"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div role="main">
   <div class="container-fluid">
     <div class="row">
