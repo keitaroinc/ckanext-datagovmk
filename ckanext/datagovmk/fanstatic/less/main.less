@@ -1,6 +1,7 @@
 @bootstrap-path: '../node_modules/bootstrap/less/';
 @gray-line: #ececec;
 @text-gray: #99938B;
+@group-icon-size: 90px;
 // @imagePath: "../../../../base/images";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -241,7 +242,7 @@
   }
   .intro,
   .accent {
-    padding: @grid-gutter-width*2 @grid-gutter-width;
+    padding: @grid-gutter-width*1.5 @grid-gutter-width;
   }
   .accent {
     .flex;
@@ -310,9 +311,10 @@
   .flex-wrap;
   .justify-content-between;
   a {
+    .flex;
+    flex-basis: 20%;
     padding: @grid-gutter-width/2 @grid-gutter-width*2;
     border-radius: @border-radius-large;
-    .flex;
     color: inherit;
     &:hover,
     &:focus,
@@ -513,11 +515,61 @@
   }
 }
 
-.featured-charts{
+.featured-groups-wrap {
+  background: @brand-secondary;
+}
+
+.featured-groups {
+  .flex;
+  .flex-wrap;
+  .align-items-center;
+  .justify-content-center;
+  list-style: none;
+  padding-left: 0;
+  li {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+  .group {
+    .flex;
+    .flex-column;
+    .align-items-center;
+    .justify-content-center;
+    &:hover {
+      color: darken(@brand-primary, 20%);
+      text-decoration: none;
+      .icon-wrap {
+        border-color: @white;
+      }
+    }
+    margin: @grid-gutter-width;
+    .icon-wrap {
+      .flex;
+      .align-items-center;
+      .justify-content-center;
+      overflow: hidden;
+      border: 4px solid transparent;
+      background: @brand-primary;
+      margin: @grid-gutter-width/2 auto;
+      width: @group-icon-size;
+      height: @group-icon-size;
+      border-radius: @group-icon-size/2;
+    }
+    .icon{
+      color: @white;
+    }
+    .title {
+      text-transform: uppercase;
+      font-size: @font-size-large;
+    }
+  }
+}
+
+.featured-charts {
   margin: @grid-gutter-width -@grid-gutter-width/2;
   .flex;
   .flex-wrap;
-  .item{
+  .item {
     .flex;
     .flex-column;
     flex-basis: 30%;
@@ -528,9 +580,9 @@
     padding: @grid-gutter-width;
     min-height: @grid-gutter-width*10;
   }
-  .title{
+  .title {
     .flex;
-    .fa{
+    .fa {
       color: @brand-secondary;
       margin-right: @grid-gutter-width/2;
     }
@@ -539,12 +591,26 @@
     margin: 0 0 @grid-gutter-width;
     text-transform: uppercase;
   }
-  iframe{
+  iframe {
     width: 100%;
     height: 100%;
   }
-  .btn-group-export{
+  .btn-group-export {
     display: none;
+  }
+}
+
+.resources {
+  h3 {
+    .text-uppercase;
+    font-weight: 300;
+    border-bottom: 1px solid @gray-lighter;
+    margin-bottom: @grid-gutter-width/2;
+    padding-bottom: @grid-gutter-width/2;
+  }
+  .resource-list {
+    padding-left: @grid-gutter-width/2;
+    padding-right: @grid-gutter-width/2;
   }
 }
 

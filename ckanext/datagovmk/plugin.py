@@ -22,5 +22,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_recently_updated_datasets':
                 helpers.get_recently_updated_datasets,
             'datagovmk_get_most_active_organizations':
-                helpers.get_most_active_organizations
+                helpers.get_most_active_organizations,
+            'datagovmk_get_groups':
+                helpers.get_groups
         }

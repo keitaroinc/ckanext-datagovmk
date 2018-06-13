@@ -2,6 +2,8 @@ from ckan.plugins import toolkit
 from ckan.lib import search
 from datetime import datetime
 
+def _get_action(action, context_dict, data_dict):
+    return toolkit.get_action(action)(context_dict, data_dict)
 
 def get_recently_updated_datasets(limit=5):
     '''
@@ -42,3 +44,15 @@ def get_most_active_organizations(limit=5):
         'limit': limit
     })
     return organizatons
+
+def get_groups():
+    # Helper used on the homepage for showing groups
+
+    data_dict = {
+        'sort': 'package_count',
+        'all_fields': True
+    }
+    groups = _get_action('group_list', {}, data_dict)
+    groups = [group for group in groups if group.get('package_count') > 0]
+
+    return groups
