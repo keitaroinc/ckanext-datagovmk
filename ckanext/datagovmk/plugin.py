@@ -25,8 +25,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
                 helpers.get_recently_updated_datasets,
             'datagovmk_get_most_active_organizations':
                 helpers.get_most_active_organizations,
+            'datagovmk_get_groups':
+                helpers.get_groups,
             'datagovmk_get_related_datasets':
-                helpers.get_related_datasets,
+                helpers.get_related_datasets
         }
 
     # IActions
@@ -40,5 +42,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
 
     def get_auth_functions(self):
         return {
-            'datagovmk_get_related_datasets': auth.get_related_datasets
+            'datagovmk_get_related_datasets': auth.get_related_datasets,
+            'datagovmk_get_groups':
+                helpers.get_groups
         }
