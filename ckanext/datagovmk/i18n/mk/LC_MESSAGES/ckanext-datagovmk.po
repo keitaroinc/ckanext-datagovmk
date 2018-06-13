@@ -82,16 +82,16 @@ msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
 "\"http://ckan.org\">CKAN</a>"
 msgstr ""
-"<strong>Поддржано од</strong> <a class=\"hide-text ckan-footer-logo\" "
+"<strong>Придвижувано од</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 
 #: ckanext/datagovmk/templates/footer.html:109
 msgid "CKAN API"
-msgstr "CKAN API"
+msgstr "API на CKAN"
 
 #: ckanext/datagovmk/templates/footer.html:110
 msgid "CKAN Association"
-msgstr "CKAN Асоцијација"
+msgstr "Асоцијација CKAN"
 
 #: ckanext/datagovmk/templates/home/layout1.html:20
 msgid "Recent datasets"
@@ -136,7 +136,7 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
-msgstr "Дознај повеќе"
+msgstr "Дознајте повеќе"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
 msgid "dataset"
