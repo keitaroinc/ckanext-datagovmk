@@ -43,6 +43,5 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
     def get_auth_functions(self):
         return {
             'datagovmk_get_related_datasets': auth.get_related_datasets,
-            'datagovmk_get_groups':
-                helpers.get_groups
+            'datagovmk_get_groups': helpers.get_groups
         }
