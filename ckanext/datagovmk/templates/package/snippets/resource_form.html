@@ -3,8 +3,9 @@
 {% ckan_extends %}
 {%- set dataset_type = 'requestdata-metadata-only' if h.datagovmk_has_query_param('metadata') else 'dataset' -%}
 {%- set schema = h.datagovmk_load_dataset_schema({}) -%}
+
 {% block basic_fields %}
-    {%- for field in schema['dataset_fields'] -%}
+    {%- for field in schema.resource_fields -%}
         {%- set preset = h.datagovmk_get_preset(field) or {} -%}
         {% if field.get('form_snippet') is not none %}
             {# Render the form snippet #}
@@ -20,7 +21,7 @@
                     'id': 'field-' + field.field_name,
                     'name': field.field_name,
                     'label': h.datagovmk_get_language_text(field.label),
-                    'placeholder': h.datagovmk_get_language_text(field.form_placeholder),
+                    'placeholder': h.datagovmk_get_language_text(field.form_placeholder or preset.form_placeholder),
                     'value': data.get(field.field_name, '').split()[0],
                     'error': errors[field.field_name],
                     'classes': preset.classes or ['control-medium'],
@@ -35,23 +36,5 @@
                 {%- endcall -%}
             {%- endif -%}
         {% endif %}
-        
     {%- endfor -%}
-  
-    {%- if 'resource_fields' not in schema -%}
-        <!-- force controller to skip resource-editing step for this type -->
-        <h1>Resource editing skipped: {{ schema }}</h1>
-        <input type="hidden" name="_ckan_phase" value="" />
-        <pre>
-            {{ schema }}
-        </pre>
-    {%- endif -%}
-{% endblock %}
-
-{% block metadata_fields %}
-    {% block package_metadata_fields_custom %}
-        {% block custom_fields %}
-            {% snippet 'snippets/custom_form_fields.html', extras=data.extras, errors=errors, limit=3 %}
-        {% endblock %}
-    {% endblock %}
 {% endblock %}

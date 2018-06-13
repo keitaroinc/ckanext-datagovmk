@@ -43,7 +43,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin):
             'datagovmk_field_choices':
                 helpers.get_field_choices,
             'datagovmk_has_query_param':
-                helpers.has_query_param
+                helpers.has_query_param,
+            'datagovmk_choices_label':
+                helpers.get_choices_label
         }
 
     # IValidators

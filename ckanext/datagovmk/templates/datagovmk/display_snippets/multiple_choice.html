@@ -1,0 +1,21 @@
+{%- set values = data[field.field_name] -%}
+{%- set labels = [] -%}
+
+{%- for choice in h.datagovmk_field_choices(field) -%}
+    {%- if choice.value in values -%}
+      {%- do labels.append(h.datagovmk_get_language_text(choice.label)) -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{%- if labels|length == 1 -%}
+  {{ labels[0] }}
+{%- else -%}
+    {%- if field.get('sorted_choices') -%}
+        {%- set labels = labels|sort -%}
+    {%- endif -%}
+    <ul>
+    {%- for label in labels -%}
+       <li>{{ label }}</li>
+    {%- endfor -%}
+    </ul>
+{%- endif -%}

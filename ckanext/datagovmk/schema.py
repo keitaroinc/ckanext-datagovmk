@@ -59,7 +59,7 @@ PRESETS = {
     "resource_format_autocomplete": {
         "validators": "if_empty_guess_format ignore_missing clean_format unicode",
         "form_placeholder": "eg. CSV, XML or JSON",
-        "form_attrs": {
+        "form-attrs": {
           "data-module": "autocomplete",
           "data-module-source": "/api/2/util/resource/format_autocomplete?incomplete=?"
         }

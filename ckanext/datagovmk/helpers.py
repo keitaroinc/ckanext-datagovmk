@@ -128,3 +128,17 @@ def has_query_param(param):
         return True
 
     return False
+
+def get_choices_label(choices, value):
+    """
+    :param choices: choices list of {"label": .., "value": ..} dicts
+    :param value: value selected
+
+    Return the label from choices with a matching value, or
+    the value passed when not found. Result is passed through
+    get_language_text before being returned.
+    """
+    for c in choices:
+        if c['value'] == value:
+            return get_language_text(c.get('label', value))
+    return get_language_text(value)

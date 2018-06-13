@@ -6,24 +6,33 @@
     'tag_string',
     'license_id',
     'owner_org',
+    'author',
+    'version',
+    'author_email',
+    'maintainer',
+    'maintainer_email',
+    'source'
     ] -%}
 
 {%- set schema = h.datagovmk_load_dataset_schema({}) -%}
 {% ckan_extends %}
 {% block package_additional_info %}
-    <h3>ADDITIONAL INFO</h3>
   {%- for field in schema.dataset_fields -%}
+    {%- set preset = h.datagovmk_get_preset(field) or {} -%}
+    {%- set display_snippet = field.display_snippet or preset.display_snippet -%}
     {%- if field.field_name not in exclude_fields
         and field.display_snippet is not none -%}
       <tr>
         <th scope="row" class="dataset-label">{{
           h.datagovmk_get_language_text(field.label) }}</th>
-        <td class="dataset-details"{%
-          if field.display_property %} property="{{ field.display_property
-          }}"{% endif %}>
-          {#%- snippet 'scheming/snippets/display_field.html',
-          field=field, data=pkg_dict, schema=schema -%#}
-          {{ pkg_dict[field.field_name] }}
+        <td class="dataset-details"{% if field.display_property %} property="{{ field.display_property }}"{% endif %}>
+          {%- if display_snippet -%}
+            display_snippet: {{ display_snippet }}
+            {%- snippet 'datagovmk/display_snippets/' + display_snippet, field=field, data=pkg_dict, schema=schema -%}
+          {%- else -%}
+            Raw value:
+            {{ pkg_dict[field.field_name] }}
+          {%- endif -%}
         </td>
       </tr>
     {%- endif -%}

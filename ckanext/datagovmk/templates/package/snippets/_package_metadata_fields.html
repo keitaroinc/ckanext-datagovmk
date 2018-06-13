@@ -1,0 +1,31 @@
+{% ckan_extends %}
+
+{% block package_metadata_fields %}
+
+  {% block package_metadata_fields_url %}
+    <h1>ALOO: Source</h1>
+    {# defined in the schema #}
+  {% endblock %}
+
+  {% block package_metadata_fields_version %}
+    {# defined in the schema #}
+  {% endblock %}
+
+  {% block package_metadata_author %}
+    {# defined in the schema #}
+  {% endblock %}
+
+  {% block package_metadata_fields_maintainer %}
+    {# defined in the schema #}
+  {% endblock %}
+
+  {% block package_metadata_fields_custom %}
+    {% block custom_fields %}
+      {% snippet 'snippets/custom_form_fields.html', extras=data.extras, errors=errors, limit=3 %}
+    {% endblock %}
+  {% endblock %}
+
+  {% block dataset_fields %}
+  {% endblock %}
+
+{% endblock %}
