@@ -1,20 +1,19 @@
 {% ckan_extends %}
 
-{% block primary_content_inner %}
-    {{ super() }}
+{% block package_additional_info %}
+  {{ super() }}
+  {% block related_datasets %}
+    {% set related_datasets = h.datagovmk_get_related_datasets(pkg.id, limit=5) %}
 
-    {% block related_datasets %}
-        {% set related_datasets = h.datagovmk_get_related_datasets(pkg.id, limit=5) %}
-
-        <h3>{{ _('Related datasets') }}</h3>
-
-        {% if related_datasets | length == 0 %}
-            <div>{{ _('No related datasets found.') }}</div>
-        {% endif %}
-
-        {% for dataset in related_datasets %}
-            {% set url = h.url_for(controller='package', action='read', id=dataset.name) %}
-            <div><a href="{{ url }}">{{ dataset.title }}</a></div>
-        {% endfor %}
-    {% endblock %}
+    {% if related_datasets %}
+    <section class="related-datasets">
+      <h3 class="title">{{ _('Related datasets') }}</h3>
+      <ul class="{{ list_class or 'dataset-list list-unstyled' }}">
+      {% for dataset in related_datasets %}
+        {% snippet 'snippets/package_item.html', package=dataset %}
+      {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+  {% endblock %}
 {% endblock %}
