@@ -155,6 +155,9 @@
   .site-search {
     margin-top: (@grid-gutter-width/6)*2;
   }
+  .navbar-collapse {
+    padding: inherit;
+  }
   .navigation {
     font-size: @font-size-large;
     .nav-pills {
@@ -311,9 +314,10 @@
   .flex-wrap;
   .justify-content-between;
   a {
+    .flex;
+    flex-basis: 20%;
     padding: @grid-gutter-width/2 @grid-gutter-width*2;
     border-radius: @border-radius-large;
-    .flex;
     color: inherit;
     &:hover,
     &:focus,
@@ -610,6 +614,20 @@
   }
   .dataset-list {
     padding: 0 @grid-gutter-width/2;
+  }
+}
+
+.resources {
+  h3 {
+    .text-uppercase;
+    font-weight: 300;
+    border-bottom: 1px solid @gray-lighter;
+    margin-bottom: @grid-gutter-width/2;
+    padding-bottom: @grid-gutter-width/2;
+  }
+  .resource-list {
+    padding-left: @grid-gutter-width/2;
+    padding-right: @grid-gutter-width/2;
   }
 }
 
