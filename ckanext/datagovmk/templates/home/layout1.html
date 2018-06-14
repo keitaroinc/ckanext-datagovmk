@@ -82,8 +82,8 @@
         <div>
           {%- for featured_chart in h.c3charts_featured_charts(limit=4) -%}
           <div class="item">
-              <h4 class="title"><i class="fa fa-database"></i><a href="#">{{ featured_chart.title }}</a></h4>
-              <iframe src="/dataset/{{ featured_chart.package_id }}/resource/{{ featured_chart.resource_id }}/view/{{ featured_chart.resource_view_id }}"></iframe> <!-- FIXME: This needs to be generated.-->
+              <h4 class="title"><i class="fa fa-database"></i><a href="{{ featured_chart.resource_view_url }}">{{ featured_chart.title }}</a></h4>
+              {{ h.c3charts_render_featured_chart(featured_chart, True ) }}
             </div>
           {%- endfor -%}
         </div>
