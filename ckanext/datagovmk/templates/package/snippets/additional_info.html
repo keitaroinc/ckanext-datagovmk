@@ -11,7 +11,8 @@
     'author_email',
     'maintainer',
     'maintainer_email',
-    'source'
+    'source',
+    'state'
     ] -%}
 
 {%- set schema = h.datagovmk_load_dataset_schema(pkg_dict) -%}
@@ -31,7 +32,9 @@
           {%- else -%}
             {{ pkg_dict[field.field_name] }}
           {%- endif -%}
+          <pre> {{ tags }}</pre>
         </td>
+        
       </tr>
     {%- endif -%}
   {%- endfor -%}
@@ -42,5 +45,3 @@
     </tr>
   {% endif %}
 {% endblock %}
-
-<h3> ETE: </h3>

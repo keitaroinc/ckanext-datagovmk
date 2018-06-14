@@ -159,28 +159,6 @@ def get_validator_or_converter(name):
         pass
     raise Exception('validator/converter not found: %r' % name)
 
-# def convert_from_extras_group(key, data, errors, context):
-#     '''Converts values from extras, tailored for groups.'''
-
-#     def remove_from_extras(data, key):
-#         to_remove = []
-#         for data_key, data_value in data.iteritems():
-#             if (data_key[0] == 'extras'
-#                     and data_key[1] == key):
-#                 to_remove.append(data_key)
-#         for item in to_remove:
-#             del data[item]
-
-#     for data_key, data_value in data.iteritems():
-#         if (data_key[0] == 'extras'
-#             and 'key' in data_value
-#                 and data_value['key'] == key[-1]):
-#             data[key] = data_value['value']
-#             break
-#     else:
-#         return
-#     remove_from_extras(data, data_key[1])
-
 
 def convert_to_json_if_date(date, context):
     if isinstance(date, datetime.datetime):
@@ -197,7 +175,7 @@ def convert_to_json_if_datetime(date, context):
     return date
 
 
-def create_schema(default_schema, schema_fields, presets, direction="ingest"):
+def create_schema(default_schema, schema_fields, presets, action="create"):
     merged_schema = {}
     merged_schema.update(default_schema)
 
@@ -208,12 +186,24 @@ def create_schema(default_schema, schema_fields, presets, direction="ingest"):
                 field_validators = presets.get(field['preset'],{}).get('validators')
         if field_validators is not None:
             field_validators = validators_from_string(field_validators, field, merged_schema)
+        else:
+            field_validators = []
 
+        if action != 'show': # create/update
+            if helpers.get_form_field_required(field):
+                field_validators += [not_empty, unicode]
+            else:
+                field_validators += [ignore_missing, unicode]
+            
             if field['field_name'] not in default_schema:
-                # convert to extras
-                field_validators.append(convert_to_extras if direction == "ingest" else convert_from_extras)
-                print " extras: ", field['field_name']
+                field_validators += [convert_to_extras]
+        else: # show - output validators
+            if field['field_name'] not in default_schema:
+                field_validators += [convert_from_extras, ignore_missing]
+            else:
+                field_validators += [ignore_missing]
 
-            merged_schema[field['field_name']] = field_validators
+        merged_schema[field['field_name']] = field_validators
+        
 
     return merged_schema

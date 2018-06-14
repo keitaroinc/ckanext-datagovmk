@@ -4,7 +4,8 @@ import ckanext.datagovmk.helpers as helpers
 import ckanext.datagovmk.loader as loader
 import ckanext.datagovmk.validators as validators
 from ckanext.datagovmk.logic import (override_package_create,
-                                     override_package_show)
+                                     override_package_show,
+                                     override_package_update)
 from ckan.logic import get_action, chained_action
 
 from ckantoolkit import get_validator
@@ -81,8 +82,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def get_actions(self):
         orig_package_create = get_action('package_create')
         orig_package_show = get_action('package_show')
+        orig_package_update = get_action('package_update')
         return {
             'package_create': override_package_create(orig_package_create, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA),
-            'package_show': override_package_show(orig_package_show, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA)
+            'package_show': override_package_show(orig_package_show, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA),
+            'package_update': override_package_update(orig_package_update, DatagovmkPlugin._DEFAULT_DATASET_SCHEMA)
         }
     

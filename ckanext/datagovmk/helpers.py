@@ -30,10 +30,13 @@ def get_recently_updated_datasets(limit=5):
         for pkg in pkg_search_results:
             package = toolkit.get_action('package_show')(
                 data_dict={'id': pkg['id']})
-            modified = datetime.strptime(
-                package['metadata_modified'].split('T')[0], '%Y-%m-%d')
-            package['days_ago_modified'] = ((datetime.now() - modified).days)
-            pkgs.append(package)
+            if package.get('metadata_modified'):
+                modified = datetime.strptime(
+                    package['metadata_modified'].split('T')[0], '%Y-%m-%d')
+                package['days_ago_modified'] = ((datetime.now() - modified).days)
+                pkgs.append(package)
+            else:
+                print "package invalid ===> ", package['name']
         return pkgs
 
 def get_most_active_organizations(limit=5):
@@ -55,10 +58,12 @@ def load_dataset_schema(data_dict, default_schema):
     # check in extras, if specific dataset schema was set
     for extra in data_dict.get('extras', []):
         if extra['key'] == 'dataset_schema':
+            print ' ==> Loading dataset_schema: ', extra['value']
             try:
                 return loader.load_schema_module_path(extra['value'])
             except:
                 return default_schema
+    print 'Loading default schema: ', default_schema is not None, str(type(default_schema))
     return default_schema
 
 
