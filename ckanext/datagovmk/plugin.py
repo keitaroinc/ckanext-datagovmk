@@ -26,3 +26,13 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_groups':
                 helpers.get_groups
         }
+
+    def update_config_schema(self, schema):
+        ignore_missing = toolkit.get_validator('ignore_missing')
+        validators = [ignore_missing, unicode]
+
+        schema.update({
+            'footer_links': validators,
+        })
+
+        return schema

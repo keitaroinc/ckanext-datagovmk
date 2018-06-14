@@ -48,24 +48,8 @@
               </div>
               <div class="col-md-4">
                 <div class="footer-links footer-nav">
-                  <h4 class="title">{{ 'Links' }}</h4>
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#">{{ 'ЕНЕР' }}</a>
-                    </li>
-                    <li>
-                      <a href="#">{{ 'Е-демократија' }}</a>
-                    </li>
-                    <li>
-                      <a href="#">{{ 'Е-Македонија' }}</a>
-                    </li>
-                    <li>
-                      <a href="#">{{ 'uslugi.gov.mk' }}</a>
-                    </li>
-                    <li>
-                      <a href="#">{{ 'Странски експерти за домашни компании' }}</a>
-                    </li>
-                  </ul>
+                  {{ app_globals }}
+                  {% snippet 'snippets/footer_links.html' %}
                 </div>
               </div>
             </div>
