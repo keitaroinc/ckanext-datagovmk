@@ -10,15 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-06-04 16:30+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
+"Last-Translator: \n"
 "Language: mk\n"
 "Language-Team: mk <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.0.8\n"
 
 #: ckanext/datagovmk/templates/footer.html:16
 msgid "Address"
@@ -79,8 +78,8 @@ msgstr "Претплатете се"
 
 #: ckanext/datagovmk/templates/footer.html:105
 msgid ""
-"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
-"\"http://ckan.org\">CKAN</a>"
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
 msgstr ""
 "<strong>Придвижувано од</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
@@ -161,3 +160,4 @@ msgstr "група"
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "groups"
 msgstr "групи"
+
