@@ -5,6 +5,6 @@
 {% block admin_form %}
   {{ super() }}
 
-  {{ form.markdown('footer_links', label=_('Footer Links'), value=data.footer_links, error=error, placeholder=_('Enter a list of links - one per line - to be shown as a list withing the secondary footer navigation. Please use Markdown formatting for the links.'), classes=['control-full']) }}
+  {{ form.markdown('footer_links', label=_('Footer Links'), value=data.footer_links, error=error, placeholder=_('Enter a list of links - one per line - to be shown as a list withing the secondary footer navigation. Please format the links with Markdown (i.e. * [Example link](https://www.example.com)).'), classes=['control-full']) }}
 
 {% endblock %}
