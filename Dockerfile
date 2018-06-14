@@ -60,8 +60,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt" && \
     # pages
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@news#egg=ckanext-pages" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-pages/dev-requirements.txt"
-    
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-pages/dev-requirements.txt" && \
+    # scheming
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt"
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -93,6 +95,7 @@ ENV CKAN__PLUGINS envvars \
                   structured_data \
                   c3charts \
                   pages \
+                  scheming_datasets \
                   datagovmk \
                   mk_dcatap
 
