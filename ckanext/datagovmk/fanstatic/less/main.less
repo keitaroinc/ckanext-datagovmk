@@ -377,6 +377,9 @@
 }
 
 .footer-links {
+  ul{
+    .list-unstyled;
+  }
   dt {
     &:after {
       content: ':'
@@ -385,7 +388,10 @@
 }
 
 .footer-nav {
-  .text-uppercase;
+  .title,
+  ul, ol{
+    .text-uppercase;
+  }
 }
 
 .attribution {
