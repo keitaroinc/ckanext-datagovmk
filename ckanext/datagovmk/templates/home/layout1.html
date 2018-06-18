@@ -83,7 +83,14 @@
           {%- for featured_chart in h.c3charts_featured_charts(limit=4) -%}
           <div class="item">
               <h4 class="title"><i class="fa fa-database"></i><a href="{{ featured_chart.resource_view_url }}">{{ featured_chart.title }}</a></h4>
-              {{ h.c3charts_render_featured_chart(featured_chart, True ) }}
+              <div
+                data-module = "c3charts_builder"
+                data-module-resource-id = "{{ featured_chart.resource_id }}"
+                data-module-resource-view = "{{ h.dump_json(featured_chart.resource_view) }}"
+                id = "c3chart-{{ featured_chart['resource_id'] }}"
+                class = "c3chart"
+                >
+              </div>
             </div>
           {%- endfor -%}
         </div>
