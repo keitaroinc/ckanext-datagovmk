@@ -1,3 +1,6 @@
+{% resource 'c3charts/main' %}
+{% resource 'c3charts/modules/export-to-png.js' %}
+{% resource 'c3charts/vendor/save-svg-png.js' %}
 <div role="main" class="hero">
   <div class="container-fluid">
     <div class="row flex flex-wrap">
@@ -79,18 +82,21 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="featured-charts">
-        <div class="item">
-          <h4 class="title"><i class="fa fa-database"></i><a href="#">Chart builder view title</a></h4>
-          <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/db871b96-17e9-418f-8c43-aeadbf59baaf"></iframe>
-        </div>
-        <div class="item">
-            <h4 class="title"><i class="fa fa-database"></i><a href="#">Another chart builder view title</a></h4>
-            <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/a5263200-9890-4e5b-bc8c-85c12ed8948c"></iframe>
-        </div>
-        <div class="item">
-            <h4 class="title"><i class="fa fa-database"></i><a href="#">This is a very long chart builder view title which should wrap</a></h4>
-            <iframe src="http://localhost:5000/dataset/ttpo6eh-nodatoheh-cet/resource/a572a1ef-732d-4de9-b4ee-e0fab8242ead/view/5d2a343f-40c6-40a7-a416-2579a52dae4e"></iframe>
-        </div>
+        <div>
+            {%- for featured_chart in h.c3charts_featured_charts(limit=4) -%}
+            <div class="item">
+                <h4 class="title"><i class="fa fa-database"></i><a href="{{ featured_chart.resource_view_url }}">{{ featured_chart.title }}</a></h4>
+                <div
+                  data-module = "c3charts_builder"
+                  data-module-resource-id = "{{ featured_chart.resource_id }}"
+                  data-module-resource-view = "{{ h.dump_json(featured_chart.resource_view) }}"
+                  id = "c3chart-{{ featured_chart['resource_id'] }}"
+                  class = "c3chart"
+                  >
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
       </div>
     </div>
   </div>
