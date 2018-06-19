@@ -155,7 +155,7 @@
   .site-search {
     margin-top: (@grid-gutter-width/6)*2;
   }
-  .navbar-collapse{
+  .navbar-collapse {
     padding: inherit;
   }
   .navigation {
@@ -377,7 +377,7 @@
 }
 
 .footer-links {
-  ul{
+  ul {
     .list-unstyled;
   }
   dt {
@@ -389,7 +389,8 @@
 
 .footer-nav {
   .title,
-  ul, ol{
+  ul,
+  ol {
     .text-uppercase;
   }
 }
@@ -405,6 +406,8 @@
 
 .news,
 .blog {
+  margin-top: @grid-gutter-width;
+  margin-bottom: @grid-gutter-width;
   .panel {
     border-color: @hr-border;
     .item {
@@ -564,7 +567,7 @@
       height: @group-icon-size;
       border-radius: @group-icon-size/2;
     }
-    .icon{
+    .icon {
       color: @white;
     }
     .title {
@@ -575,37 +578,31 @@
 }
 
 .featured-charts {
-  margin: @grid-gutter-width -@grid-gutter-width/2;
-  .flex;
-  .flex-wrap;
+  padding-left: 0;
+  padding-right: 0;
+  width: auto;
+  @media (min-width: @screen-md-min) {
+    width: percentage((10 / @grid-columns));
+    margin-left: percentage((1 / @grid-columns));
+  }
   .item {
-    .flex;
-    .flex-column;
-    flex-basis: 30%;
-    flex-grow: 1;
-    flex-shrink: 0;
     margin: @grid-gutter-width/2;
-    background-color: @white;
     padding: @grid-gutter-width;
     min-height: @grid-gutter-width*10;
+    &.box {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
   }
   .title {
-    .flex;
     .fa {
       color: @brand-secondary;
-      margin-right: @grid-gutter-width/2;
     }
     font-size: @font-size-h4;
     font-weight: 400;
     margin: 0 0 @grid-gutter-width;
     text-transform: uppercase;
-  }
-  iframe {
-    width: 100%;
-    height: 100%;
-  }
-  .btn-group-export {
-    display: none;
   }
 }
 
