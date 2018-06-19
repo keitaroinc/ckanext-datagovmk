@@ -1,186 +1,76 @@
-{% resource 'c3charts/main' %}
-{% resource 'c3charts/modules/export-to-png.js' %}
-{% resource 'c3charts/vendor/save-svg-png.js' %}
-
 <div role="main" class="hero">
-  <div class="container-fluid">
-    <div class="row flex flex-wrap">
-      <div class="col-md-6 intro">
-        {% block promoted %}
-          {% snippet 'home/snippets/promoted.html' %}
-        {% endblock %}
-      </div>
-      <div class="col-md-6 accent">
-        {% block stats %}
-          {% snippet 'home/snippets/stats_alt.html' %}
-        {% endblock %}
-        {% block search %}
-          {% snippet 'home/snippets/search.html' %}
-        {% endblock %}
-        <div class="lists">
-          {% set recent_datasets = h.datagovmk_get_recently_updated_datasets() %}
-          {% set popular_organizations = h.datagovmk_get_most_active_organizations() %}
-          <div class="col-md-6">
-            <h4 class="title"><i class="fa fa-clock-o"></i> {{_('Recent datasets')}}</h4>
-            {% if recent_datasets %}
-            <ul class="list-unstyled">
-              {% for dataset in recent_datasets %}
-                <li><i class="fa fa-database"></i> <a href="{{ h.url_for(controller='package', action='read', id=dataset.name) }}">{{ dataset.title }}</a></li>
-              {% endfor %}
-            </ul>
-            {% else %}
-              <p>{{ _('No datasets available.') }}</p>
-            {% endif %}
-          </div>
-          <div class="col-md-6">
-            <h4 class="title"><i class="fa fa-star"></i> {{_('Most active institutions')}}</h4>
-            {% if popular_organizations %}
-            <ul class="list-unstyled">
-              {% for organization in popular_organizations %}
-                <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.name) }}">{{ organization.display_name }}</a></li>
-              {% endfor %}
-            </ul>
-            {% else %}
-              <p>{{ _('No organizations available.') }}</p>
-            {% endif %}
-          </div>
+    <div class="container-fluid">
+      <div class="row flex flex-wrap">
+        <div class="col-md-6 intro">
+          {% block promoted %}
+            {% snippet 'home/snippets/promoted.html' %}
+          {% endblock %}
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% set groups = h.datagovmk_get_groups() %}
-{% if groups %}
-<div class="container-fluid featured-groups-wrap">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <ul class="featured-groups">
-        {% for group in groups %}
-          {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
-
-          {% if group.image_display_url %}
-            {% set group_image = group.image_display_url %}
-          {% else %}
-            {% set group_image = '/base/images/placeholder-group.png' %}
-          {% endif %}
-
-          <li>
-            <a href="{{ group_url }}" class="group">
-              <span role="img" class="icon-wrap">
-                <i class="fa fa-3x fa-files-o icon" alt="{{ group.title }}"></i>
-              </span>
-              <span role="heading" class="title">{{ group.title }}</span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="featured-charts">
-        <div>
-          {%- for featured_chart in h.c3charts_featured_charts(limit=4) -%}
-          <div class="item">
-              <h4 class="title"><i class="fa fa-database"></i><a href="{{ featured_chart.resource_view_url }}">{{ featured_chart.title }}</a></h4>
-              <div
-                data-module = "c3charts_builder"
-                data-module-resource-id = "{{ featured_chart.resource_id }}"
-                data-module-resource-view = "{{ h.dump_json(featured_chart.resource_view) }}"
-                id = "c3chart-{{ featured_chart['resource_id'] }}"
-                class = "c3chart"
-                >
-              </div>
+        <div class="col-md-6 accent">
+          {% block stats %}
+            {% snippet 'home/snippets/stats_alt.html' %}
+          {% endblock %}
+          {% block search %}
+            {% snippet 'home/snippets/search.html' %}
+          {% endblock %}
+          <div class="lists">
+            {% set recent_datasets = h.datagovmk_get_recently_updated_datasets() %}
+            {% set popular_organizations = h.datagovmk_get_most_active_organizations() %}
+            <div class="col-md-6">
+              <h4 class="title"><i class="fa fa-clock-o"></i> {{_('Recent datasets')}}</h4>
+              {% if recent_datasets %}
+              <ul class="list-unstyled">
+                {% for dataset in recent_datasets %}
+                  <li><i class="fa fa-database"></i> <a href="{{ h.url_for(controller='package', action='read', id=dataset.name) }}">{{ dataset.title }}</a></li>
+                {% endfor %}
+              </ul>
+              {% else %}
+                <p>{{ _('No datasets available.') }}</p>
+              {% endif %}
             </div>
-          {%- endfor -%}
+            <div class="col-md-6">
+              <h4 class="title"><i class="fa fa-star"></i> {{_('Most active institutions')}}</h4>
+              {% if popular_organizations %}
+              <ul class="list-unstyled">
+                {% for organization in popular_organizations %}
+                  <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.name) }}">{{ organization.display_name }}</a></li>
+                {% endfor %}
+              </ul>
+              {% else %}
+                <p>{{ _('No organizations available.') }}</p>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div role="main">
-  <div class="container-fluid">
+  {% set groups = h.datagovmk_get_groups() %}
+  {% if groups %}
+  <div class="container-fluid featured-groups-wrap">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <div class="row">
-          {% set news = h.get_recent_news_posts(3) %}
-          {% if news %}
-          <div class="col-md-12 col-lg-6 news">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h2 class="panel-title">
-                  <span class="fa fa-newspaper-o"></span>
-                  <span>{{ _('News') }}</span>
-                </h2>
-                <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
-              </div>
-              <div class="panel-body">
-                {% for item in news %}
-                <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/' + item.name) }}">
-                  {% if item.image %}
-                  <img class="image" src="{{ item.image }}" alt="photo">
-                  {% endif %}
-                  <span class="body">
-                    <span class="title" role="heading">{{ item.title }}</span>
-                    <span class="date" role="text">{{ h.render_datetime(item.publish_date) }}</span>
-                    <span class="description" role="text">{{ item.content|striptags|truncate(300) }}</span>
-                  </span>
-                </a>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% set blogs = h.get_recent_blog_posts(3) %}
-          {% if blogs %}
-          <div class="col-md-12 col-lg-6 blog">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h2 class="panel-title">
-                  <span class="fa fa-sticky-note"></span>
-                  <span>{{ _('Blog') }}</span>
-                </h2>
-                <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
-              </div>
-              <div class="panel-body">
-                {% for item in blogs %}
-                <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/' + item.name) }}">
-                  {% if item.image %}
-                  <img class="image" src="{{ item.image }}" alt="photo">
-                  {% endif %}
-                  <span class="body">
-                    <span class="title" role="heading">{{ item.title }}</span>
-                    <span class="description" role="text">{{ item.content|striptags|truncate(300) }}</span>
-                  </span>
-                </a>
-                {% endfor %}
-              </div>
-            </div>
-            </div>
-        {% endif %}
-        </div>
-        <div class="row row2">
-          <div class="col-md-6 col1">
-            {# Note: this featured_group block is used as an example in the theming
-               tutorial in the docs! If you change this code, be sure to check
-               whether you need to update the docs. #}
-            {# Start template block example. #}
-            {% block featured_group %}
-              {# snippet 'home/snippets/featured_group.html' #}
-            {% endblock %}
-            {# End template block example. #}
-          </div>
-          <div class="col-md-6 col2">
-            {% block featured_organization %}
-              {# snippet 'home/snippets/featured_organization.html' #}
-            {% endblock %}
-          </div>
-        </div>
+        <ul class="featured-groups">
+          {% for group in groups %}
+            {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
+  
+            {% if group.image_display_url %}
+              {% set group_image = group.image_display_url %}
+            {% else %}
+              {% set group_image = '/base/images/placeholder-group.png' %}
+            {% endif %}
+  
+            <li>
+              <a href="{{ group_url }}" class="group">
+                <span role="img" class="icon-wrap">
+                  <i class="fa fa-3x fa-files-o icon" alt="{{ group.title }}"></i>
+                </span>
+                <span role="heading" class="title">{{ group.title }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>
-</div>
+  {% endif %}

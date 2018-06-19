@@ -1,0 +1,77 @@
+{% ckan_extends %}
+
+{% block featured_charts_wrapper %}
+<div class="featured-charts-wrap">
+  <div class="featured-charts container-fluid">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        {% block featured_charts %}
+          {{ super() }}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="row">
+        {% set news = h.get_recent_news_posts(3) %} {% if news %}
+        <div class="col-md-12 col-lg-6 news">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">
+                <span class="fa fa-newspaper-o"></span>
+                <span>{{ _('News') }}</span>
+              </h2>
+              <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+            </div>
+            <div class="panel-body">
+              {% for item in news %}
+              <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/' + item.name) }}">
+                {% if item.image %}
+                <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                <span class="body">
+                  <span class="title" role="heading">{{ item.title }}</span>
+                  <span class="date" role="text">{{ h.render_datetime(item.publish_date) }}</span>
+                  <span class="description" role="text">{{ item.content|striptags|truncate(300) }}</span>
+                </span>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %} {% set blogs = h.get_recent_blog_posts(3) %} {% if blogs %}
+        <div class="col-md-12 col-lg-6 blog">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">
+                <span class="fa fa-sticky-note"></span>
+                <span>{{ _('Blog') }}</span>
+              </h2>
+              <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+            </div>
+            <div class="panel-body">
+              {% for item in blogs %}
+              <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/' + item.name) }}">
+                {% if item.image %}
+                <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                <span class="body">
+                  <span class="title" role="heading">{{ item.title }}</span>
+                  <span class="description" role="text">{{ item.content|striptags|truncate(300) }}</span>
+                </span>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
