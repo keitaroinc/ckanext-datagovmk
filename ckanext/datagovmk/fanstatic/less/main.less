@@ -301,10 +301,16 @@
     }
   }
   .list-unstyled {
+    li{
+      display: flex;
+      margin-top: @grid-gutter-width/3;
+      margin-bottom: @grid-gutter-width/3;
+    }
     a {
       display: inline-block;
-      padding-top: @grid-gutter-width/6;
-      padding-bottom: @grid-gutter-width/6;
+    }
+    .fa{
+      margin-right: @grid-gutter-width/3;
     }
   }
 }
