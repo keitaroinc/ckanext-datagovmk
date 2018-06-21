@@ -2,6 +2,8 @@ from ckan.plugins import toolkit
 from ckan.lib import search
 from datetime import datetime
 
+from ckanext.datagovmk.model.stats import get_stats_for_package, get_stats_for_resource
+
 def _get_action(action, context_dict, data_dict):
     return toolkit.get_action(action)(context_dict, data_dict)
 
@@ -56,3 +58,14 @@ def get_groups():
     groups = [group for group in groups if group.get('package_count') > 0]
 
     return groups
+
+
+def get_dataset_stats(dataset_id):
+    stats = get_stats_for_package(dataset_id) 
+    return stats
+
+
+def get_resource_stats(resource_id):
+    stats = get_stats_for_resource(resource_id)
+    print resource_id, "; stats => ", stats
+    return stats

@@ -55,4 +55,24 @@
       </tbody>
     </table>
   </div>
+
+  {%- block resource_stats -%}
+  {% set stats = h.datagovmk_get_resource_stats(res.id) %}
+  {% if stats %}
+  <div class="module-content">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+       <h3 class="panel-title"><span class="fa fa-bar-chart"></span> {{ _('Resource Stats')}}</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"><label>{{ _('Recent Visits') }}</label>{{ stats.visits_recently }}</li>
+          <li class="list-group-item"><label>{{ _('Total Visits') }}</label>{{ stats.visits_ever }}</li>
+        </ul>
+      </div>
+    </div>  
+  </div>
+  {% endif %}
+  {%- endblock -%}
+
 {% endblock %}

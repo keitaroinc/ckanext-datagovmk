@@ -24,7 +24,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_most_active_organizations':
                 helpers.get_most_active_organizations,
             'datagovmk_get_groups':
-                helpers.get_groups
+                helpers.get_groups,
+            'datagovmk_get_dataset_stats':
+                helpers.get_dataset_stats,
+            'datagovmk_get_resource_stats':
+                helpers.get_resource_stats
         }
 
     def update_config_schema(self, schema):
