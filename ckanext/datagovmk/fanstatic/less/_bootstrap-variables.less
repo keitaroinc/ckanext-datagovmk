@@ -16,17 +16,22 @@
 
 @white: #fff;
 
-@brand-primary-alt-1:   #2f3084;
+@brand-primary-alt-1:   #0085B6;
 @brand-primary-alt-2:   #2f3084;
-@brand-primary-alt-2:   #068580;
+@brand-secondary-alt-1: #00D49D;
 @brand-secondary-alt-2: #78c043;
 
-@brand-primary:         #932323;
-@brand-secondary:       #E6A828;
+@brand-primary:         @brand-primary-alt-1;
+@brand-secondary:       @brand-secondary-alt-1;
 @brand-success:         #5cb85c;
-@brand-info:            #5bc0de;
-@brand-warning:         #f0ad4e;
-@brand-danger:          #d9534f;
+@brand-info:            #0BB4C1;
+@brand-warning:         #FEDF03;
+@brand-danger:          #FF005D;
+
+@featured-groups-wrap-bg: lighten(@brand-secondary, 20%);
+@featured-group-bg: lighten(spin(@brand-info, 30deg), 5%);
+@featured-group-color: darken(@featured-group-bg, 10%);
+@featured-group-hover: darken(@featured-group-bg, 20%);
 
 
 //== Scaffolding
@@ -613,7 +618,7 @@
 //** Modal backdrop background color
 @modal-backdrop-bg:           #000;
 //** Modal backdrop opacity
-@modal-backdrop-opacity:      .5;
+@modal-backdrop-opacity:      .2;
 //** Modal header border color
 @modal-header-border-color:   #e5e5e5;
 //** Modal footer border color
