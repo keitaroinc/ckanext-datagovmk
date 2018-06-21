@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+{% block package_description %}
+<div class="dataset-header-wrap">
+  <div class="dataset-header">
+    {{ super() }}
+  </div>
+  {% snippet 'package/snippets/stats.html' %}
+</div>
+{% endblock %}
