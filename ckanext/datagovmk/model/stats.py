@@ -146,7 +146,7 @@ def increment_downloads(resource_id):
     resource_stats = TABLES['resource_stats']
     ret = model.Session.query(exists().where(resource_stats.c.resource_id == resource_id)).scalar()
     if not ret:
-        model.Session.add(resource_stats(resource_id=resource_id, visits_recently=0, visits_ever=0, downloads=1))
+        model.Session.execute(insert(resource_stats).values(resource_id=resource_id, visits_recently=0, visits_ever=0, downloads=1))
     else:
         result = model.Session.query(resource_stats).filter_by(resource_id=resource_id).first()
         if result[3] is None:
