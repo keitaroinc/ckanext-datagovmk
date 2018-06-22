@@ -21,7 +21,8 @@ RUN apk add bash \
             make \
             musl-dev \
             pcre \
-            python2-dev
+            python2-dev \
+            openssl-dev
 
 
 # Install our extension
@@ -65,7 +66,12 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt" && \
     # repeating
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating" && \
+    # google analytics
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-googleanalytics/requirements.txt" && \
+    pip install --no-cache-dir oauth2client
+
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -96,6 +102,7 @@ ENV CKAN__PLUGINS envvars \
                   dcat_json_interface \
                   structured_data \
                   c3charts \
+                  googleanalytics \
                   pages \
                   datagovmk \
                   scheming_datasets \
