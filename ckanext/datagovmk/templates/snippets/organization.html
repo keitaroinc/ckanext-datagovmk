@@ -18,6 +18,10 @@
                 <label>{{ _('Total Visits') }}</label>
                 <span>{{ stats.visits_ever }}</span>
             </div>
+            <div>
+                <label>{{ _('Total Downloads') }}</label>
+                <span>{{ h.datagovmk_total_downloads(c.pkg_dict.id) }}</span>
+            </div>
         </section>
       </div>
       {% endif %}

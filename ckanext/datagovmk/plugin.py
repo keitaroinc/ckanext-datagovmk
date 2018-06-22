@@ -2,12 +2,15 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
 from ckan.lib.plugins import DefaultTranslation
+from ckan.logic import get_action
+from routes.mapper import SubMapper
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IRoutes, inherit=True)
 
     # IConfigurer
 
@@ -28,7 +31,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_dataset_stats':
                 helpers.get_dataset_stats,
             'datagovmk_get_resource_stats':
-                helpers.get_resource_stats
+                helpers.get_resource_stats,
+            'datagovmk_total_downloads':
+                helpers.get_total_package_downloads
         }
 
     def update_config_schema(self, schema):
@@ -40,3 +45,15 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         })
 
         return schema
+
+    # IRoutes
+    def before_map(self, map):
+        with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
+            # Override the resource download links, so we can count the number of downloads.
+            m.connect('resource_download',
+                      '/dataset/{id}/resource/{resource_id}/download',
+                      action='resource_download')
+            m.connect('resource_download',
+                      '/dataset/{id}/resource/{resource_id}/download/{filename}',
+                      action='resource_download')
+        return map
