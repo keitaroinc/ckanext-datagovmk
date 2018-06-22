@@ -171,4 +171,4 @@ def get_total_package_downloads(package_id):
     subq = model.Session.query(model.Resource.id).filter(model.Resource.package_id == package_id)
 
     result = model.Session.query(func.sum(resource_stats.c.downloads)).filter(resource_stats.c.resource_id.in_(subq)).scalar()
-    return result
+    return result or 0
