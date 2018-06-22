@@ -131,7 +131,7 @@ def get_stats_for_resource(resource_id):
                                     fetchmany(1)
     if results:
         stats_tuple = results[0]
-        return {'id': stats_tuple[0], 'visits_recently': stats_tuple[1], 'visits_ever': stats_tuple[2]}
+        return {'id': stats_tuple[0], 'visits_recently': stats_tuple[1], 'visits_ever': stats_tuple[2], 'downloads': stats_tuple[3]}
     return {}
 
 
