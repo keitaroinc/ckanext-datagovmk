@@ -58,6 +58,8 @@
 
 @import "_flex.less";
 @import "_mixins.less";
+@import "_stats.less";
+
 .btn {
   .text-uppercase;
 }
@@ -199,6 +201,13 @@
   .hero {
     // Override must be more specific.
     padding: 0;
+  }
+}
+
+.primary{
+  img{
+    max-width: 100%;
+    height: auto !important; // required for inlined heights
   }
 }
 
@@ -398,6 +407,11 @@
   ul,
   ol {
     .text-uppercase;
+  }
+  ul{
+    li{
+      .font-awesome('\f0da', @brand-secondary);
+    }
   }
 }
 
@@ -624,6 +638,10 @@
     padding-left: @grid-gutter-width/2;
     padding-right: @grid-gutter-width/2;
   }
+}
+
+.prose{
+  margin-bottom: @grid-gutter-width;
 }
 
 /* Media queries */
