@@ -8,10 +8,11 @@
   padding-bottom: @grid-gutter-width/2;
 }
 
-.font-awesome(@icon) {
+.font-awesome(@icon, @color: inherit, @margin: 0 @grid-gutter-width/3 0 0) {
   &:before {
     font-family: 'FontAwesome';
     content: @icon;
-    margin-right: @grid-gutter-width/6;
+    margin: @margin;
+    color: @color;
   }
 }
