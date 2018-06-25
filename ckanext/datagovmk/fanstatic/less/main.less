@@ -59,7 +59,6 @@
 @import "_flex.less";
 @import "_mixins.less";
 @import "_stats.less";
-
 .btn {
   .text-uppercase;
 }
@@ -207,8 +206,8 @@
   }
 }
 
-.primary{
-  img{
+.primary {
+  img {
     max-width: 100%;
     height: auto !important; // required for inlined heights
   }
@@ -285,7 +284,7 @@
       padding-top: 0;
     }
     .search-giant {
-      border: @grid-gutter-width/3 solid @brand-secondary;
+      border: @grid-gutter-width/3 solid darken(@gray-lighter, 10%);
       input {
         border-radius: 0;
       }
@@ -308,7 +307,7 @@
       padding-bottom: @grid-gutter-width/3;
       border-bottom: 2px solid darken(@brand-primary, 10%);
       .fa {
-        color: @brand-secondary;
+        color: @brand-warning;
       }
     }
   }
@@ -411,9 +410,10 @@
   ol {
     .text-uppercase;
   }
-  ul{
-    li{
-      .font-awesome('\f0da', @brand-secondary);
+  ul {
+    li {
+      .font-awesome('\f0da',
+      @brand-warning);
     }
   }
 }
@@ -556,14 +556,13 @@
 
 .featured-groups {
   .flex;
-  .flex-wrap;
-  .align-items-center;
+  .flex-wrap; // .align-items-center;
   .justify-content-center;
   list-style: none;
   padding-left: 0;
+  margin: @grid-gutter-width/2 auto;
   li {
-    flex-grow: 1;
-    flex-shrink: 0;
+    flex: 0 0 10%;
   }
   a {
     color: @featured-group-color;
@@ -577,25 +576,24 @@
       color: @featured-group-hover;
       text-decoration: none;
       .icon-wrap {
-        border-color: @white;
+        border-color: @featured-group-hover;
       }
     }
-    margin: @grid-gutter-width;
+    margin: @grid-gutter-width/2;
     .icon-wrap {
       .flex;
       .align-items-center;
       .justify-content-center;
       overflow: hidden;
-      border: 4px solid transparent;
+      border: 5px solid transparent;
       background: @featured-group-bg;
-      margin: @grid-gutter-width/2 auto;
       width: @group-icon-size;
       height: @group-icon-size;
       border-radius: @group-icon-size/2;
     }
     img {
       &.icon {
-        filter: brightness(200%) contrast(200%) invert(100%);
+        filter: saturate(0%) contrast(500%) invert(100%);
       }
     }
     .icon {
@@ -603,10 +601,16 @@
       max-width: 60%;
     }
     .title {
+      text-align: center;
       text-transform: uppercase;
       font-size: @font-size-large;
+      margin-top: @grid-gutter-width/2;
     }
   }
+}
+
+.featured-charts-wrap {
+  background: @white;
 }
 
 .featured-charts {
@@ -619,7 +623,7 @@
   }
   .item {
     margin: @grid-gutter-width/2;
-    padding: @grid-gutter-width;
+    // padding: @grid-gutter-width;
     min-height: @grid-gutter-width*10;
     &.box {
       border: none;
@@ -652,7 +656,7 @@
   }
 }
 
-.prose{
+.prose {
   margin-bottom: @grid-gutter-width;
 }
 
