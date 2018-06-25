@@ -1,16 +1,18 @@
+{%- set stats = h.datagovmk_get_dataset_stats(c.pkg_dict.id) -%}
+{%- set total_downloads = h.datagovmk_total_downloads(c.pkg_dict.id)-%}
 <div class="dataset-stats">
   <div class="item">
     <div class="heading">
       <span class="fa fa-eye"></span>
       <h4 class="title">{{ _('Views') }}</h4>
     </div>
-    <span class="value">324</span>
+    <span class="value">{{ stats.visits_ever or '0' }}</span>
   </div>
   <div class="item">
     <div class="heading">
       <span class="fa fa-download"></span>
       <h4 class="title">{{ _('Downloads') }}</h4>
     </div>
-    <span class="value">324.324</span>
+    <span class="value">{{ total_downloads }}</span>
   </div>
 </div>
