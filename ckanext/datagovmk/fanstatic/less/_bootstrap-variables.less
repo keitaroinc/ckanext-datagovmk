@@ -16,22 +16,20 @@
 
 @white: #fff;
 
-@brand-primary-alt-1:   #0085B6;
-@brand-primary-alt-2:   #2f3084;
-@brand-secondary-alt-1: #00D49D;
-@brand-secondary-alt-2: #78c043;
+@brand-secondary-alt-1:   @gray-light;
 
-@brand-primary:         @brand-primary-alt-1;
-@brand-secondary:       @brand-secondary-alt-1;
-@brand-success:         #5cb85c;
-@brand-info:            #0BB4C1;
+@brand-primary:         #4679b2;
+@brand-secondary:       spin(@brand-primary, -30deg);
+@brand-success:         darken(#EEFF8A, 50%);
+@brand-info:            #4685CC;
 @brand-warning:         #FEDF03;
-@brand-danger:          #FF005D;
+@brand-danger:          #B2463D;
+@brand-accent:          #7e6bb0;
 
-@featured-groups-wrap-bg: lighten(@brand-secondary, 20%);
-@featured-group-bg: lighten(spin(@brand-info, 30deg), 5%);
-@featured-group-color: darken(@featured-group-bg, 10%);
-@featured-group-hover: darken(@featured-group-bg, 20%);
+@featured-groups-wrap-bg: @gray-lighter;
+@featured-group-bg: @brand-accent;
+@featured-group-color: darken(@featured-group-bg, 20%);
+@featured-group-hover: @brand-secondary;
 
 
 //== Scaffolding
