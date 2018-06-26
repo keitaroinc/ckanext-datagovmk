@@ -161,3 +161,6 @@ msgstr "група"
 msgid "groups"
 msgstr "групи"
 
+#: ckanext/datagovmk/templates/package/read.html:19
+msgid "Related datasets"
+msgstr "Поврзани податочни сетови"
