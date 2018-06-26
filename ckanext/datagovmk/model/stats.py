@@ -30,7 +30,7 @@ def ensure_column(table_name, column_name, column_type, engine):
         if column_name == col['name']:
             has_column = True
             break
-    
+
     if not has_column:
         engine.execute('ALTER TABLE %(table_name)s ADD COLUMN %(column_name)s %(column_type)s' % {
             "table_name": table_name,
@@ -59,17 +59,17 @@ def _setup_stats_tables():
                         Column('visits_recently', Integer),
                         Column('visits_ever', Integer),
                         Column('downloads', Integer))
-    
+
     engine = model.meta.engine
 
 
     if engine.dialect.has_table(engine, 'package_stats'):
         TABLES['package_stats'] = package_stats
-    
+
     if engine.dialect.has_table(engine, 'resource_stats'):
         TABLES['resource_stats'] = resource_stats
         ensure_column('resource_stats', 'downloads', 'INTEGER', engine)
-    
+
     _STATS_CHECKED = True
 
 
@@ -165,7 +165,7 @@ def get_total_package_downloads(package_id):
         sum of the downloads count for all resurces that belong to this package.
     """
     if not is_stats_available():
-        return
+        return 0
     resource_stats = TABLES['resource_stats']
 
     subq = model.Session.query(model.Resource.id).filter(model.Resource.package_id == package_id)

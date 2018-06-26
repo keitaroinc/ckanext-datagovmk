@@ -48,6 +48,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IRoutes
     def before_map(self, map):
+        map.connect(
+            '/api/i18n/{lang}',
+            controller='ckanext.datagovmk.controller:ApiController',
+            action='i18n_js_translations'
+        )
         with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
             # Override the resource download links, so we can count the number of downloads.
             m.connect('resource_download',
