@@ -473,7 +473,7 @@
     .justify-content-between;
     padding: @grid-gutter-width/2 @grid-gutter-width;
     .fa {
-      color: @brand-secondary;
+      color: @gray-lighter;
       margin-right: @grid-gutter-width/5;
     }
   }
@@ -626,7 +626,7 @@
     // padding: @grid-gutter-width;
     min-height: @grid-gutter-width*10;
     &.box {
-      border: none;
+      border: 1px solid @gray-lighter;
       border-radius: 0;
       box-shadow: none;
     }
@@ -638,7 +638,10 @@
     font-size: @font-size-h4;
     font-weight: 400;
     margin: 0 0 @grid-gutter-width;
+    padding-bottom: @grid-gutter-width/2;
+    border-bottom: 1px solid @gray-lighter;
     text-transform: uppercase;
+    justify-content: center;
   }
 }
 
