@@ -5,7 +5,7 @@
   <div class="dataset-header">
     {{ super() }}
   </div>
-  {% snippet 'package/snippets/stats.html' %}
+  {% snippet 'package/snippets/stats.html', stats=h.datagovmk_get_dataset_stats(c.pkg_dict.id), total_downloads=h.datagovmk_total_downloads(c.pkg_dict.id) %}
 </div>
 {% endblock %}
 
