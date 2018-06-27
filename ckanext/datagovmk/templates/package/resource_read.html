@@ -61,7 +61,9 @@
 {%- block secondary_content -%}
   {%- block resource_stats -%}
     {% set stats = h.datagovmk_get_resource_stats(res.id) %}
-    {% snippet 'package/snippets/stats.html', stats=stats.visits_ever, total_downloads=stats.downloads %}
+    {% if stats.visits_ever or stats.downloads %}
+      {% snippet 'package/snippets/stats.html', stats=stats.visits_ever, total_downloads=stats.downloads %}
+    {% endif %}
   {%- endblock -%}
   {{ super() }}
 {%- endblock -%}
