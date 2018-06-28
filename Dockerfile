@@ -113,6 +113,9 @@ RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = $
 
 COPY prerun.py /srv/app/prerun.py
 
+COPY ckan_i18n/mk/ckan.po /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.po
+COPY ckan_i18n/mk/ckan.mo /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.mo
+
 RUN sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /srv/app/production.ini
 RUN sed -i "s/#ckan.redis.url = redis:\/\/localhost:6379\/0/ckan.redis.url = redis:\/\/redis.datagovmk:6379\/1/g" /srv/app/production.ini
 
