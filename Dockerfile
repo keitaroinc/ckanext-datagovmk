@@ -109,9 +109,15 @@ ENV CKAN__PLUGINS envvars \
                   repeating \
                   mk_dcatap
 
+RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
+VOLUME /var/lib/ckan/default
 
-USER ckan
 # Load envvars plugin on ini file
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
+
+COPY prerun.py /srv/app/prerun.py
+
+RUN sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /srv/app/production.ini
+RUN sed -i "s/#ckan.redis.url = redis:\/\/localhost:6379\/0/ckan.redis.url = redis:\/\/redis.datagovmk:6379\/1/g" /srv/app/production.ini
 
 CMD ["/srv/app/start_ckan.sh"]
