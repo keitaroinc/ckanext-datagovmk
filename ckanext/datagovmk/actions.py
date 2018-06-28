@@ -7,6 +7,22 @@ get_action = toolkit.get_action
 
 @toolkit.side_effect_free
 def get_related_datasets(context, data_dict):
+
+    '''This is an action function which returns related datasets for a single dataset, based
+    on groups and tags which are parts of the dataset itself.
+    
+    :param id: id od the single dataset for which we would like to return
+        the related datasets
+    :type id: string
+    
+    :param limit: Limit of the datasets to be returned, default is 3
+    :type limit: integer
+
+    :returns: a list of datasets which are related with the one we have chosen
+    :rtype: list
+    
+    '''
+
     id = data_dict.get('id')
     limit = int(data_dict.get('limit', 3))
     related_datasets = []

@@ -13,6 +13,13 @@ class DownloadController(PackageController):
     def resource_download(self, id, resource_id, filename=None):
         """Overrides CKAN's ``resource_download`` action and adds counting of the
         number of downloads per resource.
+
+        :param id: dataset id
+        :type id: string
+
+        :param resource_id: resource id
+        :type resource_id: string
+
         """
         increment_downloads(resource_id)
         return super(DownloadController, self).resource_download(id, resource_id, filename)
@@ -21,7 +28,17 @@ class DownloadController(PackageController):
 class ApiController(BaseController):
     def i18n_js_translations(self, lang):
         ''' Patch for broken JS translations caused by Pylons to Flask
-        migration. This method patches https://github.com/ckan/ckan/blob/master/ckan/views/api.py#L467 '''
+        migration. This method patches https://github.com/ckan/ckan/blob/master/ckan/views/api.py#L467 
+        
+        :param lang: locale of the language
+        :type lang: string
+
+        :returns: the translated strings in a json file.
+        
+        :rtype: json
+        
+        '''
+
         ckan_path = os.path.join(
             os.path.dirname(__file__), '..', '..', '..', 'ckan', 'ckan'
         )

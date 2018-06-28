@@ -19,11 +19,17 @@ _STATS_CHECKED = False
 def ensure_column(table_name, column_name, column_type, engine):
     """Ensure that the column exists in the table. If not, add it.
 
-    :param str table_name: the table to check.
-    :param str column_name: the name of the column to check for.
-    :param str colmn_type: column type definition.
-    :param sqlachemy.engine.Engine engine: configured SQLAlchemy engine.
+    :param table_name: the table to check.
+    :type table_name: string
+    :param column_name: the name of the column to check for.
+    :type column_name: string
+    :param column_type: column type definition.
+    :type column_type: string
+    :param engine: configured SQLAlchemy engine.
+    :type engine: sqlachemy.engine.Engine
+
     """
+
     insp = reflection.Inspector.from_engine(engine)
     has_column = False
     for col in insp.get_columns(table_name):
@@ -76,7 +82,9 @@ def _setup_stats_tables():
 def is_stats_available():
     """Check if stats tables have been set up.
 
-    :returns: ``bool`` True if the tables have been set up and we can use stats.
+    :returns: True if the tables have been set up and we can use stats.
+    :rtype: boolean
+
     """
     _setup_stats_tables()
     return 'package_stats' in TABLES and 'resource_stats' in TABLES
@@ -85,15 +93,20 @@ def is_stats_available():
 def get_stats_for_package(package_id):
     """Retrieve stats for the package.
 
-    :param str package_id: the id of the package to retrieve stats for.
+    :param package_id: the id of the package to retrieve stats for.
+    :type package_id: string
 
-    :returns: ``dict``, the package stats. If no stats available, returns an empty dict.
-      Available dict values are:
-      * ``id`` - the package id
-      * ``visits_recently`` - number of recent visits.
-      * ``visits_ever`` - total number of visits to this package.
+    :returns: the package stats. If no stats available, returns an empty dict.
+      Available dict values are:\n
+      ``id`` - the package id\n
+      ``visits_recently`` - number of recent visits.\n
+      
+      ``visits_ever`` - total number of visits to this package.\n
+
+    :rtype: dictionary
 
     """
+
     if not is_stats_available():
         return {}
     package_stats = TABLES['package_stats']
@@ -110,16 +123,20 @@ def get_stats_for_package(package_id):
 def get_stats_for_resource(resource_id):
     """Retrieve stats for the package.
 
-    :param str resource_id: the id of the resource to retrieve stats for.
+    :param resource_id: the id of the resource to retrieve stats for.
+    :type resource_id: string
 
-    :returns: ``dict``, the resource stats. If no stats available, returns an empty dict.
-      Available dict values are:
-      * ``id`` - the package id
-      * ``visits_recently`` - number of recent visits.
-      * ``visits_ever`` - total number of visits to this package.
-      * ``downloads`` - total number of downloads of this resource.
+    :returns: the resource stats. If no stats available, returns an empty dict.
+      Available dict values are:\n
+      ``id`` - the package id\n
+      ``visits_recently`` - number of recent visits.\n
+      ``visits_ever`` - total number of visits to this package.\n
+      ``downloads`` - total number of downloads of this resource.\n
+
+    :rtype: dictionary
 
     """
+
     if not is_stats_available():
         return {}
     resource_stats = TABLES['resource_stats']
@@ -138,7 +155,9 @@ def get_stats_for_resource(resource_id):
 def increment_downloads(resource_id):
     """Increments the number of downloads for the resource with ``resource_id``.
 
-    :param str resource_id: the id of the resource which downloads count should be incremented.
+    :param resource_id: the id of the resource which downloads count should be incremented.
+
+    :type resource_id: string
 
     """
     if not is_stats_available():
@@ -159,11 +178,16 @@ def increment_downloads(resource_id):
 def get_total_package_downloads(package_id):
     """Retrieve the total number of dowloads for all resources that belong to this package.
 
-    :param str package_id: the package id.
+    :param package_id: the package (dataset) id.
+    :type package_id: string
 
-    :returns: ``int``, the total number of downloads for all resources for this package id. This is the
+    :returns: the total number of downloads for all resources for this package id. This is the
         sum of the downloads count for all resurces that belong to this package.
+        
+    :rtype: integer
+
     """
+
     if not is_stats_available():
         return 0
     resource_stats = TABLES['resource_stats']
