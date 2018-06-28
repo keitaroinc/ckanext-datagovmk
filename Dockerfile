@@ -30,22 +30,18 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
     # Install extensions
     # ckanext-spatial and related
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@ckan-2.8#egg=ckanext-spatial" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@mk-translation#egg=ckanext-spatial" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
-    pip install --no-cache-dir ckanext-geoview && \
     pip install --no-cache-dir -e "git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report" && \
     # ckanext-qa and related
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-archiver.git@ckan_2.8_celery_compat#egg=ckanext-archiver" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-archiver.git@mk-translation#egg=ckanext-archiver" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-archiver/requirements.txt" && \
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-qa.git@ckan_2.8_compat#egg=ckanext-qa" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-qa.git@mk-translation#egg=ckanext-qa" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-qa/requirements.txt" && \
     # showcase
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-showcase.git#egg=ckanext-showcase" && \
-    #  harvest
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-harvest/pip-requirements.txt" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-showcase.git@mk-translation#egg=ckanext-showcase" && \
     # c3charts
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git#egg=ckanext-c3charts" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git@mk-translation#egg=ckanext-c3charts" && \
     # disqus
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus" && \
     # dcat
@@ -60,10 +56,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt" && \
     # pages
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@news#egg=ckanext-pages" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@mk-translation#egg=ckanext-pages" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-pages/dev-requirements.txt" && \
     # scheming
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-scheming.git@ckan-2.8#egg=ckanext-scheming" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt" && \
     # repeating
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating" && \
@@ -85,20 +81,16 @@ ENV CKAN__PLUGINS envvars \
                   text_view \
                   image_view \
                   recline_view \
+                  datastore \
+                  datapusher \
                   odata \
                   spatial_metadata \
                   spatial_query \
-                  geo_view \
-                  geojson_view \
                   qa \
                   archiver \
                   report \
                   showcase \
-                  harvest \
-                  ckan_harvester \
                   dcat \
-                  dcat_rdf_harvester \
-                  dcat_json_harvester \
                   dcat_json_interface \
                   structured_data \
                   c3charts \
