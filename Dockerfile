@@ -40,6 +40,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-qa/requirements.txt" && \
     # showcase
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-showcase.git@mk-translation#egg=ckanext-showcase" && \
+    # harvest
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-harvest/pip-requirements.txt" && \
     # c3charts
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git@mk-translation#egg=ckanext-c3charts" && \
     # disqus
@@ -90,6 +93,7 @@ ENV CKAN__PLUGINS envvars \
                   archiver \
                   report \
                   showcase \
+                  harvest \
                   dcat \
                   dcat_json_interface \
                   structured_data \
