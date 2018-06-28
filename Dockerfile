@@ -69,7 +69,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # google analytics
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-googleanalytics/requirements.txt" && \
-    pip install --no-cache-dir oauth2client
+    pip install --no-cache-dir oauth2client && \
+    # organogram
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git#egg=ckanext-organogram"
 
 
 
@@ -103,7 +105,8 @@ ENV CKAN__PLUGINS envvars \
                   datagovmk \
                   scheming_datasets \
                   repeating \
-                  mk_dcatap
+                  mk_dcatap \
+                  organogram
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
