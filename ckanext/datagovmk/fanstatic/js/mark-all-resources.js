@@ -7,10 +7,10 @@ $(document).ready(function () {
         var checkboxInput = $el.parent().parent().parent().find('input[type=checkbox]');
         if (!$el.data('status')) {
             checkboxInput.prop('checked', true).change();
-            $el.data('status', 'marked').html("<span class='fa fa-minus-square'></span> Unmark All");
+            $el.data('status', 'marked').html("<span class='fa fa-minus-square'></span> " + ckan.i18n.ngettext('Unmark All'));
         } else {
             checkboxInput.prop('checked', false).change();
-            $el.data('status', null).html("<span class='fa fa-check-square'></span> Mark All");
+            $el.data('status', null).html("<span class='fa fa-check-square'></span> " + ckan.i18n.ngettext('Mark All'));
         }
     });
 
