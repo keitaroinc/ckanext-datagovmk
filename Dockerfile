@@ -71,7 +71,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-googleanalytics/requirements.txt" && \
     pip install --no-cache-dir oauth2client && \
     # organogram
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.1#egg=ckanext-organogram"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.2#egg=ckanext-organogram"
 
 
 
