@@ -72,8 +72,8 @@ def init_db():
         subprocess.check_output(qa_command, stderr=subprocess.STDOUT)
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
 
-        subprocess.check_output(archiver_bulk_command, stderr=subprocess.STDOUT)
-        subprocess.check_output(archiver_priority_command, stderr=subprocess.STDOUT)
+        #subprocess.check_output(archiver_bulk_command, stderr=subprocess.STDOUT)
+        #subprocess.check_output(archiver_priority_command, stderr=subprocess.STDOUT)
 
         print '[prerun] Initializing or upgrading db - end'
     except subprocess.CalledProcessError, e:
