@@ -1,5 +1,5 @@
 <div class="btn-group resource-download">
-  <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
+  <a class="btn btn-success resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
     {% if res.resource_type in ('listing', 'service') %}
       <i class="fa fa-eye"></i> {{ _('View') }}
     {% elif res.resource_type == 'api' %}
@@ -12,7 +12,7 @@
   </a>
     {% block download_resource_button %}
       {%if res.datastore_active %}
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
