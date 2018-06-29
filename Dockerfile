@@ -115,6 +115,7 @@ VOLUME /var/lib/ckan/default
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 
 COPY prerun.py /srv/app/prerun.py
+COPY extra_scripts.sh /srv/app/extra_scripts.sh
 
 COPY ckan_i18n/mk/ckan.po /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.po
 COPY ckan_i18n/mk/ckan.mo /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.mo
