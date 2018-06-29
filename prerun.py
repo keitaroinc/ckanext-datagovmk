@@ -59,7 +59,7 @@ def init_db():
     archiver_command = ['paster', '--plugin=ckanext-archiver', 'archiver', 'init', '-c', ckan_ini]
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
-    analytics_command = ['paster', '--plugin=ckanext-googleanalytics', 'initdb', '-c', 'ckan_ini']
+    analytics_command = ['paster', '--plugin=ckanext-googleanalytics', 'initdb', '-c', ckan_ini]
 
     print '[prerun] Initializing or upgrading db - start'
     try:
@@ -122,7 +122,7 @@ def run_background_jobs():
     print '[prerun] Starting background jobs - start'
     archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
     archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
-    
+
     # run in background
     subprocess.Popen(archiver_bulk_command)
     subprocess.Popen(archiver_priority_command)
