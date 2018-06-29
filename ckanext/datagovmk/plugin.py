@@ -46,7 +46,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_actions(self):
         return {
-            'datagovmk_get_related_datasets': actions.get_related_datasets
+            'datagovmk_get_related_datasets': actions.get_related_datasets,
+            'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
+            'datagovmk_download_zip': actions.download_zip
         }
 
     # IAuthFunctions
