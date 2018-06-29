@@ -1,4 +1,4 @@
-{% resource 'datagovmk/modules/export-page-to-png.js' %}
+{% resource 'datagovmk/javascript/modules/export-page-to-png.js' %}
 {% resource 'datagovmk/vendor/html2canvas.js' %}
 
 {% import 'macros/form.html' as form %}
@@ -8,14 +8,6 @@
 
   <div id="view-{{ resource_view['id'] }}" class="resource-view" data-id="{{ resource_view['id'] }}" data-title="{{ resource_view['title'] }}" data-description="{{ resource_view['descripion'] }}">
   <div class="actions">
-    <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Export <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li data-module="export-page-to-png"><a href="#">PNG</a></li>
-            </ul>
-    </div>
     <a class="btn btn-default"
        target="_blank"
        href="{{ h.url_for('resource_view', id=package['name'], resource_id=resource['id'], view_id=resource_view['id'], qualified=True) }}">
@@ -30,6 +22,14 @@
       <i class="fa fa-code"></i>
       {{ _("Embed") }}
     </a>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Export <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li data-module="export-page-to-png"><a href="#">PNG</a></li>
+      </ul>
+    </div>
   </div>
   <p class="desc">{{ h.render_markdown(resource_view['description']) }}</p>
     <div class="m-top ckanext-datapreview">
