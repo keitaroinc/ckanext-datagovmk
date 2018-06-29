@@ -61,8 +61,8 @@ def init_db():
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
     
-    archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '--config="${APP_DIR}/production.ini']
-    archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '--config="${APP_DIR}/production.ini']
+    archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
+    archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
 
     print '[prerun] Initializing or upgrading db - start'
     try:
