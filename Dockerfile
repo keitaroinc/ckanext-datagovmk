@@ -121,5 +121,6 @@ COPY ckan_i18n/mk/ckan.mo /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.mo
 
 RUN sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /srv/app/production.ini
 RUN sed -i "s/#ckan.redis.url = redis:\/\/localhost:6379\/0/ckan.redis.url = redis:\/\/redis.datagovmk:6379\/1/g" /srv/app/production.ini
+RUN sed -i "s/\/tmp\/uwsgi.sock --uid 92 --gid 92/\/tmp\/uwsgi.sock/g" /srv/app/start_ckan.sh
 
 CMD ["/srv/app/start_ckan.sh"]
