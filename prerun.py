@@ -52,7 +52,6 @@ def check_solr_connection(retry=None):
     else:
         eval(connection.read())
 
-
 def init_db():
 
     db_command = ['paster', '--plugin=ckan', 'db', 'init', '-c', ckan_ini]
@@ -60,20 +59,15 @@ def init_db():
     archiver_command = ['paster', '--plugin=ckanext-archiver', 'archiver', 'init', '-c', ckan_ini]
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
-    
-    archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
-    archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
 
     print '[prerun] Initializing or upgrading db - start'
     try:
+        # run init scripts
         subprocess.check_output(db_command, stderr=subprocess.STDOUT)
         subprocess.check_output(report_command, stderr=subprocess.STDOUT)
         subprocess.check_output(archiver_command, stderr=subprocess.STDOUT)
         subprocess.check_output(qa_command, stderr=subprocess.STDOUT)
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
-
-        #subprocess.check_output(archiver_bulk_command, stderr=subprocess.STDOUT)
-        #subprocess.check_output(archiver_priority_command, stderr=subprocess.STDOUT)
 
         print '[prerun] Initializing or upgrading db - end'
     except subprocess.CalledProcessError, e:
@@ -86,6 +80,7 @@ def init_db():
         else:
             print e.output
             raise e
+    print '[prerun] Initializing or upgrading db - finish'
 
 def create_sysadmin():
 
@@ -121,6 +116,15 @@ def create_sysadmin():
         subprocess.call(command)
         print '[prerun] Made user {0} a sysadmin'.format(name)
 
+def run_background_jobs():
+    print '[prerun] Starting background jobs - start'
+    archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
+    archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
+    
+    # run in background
+    subprocess.Popen(archiver_bulk_command)
+    subprocess.Popen(archiver_priority_command)
+    print '[prerun] Starting background jobs - finish'
 
 if __name__ == '__main__':
 
@@ -133,3 +137,4 @@ if __name__ == '__main__':
         check_solr_connection()
         init_db()
         create_sysadmin()
+        run_background_jobs()
