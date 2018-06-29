@@ -126,14 +126,14 @@ def get_related_datasets(context, data_dict):
 
 @toolkit.side_effect_free
 def prepare_zip_resources(context, data_dict):
-    '''Creates zip archive and stores it under CKAN's storage path.
+    """Creates zip archive and stores it under CKAN's storage path.
 
     :param resources: a list of ids of the resources
     :type resources: list
 
     :return: a dictionary containing the zip_id of the created archive
     :rtype: dict
-    '''
+    """
     file_name = uuid.uuid4().hex + '.{ext}'.format(ext='zip')
     file_path = h.get_storage_path_for('temp-datagovmk') + '/' + file_name
     resourceArchived = False
@@ -193,11 +193,11 @@ def prepare_zip_resources(context, data_dict):
 
 @toolkit.side_effect_free
 def download_zip(context, data_dict):
-    '''Downloads a zip file
+    """Downloads a zip file
 
     :param id: an id of the created zip archive, Format: filename::packagename
     :type id: string
-    '''
+    """
     file_name, package_name = data_dict.get('id').split('::')
     file_path = h.get_storage_path_for('temp-datagovmk/' + file_name)
 
