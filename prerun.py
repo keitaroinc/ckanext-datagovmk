@@ -60,7 +60,9 @@ def init_db():
     archiver_command = ['paster', '--plugin=ckanext-archiver', 'archiver', 'init', '-c', ckan_ini]
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
-    archiver_worker_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '--config="${APP_DIR}/production.ini']
+    
+    archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '--config="${APP_DIR}/production.ini']
+    archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '--config="${APP_DIR}/production.ini']
 
     print '[prerun] Initializing or upgrading db - start'
     try:
@@ -69,7 +71,9 @@ def init_db():
         subprocess.check_output(archiver_command, stderr=subprocess.STDOUT)
         subprocess.check_output(qa_command, stderr=subprocess.STDOUT)
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
-        subprocess.check_output(archiver_worker_command, stderr=subprocess.STDOUT)
+
+        subprocess.check_output(archiver_bulk_command, stderr=subprocess.STDOUT)
+        subprocess.check_output(archiver_priority_command, stderr=subprocess.STDOUT)
 
         print '[prerun] Initializing or upgrading db - end'
     except subprocess.CalledProcessError, e:
@@ -82,7 +86,6 @@ def init_db():
         else:
             print e.output
             raise e
-
 
 def create_sysadmin():
 
