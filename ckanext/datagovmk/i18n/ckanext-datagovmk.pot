@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-04 16:30+0200\n"
+"POT-Creation-Date: 2018-06-29 11:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
+#: ckanext/datagovmk/actions.py:16
+msgid "Missing dataset id"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:16
 msgid "Address"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:82
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "E-mail"
 msgstr ""
 
@@ -43,6 +47,10 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
+#: ckanext/datagovmk/templates/footer.html:35
+msgid "Navigation"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:39
 msgid "Datasets"
 msgstr ""
@@ -59,34 +67,58 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:79
+#: ckanext/datagovmk/templates/footer.html:62
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:80
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "Stay updated with "
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:84
+#: ckanext/datagovmk/templates/footer.html:67
 msgid "Your e-mail address"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:86
+#: ckanext/datagovmk/templates/footer.html:69
 msgid "Subscribe"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:105
+#: ckanext/datagovmk/templates/footer.html:88
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:109
+#: ckanext/datagovmk/templates/footer.html:92
 msgid "CKAN API"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:110
+#: ckanext/datagovmk/templates/footer.html:93
 msgid "CKAN Association"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/config.html:8
+msgid "Footer Links"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/config.html:8
+msgid ""
+"Enter a list of links - one per line - to be shown as a list withing the "
+"secondary footer navigation. Please format the links with Markdown (i.e. * "
+"[Example link](https://www.example.com))."
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/index.html:29
+msgid "News"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/index.html:31
+#: ckanext/datagovmk/templates/home/index.html:56
+msgid "Archive"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/index.html:54
+msgid "Blog"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/layout1.html:20
@@ -105,19 +137,6 @@ msgstr ""
 msgid "No organizations available."
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/layout1.html:60
-msgid "News"
-msgstr ""
-
-#: ckanext/datagovmk/templates/home/layout1.html:62
-#: ckanext/datagovmk/templates/home/layout1.html:90
-msgid "Archive"
-msgstr ""
-
-#: ckanext/datagovmk/templates/home/layout1.html:88
-msgid "Blog"
-msgstr ""
-
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:8
 msgid "Welcome to CKAN"
 msgstr ""
@@ -130,6 +149,26 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/search.html:2
+msgid "E.g. environment"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/search.html:6
+msgid "Search data"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/search.html:8
+msgid "Search datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/search.html:11
+msgid "Search"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/search.html:17
+msgid "Popular tags"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
@@ -154,5 +193,56 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "groups"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/read.html:19
+msgid "Related datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:5
+msgid "Additional Information"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:9
+msgid "Field"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:10
+msgid "Value"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:16
+msgid "Last updated"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:17
+#: ckanext/datagovmk/templates/package/resource_read.html:23
+#: ckanext/datagovmk/templates/package/resource_read.html:29
+msgid "unknown"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:22
+msgid "Created"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:28
+msgid "Format"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:34
+#: ckanext/datagovmk/templates/snippets/license.html:4
+msgid "License"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:29
+msgid "State"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/stats.html:5
+msgid "Views"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/stats.html:12
+msgid "Downloads"
 msgstr ""
 
