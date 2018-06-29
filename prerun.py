@@ -59,6 +59,7 @@ def init_db():
     archiver_command = ['paster', '--plugin=ckanext-archiver', 'archiver', 'init', '-c', ckan_ini]
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
+    analytics_command = ['paster', '--plugin=ckanext-googleanalytics', 'initdb', '-c', 'ckan_ini']
 
     print '[prerun] Initializing or upgrading db - start'
     try:
@@ -68,6 +69,7 @@ def init_db():
         subprocess.check_output(archiver_command, stderr=subprocess.STDOUT)
         subprocess.check_output(qa_command, stderr=subprocess.STDOUT)
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
+        subprocess.check_output(analytics_command, stderr=subprocess.STDOUT)
 
         print '[prerun] Initializing or upgrading db - end'
     except subprocess.CalledProcessError, e:
