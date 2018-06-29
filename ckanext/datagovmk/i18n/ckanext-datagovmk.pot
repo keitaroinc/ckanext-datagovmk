@@ -9,17 +9,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-29 11:45+0200\n"
+"POT-Creation-Date: 2018-06-29 16:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
-#: ckanext/datagovmk/actions.py:16
+#: ckanext/datagovmk/actions.py:85
 msgid "Missing dataset id"
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:44
+msgid "Preparing zip archive..."
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:56
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:71
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:10
+#: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
+msgid "Download"
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:67
+msgid "Could not create a zip archive."
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:73
+msgid "An error occured while preparing zip archive."
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/mark-all-resources.js:11
+msgid "Unmark All"
+msgstr ""
+
+#: ckanext/datagovmk/fanstatic/js/mark-all-resources.js:14
+#: ckanext/datagovmk/templates/package/snippets/resources_download.html:7
+msgid "Mark All"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:16
@@ -236,6 +264,22 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:29
 msgid "State"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:4
+msgid "View"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:6
+msgid "API Endpoint"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:8
+msgid "Go to resource"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/snippets/resource_item.html:7
+msgid "Mark for Download"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/stats.html:5

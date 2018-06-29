@@ -1,0 +1,9 @@
+{% ckan_extends %}
+
+{% block resource_list %}
+	{{ super() }}
+
+	{% if resources %}
+		{% snippet "package/snippets/resources_download.html" %}
+	{% endif%}
+{% endblock %}
