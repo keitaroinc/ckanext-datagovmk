@@ -71,7 +71,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-googleanalytics/requirements.txt" && \
     pip install --no-cache-dir oauth2client && \
     # organogram
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git#egg=ckanext-organogram"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.2#egg=ckanext-organogram"
 
 
 
@@ -115,6 +115,7 @@ VOLUME /var/lib/ckan/default
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 
 COPY prerun.py /srv/app/prerun.py
+COPY extra_scripts.sh /srv/app/extra_scripts.sh
 
 COPY ckan_i18n/mk/ckan.po /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.po
 COPY ckan_i18n/mk/ckan.mo /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.mo

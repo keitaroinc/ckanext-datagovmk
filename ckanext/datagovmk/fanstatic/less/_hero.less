@@ -1,7 +1,7 @@
 .homepage {
   .hero {
-    background: darken(@brand-primary, 20%) url("../img/Brücke_Skopje_modified.jpg") center no-repeat;
-    background-blend-mode: multiply; // Not supported in Internet Explorer
+    // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
+    background: darken(@brand-primary, 20%) url("../img/Brucke-Skopje-modified.jpg") center no-repeat;
     background-size: cover;
   }
 }
@@ -9,19 +9,18 @@
 .hero {
   padding: 0;
   color: lighten(@brand-primary, 70%);
-  min-height: auto; // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
+  min-height: auto;
   .intro {
     background: @brand-primary;
-    /* background: @brand-primary url("../img/datagovmk-bg-pattern.png") center no-repeat; */
-    background-size: cover;
     .module-content {
       .flex;
       .flex-column;
       .align-items-center;
       .justify-content-center;
-      min-height: 100%;
+      height: 100%;
     }
     header {
+      max-width: 100%;
       :first-child {
         margin-top: 0;
       }
@@ -43,7 +42,7 @@
     }
   }
   .accent {
-    background-color: fade(@brand-primary, 50%);
+    background-color: fade(darken(@brand-primary, 10%), 90%);
   }
   .intro,
   .accent {

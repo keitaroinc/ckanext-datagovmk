@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+  var _ = ckan.i18n.ngettext;
   var downloadResourcesBtn = $('#download-resources');
   var resourceCheckboxes = $('input[name=mark-download-resource]');
 
@@ -39,7 +40,7 @@ $(document).ready(function () {
     var data = { resources: [] };
 
     downloadResourcesBtn.attr('disabled', 'disabled');
-    downloadResourcesBtn.text('Preparing zip archive...');
+    downloadResourcesBtn.text(_('Preparing zip archive...'));
 
     $.each(resourceCheckboxes, function (i, el) {
       if (el.checked) {
@@ -51,7 +52,7 @@ $(document).ready(function () {
       var zip_id = response.result.zip_id;
 
       downloadResourcesBtn.removeAttr('disabled');
-      downloadResourcesBtn.text('Download');
+      downloadResourcesBtn.text(_('Download'));
 
       if (zip_id) {
         var link = document.createElement('a');
@@ -62,13 +63,13 @@ $(document).ready(function () {
         link.click();
         document.body.removeChild(link);
       } else {
-        window.ckan.notify('Could not create a zip archive.');
+        window.ckan.notify(_('Could not create a zip archive.'));
       }
     }).error(function (response) {
       downloadResourcesBtn.removeAttr('disabled');
-      downloadResourcesBtn.text('Download');
+      downloadResourcesBtn.text(_('Download'));
 
-      window.ckan.notify('An error occured while preparing zip archive.');
+      window.ckan.notify(_('An error occured while preparing zip archive.'));
     });
   });
 

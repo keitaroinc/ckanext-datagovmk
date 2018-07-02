@@ -1,7 +1,7 @@
 {% set intro = g.site_intro_text %}
 
 <div class="module-content">
-  <header class="flex flex-wrap align-items-center">
+  <header>
     {% if intro %}
       {{ h.render_markdown(intro) }}
     {% else %}
