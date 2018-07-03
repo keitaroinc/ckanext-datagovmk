@@ -48,7 +48,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
-            'datagovmk_download_zip': actions.download_zip
+            'datagovmk_download_zip': actions.download_zip,
         }
 
     # IAuthFunctions
@@ -84,4 +84,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
+
+        map.connect('/api/download/{package_id}/resources',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_resources_metadata')
+
         return map

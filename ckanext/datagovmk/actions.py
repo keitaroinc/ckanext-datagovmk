@@ -7,6 +7,7 @@ from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
 from logging import getLogger
+from ckanext.dcat.processors import RDFSerializer
 log = getLogger(__name__)
 
 _ = toolkit._
