@@ -58,6 +58,32 @@
 
 {% endblock %}
 
+{%- block resource_actions_inner -%}
+  {{ super() }}
+  {%- block resource_metadata_download -%}
+    <li>
+      <div class="btn-group download-metadata-control">
+          <button class="btn btn-success download-metadata-btn"><i class="fa fa-download"></i> {{ _('Download Metadata') }} </button>
+          <button href="#" class="btn btn-success dropdown-toggle download-metadata-btn" data-toggle="dropdown">
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                            action='download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">JSON</a>
+              <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                              action='download_resources_metadata', format='xml', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">XML</a>
+              <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                              action='download_resources_metadata', format='rdf', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">RDF</a>
+              <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                              action='download_resources_metadata', format='csv', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">CSV</a>
+            </li>
+          </ul>
+      </div>
+    </li>
+  {%- endblock -%}
+{%- endblock-%}
+
 {%- block secondary_content -%}
   {%- block resource_stats -%}
     {% set stats = h.datagovmk_get_resource_stats(res.id) %}

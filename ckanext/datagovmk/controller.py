@@ -13,6 +13,7 @@ from io import StringIO
 from ckan.controllers.package import PackageController
 from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.helpers import get_storage_path_for
+from ckanext.datagovmk.utils import export_resource_to_rdf, export_resource_to_xml, export_resource_to_csv, to_utf8_str
 from ckan.lib.base import BaseController, abort
 from ckan.plugins import toolkit
 from ckan.common import c, request, response
@@ -87,8 +88,15 @@ class ApiController(BaseController):
 
 
 class BulkDownloadController(BaseController):
+    """Download metadata as ZIP file.
+    """
 
     def download_resources_metadata(self, package_id):
+        """Download resources metadata in different formats as ZIP file.
+
+        :param str package_id: the id of the package containing the resources.
+
+        """
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
@@ -146,15 +154,11 @@ def _export_resources_json(zip_file, pkg_dict, request, response):
 
 
 def _export_to_rdf(zip_file, pkg_dict, request, response, file_ext='rdf'):
-    from ckanext.dcat.processors import RDFSerializer
-    serializer = RDFSerializer()
+    for resource in pkg_dict['resources']:
+        file_name = '%s.rdf' % resource.get('name') or resource['id']
+        output = export_resource_to_rdf(resource, pkg_dict)
+        zip_file.writestr(file_name, output)
 
-    file_name = '%s.%s' % (pkg_dict.get('name') or pkg_dict['id'], file_ext)
-
-    output = serializer.serialize_dataset(pkg_dict,
-                                          _format='xml')
-    
-    zip_file.writestr(file_name, output)
 
 
 def _export_resources_rdf(zip_file, pkg_dict, request, response):
@@ -162,23 +166,17 @@ def _export_resources_rdf(zip_file, pkg_dict, request, response):
 
 
 def _export_resources_xml(zip_file, pkg_dict, request, response):
-    # It only makes sense to export in RDF valid XML, containing the dataset info as well.
-    return _export_to_rdf(zip_file, pkg_dict, request, response, 'rdf')
+    for resource in pkg_dict['resources']:
+        file_name = '%s.xml' % resource.get('name') or resource['id']
+        output = export_resource_to_xml(resource)
+        zip_file.writestr(file_name.encode('utf-8'), output.encode('utf-8'))
 
 
 def _export_resources_csv(zip_file, pkg_dict, request, response):
     for resource in pkg_dict['resources']:
-        rc_filename = '%s.json' % resource.get('name') or resource['id']
-        fieldnames = [prop for prop,_ in resource.iteritems()]
-        output = StringIO()
-        writer = csv.DictWriter(output, fieldnames=fieldnames)
-        print fieldnames
-        print resource
-        writer.writeheader()
-        
-        writer.writerow(resource)
-
-        zip_file.writestr(rc_filename, output.getvalue()) 
+        rc_filename =to_utf8_str('%s.csv' % resource.get('name') or resource['id'])
+        output = export_resource_to_csv(resource)
+        zip_file.writestr(rc_filename, output) 
 
 _SUPPORTED_EXPORTS = {
     'json': _export_resources_json,
