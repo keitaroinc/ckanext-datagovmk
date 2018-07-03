@@ -3,21 +3,19 @@ $(document).ready(function () {
   var _ = ckan.i18n.ngettext;
   var downloadResourcesBtn = $('#download-resources');
   var resourceCheckboxes = $('input[name=mark-download-resource]');
+  var downloadMetadata = $('a.download-metadata');
 
-  // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
-  $('.btn-mark-all').click(function (e) {
-    var $el = $(this);
-    if (!$el.data('status')) {
-      downloadResourcesBtn.addClass('btn-success');
-      downloadResourcesBtn.removeAttr('disabled');
-    } else {
-      downloadResourcesBtn.removeClass('btn-success');
-      downloadResourcesBtn.attr('disabled', 'disabled');
-    }
-  });
 
-  // Disable/enable the Download button depending if any checkbox is checked.
-  resourceCheckboxes.click(function (e) {
+  var clickLinkInBackground = function(url) {
+    var link = document.createElement('a');
+    link.style.display = 'none';
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  var toggleDownloadButtons = function(){
     var atLeastOneChecked = false;
 
     $.each(resourceCheckboxes, function (i, el) {
@@ -27,12 +25,26 @@ $(document).ready(function () {
     });
 
     if (atLeastOneChecked) {
-      downloadResourcesBtn.addClass('btn-success');
-      downloadResourcesBtn.removeAttr('disabled');
+      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function(i, elem){
+        elem.addClass('btn-success');
+        elem.removeAttr('disabled');
+      });
     } else {
-      downloadResourcesBtn.removeClass('btn-success');
-      downloadResourcesBtn.attr('disabled', 'disabled');
+      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function(i, elem){
+        elem.removeClass('btn-success');
+        elem.attr('disabled', 'disabled');
+      });
     }
+  };
+
+  // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
+  $('.btn-mark-all').click(function (e) {
+    toggleDownloadButtons();
+  });
+
+  // Disable/enable the Download button depending if any checkbox is checked.
+  resourceCheckboxes.click(function (e) {
+    toggleDownloadButtons();
   });
 
   downloadResourcesBtn.click(function (e) {
@@ -72,5 +84,27 @@ $(document).ready(function () {
       window.ckan.notify(_('An error occured while preparing zip archive.'));
     });
   });
+
+  downloadMetadata.click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var resources = []
+    if ( $(this).attr('disabled') ) {
+      return;
+    }
+    $.each(resourceCheckboxes, function (i, el) {
+      if (el.checked) {
+        resources.push(el.value);
+      }
+    });
+    var url = $(this).attr('href')
+    if (resources.length){
+      url += '&resources=' + resources.join(',')
+    }
+    clickLinkInBackground(url)
+  });
+
+
+  toggleDownloadButtons(); // first time we load.
 
 });

@@ -2,11 +2,13 @@ import os
 import uuid
 import requests
 import zipfile
+from io import StringIO
 
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
 from logging import getLogger
+from ckanext.dcat.processors import RDFSerializer
 log = getLogger(__name__)
 
 _ = toolkit._
@@ -210,3 +212,64 @@ def download_zip(context, data_dict):
 
     toolkit.response.content_disposition = 'attachment; filename=' + package_name
     os.remove(file_path)
+
+
+@toolkit.side_effect_free
+def download_dataset_metadata(context, data_dict):
+    export_format = data_dict.get('format', 'json')
+    exporter = SUPPORTED_EXPORTS.get(export_format)
+    if not exporter:
+        raise Exception('FIXME: Unsupported export format')
+    
+    serialize = exporter['serializer']
+    
+    dataset = get_action('package_show')(context, {'id': data_dict.get('id')})
+
+    
+    if exporter.get('mime-type'):
+        toolkit.response.headers['Content-Type'] = exporter['mime-type']
+    
+    return serialize(context, data_dict, dataset)
+
+
+def _serialize_json(context, data_dict, dataset):
+    return dataset
+
+
+def _serialize_xml(context, data_dict, dataset):
+    return _serialize_rdf(context, data_dict, dataset)
+
+
+def _serialize_rdf(context, data_dict, dataset):
+    serializer = RDFSerializer()
+
+    output = serializer.serialize_dataset(dataset,
+                                          _format='xml')
+    toolkit.response.content_type = 'text/xml'
+    toolkit.response.headerlist.append(('Content-Type', 'text/xml'))
+    toolkit.response.write(output)
+    print 'RESP ->', dir(toolkit.response)
+    raise Exception('Bango Bongo')
+
+
+def _serialize_csv(context, data_dict, dataset):
+    pass
+
+SUPPORTED_EXPORTS= {
+    'json': {
+        'mime-type': 'application/json',
+        'serializer': _serialize_json
+    },
+    'xml': {
+        'mime-type': 'appliation/xml',
+        'serializer': _serialize_xml
+    },
+    'rdf': {
+        'mime-type': 'application/rdf+xml',
+        'serializer': _serialize_rdf
+    },
+    'csv': {
+        'mime-type': 'text/csv',
+        'serializer': _serialize_csv
+    }
+}
