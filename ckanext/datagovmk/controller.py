@@ -13,7 +13,12 @@ from io import StringIO
 from ckan.controllers.package import PackageController
 from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.helpers import get_storage_path_for
-from ckanext.datagovmk.utils import export_resource_to_rdf, export_resource_to_xml, export_resource_to_csv, to_utf8_str
+from ckanext.datagovmk.utils import (export_resource_to_rdf,
+                                     export_resource_to_xml,
+                                     export_dict_to_csv,
+                                     to_utf8_str,
+                                     export_package_to_xml,
+                                     export_package_to_rdf)
 from ckan.lib.base import BaseController, abort
 from ckan.plugins import toolkit
 from ckan.common import c, request, response
@@ -143,7 +148,34 @@ class BulkDownloadController(BaseController):
             pkg_dict['resources'] = filtered_resources
         
         exporter(zip_file, pkg_dict, request, response)
+    
+    def download_package_metadata(self, package_id):
+        """Download package metadata in one of the supported formats.
+
+        :param dict package_dict: the package metadata.
+
+        """
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'auth_user_obj': c.userobj}
+
+        package_dict = get_action('package_show')(context, {'id': package_id})
+        _format = request.params.get('format', 'json')
+        export_def = _SUPPORTED_PACKAGE_EXPORTS.get(_format)
+        if not export_def:
+            raise Exception('Unsupported export format: %s' % _format)
         
+        content_type = export_def['content-type']
+        response.headers['Content-Type'] = content_type
+
+        exporter = export_def['exporter']
+
+        file_name = '%s.%s' % (package_dict.get('name') or package_dict['id'], _format)
+
+        response.content_disposition = 'attachment; filename=' + file_name
+        response.charset = 'UTF-8'
+
+        exporter(package_dict, request, response)
 
     
 
@@ -175,7 +207,7 @@ def _export_resources_xml(zip_file, pkg_dict, request, response):
 def _export_resources_csv(zip_file, pkg_dict, request, response):
     for resource in pkg_dict['resources']:
         rc_filename =to_utf8_str('%s.csv' % resource.get('name') or resource['id'])
-        output = export_resource_to_csv(resource)
+        output = export_dict_to_csv(resource)
         zip_file.writestr(rc_filename, output) 
 
 _SUPPORTED_EXPORTS = {
@@ -184,6 +216,61 @@ _SUPPORTED_EXPORTS = {
     'xml': _export_resources_xml,
     'csv': _export_resources_csv
 }
+
+
+def _export_package_json(package_dict, request, response):
+    json.dump(package_dict, response, indent=4)
+
+
+def _export_package_xml(package_dict, request, response):
+    response.write(export_package_to_xml(package_dict))
+
+
+def _export_package_to_rdf(package_dict, request, response):
+    response.write(export_package_to_rdf(package_dict, _format='xml'))
+
+
+def _export_package_to_csv(package_dict, request, response):
+    result = {}
+    for key, value in package_dict.iteritems():
+        if isinstance(value, list):
+            if not value:
+                value = ""
+            elif len(value) == 1:
+                value = value[0]
+        result[key] = value
+    
+    if result.get('organization'):
+        result['organization'] = result['organization'].get('name') or result['organization']['id']
+    
+    if result.get('tags'):
+        tags = []
+        for tag in result['tags']:
+            tags.append(tag.get('name') or tag['id'])
+        result['tags'] = ','.join(tags)
+
+    response.write(export_dict_to_csv(result))
+
+
+_SUPPORTED_PACKAGE_EXPORTS = {
+    'json': {
+        'content-type': 'application/json',
+        'exporter': _export_package_json,
+    },
+    'rdf': {
+        'content-type': 'application/rdf+xml',
+        'exporter': _export_package_to_rdf,
+    },
+    'xml': {
+        'content-type': 'application/xml',
+        'exporter': _export_package_xml,
+    },
+    'csv': {
+        'content-type': 'text/csv',
+        'exporter': _export_package_to_csv,
+    },
+}
+
 
 def _open_temp_zipfile():
     file_name = uuid.uuid4().hex + '.{ext}'.format(ext='zip')

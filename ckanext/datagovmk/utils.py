@@ -9,6 +9,7 @@ from rdflib.namespace import Namespace, RDF, XSD, SKOS, RDFS
 from rdflib import Literal, URIRef, BNode, Graph
 from ckanext.dcat.utils import resource_uri
 from ckan.model.license import LicenseRegister
+from ckanext.dcat.processors import RDFSerializer
 
 
 
@@ -150,18 +151,49 @@ def export_resource_to_xml(resource_dict):
 
     :returns: serialized data as XML string.
     """
+    return export_dict_to_xml(resource_dict, 'resource')
+
+
+def export_package_to_xml(package_dict):
+    """Export package metadata to XML format.
+
+    :param dict package_dict: the package metadata.
+
+    :returns: XML representation (as string) of the package metadata.
+    """
+    return export_dict_to_xml(package_dict, 'package')
+
+
+def export_dict_to_xml(value_dict, root_name):
+    """Export a dictionary data as XML string.
+
+    :param dict value_dict: the dictionary holding the data to be exported.
+    :param str root_name: the name of the root element in the XML DOM.
+
+    :returns: XML representation (without namespaces) of the provided dictionary.
+    """
     impl = getDOMImplementation()
 
-    doc = impl.createDocument(None, 'resource', None)
+    doc = impl.createDocument(None, root_name, None)
 
     root = doc.documentElement
 
-    for prop, value in resource_dict.iteritems():
+    for prop, value in value_dict.iteritems():
         _add_element(doc, root, prop, value)
 
     xml = doc.toprettyxml()
     return xml
-            
+
+
+def export_package_to_rdf(package_dict, _format='xml'):
+    """Exports a package metadata in RDF in the specified format.
+
+    :param dict package_dict: the package metadata.
+    :param str _format: the desired format to export to. Default is ``xml``.
+    """
+    serializer = RDFSerializer()
+    return serializer.serialize_dataset(package_dict, _format=_format)
+
 
 def _add_element(doc, parent_el, element_name, value):
     if isinstance(value, list):
@@ -233,22 +265,22 @@ class UnicodeWriter:
             self.writerow(row)
 
 
-def export_resource_to_csv(resource_dict):
-    """Exports the provided resource metadata as CSV file.
+def export_dict_to_csv(value_dict):
+    """Exports the provided dictionary as CSV file.
 
-    :param dict resource_dict: resource metadata.
+    :param dict value_dict: dictionary to be serialized.
 
-    :returns: serialized CSV representation of the resource metadata.
+    :returns: serialized CSV representation of the dict data.
     """
     stream = BytesIO()
 
-    fieldnames = [prop for prop,_ in resource_dict.iteritems()]
+    fieldnames = [prop for prop,_ in value_dict.iteritems()]
 
     writer = UnicodeWriter(stream)
 
     row = []
     for prop in fieldnames:
-        val = resource_dict[prop]
+        val = value_dict[prop]
         if isinstance(val, list) or isinstance(val, dict):
             val = json.dumps(val)
         row.append(to_utf8_str(val))

@@ -88,5 +88,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         map.connect('/api/download/{package_id}/resources',
                     controller='ckanext.datagovmk.controller:BulkDownloadController',
                     action='download_resources_metadata')
+        map.connect('/api/download/{package_id}/metadata',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_package_metadata')
 
         return map
