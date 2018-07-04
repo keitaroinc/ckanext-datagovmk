@@ -2,17 +2,24 @@ import os
 import uuid
 import requests
 import zipfile
+import hashlib
 
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
+
+import ckan.plugins as plugins
+import ckan.lib.uploader as uploader
+
 log = getLogger(__name__)
 
 _ = toolkit._
 ValidationError = toolkit.ValidationError
 get_action = toolkit.get_action
+get_or_bust = toolkit.get_or_bust
+check_access = toolkit.check_access
 
 SUPPORTED_RESOURCE_MIMETYPES = [
     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -211,3 +218,92 @@ def download_zip(context, data_dict):
 
     toolkit.response.content_disposition = 'attachment; filename=' + package_name
     os.remove(file_path)
+
+
+def resource_create(context, data_dict):
+    '''Overrides CKAN's ``resource_create`` action.'''
+
+    model = context['model']
+
+    package_id = get_or_bust(data_dict, 'package_id')
+    if not data_dict.get('url'):
+        data_dict['url'] = ''
+
+    pkg_dict = get_action('package_show')(
+        dict(context, return_type='dict'),
+        {'id': package_id})
+
+    check_access('resource_create', context, data_dict)
+
+    for plugin in plugins.PluginImplementations(plugins.IResourceController):
+        plugin.before_create(context, data_dict)
+
+    if 'resources' not in pkg_dict:
+        pkg_dict['resources'] = []
+
+    upload = uploader.get_resource_uploader(data_dict)
+
+    checksum = _calculate_checksum(upload.upload_file)
+
+    rsc = model.Session.query(model.Resource).\
+        filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
+        first()
+    if rsc:
+        log.info('EXISTS')
+    else:
+        data_dict['hash'] = checksum
+
+    if 'mimetype' not in data_dict:
+        if hasattr(upload, 'mimetype'):
+            data_dict['mimetype'] = upload.mimetype
+
+    if 'size' not in data_dict:
+        if hasattr(upload, 'filesize'):
+            data_dict['size'] = upload.filesize
+
+    pkg_dict['resources'].append(data_dict)
+
+    try:
+        context['defer_commit'] = True
+        context['use_cache'] = False
+        get_action('package_update')(context, pkg_dict)
+        context.pop('defer_commit')
+    except ValidationError as e:
+        try:
+            raise ValidationError(e.error_dict['resources'][-1])
+        except (KeyError, IndexError):
+            raise ValidationError(e.error_dict)
+
+    # Get out resource_id resource from model as it will not appear in
+    # package_show until after commit
+    upload.upload(context['package'].resources[-1].id,
+                  uploader.get_max_resource_size())
+
+    model.repo.commit()
+
+    #  Run package show again to get out actual last_resource
+    updated_pkg_dict = get_action('package_show')(context, {'id': package_id})
+    resource = updated_pkg_dict['resources'][-1]
+
+    #  Add the default views to the new resource
+    get_action('resource_create_default_resource_views')(
+        {'model': context['model'],
+         'user': context['user'],
+         'ignore_auth': True
+         },
+        {'resource': resource,
+         'package': updated_pkg_dict
+         })
+
+    for plugin in plugins.PluginImplementations(plugins.IResourceController):
+        plugin.after_create(context, resource)
+
+    return resource
+
+def _calculate_checksum(file):
+    hash_md5 = hashlib.md5()
+    for chunk in iter(lambda: file.read(4096), b""):
+        hash_md5.update(chunk)
+
+    return hash_md5.hexdigest()
+
