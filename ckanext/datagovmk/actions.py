@@ -221,7 +221,9 @@ def download_zip(context, data_dict):
 
 
 def resource_create(context, data_dict):
-    '''Overrides CKAN's ``resource_create`` action.'''
+    '''Overrides CKAN's ``resource_create`` action. Calculates checksum of
+    the file and if file exists it will notify the user.
+    '''
 
     model = context['model']
 
@@ -249,7 +251,7 @@ def resource_create(context, data_dict):
         filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
         first()
     if rsc:
-        log.info('EXISTS')
+        raise ValidationError({_('file'): [_('Already exists')]})
     else:
         data_dict['hash'] = checksum
 
