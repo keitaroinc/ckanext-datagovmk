@@ -245,6 +245,8 @@ def resource_create(context, data_dict):
 
     upload = uploader.get_resource_uploader(data_dict)
 
+    # Checksum calculated for resource file must be different from checksum calculaated
+    # by Datapushes that's why '-resource' string is added to the checksum
     checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
     rsc = model.Session.query(model.Resource).\
