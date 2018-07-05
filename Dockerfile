@@ -32,7 +32,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # ckanext-spatial and related
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@mk-translation#egg=ckanext-spatial" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
-    pip install --no-cache-dir -e "git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@mk-translation#egg=ckanext-report" && \
     # ckanext-qa and related
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-archiver.git@mk-translation#egg=ckanext-archiver" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-archiver/requirements.txt" && \
