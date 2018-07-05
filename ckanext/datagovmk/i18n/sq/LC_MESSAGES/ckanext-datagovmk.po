@@ -158,7 +158,7 @@ msgstr "Blog"
 
 #: ckanext/datagovmk/templates/home/layout1.html:20
 msgid "Recent datasets"
-msgstr "I fundit seti i të dhënave"
+msgstr "Setet më të fundit të të dhënave"
 
 #: ckanext/datagovmk/templates/home/layout1.html:28
 msgid "No datasets available."
