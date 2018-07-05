@@ -245,7 +245,7 @@ def resource_create(context, data_dict):
 
     upload = uploader.get_resource_uploader(data_dict)
 
-    checksum = _calculate_checksum(upload.upload_file)
+    checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
     rsc = model.Session.query(model.Resource).\
         filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
@@ -308,4 +308,3 @@ def _calculate_checksum(file):
         hash_md5.update(chunk)
 
     return hash_md5.hexdigest()
-
