@@ -246,7 +246,7 @@ def resource_create(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if not hasattr(upload, 'upload_file'):
-        raise ValidationError({'file': [_('Missing value')]})
+        raise ValidationError({'URL': [_('Missing value')]})
 
     # Checksum calculated for resource file must be different from checksum calculaated
     # by Datapushes that's why '-resource' string is added to the checksum
@@ -256,7 +256,7 @@ def resource_create(context, data_dict):
         filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
         first()
     if rsc:
-        raise ValidationError([_('Resource already exists')])
+        raise ValidationError({_('message'): [_('Resource already exists')]})
     else:
         data_dict['hash'] = checksum
 
