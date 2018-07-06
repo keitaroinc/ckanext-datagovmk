@@ -2,6 +2,9 @@
 @gray-line: #ececec;
 @text-gray: #99938B;
 @group-icon-size: 90px;
+//** Resources
+@resource-list-actions-border: 1px solid #ccc;
+
 // @imagePath: "../../../../base/images";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -43,14 +46,14 @@
 @import "@{bootstrap-path}media.less";
 @import "@{bootstrap-path}list-group.less";
 @import "@{bootstrap-path}panels.less";
-// @import "@{bootstrap-path}responsive-embed.less";
+@import "@{bootstrap-path}responsive-embed.less";
 @import "@{bootstrap-path}wells.less";
 @import "@{bootstrap-path}close.less";
 // Components w/ JavaScript
-// @import "@{bootstrap-path}modals.less";
-// @import "@{bootstrap-path}tooltip.less";
-// @import "@{bootstrap-path}popovers.less";
-// @import "@{bootstrap-path}carousel.less";
+@import "@{bootstrap-path}modals.less";
+@import "@{bootstrap-path}tooltip.less";
+@import "@{bootstrap-path}popovers.less";
+@import "@{bootstrap-path}carousel.less";
 // Utility classes
 @import "@{bootstrap-path}utilities.less";
 @import "@{bootstrap-path}responsive-utilities.less";
@@ -58,16 +61,15 @@
 
 @import "_flex.less";
 @import "_mixins.less";
-.btn {
-  .text-uppercase;
-}
-
-.btn-primary-outline {
-  &,
-  &:hover {
-    border-color: @white;
-  }
-}
+@import "_buttons.less";
+@import "_hero.less";
+@import "_featured-groups.less";
+@import "_featured-charts.less";
+@import "_related-datasets.less";
+@import "_quick-stats.less";
+@import "_datasets.less";
+@import "_resources.less";
+@import "_stats.less";
 
 // Override Bootstrap 3 default
 .radio input[type="radio"],
@@ -137,6 +139,9 @@
     .text-muted;
   }
   hgroup {
+    h1 {
+      margin: @grid-gutter-width/3 0;
+    }
     h2 {
       .text-muted;
       position: static;
@@ -202,155 +207,10 @@
   }
 }
 
-.hero {
-  padding: 0;
-  color: lighten(@brand-primary, 70%);
-  min-height: auto; // Source: https://de.wikipedia.org/wiki/Datei:Br%C3%BCcke_Skopje.JPG
-  background: darken(@brand-primary, 20%) url("../img/Brücke_Skopje_modified.jpg") center no-repeat;
-  background-blend-mode: multiply; // Not supported in Internet Explorer
-  background-size: cover;
-  .intro {
-    background: @brand-primary url("../img/datagovmk-bg-pattern.png") center no-repeat;
-    background-size: cover;
-    .module-content {
-      .flex;
-      .flex-column;
-      .align-items-center;
-      .justify-content-center;
-      min-height: 100%;
-    }
-    header {
-      :first-child {
-        margin-top: 0;
-      }
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      .text-uppercase;
-    }
-    p {
-      font-size: @font-size-large;
-    }
-    .btn {
-      align-self: flex-start;
-      margin-top: @grid-gutter-width/2;
-    }
-  }
-  .accent {
-    background-color: fade(@brand-primary, 50%);
-  }
-  .intro,
-  .accent {
-    padding: @grid-gutter-width*1.5 @grid-gutter-width;
-  }
-  .accent {
-    .flex;
-    .flex-wrap;
-    .flex-column;
-    .justify-content-center;
-  }
-  .module-search {
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    margin: @grid-gutter-width/2 0;
-    .module-content {
-      padding-bottom: 0;
-      .heading {
-        .text-uppercase;
-      }
-    }
-    &,
-    .tags,
-    .module-content {
-      background-color: transparent;
-    }
-    .tags {
-      padding-top: 0;
-    }
-    .search-giant {
-      border: @grid-gutter-width/3 solid @brand-secondary;
-      input {
-        border-radius: 0;
-      }
-    }
-  }
-}
-
-.accent {
-  .lists {
-    margin-top: @grid-gutter-width/2;
-    font-size: @font-size-base + 2;
-    .fa {
-      margin-right: @grid-gutter-width/6;
-    }
-    a {
-      color: inherit;
-    }
-    .title {
-      .text-uppercase;
-      padding-bottom: @grid-gutter-width/3;
-      border-bottom: 2px solid darken(@brand-primary, 10%);
-      .fa {
-        color: @brand-secondary;
-      }
-    }
-  }
-  .list-unstyled {
-    li{
-      display: flex;
-      margin-top: @grid-gutter-width/3;
-      margin-bottom: @grid-gutter-width/3;
-    }
-    a {
-      display: inline-block;
-    }
-    .fa{
-      margin-right: @grid-gutter-width/3;
-    }
-  }
-}
-
-.quick-stats {
-  .flex;
-  .flex-wrap;
-  .justify-content-between;
-  a {
-    .flex;
-    flex-basis: 20%;
-    padding: @grid-gutter-width/2 @grid-gutter-width*2;
-    border-radius: @border-radius-large;
-    color: inherit;
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
-    &:hover {
-      background: fade(@brand-primary, 50%);
-    }
-  }
-  .value {
-    font-weight: 700;
-    font-size: @font-size-h4*2;
-    line-height: 1;
-  }
-  .title {
-    font-size: @font-size-h4;
-    line-height: 1;
-  }
-  .fa {
-    margin-right: @grid-gutter-width;
-    font-size: @font-size-h2*2;
-  }
-  .wrap {
-    .flex;
-    .flex-column;
-    justify-content: center;
+.primary {
+  img {
+    max-width: 100%;
+    height: auto !important; // required for inlined heights
   }
 }
 
@@ -399,6 +259,12 @@
   ol {
     .text-uppercase;
   }
+  ul {
+    li {
+      .font-awesome('\f0da',
+      @brand-warning);
+    }
+  }
 }
 
 .attribution {
@@ -412,8 +278,6 @@
 
 .news,
 .blog {
-  margin-top: @grid-gutter-width;
-  margin-bottom: @grid-gutter-width;
   .panel {
     border-color: @hr-border;
     .item {
@@ -456,7 +320,7 @@
     .justify-content-between;
     padding: @grid-gutter-width/2 @grid-gutter-width;
     .fa {
-      color: @brand-secondary;
+      color: @gray-lighter;
       margin-right: @grid-gutter-width/5;
     }
   }
@@ -467,13 +331,19 @@
 }
 
 .news {
+  margin-top: @grid-gutter-width;
+  margin-bottom: @grid-gutter-width;
   .panel-body {
     .flex;
     .flex-wrap;
     flex: 1;
+    .body{
+      width: 100%;
+    }
     .item {
-      flex-basis: 33%;
+      flex: 1/3;
       .image {
+        width: 100%;
         max-width: 100%;
         margin-bottom: @grid-gutter-width/2;
       }
@@ -483,6 +353,8 @@
 
 .blog {
   .panel {
+    margin-top: @grid-gutter-width;
+    margin-bottom: @grid-gutter-width;
     .item {
       &:not(:last-child) {
         border-bottom: 1px solid @hr-border;
@@ -533,97 +405,8 @@
   }
 }
 
-.featured-groups-wrap {
-  background: @brand-secondary;
-}
-
-.featured-groups {
-  .flex;
-  .flex-wrap;
-  .align-items-center;
-  .justify-content-center;
-  list-style: none;
-  padding-left: 0;
-  li {
-    flex-grow: 1;
-    flex-shrink: 0;
-  }
-  .group {
-    .flex;
-    .flex-column;
-    .align-items-center;
-    .justify-content-center;
-    &:hover {
-      color: darken(@brand-primary, 20%);
-      text-decoration: none;
-      .icon-wrap {
-        border-color: @white;
-      }
-    }
-    margin: @grid-gutter-width;
-    .icon-wrap {
-      .flex;
-      .align-items-center;
-      .justify-content-center;
-      overflow: hidden;
-      border: 4px solid transparent;
-      background: @brand-primary;
-      margin: @grid-gutter-width/2 auto;
-      width: @group-icon-size;
-      height: @group-icon-size;
-      border-radius: @group-icon-size/2;
-    }
-    .icon {
-      color: @white;
-    }
-    .title {
-      text-transform: uppercase;
-      font-size: @font-size-large;
-    }
-  }
-}
-
-.featured-charts {
-  padding-left: 0;
-  padding-right: 0;
-  width: auto;
-  @media (min-width: @screen-md-min) {
-    width: percentage((10 / @grid-columns));
-    margin-left: percentage((1 / @grid-columns));
-  }
-  .item {
-    margin: @grid-gutter-width/2;
-    padding: @grid-gutter-width;
-    min-height: @grid-gutter-width*10;
-    &.box {
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  }
-  .title {
-    .fa {
-      color: @brand-secondary;
-    }
-    font-size: @font-size-h4;
-    font-weight: 400;
-    margin: 0 0 @grid-gutter-width;
-    text-transform: uppercase;
-  }
-}
-
-.resources {
-  h3 {
-    .text-uppercase;
-    font-weight: 300;
-    border-bottom: 1px solid @gray-lighter;
-    margin-bottom: @grid-gutter-width/2;
-    padding-bottom: @grid-gutter-width/2;
-  }
-  .resource-list {
-    padding-left: @grid-gutter-width/2;
-    padding-right: @grid-gutter-width/2;
-  }
+.prose {
+  margin-bottom: @grid-gutter-width;
 }
 
 /* Media queries */

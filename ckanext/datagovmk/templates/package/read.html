@@ -1,0 +1,50 @@
+{% ckan_extends %}
+
+{% block package_description %}
+<div class="dataset-header-wrap">
+  <div class="dataset-header">
+    {{ super() }}
+  </div>
+  {% snippet 'package/snippets/stats.html', stats=h.datagovmk_get_dataset_stats(c.pkg_dict.id), total_downloads=h.datagovmk_total_downloads(c.pkg_dict.id) %}
+</div>
+{% endblock %}
+
+{% block package_tags %}
+  {{ super() }}
+  {% block related_datasets %}
+    {% set related_datasets = h.datagovmk_get_related_datasets(pkg.id, limit=5) %}
+
+    {% if related_datasets %}
+    <section class="related-datasets">
+      <h3 class="title">{{ _('Related datasets') }}</h3>
+      <ul class="{{ list_class or 'dataset-list list-unstyled' }}">
+      {% for dataset in related_datasets %}
+        {% snippet 'snippets/package_item.html', package=dataset %}
+      {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+  {% endblock %}
+{% endblock %}
+
+{% block content_action %}
+{{ super() }}
+{% block download_metadata %}
+    <div class="btn-group">
+        <button class="btn btn-success"><i class="fa fa-download"></i> {{ _('Download Dataset Metadata') }} </button>
+        <button href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                            action='download_package_metadata', format='json', package_id=c.pkg_dict['id']) }}">JSON</a></li>
+            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                            action='download_package_metadata', format='xml', package_id=c.pkg_dict['id']) }}">XML</a></li>
+            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                            action='download_package_metadata', format='rdf', package_id=c.pkg_dict['id']) }}">RDF</a></li>
+            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                            action='download_package_metadata', format='csv', package_id=c.pkg_dict['id']) }}">CSV</a></li>
+        </ul>
+      </div>
+  {% endblock%}
+{% endblock %}

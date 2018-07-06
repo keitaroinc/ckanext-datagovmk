@@ -1,0 +1,12 @@
+{%- set values = data[field.field_name] -%}
+<ul>
+{%- for element in values -%}
+  <li>
+    {% if h.is_url(element) %}
+        {{ h.link_to(element, element, target='_blank') }}
+    {% else %}
+        {{ element }}
+    {% endif %}
+  </li>
+{%- endfor -%}
+</ul>

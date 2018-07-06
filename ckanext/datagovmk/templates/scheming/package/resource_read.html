@@ -1,0 +1,11 @@
+{% extends "package/resource_read.html" %}
+
+{%- set exclude_fields = [
+    'name',
+    'description',
+    'url',
+    'format',
+    ] -%}
+{%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+
+{% snippet "package/resource_read.html", res=res, schema=schema %}

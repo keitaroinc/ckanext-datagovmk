@@ -45,6 +45,95 @@ For example, you might want to mention here which versions of CKAN this
 extension works with.
 
 
+---------------------
+Install prerequisites
+---------------------
+
+This extension requires other extensions to be installed prior to installation and
+configuring for CKAN.
+
+To install these dependecies you must first activate your CKAN virtual
+environment::
+
+     . /usr/lib/ckan/default/bin/activate
+
+
+Then proceed to install the extensions bellow.
+
+
+ckanext-scheming
+^^^^^^^^^^^^^^^^
+
+Install scheming and its dependencies with the patch for CKAN 2.8::
+
+    pip install -se "git+https://github.com/keitaroinc/ckanext-scheming.git@ckan-2.8#egg=ckanext-scheming"
+    pip install -r /usr/lib/ckan/default/src/ckanext-scheming/requirements.txt
+
+
+
+ckanext-repeating
+^^^^^^^^^^^^^^^^^
+
+This plays with ckanext-scheming and adds support for repeatable fields::
+
+    pip install +e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating"
+
+
+
+
+ckanext-dcat
+^^^^^^^^^^^^
+
+This extension enabes CKAN to process and export catalogs and datasets metadata in
+accordance with the DCAT standard.
+
+Install it along with its dependencies::
+
+    pip install -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat"
+    pip install -r /usr/lib/ckan/default/src/ckanext-dcat/requirements.txt
+
+
+
+ckanext-mk_dcatap
+^^^^^^^^^^^^^^^^^
+
+Macedonian DCAT Application Profile specs and Scheming schema definition to support
+this profile.
+
+Install it::
+
+    pip install -e "git+https://github.com/keitaroinc/ckanext-mk_dcatap#egg=ckanext-mk_dcatap"
+    pip install -r /usr/lib/ckan/default/src/ckanext-mk-dcatap/requirements.txt
+
+
+To enable schemig with the MK DCAT profile, you'll need to add the following propeties
+in CKAN configuration file (.ini)::
+
+    # Scheming
+    scheming.dataset_schemas=ckanext.mk_dcatap:mk_dcatap_schema.json
+
+    scheming.presets = ckanext.scheming:presets.json
+                       ckanext.repeating:presets.json
+
+    # Enable the DCAP profile
+    ckanext.dcat.rdf.profiles = mk_dcat_ap
+
+
+Add the extensions to ``ckan.plugins``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add the extensions to the ``ckan.plugins`` setting in your CKAN config file (by default
+the config file is located at ``/etc/ckan/default/production.ini``).
+The order of the plugins matters in this case. You must put ``scheming_datasets`` **after**
+``datagovmk``, and ``repeating`` should be placed after ``schemig_datasets``. ``mk_dcatap``
+goes at the end.
+
+The plugins list should look something like this::
+
+    ckan.plugins = <other plugins> dcat datagovmk scheming_datasets repeating  mk_dcatap 
+
+
+
 ------------
 Installation
 ------------

@@ -1,0 +1,18 @@
+{% ckan_extends %}
+
+{% block resource_item_title %}
+  <div class="checkbox checkbox-mark-for-download">
+    <label for="mark-download-resource">
+      <input name="mark-download-resource" value="{{ res.id }}" type="checkbox">
+      <span class="hidden">{{ _('Mark for Download') }}</span>
+    </label>
+  </div>
+  {{ super() }}
+{% endblock %}
+
+{% block resource_item_explore %}
+  {% if res.url and h.is_url(res.url) and (res.has_views or res.url_type == 'upload') %}
+      {% snippet 'package/snippets/resource_download_button.html', res=res, pkg=pkg, url=url %}
+  {% endif %}
+  {{ super() }}
+{% endblock %}
