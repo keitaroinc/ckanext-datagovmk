@@ -245,20 +245,23 @@ def resource_create(context, data_dict):
 
     upload = uploader.get_resource_uploader(data_dict)
 
-    if not hasattr(upload, 'upload_file'):
-        raise ValidationError({'URL': [_('Missing value')]})
+    if hasattr(upload, 'upload_file'):
+        # Checksum calculated for resource file must be different from checksum calculaated
+        # by Datapushes that's why '-resource' string is added to the checksum
+        checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-    # Checksum calculated for resource file must be different from checksum calculaated
-    # by Datapushes that's why '-resource' string is added to the checksum
-    checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
-
-    rsc = model.Session.query(model.Resource).\
-        filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-        first()
-    if rsc:
-        raise ValidationError({_('message'): [_('Resource already exists')]})
+        rsc = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
+            first()
+        if rsc:
+            raise ValidationError({_('message'): [_('Resource already exists')]})
+        else:
+            data_dict['hash'] = checksum
+    elif data_dict.get('url'):
+        _validate_link(data_dict.get('url'))
     else:
-        data_dict['hash'] = checksum
+        raise ValidationError({_('message'): [_('Resource file is missing')]})
+
 
     if 'mimetype' not in data_dict:
         if hasattr(upload, 'mimetype'):
@@ -313,3 +316,18 @@ def _calculate_checksum(file):
         hash_md5.update(chunk)
 
     return hash_md5.hexdigest()
+
+def _validate_link(link):
+    # HTTP status code meaning:
+    # 1xx - informational
+    # 2xx - success
+    # 3xx - redirection
+    # 4xx - client error
+    # 5xx - server error
+    try:
+        response = requests.head(link)
+    except Exception:
+        raise ValidationError({_('message'): [_('Invalid URL')]})
+
+    if int(response.status_code) >= 400:
+        raise ValidationError({_('message'): [_('Invalid URL')]})

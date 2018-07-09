@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-06 16:22+0200\n"
+"POT-Creation-Date: 2018-07-09 16:11+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -23,27 +23,32 @@ msgstr ""
 msgid "Missing dataset id"
 msgstr "Недостасува ИД на податочен сет"
 
-#: ckanext/datagovmk/actions.py:249
-msgid "Missing value"
-msgstr "Недостасува вредност"
-
-#: ckanext/datagovmk/actions.py:259
+#: ckanext/datagovmk/actions.py:257 ckanext/datagovmk/actions.py:263
+#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
 msgid "message"
 msgstr "порака"
 
-#: ckanext/datagovmk/actions.py:259
+#: ckanext/datagovmk/actions.py:257
 msgid "Resource already exists"
 msgstr "Ресурсот веќе постои"
 
-#: ckanext/datagovmk/controller.py:50
+#: ckanext/datagovmk/actions.py:263
+msgid "Resource file is missing"
+msgstr "Недостасува датотека на ресурсот"
+
+#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
+msgid "Invalid URL"
+msgstr "Невалиден линк"
+
+#: ckanext/datagovmk/controller.py:55
 msgid "Resource not found"
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:59
+#: ckanext/datagovmk/controller.py:64
 msgid "Resource data not found"
 msgstr "Податоците за ресурсот не се пронајдени"
 
-#: ckanext/datagovmk/controller.py:69
+#: ckanext/datagovmk/controller.py:74
 #, fuzzy
 msgid "No download is available"
 msgstr "Нема достапни податочни сетови."
@@ -259,6 +264,11 @@ msgstr "групи"
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
 msgstr "Поврзани податочни сетови"
+
+#: ckanext/datagovmk/templates/package/read.html:34
+#, fuzzy
+msgid "Download Dataset Metadata"
+msgstr "Преземи мета податоци"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:5
 msgid "Additional Information"
