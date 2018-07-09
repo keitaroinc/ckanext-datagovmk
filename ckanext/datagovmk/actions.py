@@ -6,6 +6,7 @@ import zipfile
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
+from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
 log = getLogger(__name__)
@@ -211,3 +212,20 @@ def download_zip(context, data_dict):
 
     toolkit.response.content_disposition = 'attachment; filename=' + package_name
     os.remove(file_path)
+
+
+def safe_override(action):
+    def get_safe_override(original_action):
+        def _action(*args, **kwargs):
+            return action(original_action, *args, **kwargs)
+        return _action
+    return get_safe_override
+    
+
+@safe_override
+def add_spatial_data(package_action, context, data_dict):
+    try:
+        l.import_spatial_data(data_dict)
+    except Exception as e:
+        log.warning(e)
+    return package_action(context, data_dict)

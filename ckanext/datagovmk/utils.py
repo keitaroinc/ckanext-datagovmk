@@ -4,13 +4,19 @@ from io import BytesIO
 import cStringIO
 import json
 import codecs
+import re
+from logging import getLogger
 
 from rdflib.namespace import Namespace, RDF, XSD, SKOS, RDFS
 from rdflib import Literal, URIRef, BNode, Graph
 from ckanext.dcat.utils import resource_uri
 from ckan.model.license import LicenseRegister
 from ckanext.dcat.processors import RDFSerializer
+from ckan.common import config
+import requests
 
+
+log = getLogger(__name__)
 
 
 DCT = Namespace("http://purl.org/dc/terms/")
@@ -24,6 +30,9 @@ LOCN = Namespace('http://www.w3.org/ns/locn#')
 GSP = Namespace('http://www.opengis.net/ont/geosparql#')
 OWL = Namespace('http://www.w3.org/2002/07/owl#')
 SPDX = Namespace('http://spdx.org/rdf/terms#')
+
+
+_DEFAULT_GEOJSON_SERVICE_URL = "http://polygons.openstreetmap.fr/get_geojson.py?id={resource}&params=0"
 
 
 def export_resource_to_rdf(resource_dict, dataset_dict, _format='xml'):
@@ -289,3 +298,93 @@ def export_dict_to_csv(value_dict):
     writer.writerow(row)
 
     return stream.getvalue()
+
+
+def get_package_location_geojson(package_dict):
+    print "Fetch GeoJSON for:", package_dict['id']
+    location_uri = package_dict.get('spatial_uri')
+    print " ==> location_uri: ", location_uri, type(location_uri)
+    if not location_uri:
+        return None
+    resource_id = _extract_spatial_resource_id(location_uri)
+    print " ==> resource_id: ", resource_id
+    if not resource_id:
+        return None
+    #geojson_value = _fetch_geojson_for_resource(resource_id)
+    geojson_value = _get_geojson(resource_id)
+    print " ==> geojson: ", geojson_value
+    return geojson_value
+
+
+def _extract_spatial_resource_id(location_uri):
+    match = re.search('/(?P<relation_id>\\d+)$', str(location_uri))
+    if match:
+        return match.group('relation_id')
+    return None
+
+
+def get_geojson_service_url(resource):
+    url_template = config.get('ckanext.datagovmk.geojson_service_url', _DEFAULT_GEOJSON_SERVICE_URL)
+    return url_template.format(resource=resource)
+
+
+def _fetch_geojson_for_resource(resource_id):
+    try:
+        resp = requests.get(get_geojson_service_url(resource_id))
+        if resp.status_code == 200:
+            return resp.text
+        log.warn("Failed to fetch GeoJSON for spatial resource %s, remote server responded with status code %d", resource_id, resp.status_code)
+        return None
+    except Exception as e:
+        log.warn('Failed to fetch GeoJSON for spatial resource %s: %s', resource_id, e)
+        return None
+
+
+def _fetch_osm_relation(relation_id):
+    overpass_interpeter_url = config.get('ckanext.datagovmk.osm_overpass_url', 'https://lz4.overpass-api.de/api/interpreter')
+    overpass_query = "[out:json];(relation(id:{relation_id})[boundary=administrative];);out bb;".format(relation_id=relation_id)
+    try:
+        resp = requests.post(overpass_interpeter_url, data=overpass_query)
+        if resp and resp.status_code == 200:
+            return resp.json()
+        log.warning('Unable to fetch geometry data from openstreetmap. Remote server responded with error: %d - %s', resp.status_code, resp.text)
+        return None
+    except Exception as e:
+        log.warning(e)
+        return None
+
+
+def _fetch_geom(resource):
+    data = _fetch_osm_relation(resource)
+    if not data:
+        return None
+    
+    if data.get('elements'):
+        bounds = data['elements'][0].get('bounds')
+        if bounds:
+            minlat = bounds['minlat']
+            maxlat = bounds['maxlat']
+            minlon = bounds['minlon']
+            maxlon = bounds['maxlon']
+
+            geom = {
+                'type': 'Polygon',
+                'coordinates': [
+                    [
+                        [minlon, maxlat],
+                        [minlon, minlat],
+                        [maxlon, minlat],
+                        [maxlon, maxlat],
+                        [minlon, maxlat]  # just a copy of the first one, close the Polygon
+                    ]
+                ]
+            }
+
+            return geom
+    return None
+
+def _get_geojson(resource):
+    geojson_dict = _fetch_geom(resource)
+    if geojson_dict:
+        return json.dumps(geojson_dict)
+    return None
