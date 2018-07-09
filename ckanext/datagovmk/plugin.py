@@ -49,7 +49,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
             'datagovmk_download_zip': actions.download_zip,
-            'resource_create': actions.resource_create
+            'resource_create': actions.resource_create,
+            'resource_update': actions.resource_update
         }
 
     # IAuthFunctions
