@@ -12,8 +12,9 @@
   </li>
   <li>
     <div class="btn-group download-metadata-control">
-      <button class="btn btn-success download-metadata-btn"><i class="fa fa-download"></i> {{ _('Download Metadata') }} </button>
-      <button href="#" class="btn btn-success dropdown-toggle download-metadata-btn" data-toggle="dropdown">
+      <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_resources_metadata', format='json', package_id=c.pkg_dict['id']) }}"
+         class="btn btn-default download-metadata-btn download-metadata"><i class="fa fa-download"></i> {{ _('Download Metadata') }} </a>
+      <button href="#" class="btn btn-default dropdown-toggle download-metadata-btn" data-toggle="dropdown">
           <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">

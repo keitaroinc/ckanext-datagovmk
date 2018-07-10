@@ -160,6 +160,10 @@ To install ckanext-datagovmk:
 
      sudo service apache2 reload
 
+5. Copy solr schema::
+
+    cp solr/schema.xml /opt/solr/server/solr/ckan/conf/schema.xml
+
 
 ---------------
 Config Settings
