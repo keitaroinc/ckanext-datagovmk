@@ -86,6 +86,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
 ENV CKAN__PLUGINS envvars \
+                  datagovmk \
                   disqus \
                   stats \
                   text_view \
@@ -107,7 +108,6 @@ ENV CKAN__PLUGINS envvars \
                   c3charts \
                   googleanalytics \
                   pages \
-                  datagovmk \
                   scheming_datasets \
                   repeating \
                   mk_dcatap \
