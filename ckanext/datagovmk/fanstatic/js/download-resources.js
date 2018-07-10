@@ -39,7 +39,18 @@ $(document).ready(function () {
 
   // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
   $('.btn-mark-all').click(function (e) {
-    toggleDownloadButtons();
+    var $el = $(this);
+    if (!$el.data('status')) {
+      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
+        elem.addClass('btn-success');
+        elem.removeAttr('disabled');
+      });
+    } else {
+      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
+        elem.removeClass('btn-success');
+        elem.attr('disabled', 'disabled');
+      });
+    }
   });
 
   // Disable/enable the Download button depending if any checkbox is checked.
