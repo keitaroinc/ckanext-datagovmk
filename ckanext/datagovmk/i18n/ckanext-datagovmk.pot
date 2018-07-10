@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-06 16:22+0200\n"
+"POT-Creation-Date: 2018-07-09 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,27 +22,32 @@ msgstr ""
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:249
-msgid "Missing value"
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:259
+#: ckanext/datagovmk/actions.py:257 ckanext/datagovmk/actions.py:263
+#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:259
+#: ckanext/datagovmk/actions.py:257
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:50
+#: ckanext/datagovmk/actions.py:263
+msgid "Resource file is missing"
+msgstr ""
+
+#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
+msgid "Invalid URL"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:55
 msgid "Resource not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:59
+#: ckanext/datagovmk/controller.py:64
 msgid "Resource data not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:69
+#: ckanext/datagovmk/controller.py:74
 msgid "No download is available"
 msgstr ""
 
@@ -249,6 +254,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/read.html:34
+msgid "Download Dataset Metadata"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/resource_read.html:5
