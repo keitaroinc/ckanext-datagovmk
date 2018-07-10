@@ -4,7 +4,6 @@
 @group-icon-size: 90px;
 //** Resources
 @resource-list-actions-border: 1px solid #ccc;
-
 // @imagePath: "../../../../base/images";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -70,7 +69,6 @@
 @import "_datasets.less";
 @import "_resources.less";
 @import "_stats.less";
-
 // Override Bootstrap 3 default
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
@@ -261,8 +259,7 @@
   }
   ul {
     li {
-      .font-awesome('\f0da',
-      @brand-warning);
+      .font-awesome('\f0da', @brand-warning);
     }
   }
 }
@@ -337,7 +334,7 @@
     .flex;
     .flex-wrap;
     flex: 1;
-    .body{
+    .body {
       width: 100%;
     }
     .item {
@@ -407,6 +404,20 @@
 
 .prose {
   margin-bottom: @grid-gutter-width;
+}
+
+.list-language-switch {
+  text-transform: uppercase;
+  float: right;
+  margin: @grid-gutter-width/5 @grid-gutter-width/3 @grid-gutter-width/5 @grid-gutter-width;
+  a {
+    color: @text-color;
+  }
+  .active {
+    background: @brand-secondary;
+    color: @white;
+    padding: 3px @grid-gutter-width/3;
+  }
 }
 
 /* Media queries */
