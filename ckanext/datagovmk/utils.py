@@ -4,13 +4,19 @@ from io import BytesIO
 import cStringIO
 import json
 import codecs
+import re
+from logging import getLogger
 
 from rdflib.namespace import Namespace, RDF, XSD, SKOS, RDFS
 from rdflib import Literal, URIRef, BNode, Graph
 from ckanext.dcat.utils import resource_uri
 from ckan.model.license import LicenseRegister
 from ckanext.dcat.processors import RDFSerializer
+from ckan.common import config
+import requests
 
+
+log = getLogger(__name__)
 
 
 DCT = Namespace("http://purl.org/dc/terms/")
@@ -24,6 +30,9 @@ LOCN = Namespace('http://www.w3.org/ns/locn#')
 GSP = Namespace('http://www.opengis.net/ont/geosparql#')
 OWL = Namespace('http://www.w3.org/2002/07/owl#')
 SPDX = Namespace('http://spdx.org/rdf/terms#')
+
+
+_DEFAULT_OSM_OVERPASS_URL = "https://lz4.overpass-api.de/api/interpreter"
 
 
 def export_resource_to_rdf(resource_dict, dataset_dict, _format='xml'):
@@ -289,3 +298,93 @@ def export_dict_to_csv(value_dict):
     writer.writerow(row)
 
     return stream.getvalue()
+
+
+def get_package_location_geojson(package_dict):
+    """Retrieve spatial data in GeoJSON string for this package.
+
+    The package is checked if it contains spatial_uri and if so, the
+    GeoJSON spatial data is fetched for that spatial_uri.
+
+    :param dict package_dict: the package data dict.
+
+    :returns: ``str`` the GeoJSON data string.
+    """
+    location_uri = package_dict.get('spatial_uri')
+    if not location_uri:
+        return None
+    resource_id = _extract_spatial_resource_id(location_uri)
+    if not resource_id:
+        return None
+
+    geojson_value = _get_geojson(resource_id)
+    return geojson_value
+
+
+def _extract_spatial_resource_id(location_uri):
+    """Extracts the resource_id from the spatial URI.
+    """
+    match = re.search('/(?P<relation_id>\\d+)$', str(location_uri))
+    if match:
+        return match.group('relation_id')
+    return None
+
+
+def _fetch_osm_relation(relation_id):
+    """Fetches the Openstreetmap data for the given relation. The important
+    data fetched is the bounding box.
+
+    Uses the OSM overpass API.
+    """
+    overpass_interpeter_url = config.get('ckanext.datagovmk.osm_overpass_url', _DEFAULT_OSM_OVERPASS_URL)
+    overpass_query = "[out:json];(relation(id:{relation_id})[boundary=administrative];);out bb;".format(relation_id=relation_id)
+    try:
+        resp = requests.post(overpass_interpeter_url, data=overpass_query)
+        if resp and resp.status_code == 200:
+            return resp.json()
+        log.warning('Unable to fetch geometry data from openstreetmap. Remote server responded with error: %d - %s', resp.status_code, resp.text)
+        return None
+    except Exception as e:
+        log.warning(e)
+        return None
+
+
+def _fetch_geom(resource):
+    """Fetches the bounding box from OSM and transforms it to a 5-point ``Polygon`` geometry 
+    supported by CKAN.
+    """
+    data = _fetch_osm_relation(resource)
+    if not data:
+        return None
+    
+    if data.get('elements'):
+        bounds = data['elements'][0].get('bounds')
+        if bounds:
+            minlat = bounds['minlat']
+            maxlat = bounds['maxlat']
+            minlon = bounds['minlon']
+            maxlon = bounds['maxlon']
+
+            geom = {
+                'type': 'Polygon',
+                'coordinates': [
+                    [
+                        [minlon, maxlat],
+                        [minlon, minlat],
+                        [maxlon, minlat],
+                        [maxlon, maxlat],
+                        [minlon, maxlat]  # just a copy of the first one, close the Polygon
+                    ]
+                ]
+            }
+
+            return geom
+    return None
+
+def _get_geojson(resource):
+    """Retrieves the GeoJSON 5-point Polygon geom for the specified resource.
+    """
+    geojson_dict = _fetch_geom(resource)
+    if geojson_dict:
+        return json.dumps(geojson_dict)
+    return None

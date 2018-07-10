@@ -7,6 +7,7 @@ import hashlib
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
+from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
 
@@ -220,6 +221,73 @@ def download_zip(context, data_dict):
 
     toolkit.response.content_disposition = 'attachment; filename=' + package_name
     os.remove(file_path)
+
+
+def safe_override(action):
+    """Decorator for save override of standard CKAN actions.
+    When overriding CKAN actions you must be aware of the extensions
+    order and whether some other extension have already registered the action.
+    
+    When decorated with this decorator, you can provide a chained implementation
+    for the given action withour checking if there are prior extensions or just
+    the CKAN core action.
+
+    Your action will be called with the previous (the original) action as a first argument.
+
+    Usage:
+
+    .. code-block: python
+        import ckan.plugins as plugins
+        from ckan.logic import get_action
+
+
+        @safe_override
+        def package_create_override(package_create, context, data_dict):
+            # add extra logic here
+
+            # then pass the control to the original action
+            return package_create(context, data_dict)
+
+
+        class MyPlugin(plugins.SingletonPlugin):
+            plugins.implements(plugins.IActions)
+
+            def get_actions(self):
+                prev_package_create = get_action('package_create')
+
+                return {
+                    'package_create': package_create_override(prev_package_create)
+                }
+
+    :param function action: the override function for the CKAN core action.
+
+    :returns: a wrapper accepting the original action to be chained.
+
+    """
+    def get_safe_override(original_action):
+        def _action(*args, **kwargs):
+            return action(original_action, *args, **kwargs)
+        return _action
+    return get_safe_override
+    
+
+@safe_override
+def add_spatial_data(package_action, context, data_dict):
+    """Override for ``package_create`` and ``package_update`` that
+    adds/updates the spatial data.
+
+    :param function package_action: the previous (original) action (either ``package_create`` or
+        ``package_update``).
+    :param context: CKAN actions context.
+    :param dict data_dict: the package data dict.
+
+    :returns: the CKAN ``package_create``/``package_update`` result.
+    """
+    try:
+        l.import_spatial_data(data_dict)
+    except Exception as e:
+        log.warning(e)
+    return package_action(context, data_dict)
 
 
 def resource_create(context, data_dict):
