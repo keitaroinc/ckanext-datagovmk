@@ -160,16 +160,20 @@ To install ckanext-datagovmk:
 
      sudo service apache2 reload
 
+5. Copy solr schema::
+
+    cp solr/schema.xml /opt/solr/server/solr/ckan/conf/schema.xml
+
 
 ---------------
 Config Settings
 ---------------
 
-Document any optional config settings here. For example::
+Additional configuration settings::
 
-    # The minimum number of hours to wait before re-checking a resource
-    # (optional, default: 24).
-    ckanext.datagovmk.some_setting = some_default_value
+    # Openstreetmap Overpass API URL.
+    # (optional, default: https://lz4.overpass-api.de/api/interpreter).
+    ckanext.datagovmk.osm_overpass_url = https://lz4.overpass-api.de/api/interpreter
 
 
 ------------------------

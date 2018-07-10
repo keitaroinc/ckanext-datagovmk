@@ -6,6 +6,7 @@ from ckan.logic import get_action
 from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
+from ckanext.datagovmk.logic import import_spatial_data
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -45,8 +46,16 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IActions
 
     def get_actions(self):
+        package_create = get_action('package_create')
+        package_update = get_action('package_update')
         return {
-            'datagovmk_get_related_datasets': actions.get_related_datasets
+            'datagovmk_get_related_datasets': actions.get_related_datasets,
+            'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
+            'datagovmk_download_zip': actions.download_zip,
+            'package_create': actions.add_spatial_data(package_create),
+            'package_update': actions.add_spatial_data(package_update),
+            'resource_create': actions.resource_create,
+            'resource_update': actions.resource_update
         }
 
     # IAuthFunctions
@@ -82,4 +91,12 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
+
+        map.connect('/api/download/{package_id}/resources',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_resources_metadata')
+        map.connect('/api/download/{package_id}/metadata',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_package_metadata')
+
         return map

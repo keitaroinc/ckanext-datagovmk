@@ -1,0 +1,32 @@
+{% resource 'datagovmk/js/mark-all-resources.js' %}
+{% resource 'datagovmk/js/download-resources.js' %}
+
+<ul class="resource-list-actions list-inline">
+  <li>
+    <button class="btn btn-default btn-mark-all" type="button">
+      <span class="fa fa-check-square"></span> {{ _('Mark All') }}</button>
+  </li>
+  <li>
+    <button class="btn btn-default" id="download-resources" disabled type="button">
+      <span class="fa fa-download"></span> {{ _('Download') }}</button>
+  </li>
+  <li>
+    <div class="btn-group download-metadata-control">
+      <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_resources_metadata', format='json', package_id=c.pkg_dict['id']) }}"
+         class="btn btn-default download-metadata-btn download-metadata"><i class="fa fa-download"></i> {{ _('Download Metadata') }} </a>
+      <button href="#" class="btn btn-default dropdown-toggle download-metadata-btn" data-toggle="dropdown">
+          <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                         action='download_resources_metadata', format='json', package_id=c.pkg_dict['id']) }}" class="download-metadata">JSON</a></li>
+          <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                          action='download_resources_metadata', format='xml', package_id=c.pkg_dict['id']) }}" class="download-metadata">XML</a></li>
+          <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                          action='download_resources_metadata', format='rdf', package_id=c.pkg_dict['id']) }}" class="download-metadata">RDF</a></li>
+          <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
+                          action='download_resources_metadata', format='csv', package_id=c.pkg_dict['id']) }}" class="download-metadata">CSV</a></li>
+      </ul>
+    </div>
+  </li>
+</ul>
