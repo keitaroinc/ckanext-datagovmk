@@ -54,6 +54,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_download_zip': actions.download_zip,
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
+            'resource_create': actions.resource_create,
+            'resource_update': actions.resource_update
         }
 
     # IAuthFunctions

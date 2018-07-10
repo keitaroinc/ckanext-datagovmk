@@ -1458,7 +1458,7 @@ msgstr "{actor} го избриша додатокот {extra} од подато
 #: ckan/lib/activity_streams.py:93
 msgid "{actor} deleted the resource {resource} from the dataset {dataset}"
 msgstr ""
-"{actor} го избриша дополнителниот дел {extra} од податочниот сет {dataset}"
+"{actor} го избриша ресурсот {resource} од податочниот сет {dataset}"
 
 #: ckan/lib/activity_streams.py:97
 msgid "{actor} created the group {group}"
