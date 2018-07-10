@@ -72,7 +72,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir oauth2client && \
     # organogram
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.2#egg=ckanext-organogram"
-
+    # validation
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-validation.git@mk-translation#egg=ckanext-validation"
+    # skip scheming since we are using a fork
+    pip install --no-cache-dir $(cat ${APP_DIR}/src/ckanext-validation/requirements.txt | grep -ivE "ckanext-scheming")
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -106,7 +109,8 @@ ENV CKAN__PLUGINS envvars \
                   scheming_datasets \
                   repeating \
                   mk_dcatap \
-                  organogram
+                  organogram \
+                  validation
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
