@@ -58,7 +58,7 @@ class DownloadController(PackageController):
             rsc = get_action('resource_show')(context, {'id': resource_id})
             get_action('package_show')(context, {'id': id})
         except (NotFound, NotAuthorized):
-            abort(404, _('Resource not found'))
+            abort(404, toolkit._('Resource not found'))
 
         if rsc.get('url_type') == 'upload':
             upload = uploader.get_resource_uploader(rsc)
@@ -67,7 +67,7 @@ class DownloadController(PackageController):
             try:
                 status, headers, app_iter = request.call_application(fileapp)
             except OSError:
-                abort(404, _('Resource data not found'))
+                abort(404, toolkit._('Resource data not found'))
             response.headers.update(dict(headers))
             content_type, content_enc = mimetypes.guess_type(
                 rsc.get('url', ''))
@@ -77,22 +77,22 @@ class DownloadController(PackageController):
             response.status = status
             return app_iter
         elif 'url' not in rsc:
-            abort(404, _('No download is available'))
+            abort(404, toolkit._('No download is available'))
         h.redirect_to(rsc['url'])
 
 
 class ApiController(BaseController):
     def i18n_js_translations(self, lang):
         ''' Patch for broken JS translations caused by Pylons to Flask
-        migration. This method patches https://github.com/ckan/ckan/blob/master/ckan/views/api.py#L467 
-        
+        migration. This method patches https://github.com/ckan/ckan/blob/master/ckan/views/api.py#L467
+
         :param lang: locale of the language
         :type lang: string
 
         :returns: the translated strings in a json file.
-        
+
         :rtype: json
-        
+
         '''
 
         ckan_path = os.path.join(
@@ -129,7 +129,7 @@ class BulkDownloadController(BaseController):
             resources = [r.strip() for r in resources.split(',')]
         else:
             resources = None
-        
+
         tmp_file_path = None
         try:
             with _open_temp_zipfile() as zipf:
@@ -139,7 +139,7 @@ class BulkDownloadController(BaseController):
             log.error('Error while preparing zip archive: %s', exc)
             log.exception(exc)
             raise exc
-        
+
         try:
             response.headers['Content-Type'] = 'application/octet-stream'
             zip_file_name = '%s_resources.zip' % pkg_dict['name']
@@ -160,11 +160,11 @@ class BulkDownloadController(BaseController):
             for resource in pkg_dict.get('resources', []):
                 if resource['id'] in resources:
                     filtered_resources.append(resource)
-            
+
             pkg_dict['resources'] = filtered_resources
-        
+
         exporter(zip_file, pkg_dict, request, response)
-    
+
     def download_package_metadata(self, package_id):
         """Download package metadata in one of the supported formats.
 
@@ -180,7 +180,7 @@ class BulkDownloadController(BaseController):
         export_def = _SUPPORTED_PACKAGE_EXPORTS.get(_format)
         if not export_def:
             raise Exception('Unsupported export format: %s' % _format)
-        
+
         content_type = export_def['content-type']
         response.headers['Content-Type'] = content_type
 
@@ -193,7 +193,7 @@ class BulkDownloadController(BaseController):
 
         exporter(package_dict, request, response)
 
-    
+
 
 def _export_resources_json(zip_file, pkg_dict, request, response):
     for resource in pkg_dict['resources']:
@@ -224,7 +224,7 @@ def _export_resources_csv(zip_file, pkg_dict, request, response):
     for resource in pkg_dict['resources']:
         rc_filename =to_utf8_str('%s.csv' % resource.get('name') or resource['id'])
         output = export_dict_to_csv(resource)
-        zip_file.writestr(rc_filename, output) 
+        zip_file.writestr(rc_filename, output)
 
 _SUPPORTED_EXPORTS = {
     'json': _export_resources_json,
@@ -255,10 +255,10 @@ def _export_package_to_csv(package_dict, request, response):
             elif len(value) == 1:
                 value = value[0]
         result[key] = value
-    
+
     if result.get('organization'):
         result['organization'] = result['organization'].get('name') or result['organization']['id']
-    
+
     if result.get('tags'):
         tags = []
         for tag in result['tags']:
