@@ -35,12 +35,7 @@
                   <h4 class="title">{{ _('Navigation') }}</h4>
                   <ul class="list-unstyled">
                     {% block footer_links %}
-                    {{ h.build_nav_main(
-                      ('search', _('Datasets')),
-                      ('organizations_index', _('Organizations')),
-                      ('group_index', _('Groups')),
-                      ('home.about', _('About')) )
-                    }}
+                      {% snippet 'snippets/main_navigation.html' %}
                     {% endblock %}
                   </ul>
                   {% endblock %}

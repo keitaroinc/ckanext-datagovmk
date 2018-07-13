@@ -34,8 +34,14 @@
             {% endblock %}
           </hgroup>
           <div class="collapse navbar-collapse" id="main-navigation-toggle">
-            {% block header_site_navigation %}
-            {{ super() }}
+            <nav class="section navigation">
+              <ul class="nav nav-pills">
+              {% block header_site_navigation %}
+                {% block header_site_navigation_tabs %}
+                  {% snippet 'snippets/main_navigation.html' %}
+                {% endblock %}
+              </ul>
+            </nav>
             {% endblock %}
 
             {% block header_site_search %}
