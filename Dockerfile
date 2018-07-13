@@ -77,7 +77,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # skip scheming since we are using a fork
     pip install --no-cache-dir $(cat ${APP_DIR}/src/ckanext-validation/requirements.txt | grep -ivE "ckanext-scheming") && \
     # experience
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-experience.git#egg=ckanext-experience"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-experience.git#egg=ckanext-experience" && \
+    # requestdata
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-requestdata.git@ckan-2.8-datagovmk#egg=ckanext-requestdata" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-requestdata/requirements.txt"
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -108,6 +111,7 @@ ENV CKAN__PLUGINS envvars \
                   c3charts \
                   googleanalytics \
                   pages \
+                  requestdata \
                   scheming_datasets \
                   repeating \
                   mk_dcatap \
