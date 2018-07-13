@@ -48,7 +48,9 @@ def get_recently_updated_datasets(limit=5):
 
 def get_most_active_organizations(limit=5):
     '''
-    Returns most active organizations by number of datasets published
+    Returns most active organizations based on when new resource has been
+    added to a dataset, or when an existing resource has been updated (new
+    file has been added).
 
     :param limit: Number of organizations to be returned. Default is 5.
     :type limit: integer
@@ -57,12 +59,58 @@ def get_most_active_organizations(limit=5):
     :rtype: list
 
     '''
-    organizatons = toolkit.get_action('organization_list')(data_dict={
-        'all_fields': True,
-        'order_by': 'packages',
-        'limit': limit
-    })
-    return organizatons
+
+    orgs = toolkit.get_action('organization_list')({}, {})
+    last_updated_orgs = []
+
+    for org_name in orgs:
+        org = toolkit.get_action('organization_show')({'user': None}, {
+            'id': org_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': False,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False,
+        })
+
+        last_updated_datasets = []
+
+        for dataset in org.get('packages'):
+            dataset_full = toolkit.get_action('package_show')({}, {
+                'id': dataset.get('id'),
+            })
+            last_modified_resource = ''
+
+            for resource in dataset_full.get('resources'):
+                field = 'last_modified'
+                if resource.get('last_modified') is None:
+                    field = 'created'
+
+                if resource.get(field) > last_modified_resource:
+                    last_modified_resource = resource.get(field)
+
+            last_updated_datasets.append(last_modified_resource)
+
+        last_updated_datasets = sorted(last_updated_datasets, reverse=True)
+
+        if last_updated_datasets:
+            last_modified_dataset = last_updated_datasets[0]
+            last_updated_orgs.append({
+                'org': org, 'last_modified': last_modified_dataset
+            })
+
+    sorted_orgs = sorted(
+        last_updated_orgs,
+        key=lambda k: k['last_modified'],
+        reverse=True
+    )
+
+    orgs = map(lambda x: x.get('org'), sorted_orgs)
+
+    return orgs[:limit]
+
 
 def get_related_datasets(id, limit=3):
     """ Return related datasets for a specific dataset
@@ -85,7 +133,7 @@ def get_related_datasets(id, limit=3):
     return related_datasets
 
 def get_groups():
-    ''' This helper returns all the created groups sorted by the number of datasets desc without 
+    ''' This helper returns all the created groups sorted by the number of datasets desc without
     listing the empty ones
 
     :returns: a list of groups soted by the number of datasets per each group desc
@@ -118,7 +166,7 @@ def get_dataset_stats(dataset_id):
 
     """
 
-    stats = get_stats_for_package(dataset_id) 
+    stats = get_stats_for_package(dataset_id)
     return stats
 
 
@@ -134,7 +182,7 @@ def get_resource_stats(resource_id):
         ``visits_recently`` - number of recent visits.\n
         ``visits_ever`` - total number of visits to this package.\n
         ``downloads`` - total number of downloads of this resource.\n
-        
+
     :rtype: dictionary
 
     """
