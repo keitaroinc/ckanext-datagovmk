@@ -4,6 +4,10 @@
 @group-icon-size: 90px;
 //** Resources
 @resource-list-actions-border: 1px solid #ccc;
+//** Social Media
+@facebook-color: #3B5998;
+@twitter-color: #55ACEE;
+@google-color: #DD4B39;
 // @imagePath: "../../../../base/images";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -428,5 +432,23 @@
   .intro,
   .accent {
     flex-basis: 100%;
+  }
+}
+
+/* Social Media styling */
+.social-media {
+  float: right;
+  margin: @grid-gutter-width/5 @grid-gutter-width/3 @grid-gutter-width/5 @grid-gutter-width;
+  .btn-lg {
+    padding: 0px
+  }
+  .btn-facebook {
+    color: @facebook-color;
+  }
+  .btn-twitter {
+    color: @twitter-color;
+  }
+  .btn-google {
+    color: @google-color;
   }
 }

@@ -1,0 +1,8 @@
+{% set current_url = h.full_current_url() %}
+{% block social_media %}
+  <ul class="list-inline social-media">
+    <li><a class="btn btn-social-icon btn-lg btn-facebook" title="{{ _('Share on Facebook') }}" href="https://www.facebook.com/sharer.php?u={{ current_url }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+    <li><a class="btn btn-social-icon btn-lg btn-twitter" title="{{ _('Share on Twitter') }}" href="https://twitter.com/share?url={{ current_url }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+    <li><a class="btn btn-social-icon btn-lg btn-google" title="{{ _('Share on Google+') }}" href="https://plus.google.com/share?url={{ current_url }}" target="_blank"><i class="fa fa-google"></i></a></li>
+  </ul>
+{% endblock %}
