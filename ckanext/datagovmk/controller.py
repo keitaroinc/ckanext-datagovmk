@@ -11,6 +11,7 @@ import csv
 from io import StringIO
 
 from ckan.controllers.package import PackageController
+from ckan.controllers.user import UserController
 from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.helpers import get_storage_path_for
 from ckanext.datagovmk.utils import (export_resource_to_rdf,
@@ -193,6 +194,11 @@ class BulkDownloadController(BaseController):
 
         exporter(package_dict, request, response)
 
+
+class DatagovmkUserController(UserController):
+
+    def register(self, data=None, errors=None, error_summary=None):
+        self.register(data, errors, error_summary)
 
 
 def _export_resources_json(zip_file, pkg_dict, request, response):
