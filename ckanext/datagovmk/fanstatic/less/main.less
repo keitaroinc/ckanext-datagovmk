@@ -73,7 +73,9 @@
 @import "_datasets.less";
 @import "_resources.less";
 @import "_stats.less";
-// Override Bootstrap 3 default
+@import "_social-media.less";
+/* Override Bootstrap 3 default */
+
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -413,7 +415,7 @@
 .list-language-switch {
   text-transform: uppercase;
   float: right;
-  margin: @grid-gutter-width/5 @grid-gutter-width/3 @grid-gutter-width/5 @grid-gutter-width;
+  margin: @grid-gutter-width/5 @grid-gutter-width;
   a {
     color: @text-color;
   }
@@ -432,23 +434,5 @@
   .intro,
   .accent {
     flex-basis: 100%;
-  }
-}
-
-/* Social Media styling */
-.social-media {
-  float: right;
-  margin: @grid-gutter-width/5 @grid-gutter-width/3 @grid-gutter-width/5 @grid-gutter-width;
-  .btn-lg {
-    padding: 0px
-  }
-  .btn-facebook {
-    color: @facebook-color;
-  }
-  .btn-twitter {
-    color: @twitter-color;
-  }
-  .btn-google {
-    color: @google-color;
   }
 }
