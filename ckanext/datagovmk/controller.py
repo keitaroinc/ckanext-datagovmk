@@ -23,15 +23,23 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
 from ckan.lib.base import BaseController, abort
 from ckan.plugins import toolkit
 from ckan.common import c, request, response
+from ckan.lib.navl import dictization_functions
 
 import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
+import ckan.lib.captcha as captcha
 
 NotFound = logic.NotFound
 NotAuthorized = logic.NotAuthorized
+ValidationError = logic.ValidationError
+DataError = dictization_functions.DataError
+
 get_action = logic.get_action
+
+unflatten = dictization_functions.unflatten
+
 log = getLogger(__name__)
 
 
@@ -197,8 +205,60 @@ class BulkDownloadController(BaseController):
 
 class DatagovmkUserController(UserController):
 
-    def register(self, data=None, errors=None, error_summary=None):
-        self.register(data, errors, error_summary)
+    def datagovmk_register(self, data=None, errors=None, error_summary=None):
+        return self.register(data, errors, error_summary)
+
+    def _save_new(self, context):
+        came_from = request.params.get('came_from')
+        try:
+            data_dict = logic.clean_dict(unflatten(
+                logic.tuplize_dict(logic.parse_params(request.params))))
+            context['message'] = data_dict.get('log_message', '')
+            captcha.check_recaptcha(request)
+            user = get_action('datagovmk_user_create')(context, data_dict)
+        except NotAuthorized:
+            abort(403, _('Unauthorized to create user %s') % '')
+        except NotFound, e:
+            abort(404, _('User not found'))
+        except DataError:
+            abort(400, _(u'Integrity Error'))
+        except captcha.CaptchaError:
+            error_msg = _(u'Bad Captcha. Please try again.')
+            h.flash_error(error_msg)
+            return self.new(data_dict)
+        except ValidationError, e:
+            errors = e.error_dict
+            error_summary = e.error_summary
+            return self.new(data_dict, errors, error_summary)
+
+        h.flash_success(_('A confirmation email has been sent to "%s". Please '
+                          'use the link in the email to continue.') %
+                         data_dict['email'])
+        if not c.user:
+            # line below which logs the user in programatically is commented out
+            # as we expect new accounts to be in the PENDING state by default.
+            # set_repoze_user(data_dict['name'])
+            if came_from:
+                h.redirect_to(came_from)
+            else:
+                # h.redirect_to(controller='user', action='me')
+                ## instead of redirected above, redirect to the login page=
+                h.redirect_to(controller='user', action='login')
+        else:
+            # #1799 User has managed to register whilst logged in - warn user
+            # they are not re-logged in as new user.
+            h.flash_success(_('User "%s" is now registered but you are still '
+                            'logged in as "%s" from before') %
+                            (data_dict['name'], c.user))
+            if authz.is_sysadmin(c.user):
+                # the sysadmin created a new user. We redirect him to the
+                # activity page for the newly created user
+                h.redirect_to(controller='user',
+                                action='activity',
+                                id=data_dict['name'])
+            else:
+                return render('user/logout_first.html')
+
 
 
 def _export_resources_json(zip_file, pkg_dict, request, response):

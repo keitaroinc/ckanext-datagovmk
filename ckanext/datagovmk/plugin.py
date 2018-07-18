@@ -131,6 +131,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
             'dashboard_activity_list_html': actions.dashboard_activity_list_html,
+            'datagovmk_user_create': actions.datagovmk_user_create
         }
 
     # IAuthFunctions
@@ -177,8 +178,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
-            m.connect('register', '/user/register', action='register')
-
+            m.connect('register', '/user/register', action='datagovmk_register')
 
         return map
 

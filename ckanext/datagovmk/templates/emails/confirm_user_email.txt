@@ -1,0 +1,12 @@
+Dear {{ user_name }},
+
+A user account has been created on {{ site_title }}.
+
+To activate the account please use the link below.
+
+    {{ activation_link }}
+
+Have a nice day.
+
+--
+Message sent by {{ site_title }} ({{ site_url }})

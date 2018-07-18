@@ -13,6 +13,9 @@ from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
 from ckan.common import config
+from ckan.model import State as model_state
+from socket import error as socket_error
+import ckan.lib.mailer as mailer
 
 import ckan.logic as logic
 import ckan.plugins as plugins
