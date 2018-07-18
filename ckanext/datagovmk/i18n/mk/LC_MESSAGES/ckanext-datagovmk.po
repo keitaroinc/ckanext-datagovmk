@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-09 16:11+0200\n"
+"POT-Creation-Date: 2018-07-17 17:00+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -19,56 +19,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:93
+#: ckanext/datagovmk/actions.py:112
 msgid "Missing dataset id"
 msgstr "Недостасува ИД на податочен сет"
 
-#: ckanext/datagovmk/actions.py:257 ckanext/datagovmk/actions.py:263
-#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
+#: ckanext/datagovmk/actions.py:343 ckanext/datagovmk/actions.py:349
+#: ckanext/datagovmk/actions.py:465 ckanext/datagovmk/actions.py:471
+#: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:532
 msgid "message"
 msgstr "порака"
 
-#: ckanext/datagovmk/actions.py:257
+#: ckanext/datagovmk/actions.py:343 ckanext/datagovmk/actions.py:465
 msgid "Resource already exists"
 msgstr "Ресурсот веќе постои"
 
-#: ckanext/datagovmk/actions.py:263
+#: ckanext/datagovmk/actions.py:349 ckanext/datagovmk/actions.py:471
 msgid "Resource file is missing"
 msgstr "Недостасува датотека на ресурсот"
 
-#: ckanext/datagovmk/actions.py:330 ckanext/datagovmk/actions.py:333
+#: ckanext/datagovmk/actions.py:429 ckanext/datagovmk/actions.py:443
+#, fuzzy
+msgid "Resource was not found."
+msgstr "Ресурсот не е пронајден"
+
+#: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:532
 msgid "Invalid URL"
 msgstr "Невалиден линк"
 
-#: ckanext/datagovmk/controller.py:55
+#: ckanext/datagovmk/controller.py:61
 msgid "Resource not found"
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:64
+#: ckanext/datagovmk/controller.py:70
 msgid "Resource data not found"
 msgstr "Податоците за ресурсот не се пронајдени"
 
-#: ckanext/datagovmk/controller.py:74
+#: ckanext/datagovmk/controller.py:80
 #, fuzzy
 msgid "No download is available"
 msgstr "Нема достапни податочни сетови."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:55
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:66
 msgid "Preparing zip archive..."
 msgstr "Архивата се подготвува..."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:67
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:82
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:78
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:93
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:10
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
 msgid "Download"
 msgstr "Преземи"
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:78
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:89
 msgid "Could not create a zip archive."
 msgstr "Не може да се создаде архива."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:84
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:95
 msgid "An error occured while preparing zip archive."
 msgstr "Настана грешка при подготвувањето на архивата."
 
@@ -86,7 +92,7 @@ msgid "Address"
 msgstr "Адреса"
 
 #: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:65
+#: ckanext/datagovmk/templates/footer.html:60
 msgid "E-mail"
 msgstr "Е-пошта"
 
@@ -110,39 +116,23 @@ msgstr "Политика за приватност"
 msgid "Navigation"
 msgstr "Навигација"
 
-#: ckanext/datagovmk/templates/footer.html:39
-msgid "Datasets"
-msgstr "Податочни сетови"
-
-#: ckanext/datagovmk/templates/footer.html:40
-msgid "Organizations"
-msgstr "Организации"
-
-#: ckanext/datagovmk/templates/footer.html:41
-msgid "Groups"
-msgstr "Групи"
-
-#: ckanext/datagovmk/templates/footer.html:42
-msgid "About"
-msgstr "За"
-
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:57
 msgid "Subscribe to our newsletter"
 msgstr "Претплатете се на нашиот билтен"
 
-#: ckanext/datagovmk/templates/footer.html:63
+#: ckanext/datagovmk/templates/footer.html:58
 msgid "Stay updated with "
 msgstr "Бидете во тек со "
 
-#: ckanext/datagovmk/templates/footer.html:67
+#: ckanext/datagovmk/templates/footer.html:62
 msgid "Your e-mail address"
 msgstr "Вашата е-пошта"
 
-#: ckanext/datagovmk/templates/footer.html:69
+#: ckanext/datagovmk/templates/footer.html:64
 msgid "Subscribe"
 msgstr "Претплатете се"
 
-#: ckanext/datagovmk/templates/footer.html:88
+#: ckanext/datagovmk/templates/footer.html:83
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
@@ -150,11 +140,11 @@ msgstr ""
 "<strong>Придвижувано од</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 
-#: ckanext/datagovmk/templates/footer.html:92
+#: ckanext/datagovmk/templates/footer.html:87
 msgid "CKAN API"
 msgstr "API на CKAN"
 
-#: ckanext/datagovmk/templates/footer.html:93
+#: ckanext/datagovmk/templates/footer.html:88
 msgid "CKAN Association"
 msgstr "Асоцијација CKAN"
 
@@ -265,52 +255,59 @@ msgstr "групи"
 msgid "Related datasets"
 msgstr "Поврзани податочни сетови"
 
-#: ckanext/datagovmk/templates/package/read.html:34
-#, fuzzy
-msgid "Download Dataset Metadata"
+#: ckanext/datagovmk/templates/package/resource_read.html:8
+#: ckanext/datagovmk/templates/package/snippets/resources_download.html:16
+msgid "Download Metadata"
 msgstr "Преземи мета податоци"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:5
+#: ckanext/datagovmk/templates/package/resource_read.html:26
 msgid "Additional Information"
 msgstr "Дополнителни информации"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:9
+#: ckanext/datagovmk/templates/package/resource_read.html:30
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:35
 msgid "Field"
 msgstr "Поле"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:10
+#: ckanext/datagovmk/templates/package/resource_read.html:31
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
 msgid "Value"
 msgstr "Вредност"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:16
+#: ckanext/datagovmk/templates/package/resource_read.html:37
 msgid "Last updated"
 msgstr "Последно ажурирање"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:17
-#: ckanext/datagovmk/templates/package/resource_read.html:23
-#: ckanext/datagovmk/templates/package/resource_read.html:29
+#: ckanext/datagovmk/templates/package/resource_read.html:38
+#: ckanext/datagovmk/templates/package/resource_read.html:44
+#: ckanext/datagovmk/templates/package/resource_read.html:50
 msgid "unknown"
 msgstr "непознато"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:22
+#: ckanext/datagovmk/templates/package/resource_read.html:43
 msgid "Created"
 msgstr "Креиран"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:28
+#: ckanext/datagovmk/templates/package/resource_read.html:49
 msgid "Format"
 msgstr "Формат"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:34
+#: ckanext/datagovmk/templates/package/resource_read.html:55
 #: ckanext/datagovmk/templates/snippets/license.html:4
 msgid "License"
 msgstr "Лиценца"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:66
-#: ckanext/datagovmk/templates/package/snippets/resources_download.html:15
-msgid "Download Metadata"
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
+#, fuzzy
+msgid "Download Dataset Metadata"
 msgstr "Преземи мета податоци"
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:29
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
+#, fuzzy
+msgid "Additional Info"
+msgstr "Дополнителни информации"
+
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:56
 msgid "State"
 msgstr "Состојба"
 
@@ -341,4 +338,48 @@ msgstr "Преземања"
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
 msgstr "Формата содржи невалидни записи:"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:2
+msgid "Datasets"
+msgstr "Податочни сетови"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:3
+msgid "Organizations"
+msgstr "Организации"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:4
+msgid "Groups"
+msgstr "Групи"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:5
+msgid "About"
+msgstr "За"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
+msgid "Organogram"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+msgid "Showcases"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+msgid "Experiences"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+msgid "Reports"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/social_media.html:4
+msgid "Share on Facebook"
+msgstr "Сподели на Facebook"
+
+#: ckanext/datagovmk/templates/snippets/social_media.html:5
+msgid "Share on Twitter"
+msgstr "Сподели на Twitter"
+
+#: ckanext/datagovmk/templates/snippets/social_media.html:6
+msgid "Share on Google+"
+msgstr "Сподели на Google+"
 

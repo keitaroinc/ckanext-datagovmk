@@ -4,6 +4,10 @@
 @group-icon-size: 90px;
 //** Resources
 @resource-list-actions-border: 1px solid #ccc;
+//** Social Media
+@facebook-color: #3B5998;
+@twitter-color: #55ACEE;
+@google-color: #DD4B39;
 // @imagePath: "../../../../base/images";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -69,7 +73,9 @@
 @import "_datasets.less";
 @import "_resources.less";
 @import "_stats.less";
-// Override Bootstrap 3 default
+@import "_social-media.less";
+/* Override Bootstrap 3 default */
+
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -409,7 +415,7 @@
 .list-language-switch {
   text-transform: uppercase;
   float: right;
-  margin: @grid-gutter-width/5 @grid-gutter-width/3 @grid-gutter-width/5 @grid-gutter-width;
+  margin: @grid-gutter-width/5 @grid-gutter-width;
   a {
     color: @text-color;
   }
