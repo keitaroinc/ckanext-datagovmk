@@ -7,6 +7,8 @@ from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
 from ckanext.datagovmk.logic import import_spatial_data
+from ckanext.datagovmk.model.user_authority \
+    import setup as setup_user_authority_table
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -16,6 +18,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IConfigurable)
 
     # IConfigurer
 
@@ -55,7 +58,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
-            'resource_update': actions.resource_update
+            'resource_update': actions.resource_update,
+            'user_create': actions.user_create
         }
 
     # IAuthFunctions
@@ -100,3 +104,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     action='download_package_metadata')
 
         return map
+
+    def configure(self, config):
+        setup_user_authority_table()
