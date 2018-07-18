@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-17 17:00+0200\n"
+"POT-Creation-Date: 2018-07-18 16:28+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ckanext/datagovmk/actions.py:112
 msgid "Missing dataset id"
@@ -357,29 +357,33 @@ msgstr "За"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
-msgstr ""
+msgstr "Органограм"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Showcases"
-msgstr ""
+msgstr "Апликации"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Experiences"
-msgstr ""
+msgstr "Искуства"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
-msgstr ""
+msgstr "Извештаи"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4
+msgid "Share"
+msgstr "Сподели"
+
+#: ckanext/datagovmk/templates/snippets/social_media.html:5
 msgid "Share on Facebook"
 msgstr "Сподели на Facebook"
 
-#: ckanext/datagovmk/templates/snippets/social_media.html:5
+#: ckanext/datagovmk/templates/snippets/social_media.html:6
 msgid "Share on Twitter"
 msgstr "Сподели на Twitter"
 
-#: ckanext/datagovmk/templates/snippets/social_media.html:6
+#: ckanext/datagovmk/templates/snippets/social_media.html:7
 msgid "Share on Google+"
 msgstr "Сподели на Google+"
 
