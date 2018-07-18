@@ -92,6 +92,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
 ENV CKAN__PLUGINS envvars \
+                  qa \
+                  archiver \
+                  report \
                   datagovmk \
                   disqus \
                   stats \
@@ -103,9 +106,6 @@ ENV CKAN__PLUGINS envvars \
                   odata \
                   spatial_metadata \
                   spatial_query \
-                  qa \
-                  archiver \
-                  report \
                   showcase \
                   harvest \
                   dcat \
