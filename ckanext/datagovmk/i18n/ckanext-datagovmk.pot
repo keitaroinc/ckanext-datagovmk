@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-17 17:00+0200\n"
+"POT-Creation-Date: 2018-07-18 16:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ckanext/datagovmk/actions.py:112
 msgid "Missing dataset id"
@@ -360,14 +360,18 @@ msgid "Reports"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4
-msgid "Share on Facebook"
+msgid "Share"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:5
-msgid "Share on Twitter"
+msgid "Share on Facebook"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:6
+msgid "Share on Twitter"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/social_media.html:7
 msgid "Share on Google+"
 msgstr ""
 
