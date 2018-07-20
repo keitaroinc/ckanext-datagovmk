@@ -6,7 +6,7 @@ from ckan.model.meta import metadata, mapper, Session
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
 
-from sqlalchemy import types, ForeignKey, Column, Table
+from sqlalchemy import types, ForeignKey, Column, Table, desc
 
 user_authority_table = None
 
@@ -22,16 +22,25 @@ def setup():
 class UserAuthority(DomainObject):
 
     @classmethod
-    def get(cls, user_id, key, default=None):
-        keywords = {'user_id':user_id, 'key':key}
-
+    def get(cls, **kwargs):
         obj = Session.query(cls).autoflush(False)
-        obj = obj.filter_by(**keywords).first()
+        obj = obj.filter_by(**kwargs).first()
 
         if obj:
             return obj
         else:
-            return default
+            return None
+
+    @classmethod
+    def get_last_general_authority_for_user(cls, user_id):
+        obj = Session.query(cls).autoflush(False)
+        obj = obj.filter_by(user_id=user_id, authority_type='general')
+        obj = obj.order_by(desc('created')).first()
+
+        if obj:
+            return obj
+        else:
+            return None
 
     @classmethod
     def delete(cls, user_id, key):
@@ -53,7 +62,6 @@ def define_user_authority_table():
         Column('user_id', types.UnicodeText, ForeignKey('user.id')),
         Column('authority_file', types.UnicodeText),
         Column('authority_type', types.UnicodeText),
-        Column('dataset_id', types.UnicodeText),
         Column('created', types.DateTime, default=datetime.datetime.now),
     )
 

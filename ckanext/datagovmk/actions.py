@@ -15,6 +15,7 @@ import ckan.logic as logic
 import ckan.plugins as plugins
 import ckan.lib.uploader as uploader
 from ckan.logic.action.create import user_create as _user_create
+from ckan.logic.action.update import user_update as _user_update
 from ckan.common import request, config
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckan.logic.schema import default_user_schema
@@ -541,6 +542,26 @@ def user_create(context, data_dict):
     if data_dict.get('authority_file_url') == '':
         raise ValidationError({_('authority'): [_('Missing value')]})
 
+    authority_file = _upload_authority_file(data_dict)
+
+    created_user = _user_create(context, data_dict)
+
+    data = {
+        'user_id': created_user.get('id'),
+        'authority_file': authority_file,
+        'authority_type': 'general'
+    }
+
+    userAuthority = UserAuthority(**data)
+    userAuthority.save()
+
+    return created_user
+
+
+def _upload_authority_file(data_dict):
+    if data_dict.get('authority_file_url') == '':
+        raise ValidationError({_('authority'): [_('Missing value')]})
+
     if request.files.get('authority_file_upload'):
         max_authority_size =\
             int(config.get('ckanext.datagovmk.authority_file_max_size', 10))
@@ -569,15 +590,41 @@ def user_create(context, data_dict):
     else:
         authority_file = data_dict.get('authority_file_url')
 
-    created_user = _user_create(context, data_dict)
+    return authority_file
 
-    data = {
-        'user_id': created_user.get('id'),
-        'authority_file': authority_file,
-        'authority_type': 'general'
-    }
 
-    userAuthority = UserAuthority(**data)
-    userAuthority.save()
+def user_update(context, data_dict):
+    if data_dict.get('authority_file_url') == '':
+        raise ValidationError({_('authority'): [_('Missing value')]})
 
-    return created_user
+    authority_file = _upload_authority_file(data_dict)
+
+    updated_user = _user_update(context, data_dict)
+
+    if request.files.get('authority_file_upload'):
+        last_general_authority = h.get_last_general_authority_for_user(updated_user.get('id'))
+        data = {
+            'user_id': updated_user.get('id'),
+            'authority_file': authority_file,
+            'authority_type': 'general'
+        }
+
+        userAuthority = UserAuthority(**data)
+        userAuthority.save()
+
+        previous_authority_file = '/uploads/authorities/{0}'.format(last_general_authority)
+        current_authority_file = '/uploads/authorities/{0}'.format(authority_file)
+
+        data_dict = {
+            'user_id': context.get('user'),
+            'object_id': context.get('user'),
+            'activity_type': 'updated_user_general_authority',
+            'data': {
+                'previous_authority_file': previous_authority_file,
+                'current_authority_file': current_authority_file,
+            }
+        }
+
+        toolkit.get_action('activity_create')({}, data_dict)
+
+    return updated_user

@@ -11,6 +11,7 @@ from ckanext.datagovmk.model.stats import (get_stats_for_package,
                                            get_total_package_downloads)
 
 from logging import getLogger
+from ckanext.datagovmk.model.user_authority import UserAuthority
 log = getLogger(__name__)
 
 def _get_action(action, context_dict, data_dict):
@@ -228,3 +229,18 @@ def get_storage_path_for(dirname):
                 raise
 
     return target_path
+
+
+def get_user_id(user_name):
+    try:
+        user = toolkit.get_action('user_show')({}, {'id': user_name})
+        return user.get('id')
+    except:
+        return None
+
+
+def get_last_general_authority_for_user(user_id):
+    user_authority = UserAuthority.get_last_general_authority_for_user(user_id)
+
+    if user_authority:
+        return user_authority.authority_file

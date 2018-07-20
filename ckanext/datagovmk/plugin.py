@@ -9,6 +9,11 @@ from ckanext.datagovmk import auth
 from ckanext.datagovmk.logic import import_spatial_data
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
+from ckanext.datagovmk import monkey_patch
+
+
+monkey_patch.activity_streams()
+monkey_patch.validators()
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -43,7 +48,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_total_downloads':
                 helpers.get_total_package_downloads,
             'datagovmk_get_related_datasets':
-                helpers.get_related_datasets
+                helpers.get_related_datasets,
+            'datagovmk_get_user_id':
+                helpers.get_user_id,
+            'datagovmk_get_last_general_authority_for_user':
+                helpers.get_last_general_authority_for_user,
         }
 
     # IActions
@@ -59,7 +68,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
             'resource_update': actions.resource_update,
-            'user_create': actions.user_create
+            'user_create': actions.user_create,
+            'user_update': actions.user_update,
         }
 
     # IAuthFunctions
