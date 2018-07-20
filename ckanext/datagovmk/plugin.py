@@ -70,6 +70,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'resource_update': actions.resource_update,
             'user_create': actions.user_create,
             'user_update': actions.user_update,
+            'user_activity_list': actions.user_activity_list,
+            'user_activity_list_html': actions.user_activity_list_html,
         }
 
     # IAuthFunctions

@@ -16,10 +16,12 @@ import ckan.plugins as plugins
 import ckan.lib.uploader as uploader
 from ckan.logic.action.create import user_create as _user_create
 from ckan.logic.action.update import user_update as _user_update
+from ckan.logic.action.get import user_activity_list as _user_activity_list
 from ckan.common import request, config
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
+import ckan.lib.activity_streams as activity_streams
 
 log = getLogger(__name__)
 
@@ -625,6 +627,63 @@ def user_update(context, data_dict):
             }
         }
 
-        toolkit.get_action('activity_create')({}, data_dict)
+        toolkit.get_action('activity_create')({'ignore_auth': True}, data_dict)
 
     return updated_user
+
+
+@toolkit.side_effect_free
+def user_activity_list(context, data_dict):
+    print 'user_activity_list'
+    """ Override this action to filter out activities for
+    updated_user_general_authority that are only shown for sysadmins and users
+    that updated their general activites. """
+
+    activities = _user_activity_list(context, data_dict)
+    filtered_activities = []
+
+    for activity in activities:
+        if activity.get('activity_type') == 'updated_user_general_authority':
+            if context.get('auth_user_obj') is None:
+                continue
+
+            if activity.get('user_id') == context.get('auth_user_obj').id or \
+               context.get('auth_user_obj').sysadmin is True:
+                filtered_activities.append(activity)
+        else:
+            filtered_activities.append(activity)
+
+    return filtered_activities
+
+
+@toolkit.side_effect_free
+def user_activity_list_html(context, data_dict):
+    print 'user_activity_list_html'
+    '''Return a user's public activity stream as HTML.
+
+    The activity stream is rendered as a snippet of HTML meant to be included
+    in an HTML page, i.e. it doesn't have any HTML header or footer.
+
+    :param id: The id or name of the user.
+    :type id: string
+    :param offset: where to start getting activity items from
+        (optional, default: ``0``)
+    :type offset: int
+    :param limit: the maximum number of activities to return
+        (optional, default: ``31``, the default value is configurable via the
+        ckan.activity_list_limit setting)
+    :type limit: int
+
+    :rtype: string
+
+    '''
+    activity_stream = toolkit.get_action('user_activity_list')(context, data_dict)
+    offset = int(data_dict.get('offset', 0))
+    extra_vars = {
+        'controller': 'user',
+        'action': 'activity',
+        'id': data_dict['id'],
+        'offset': offset,
+    }
+    return activity_streams.activity_list_to_html(
+        context, activity_stream, extra_vars)
