@@ -72,6 +72,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_update': actions.user_update,
             'user_activity_list': actions.user_activity_list,
             'user_activity_list_html': actions.user_activity_list_html,
+            'dashboard_activity_list': actions.dashboard_activity_list,
+            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
         }
 
     # IAuthFunctions
