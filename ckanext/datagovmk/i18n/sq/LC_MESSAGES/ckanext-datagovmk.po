@@ -344,7 +344,7 @@ msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:3
 msgid "Organizations"
-msgstr "Institucionet"
+msgstr "Organizatat"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:4
 msgid "Groups"
