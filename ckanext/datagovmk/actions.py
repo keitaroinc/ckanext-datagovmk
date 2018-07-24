@@ -222,7 +222,7 @@ def prepare_zip_resources(context, data_dict):
 def download_zip(context, data_dict):
     """Downloads a zip file
 
-    :param id: an id of the created zip archive, Format: filename::packagename
+    :param id: an id of the created zip archive, format: filename::packagename
     :type id: string
     """
     file_name, package_name = data_dict.get('id').split('::')
@@ -252,7 +252,8 @@ def safe_override(action):
 
     Usage:
 
-    .. code-block: python
+    .. code-block:: python
+    
         import ckan.plugins as plugins
         from ckan.logic import get_action
 
@@ -278,6 +279,7 @@ def safe_override(action):
     :param function action: the override function for the CKAN core action.
 
     :returns: a wrapper accepting the original action to be chained.
+    :rtype: function
 
     """
     def get_safe_override(original_action):
@@ -298,6 +300,8 @@ def add_spatial_data(package_action, context, data_dict):
     :param dict data_dict: the package data dict.
 
     :returns: the CKAN ``package_create``/``package_update`` result.
+    :rtype: dict
+    
     """
     try:
         l.import_spatial_data(data_dict)

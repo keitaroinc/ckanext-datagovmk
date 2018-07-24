@@ -168,7 +168,7 @@ class BulkDownloadController(BaseController):
     def download_package_metadata(self, package_id):
         """Download package metadata in one of the supported formats.
 
-        :param dict package_dict: the package metadata.
+        :param string package_id: the id of the package
 
         """
 
