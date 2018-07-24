@@ -30,28 +30,28 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
     # Install extensions
     # ckanext-spatial and related
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@mk-translation#egg=ckanext-spatial" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@dgm-stable#egg=ckanext-spatial" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@mk-translation#egg=ckanext-report" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@dgm-stable#egg=ckanext-report" && \
     # ckanext-qa and related
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-archiver.git@mk-translation#egg=ckanext-archiver" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-archiver.git@dgm-stable#egg=ckanext-archiver" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-archiver/requirements.txt" && \
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-qa.git@mk-translation#egg=ckanext-qa" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-qa.git@dgm-stable#egg=ckanext-qa" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-qa/requirements.txt" && \
     # showcase
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-showcase.git@mk-translation#egg=ckanext-showcase" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-showcase.git@dgm-stable#egg=ckanext-showcase" && \
     # harvest
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-harvest/pip-requirements.txt" && \
     # c3charts
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git@mk-translation#egg=ckanext-c3charts" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-c3charts.git@dgm-stable#egg=ckanext-c3charts" && \
     # disqus
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-disqus.git@dgm-stable#egg=ckanext-disqus" && \
     # dcat
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dcat.git@dgm-stable#egg=ckanext-dcat" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dcat/requirements.txt" && \
     # odata
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@odata-ckan-2.8#egg=ckanext-odata" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-odata@dgm-stable#egg=ckanext-odata" && \
     # mk dcat-ap
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-mk_dcatap#egg=ckanext-mk_dcatap" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-mk-dcatap/requirements.txt" && \
@@ -59,10 +59,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-envvars/dev-requirements.txt" && \
     # pages
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@mk-translation#egg=ckanext-pages" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-pages.git@dgm-stable#egg=ckanext-pages" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-pages/dev-requirements.txt" && \
     # scheming
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-scheming.git@ckan-2.8#egg=ckanext-scheming" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-scheming.git@dgm-stable#egg=ckanext-scheming" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-scheming/requirements.txt" && \
     # repeating
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating" && \
@@ -73,14 +73,17 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # organogram
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.2#egg=ckanext-organogram" && \
     # validation
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-validation.git@mk-translation#egg=ckanext-validation" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-validation.git@dgm-stable#egg=ckanext-validation" && \
     # skip scheming since we are using a fork
     pip install --no-cache-dir $(cat ${APP_DIR}/src/ckanext-validation/requirements.txt | grep -ivE "ckanext-scheming") && \
     # experience
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-experience.git#egg=ckanext-experience" && \
     # requestdata
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-requestdata.git@ckan-2.8-datagovmk#egg=ckanext-requestdata" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-requestdata/requirements.txt"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-requestdata.git@dgm-stable#egg=ckanext-requestdata" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-requestdata/requirements.txt" && \
+    # likes
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-likes.git#egg=ckanext-likes" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-likes/requirements.txt"
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -89,7 +92,10 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 # These plugins should always be added to cloud instances
 # (you can add more needed by your instance)
 ENV CKAN__PLUGINS envvars \
+                  qa \
+                  archiver \
                   datagovmk \
+                  report \
                   disqus \
                   stats \
                   text_view \
@@ -100,9 +106,6 @@ ENV CKAN__PLUGINS envvars \
                   odata \
                   spatial_metadata \
                   spatial_query \
-                  qa \
-                  archiver \
-                  report \
                   showcase \
                   harvest \
                   dcat \
@@ -117,7 +120,8 @@ ENV CKAN__PLUGINS envvars \
                   mk_dcatap \
                   organogram \
                   validation \
-                  experience
+                  experience \
+                  likes
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
@@ -130,6 +134,9 @@ COPY extra_scripts.sh /srv/app/extra_scripts.sh
 
 COPY ckan_i18n/mk/ckan.po /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.po
 COPY ckan_i18n/mk/ckan.mo /srv/app/src/ckan/ckan/i18n/mk/LC_MESSAGES/ckan.mo
+
+COPY ckan_i18n/sq/ckan.po /srv/app/src/ckan/ckan/i18n/sq/LC_MESSAGES/ckan.po
+COPY ckan_i18n/sq/ckan.mo /srv/app/src/ckan/ckan/i18n/sq/LC_MESSAGES/ckan.mo
 
 RUN sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /srv/app/production.ini
 RUN sed -i "s/#ckan.redis.url = redis:\/\/localhost:6379\/0/ckan.redis.url = redis:\/\/redis.datagovmk:6379\/1/g" /srv/app/production.ini

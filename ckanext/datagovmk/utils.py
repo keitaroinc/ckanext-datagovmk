@@ -13,6 +13,7 @@ from ckanext.dcat.utils import resource_uri
 from ckan.model.license import LicenseRegister
 from ckanext.dcat.processors import RDFSerializer
 from ckan.common import config
+from ckan.lib.helpers import helper_functions
 import requests
 
 
@@ -46,6 +47,7 @@ def export_resource_to_rdf(resource_dict, dataset_dict, _format='xml'):
     :param str _format: export format. Default is ``xml``.
 
     :returns: the serialized RDF graph of the resource.
+    :rtype: 
     """
     g = Graph()
 
@@ -159,6 +161,7 @@ def export_resource_to_xml(resource_dict):
     :param dict resource_dict: resource metadata.
 
     :returns: serialized data as XML string.
+    :rtype:
     """
     return export_dict_to_xml(resource_dict, 'resource')
 
@@ -168,7 +171,8 @@ def export_package_to_xml(package_dict):
 
     :param dict package_dict: the package metadata.
 
-    :returns: XML representation (as string) of the package metadata.
+    :returns: XML representation of the package metadata.
+    :rtype: string
     """
     return export_dict_to_xml(package_dict, 'package')
 
@@ -310,9 +314,11 @@ def get_package_location_geojson(package_dict):
 
     :returns: ``str`` the GeoJSON data string.
     """
+
     location_uri = package_dict.get('spatial_uri')
     if not location_uri:
         return None
+    location_uri = _code_to_spatial_uri(location_uri)
     resource_id = _extract_spatial_resource_id(location_uri)
     if not resource_id:
         return None
@@ -388,3 +394,15 @@ def _get_geojson(resource):
     if geojson_dict:
         return json.dumps(geojson_dict)
     return None
+
+
+def _get_helper(helper):
+    return helper_functions.get(helper)
+
+
+def _code_to_spatial_uri(code):
+    code_to_uri = _get_helper('mk_dcatap_spatial_uri_from_code')
+    if code_to_uri:
+        uri = code_to_uri(code)
+        return uri or code
+    return code

@@ -1,0 +1,28 @@
+{% set num = activities|length %}{{ ungettext("Вие имате {num} нови активности на Вашата {site_title} табла.", "Вие имате {num} нови активности на Вашата {site_title} табла", num).format(site_title=g.site_title, num=num) }} {{ _('За да ја видите контролната табла, кликнете на овој линк:') }}
+
+{{ g.site_url + '/dashboard' }}
+
+{{ 'Можете да ги исклучите овие е-мејл известувања во вашите {site_title} параметри. За да ги промените вашите параметри, кликнете на овој линк:'.format(site_title=g.site_title) }}
+
+{{ g.site_url + '/user/edit' }}
+
+
+
+{% set num = activities|length %}{{ ungettext("Ju keni {num} aktivitet të ri në panelin e kontrollit tuaj {site_title}.", "Ju keni aktivitete të reja {num} në panelin e kontrollit {site_title}", num).format(site_title=g.site_title, num=num) }} {{ _('Për të parë pultin tuaj, klikoni në këtë link:') }}
+
+{{ g.site_url + '/dashboard' }}
+
+{{ "Ju mund të çaktivizoni këto njoftime përmes emailit në preferencat tuaja {site_title}. Për të ndryshuar preferencat tuaja, klikoni në këtë link:".format(site_title=g.site_title) }}
+
+{{ g.site_url + '/user/edit' }}
+
+
+
+{% set num = activities|length %}{{ ungettext("You have {num} new activity on your {site_title} dashboard.", "You have {num} new activities on your {site_title} dashboard", num).format(site_title=g.site_title, num=num) }} {{ _('To view your dashboard, click on this link:') }}
+
+{{ g.site_url + '/dashboard' }}
+
+{{ 'You can turn off these email notifications in your {site_title} preferences. To change your preferences, click on this link:'.format(site_title=g.site_title) }}
+
+{{ g.site_url + '/user/edit' }}
+

@@ -1,4 +1,4 @@
-# Macedonian translations for ckanext-datagovmk.
+# Albanian translations for ckanext-datagovmk.
 # Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the ckanext-datagovmk
 # project.
@@ -9,148 +9,147 @@ msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-07-18 16:28+0200\n"
-"PO-Revision-Date: 2018-06-09 00:36+0200\n"
+"PO-Revision-Date: 2018-07-23 20:57+0200\n"
 "Last-Translator: \n"
-"Language: mk\n"
-"Language-Team: mk <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: sq\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ckanext/datagovmk/actions.py:112
 msgid "Missing dataset id"
-msgstr "Недостасува ИД на податочен сет"
+msgstr "ID i seti të dhënave mungon"
 
 #: ckanext/datagovmk/actions.py:343 ckanext/datagovmk/actions.py:349
 #: ckanext/datagovmk/actions.py:465 ckanext/datagovmk/actions.py:471
 #: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:532
 msgid "message"
-msgstr "порака"
+msgstr "mesazh"
 
 #: ckanext/datagovmk/actions.py:343 ckanext/datagovmk/actions.py:465
 msgid "Resource already exists"
-msgstr "Ресурсот веќе постои"
+msgstr "Burimet tashmë ekzistojnë"
 
 #: ckanext/datagovmk/actions.py:349 ckanext/datagovmk/actions.py:471
 msgid "Resource file is missing"
-msgstr "Недостасува датотека на ресурсот"
+msgstr "Dosja e burimeve mungon"
 
 #: ckanext/datagovmk/actions.py:429 ckanext/datagovmk/actions.py:443
-#, fuzzy
 msgid "Resource was not found."
-msgstr "Ресурсот не е пронајден"
+msgstr "Burimi nuk u gjet."
 
 #: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:532
 msgid "Invalid URL"
-msgstr "Невалиден линк"
+msgstr "URL e pavlefshme"
 
 #: ckanext/datagovmk/controller.py:61
 msgid "Resource not found"
-msgstr "Ресурсот не е пронајден"
+msgstr "Burimi nuk u gjet"
 
 #: ckanext/datagovmk/controller.py:70
 msgid "Resource data not found"
-msgstr "Податоците за ресурсот не се пронајдени"
+msgstr "Të dhënat e resurseve nuk u gjetën"
 
 #: ckanext/datagovmk/controller.py:80
-#, fuzzy
 msgid "No download is available"
-msgstr "Нема достапни податочни сетови."
+msgstr "Nuk ka shkarkim në dispozicion"
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:66
 msgid "Preparing zip archive..."
-msgstr "Архивата се подготвува..."
+msgstr "Përgatitja e një arkivi zip ..."
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:78
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:93
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:10
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
 msgid "Download"
-msgstr "Преземи"
+msgstr "Shkarko"
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:89
 msgid "Could not create a zip archive."
-msgstr "Не може да се создаде архива."
+msgstr "Nuk mund të krijohej arkiva zip."
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:95
 msgid "An error occured while preparing zip archive."
-msgstr "Настана грешка при подготвувањето на архивата."
+msgstr "Ndodhi një gabim gjatë përgatitjes së një arkivi zip."
 
 #: ckanext/datagovmk/fanstatic/js/mark-all-resources.js:11
 msgid "Unmark All"
-msgstr "Отстрани ознаки на сите"
+msgstr "Hiqni të gjitha"
 
 #: ckanext/datagovmk/fanstatic/js/mark-all-resources.js:14
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:7
 msgid "Mark All"
-msgstr "Означи ги сите"
+msgstr "Shënoji të gjitha"
 
 #: ckanext/datagovmk/templates/footer.html:16
 msgid "Address"
-msgstr "Адреса"
+msgstr "Adresë"
 
 #: ckanext/datagovmk/templates/footer.html:20
 #: ckanext/datagovmk/templates/footer.html:60
 msgid "E-mail"
-msgstr "Е-пошта"
+msgstr "E-mail"
 
 #: ckanext/datagovmk/templates/footer.html:22
 msgid "Phone"
-msgstr "Телефон"
+msgstr "Telefon"
 
 #: ckanext/datagovmk/templates/footer.html:24
 msgid "Fax"
-msgstr "Факс"
+msgstr "Faks"
 
 #: ckanext/datagovmk/templates/footer.html:28
 msgid "Terms of use"
-msgstr "Услови за користење"
+msgstr "Kushtet e përdorimit"
 
 #: ckanext/datagovmk/templates/footer.html:29
 msgid "Privacy Policy"
-msgstr "Политика за приватност"
+msgstr "Politika e privatësisë"
 
 #: ckanext/datagovmk/templates/footer.html:35
 msgid "Navigation"
-msgstr "Навигација"
+msgstr "Lundrim"
 
 #: ckanext/datagovmk/templates/footer.html:57
 msgid "Subscribe to our newsletter"
-msgstr "Претплатете се на нашиот билтен"
+msgstr "Abonohuni për gazetën tonë"
 
 #: ckanext/datagovmk/templates/footer.html:58
 msgid "Stay updated with "
-msgstr "Бидете во тек со "
+msgstr "Qëndro i përditësuar me"
 
 #: ckanext/datagovmk/templates/footer.html:62
 msgid "Your e-mail address"
-msgstr "Вашата е-пошта"
+msgstr "Adresa juaj e e-mailit"
 
 #: ckanext/datagovmk/templates/footer.html:64
 msgid "Subscribe"
-msgstr "Претплатете се"
+msgstr "Abonohu"
 
 #: ckanext/datagovmk/templates/footer.html:83
 msgid ""
-"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
-"href=\"http://ckan.org\">CKAN</a>"
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\">CKAN</a>"
 msgstr ""
-"<strong>Придвижувано од</strong> <a class=\"hide-text ckan-footer-logo\" "
+"<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 
 #: ckanext/datagovmk/templates/footer.html:87
 msgid "CKAN API"
-msgstr "API на CKAN"
+msgstr "CKAN API"
 
 #: ckanext/datagovmk/templates/footer.html:88
 msgid "CKAN Association"
-msgstr "Асоцијација CKAN"
+msgstr "Shoqata CKAN"
 
 #: ckanext/datagovmk/templates/admin/config.html:8
 msgid "Footer Links"
-msgstr "Линкови во футер"
+msgstr "Lidhjet e Footer"
 
 #: ckanext/datagovmk/templates/admin/config.html:8
 msgid ""
@@ -158,232 +157,231 @@ msgid ""
 "secondary footer navigation. Please format the links with Markdown (i.e. "
 "* [Example link](https://www.example.com))."
 msgstr ""
-"Внесете листа од линкови - еден по линија - за да се прикаже како листа "
-"вофутер во навигација. Форматирајте ги линковите со Markdown (п.р. * "
-"[Пример линк](https://www.example.com))."
+"Futni një listë të lidhjeve - një në rresht - që do të shfaqet si një "
+"listë brenda navigacionit të fushës së mesme. Formatoni lidhjet me "
+"Markdown (dmth. * [Shembull i lidhjes] (https://www.shembull.com))."
 
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
-msgstr "Новости"
+msgstr "Lajme"
 
 #: ckanext/datagovmk/templates/home/index.html:31
 #: ckanext/datagovmk/templates/home/index.html:56
 msgid "Archive"
-msgstr "Архива"
+msgstr "Arkivi"
 
 #: ckanext/datagovmk/templates/home/index.html:54
 msgid "Blog"
-msgstr "Блог"
+msgstr "Blog"
 
 #: ckanext/datagovmk/templates/home/layout1.html:20
 msgid "Recent datasets"
-msgstr "Неодамнешни податочни сетови"
+msgstr "Setet më të fundit të të dhënave"
 
 #: ckanext/datagovmk/templates/home/layout1.html:28
 msgid "No datasets available."
-msgstr "Нема достапни податочни сетови."
+msgstr "Nuk ka të seti i të dhënave në dispozicion."
 
 #: ckanext/datagovmk/templates/home/layout1.html:32
 msgid "Most active institutions"
-msgstr "Најактивни институции"
+msgstr "Institucionet më aktive"
 
 #: ckanext/datagovmk/templates/home/layout1.html:40
 msgid "No organizations available."
-msgstr "Нема достапни организации."
+msgstr "Asnjë organizatë nuk është në dispozicion.."
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:8
 msgid "Welcome to CKAN"
-msgstr "Добредојдовте во CKAN"
+msgstr "Mirësevini në CKAN"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:10
 msgid ""
 "This is a nice introductory paragraph about CKAN or the site in general. "
 "We don't have any copy to go here yet but soon we will "
 msgstr ""
-"Ова е убав воведен параграф за CKAN или за сајтот воопшто. Ние немаме "
-"никаков текст за тука, но наскоро ќе имаме "
+"Ky është një paragraf hyrës rreth CKAN ose faqës në përgjithësi. Nuk "
+"kemi ndonjë shembull për të treguar këtu ende, por së shpejti do kemi"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
-msgstr "Дознајте повеќе"
+msgstr "Mëso më shumë"
 
 #: ckanext/datagovmk/templates/home/snippets/search.html:2
 msgid "E.g. environment"
-msgstr "пр. околина"
+msgstr "P.sh. mjedis"
 
 #: ckanext/datagovmk/templates/home/snippets/search.html:6
 msgid "Search data"
-msgstr "Пребарај податоци"
+msgstr "Kërko të dhënat"
 
 #: ckanext/datagovmk/templates/home/snippets/search.html:8
 msgid "Search datasets"
-msgstr "Пребарај податочни сетови"
+msgstr "Kërko Setet e të dhënave"
 
 #: ckanext/datagovmk/templates/home/snippets/search.html:11
 msgid "Search"
-msgstr "Пребарај"
+msgstr "Кërko"
 
 #: ckanext/datagovmk/templates/home/snippets/search.html:17
 msgid "Popular tags"
-msgstr "Популарни тагови"
+msgstr "Etiketa të popullarizaura"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
 msgid "dataset"
-msgstr "податочен сет"
+msgstr "set i të dhënave"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
 msgid "datasets"
-msgstr "податочни сетови"
+msgstr "Setet e të dhënave"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
 msgid "organization"
-msgstr "организација"
+msgstr "organizatë"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
 msgid "organizations"
-msgstr "организации"
+msgstr "organizatat"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "group"
-msgstr "група"
+msgstr "grup"
 
 #: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
 msgid "groups"
-msgstr "групи"
+msgstr "grupet"
 
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
-msgstr "Поврзани податочни сетови"
+msgstr "Seti i të dhënave të ngjashme"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:8
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:16
 msgid "Download Metadata"
-msgstr "Преземи мета податоци"
+msgstr "Shkarko Metadata"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:26
 msgid "Additional Information"
-msgstr "Дополнителни информации"
+msgstr "Informata shtesë"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:30
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:35
 msgid "Field"
-msgstr "Поле"
+msgstr "Fusha"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:31
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
 msgid "Value"
-msgstr "Вредност"
+msgstr "Vlera"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:37
 msgid "Last updated"
-msgstr "Последно ажурирање"
+msgstr "Përditësimi i fundit"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:38
 #: ckanext/datagovmk/templates/package/resource_read.html:44
 #: ckanext/datagovmk/templates/package/resource_read.html:50
 msgid "unknown"
-msgstr "непознато"
+msgstr "i panjohur"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:43
 msgid "Created"
-msgstr "Креиран"
+msgstr "U krijua"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:49
 msgid "Format"
-msgstr "Формат"
+msgstr "Formati"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:55
 #: ckanext/datagovmk/templates/snippets/license.html:4
 msgid "License"
-msgstr "Лиценца"
+msgstr "Licenca"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
-#, fuzzy
 msgid "Download Dataset Metadata"
-msgstr "Преземи мета податоци"
+msgstr "Shkarko Metadatat e të dhënave"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
 #, fuzzy
+#| msgid "Additional Information"
 msgid "Additional Info"
-msgstr "Дополнителни информации"
+msgstr "Informata shtesë"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:56
 msgid "State"
-msgstr "Состојба"
+msgstr "Rang"
 
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:4
 msgid "View"
-msgstr "Преглед"
+msgstr "Faqe"
 
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:6
 msgid "API Endpoint"
-msgstr "Крајна точка на API"
+msgstr "API Pika e fundit"
 
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:8
 msgid "Go to resource"
-msgstr "Отвори ресурс"
+msgstr "Shko tek burimi"
 
 #: ckanext/datagovmk/templates/package/snippets/resource_item.html:7
 msgid "Mark for Download"
-msgstr "Означи за преземање"
+msgstr "Shënoni për shkarkim"
 
 #: ckanext/datagovmk/templates/package/snippets/stats.html:5
 msgid "Views"
-msgstr "Прегледи"
+msgstr "Pamjet"
 
 #: ckanext/datagovmk/templates/package/snippets/stats.html:12
 msgid "Downloads"
-msgstr "Преземања"
+msgstr "Shkarkime"
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
-msgstr "Формата содржи невалидни записи:"
+msgstr "Formulari përmban shënime të pavlefshme:"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:2
 msgid "Datasets"
-msgstr "Податочни сетови"
+msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:3
 msgid "Organizations"
-msgstr "Организации"
+msgstr "Organizatat"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:4
 msgid "Groups"
-msgstr "Групи"
+msgstr "Grupet"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
 msgid "About"
-msgstr "За"
+msgstr "Për"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
-msgstr "Органограм"
+msgstr "Organogram"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Showcases"
-msgstr "Апликации"
+msgstr "Aplikimet"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Experiences"
-msgstr "Искуства"
+msgstr "Përvojë"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
-msgstr "Извештаи"
+msgstr "Raportet"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4
 msgid "Share"
-msgstr "Сподели"
+msgstr "Shpërndaje"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:5
 msgid "Share on Facebook"
-msgstr "Сподели на Facebook"
+msgstr "Shpërndaje në Facebook"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:6
 msgid "Share on Twitter"
-msgstr "Сподели на Twitter"
+msgstr "Shpërndaje në Twitter"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:7
 msgid "Share on Google+"
-msgstr "Сподели на Google+"
-
+msgstr "Shpërndaje në Google+"

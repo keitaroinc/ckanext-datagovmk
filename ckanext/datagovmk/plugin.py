@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
@@ -10,10 +12,62 @@ from ckanext.datagovmk.logic import import_spatial_data
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk import monkey_patch
+from ckan.lib import email_notifications
+from ckan.lib import base
+from ckan.common import config
 
 
 monkey_patch.activity_streams()
 monkey_patch.validators()
+
+
+def _notifications_for_activities(activities, user_dict):
+    '''Return one or more email notifications covering the given activities.
+
+    This function handles grouping multiple activities into a single digest
+    email.
+
+    :param activities: the activities to consider
+    :type activities: list of activity dicts like those returned by
+        ckan.logic.action.get.dashboard_activity_list()
+
+    :returns: a list of email notifications
+    :rtype: list of dicts each with keys 'subject' and 'body'
+
+    '''
+    if not activities:
+        return []
+
+    if not user_dict.get('activity_streams_email_notifications'):
+        return []
+
+    # We just group all activities into a single "new activity" email that
+    # doesn't say anything about _what_ new activities they are.
+    # TODO: Here we could generate some smarter content for the emails e.g.
+    # say something about the contents of the activities, or single out
+    # certain types of activity to be sent in their own individual emails,
+    # etc.
+
+    if len(activities) > 1:
+        subject = u"{n} нови активности од {site_title} /{n} aktivitete të reja nga {site_title}/{n} new activities from {site_title}".format(
+                site_title=config.get('ckan.site_title'),
+                n=len(activities))
+    else:
+        subject = u"{n} нова активност од {site_title} / {n} aktivitet i ri nga {site_title} / {n} new activity from {site_title}".format(
+                site_title=config.get('ckan.site_title'),
+                n=len(activities))
+    body = base.render(
+            'activity_streams/activity_stream_email_notifications.text',
+            extra_vars={'activities': activities})
+
+    notifications = [{
+        'subject': subject,
+        'body': body
+    }]
+
+    return notifications
+
+email_notifications._notifications_for_activities = _notifications_for_activities
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
