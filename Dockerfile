@@ -94,8 +94,8 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
 ENV CKAN__PLUGINS envvars \
                   qa \
                   archiver \
-                  report \
                   datagovmk \
+                  report \
                   disqus \
                   stats \
                   text_view \
