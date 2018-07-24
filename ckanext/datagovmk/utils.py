@@ -16,6 +16,14 @@ from ckan.common import config
 from ckan.lib.helpers import helper_functions
 import requests
 
+import smtplib
+from socket import error as socket_error
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.MIMEBase import MIMEBase
+from smtplib import SMTPRecipientsRefused
+from ckan.plugins.toolkit import _
+
 
 log = getLogger(__name__)
 
@@ -403,3 +411,68 @@ def _code_to_spatial_uri(code):
         uri = code_to_uri(code)
         return uri or code
     return code
+
+
+SMTP_SERVER = config.get('smtp.server', '')
+SMTP_USER = config.get('smtp.user', '')
+SMTP_PASSWORD = config.get('smtp.password', '')
+SMTP_FROM = config.get('smtp.mail_from')
+SMTP_TLS = config.get('smtp.tls', '')
+
+def send_email(from_email, to, subject, content):
+    msg = MIMEMultipart()
+
+    from_ = from_email
+
+    if isinstance(to, basestring):
+        to = [to]
+
+    msg['Subject'] = subject
+    msg['From'] = from_
+    msg['To'] = ','.join(to)
+
+    content = """\
+        <html>
+          <head></head>
+          <body>
+            <span>""" + content + """</span>
+          </body>
+        </html>
+    """
+
+    msg.attach(MIMEText(content, 'html', _charset='utf-8'))
+
+    try:
+        s = smtplib.SMTP(SMTP_SERVER)
+        if SMTP_USER:
+            if SMTP_TLS:
+                s.ehlo()
+                s.starttls()
+        s.login(SMTP_USER, SMTP_PASSWORD)
+        s.sendmail(from_, to, msg.as_string())
+        s.quit()
+        response_dict = {
+            'success': True,
+            'message': _('Email message was successfully sent.')
+        }
+        return response_dict
+    except SMTPRecipientsRefused:
+        error = {
+            'success': False,
+            'error': {
+                'fields': {
+                    'recepient': _(
+                        'Invalid email recepient, maintainer not found'
+                    )
+                }
+            }
+        }
+        return error
+    except socket_error:
+        log.critical('Could not connect to email server. Have you configured '
+                     'the SMTP settings?')
+        error_dict = {
+            'success': False,
+            'message': _('An error occured while sending the email. Try again.')
+        }
+        return error_dict

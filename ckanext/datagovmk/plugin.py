@@ -153,4 +153,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.datagovmk.controller:BulkDownloadController',
                     action='download_package_metadata')
 
+        map.connect('/issues/report_site_issue', 
+                    controller='ckanext.datagovmk.controller:ReportIssueController',
+                    action='report_issue_form')
+
         return map
