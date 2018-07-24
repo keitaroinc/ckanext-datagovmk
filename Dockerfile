@@ -73,9 +73,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # organogram
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-organogram.git@v0.2#egg=ckanext-organogram" && \
     # validation
-    # pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-validation.git@dgm-stable#egg=ckanext-validation" && \
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-validation.git@dgm-stable#egg=ckanext-validation" && \
     # skip scheming since we are using a fork
-    # pip install --no-cache-dir $(cat ${APP_DIR}/src/ckanext-validation/requirements.txt | grep -ivE "ckanext-scheming") && \
+    pip install --no-cache-dir $(cat ${APP_DIR}/src/ckanext-validation/requirements.txt | grep -ivE "ckanext-scheming") && \
     # experience
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-experience.git#egg=ckanext-experience" && \
     # requestdata
@@ -119,6 +119,7 @@ ENV CKAN__PLUGINS envvars \
                   repeating \
                   mk_dcatap \
                   organogram \
+                  validation \
                   experience \
                   likes
 
