@@ -23,7 +23,7 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      send_email)
 from ckan.lib.base import BaseController, abort, render
 from ckan.plugins import toolkit
-from ckan.common import c, request, response
+from ckan.common import c, request, response, config
 
 import ckan.model as model
 import ckan.logic as logic
@@ -301,10 +301,13 @@ def _open_temp_zipfile():
 
 
 class ReportIssueController(BaseController):
-
+    """Controller for the issue reporting (site wide) form.
+    """
     def report_issue_form(self):
+        """Renders the issue reporting form and reports the issue by sending
+        an email to the system admin with the issue.
+        """
         login_required = False
-        print ' => sysadmins', get_sysadmins()
         if not c.user:
             login_required = True
 
@@ -359,11 +362,28 @@ class ReportIssueController(BaseController):
         
         if not result['success']:
             h.flash_error(result['message'])
+        else:
+            h.flash_success(toolkit._('The issue has been reported.'))
             extra_vars['successfuly_reported'] = True
         return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
 
 def get_admin_email():
+    """Loads the admin email.
+
+    If a system configuration is present, it is preffered to the CKAN sysadmins.
+    The configuration property is ``ckanext.datagovmk.site_admin_email``.
+
+    If no email is configured explicitly, then the email of the first CKAN 
+    sysadmin is used.
+
+    :returns: ``str`` the email of the sysadmin to which to send emails with
+        issues.
+        
+    """
+    sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
+    if sysadmin_email:
+        return sysadmin_email
     sysadmins = get_sysadmins()
     if sysadmins:
         return sysadmins[0].email

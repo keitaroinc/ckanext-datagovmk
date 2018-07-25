@@ -37,6 +37,9 @@
                     {% block footer_links %}
                       {% snippet 'snippets/main_navigation.html' %}
                     {% endblock %}
+                    <li>
+                      <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') }}">{{ _('Report site issue')}}</a>
+                    </li>
                   </ul>
                   {% endblock %}
                 </div>
