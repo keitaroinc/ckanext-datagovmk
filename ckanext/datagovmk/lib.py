@@ -1,4 +1,4 @@
-from ckan.common import config
+from ckan.common import config, _
 from ckan.lib.base import render_jinja2
 from ckan.lib import helpers as h
 from ckan.lib import mailer
@@ -9,7 +9,7 @@ def create_activation_key(user):
 
 
 def get_activation_link(user):
-    controller_path = 'ckanext.eoc.controllers.eoc_user:EocUserController'
+    controller_path = 'ckanext.datagovmk.controller:DatagovmkUserController'
     return h.url_for(controller=controller_path,
                      action='perform_activation',
                      id=user.id,
@@ -20,18 +20,15 @@ def get_activation_link(user):
 def request_activation(user):
     create_activation_key(user)
     site_title = config.get('ckan.site_title')
+    site_url = config.get('ckan.site_url')
 
+    subject = _('%s User Account Activation Required' % site_title)
     body = render_jinja2('emails/confirm_user_email.txt', {
         'activation_link': get_activation_link(user),
-        'site_url': config.get('ckan.site_url'),
+        'site_url': site_url,
         'site_title': site_title,
         'user_name': user.name
     })
-    subject = render_jinja2('emails/confirm_user_subject.txt', {
-        'site_title': site_title
-    })
-
-    subject = subject.split('\n')[0]
     mailer.mail_user(user, subject, body)
 
 

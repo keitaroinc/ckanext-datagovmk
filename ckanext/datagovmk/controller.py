@@ -20,9 +20,11 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      to_utf8_str,
                                      export_package_to_xml,
                                      export_package_to_rdf)
+from ckanext.datagovmk.lib import (verify_activation_link,
+                                   create_activation_key)
 from ckan.lib.base import BaseController, abort
 from ckan.plugins import toolkit
-from ckan.common import c, request, response
+from ckan.common import _, c, request, response
 from ckan.lib.navl import dictization_functions
 
 import ckan.model as model
@@ -207,6 +209,45 @@ class DatagovmkUserController(UserController):
 
     def datagovmk_register(self, data=None, errors=None, error_summary=None):
         return self.register(data, errors, error_summary)
+
+    def perform_activation(self, id):
+        context = {'model': model, 'session': model.Session,
+                   'user': id, 'keep_email': True}
+
+        try:
+            data_dict = {'id': id}
+            user_dict = get_action('user_show')(context, data_dict)
+
+            user_obj = context['user_obj']
+        except NotFound, e:
+            abort(404, _('User not found'))
+
+        c.activation_key = request.params.get('key')
+        if not verify_activation_link(user_obj, c.activation_key):
+            h.flash_error(_('Invalid activation key. Please try again.'))
+            abort(403)
+
+        try:
+            user_dict['reset_key'] = c.activation_key
+            user_dict['state'] = model.State.ACTIVE
+            user = get_action('user_update')(context, user_dict)
+            create_activation_key(user_obj)
+
+            h.flash_success(_('Your account has been activated.'))
+            h.redirect_to(controller='user', action='login')
+        except NotAuthorized:
+            h.flash_error(_('Unauthorized to edit user %') % id)
+        except NotFound, e:
+            h.flash_error(_('User not found'))
+        except DataError:
+            h.flash_error(_(u'Integrity Error'))
+        except ValidationError, e:
+            h.flash_error(u'%r' % e.error_dict)
+        except ValueError, ve:
+            h.flash_error(unicode(ve))
+
+        c.user_dict = user_dict
+        h.redirect_to(controller='user', action='login')
 
     def _save_new(self, context):
         came_from = request.params.get('came_from')

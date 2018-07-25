@@ -179,6 +179,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
             m.connect('register', '/user/register', action='datagovmk_register')
+            m.connect('/user/activate/{id:.*}', action='perform_activation')
 
         return map
 

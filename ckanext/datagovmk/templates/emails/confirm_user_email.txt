@@ -1,8 +1,22 @@
-Dear {{ user_name }},
+Здраво {{ user_name }},
+
+Корисничка сметка е креирана на {{ site_title }}.
+
+За активирање на сметката ве молиме користете го линкот долу:
+
+    {{ activation_link }}
+
+Имајте убав ден.
+
+--
+Порака пратена од {{ site_title }} ({{ site_url }})
+
+
+Hello {{ user_name }},
 
 A user account has been created on {{ site_title }}.
 
-To activate the account please use the link below.
+To activate the account please use the link below:
 
     {{ activation_link }}
 
