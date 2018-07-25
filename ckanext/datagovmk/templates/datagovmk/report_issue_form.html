@@ -21,14 +21,14 @@
 {% if login_required %}
 <div class="row">
     <div class="col-md-12">
-        <p>{{ _('Please login before reporting an issue.')}}</p>
+        <p class="lead">{{ _('Please login before reporting an issue.')}}</p>
         <p><a href="{{ login_url }}" class="btn btn-primary pull-right">{{_('Login')}}</a></p>
     </div>
 </div>
 {% elif successfuly_reported %}
 <div class="row">
     <div class="col-md-12">
-        <p>{{ _('The issus has been succesfuly reported. You can report another issue by clicking the button bellow.') }}</p>
+        <p class="lead">{{ _('The issue has been successfully reported. You can report another issue by clicking the button below.') }}</p>
         <p><a href="{{ form_url }}" class="btn btn-primary pull-right">{{_('Report issue')}}</a></p>
     </div>
 </div>
@@ -36,7 +36,7 @@
 <form action="{{ form_url }}" method="POST">
     <div class="row">
         <div class="col-md-12">
-                <h2>Report an issue</h2>
+                <h2>{{ _('Report an issue') }}</h2>
                 
                 {{ form.input('issue_title', id='field-title', label=_('Title'), placeholder=_('The issue title'), value='', error=errors.issue_title, classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
         
