@@ -55,6 +55,7 @@ def export_resource_to_rdf(resource_dict, dataset_dict, _format='xml'):
     :param str _format: export format. Default is ``xml``.
 
     :returns: the serialized RDF graph of the resource.
+    :rtype: 
     """
     g = Graph()
 
@@ -168,6 +169,7 @@ def export_resource_to_xml(resource_dict):
     :param dict resource_dict: resource metadata.
 
     :returns: serialized data as XML string.
+    :rtype:
     """
     return export_dict_to_xml(resource_dict, 'resource')
 
@@ -177,7 +179,8 @@ def export_package_to_xml(package_dict):
 
     :param dict package_dict: the package metadata.
 
-    :returns: XML representation (as string) of the package metadata.
+    :returns: XML representation of the package metadata.
+    :rtype: string
     """
     return export_dict_to_xml(package_dict, 'package')
 

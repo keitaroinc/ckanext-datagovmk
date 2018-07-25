@@ -11,3 +11,7 @@ API Documentation
     :members:
 .. automodule:: ckanext.datagovmk.helpers
     :members:
+.. automodule:: ckanext.datagovmk.logic
+    :members:
+.. automodule:: ckanext.datagovmk.utils
+    :members:

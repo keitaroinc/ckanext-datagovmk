@@ -121,16 +121,16 @@ def get_stats_for_package(package_id):
     return {}
 
 def get_stats_for_resource(resource_id):
-    """Retrieve stats for the package.
+    """Retrieve stats for the resource.
 
     :param resource_id: the id of the resource to retrieve stats for.
     :type resource_id: string
 
     :returns: the resource stats. If no stats available, returns an empty dict.
       Available dict values are:\n
-      ``id`` - the package id\n
+      ``id`` - the resource id\n
       ``visits_recently`` - number of recent visits.\n
-      ``visits_ever`` - total number of visits to this package.\n
+      ``visits_ever`` - total number of visits to this resource.\n
       ``downloads`` - total number of downloads of this resource.\n
 
     :rtype: dictionary
