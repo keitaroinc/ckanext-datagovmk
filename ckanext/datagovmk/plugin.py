@@ -40,7 +40,7 @@ def _notifications_for_activities(activities, user_dict):
     # say something about the contents of the activities, or single out
     # certain types of activity to be sent in their own individual emails,
     # etc.
-    
+
     if len(activities) > 1:
         subject = u"{n} нови активности од {site_title} /{n} aktivitete të reja nga {site_title}/{n} new activities from {site_title}".format(
                 site_title=config.get('ckan.site_title'),
@@ -109,7 +109,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
-            'resource_update': actions.resource_update
+            'resource_update': actions.resource_update,
+            'datagovmk_start_script': actions.start_script,
         }
 
     # IAuthFunctions
@@ -117,7 +118,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_auth_functions(self):
         return {
             'datagovmk_get_related_datasets': auth.get_related_datasets,
-            'datagovmk_get_groups': helpers.get_groups
+            'datagovmk_get_groups': helpers.get_groups,
+            'datagovmk_start_script': auth.start_script,
         }
 
     def update_config_schema(self, schema):
