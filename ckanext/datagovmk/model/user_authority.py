@@ -32,9 +32,9 @@ class UserAuthority(DomainObject):
             return None
 
     @classmethod
-    def get_last_general_authority_for_user(cls, user_id):
+    def get_last_authority_for_user(cls, authority_type, user_id):
         obj = Session.query(cls).autoflush(False)
-        obj = obj.filter_by(user_id=user_id, authority_type='general')
+        obj = obj.filter_by(user_id=user_id, authority_type=authority_type)
         obj = obj.order_by(desc('created')).first()
 
         if obj:

@@ -52,7 +52,8 @@ def define_user_authority_dataset_table():
         Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
         Column('authority_id', types.UnicodeText,
                ForeignKey('user_authority.id')),
-        Column('dataset_id', types.UnicodeText),
+        Column('dataset_id', types.UnicodeText,
+               ForeignKey('package.id')),
         Column('created', types.DateTime, default=datetime.datetime.now),
     )
 

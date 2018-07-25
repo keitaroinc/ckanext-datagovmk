@@ -11,6 +11,8 @@ from ckanext.datagovmk import auth
 from ckanext.datagovmk.logic import import_spatial_data
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
+from ckanext.datagovmk.model.user_authority_dataset \
+    import setup as setup_user_authority_dataset_table
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
@@ -105,8 +107,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_related_datasets,
             'datagovmk_get_user_id':
                 helpers.get_user_id,
-            'datagovmk_get_last_general_authority_for_user':
-                helpers.get_last_general_authority_for_user,
+            'datagovmk_get_last_authority_for_user':
+                helpers.get_last_authority_for_user,
         }
 
     # IActions
@@ -175,3 +177,4 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def configure(self, config):
         setup_user_authority_table()
+        setup_user_authority_dataset_table()

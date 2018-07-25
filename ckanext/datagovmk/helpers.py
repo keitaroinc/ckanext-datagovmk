@@ -239,8 +239,9 @@ def get_user_id(user_name):
         return None
 
 
-def get_last_general_authority_for_user(user_id):
-    user_authority = UserAuthority.get_last_general_authority_for_user(user_id)
+def get_last_authority_for_user(authority_type, user_id):
+    user_authority = UserAuthority.get_last_authority_for_user(
+        authority_type, user_id
+    )
 
-    if user_authority:
-        return user_authority.authority_file
+    return user_authority

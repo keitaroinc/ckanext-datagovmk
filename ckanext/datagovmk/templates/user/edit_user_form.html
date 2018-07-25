@@ -21,7 +21,7 @@
     {% endif %}
 
     {% set user_id = h.datagovmk_get_user_id(data.name) %}
-    {% set authority_file_url = h.datagovmk_get_last_general_authority_for_user(user_id) %}
+    {% set authority_file_url = h.datagovmk_get_last_authority_for_user('general', user_id).authority_file %}
     {% set is_upload = authority_file_url and not authority_file_url.startswith('http') %}
     {% set is_url = authority_file_url and authority_file_url.startswith('http') %}
     {% set is_upload_enabled = h.uploads_enabled() %}

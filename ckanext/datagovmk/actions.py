@@ -3,6 +3,7 @@ import uuid
 import requests
 import zipfile
 import hashlib
+import cgi
 
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
@@ -18,11 +19,15 @@ from ckan.logic.action.create import user_create as _user_create
 from ckan.logic.action.update import user_update as _user_update
 from ckan.logic.action.get import user_activity_list as _user_activity_list
 from ckan.logic.action.get import dashboard_activity_list as _dashboard_activity_list
-from ckan.common import request, config
+from ckan.logic.action.create import package_create as _package_create
+
+from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
+from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
+from ckan.lib import helpers as core_helpers
 
 log = getLogger(__name__)
 
@@ -262,7 +267,7 @@ def safe_override(action):
     Usage:
 
     .. code-block:: python
-    
+
         import ckan.plugins as plugins
         from ckan.logic import get_action
 
@@ -310,13 +315,80 @@ def add_spatial_data(package_action, context, data_dict):
 
     :returns: the CKAN ``package_create``/``package_update`` result.
     :rtype: dict
-    
+
     """
     try:
         l.import_spatial_data(data_dict)
     except Exception as e:
         log.warning(e)
-    return package_action(context, data_dict)
+
+    if package_action.func_name == 'package_create':
+        authority_file = _upload_authority_file(data_dict, is_required=False)
+
+    if package_action.func_name == 'package_create' and \
+       data_dict.get('add_dataset_agreement') is None:
+        raise ValidationError({
+            _('Add dataset agreement'): [_('Missing value')]
+        })
+
+    dataset = package_action(context, data_dict)
+
+    if package_action.func_name == 'package_create':
+        if data_dict.get('authority_file_url'):
+            data = {
+                'user_id': context.get('auth_user_obj').id,
+                'authority_file': authority_file,
+                'authority_type': 'additional'
+            }
+
+            userAuthority = UserAuthority(**data)
+            userAuthority.save()
+
+            authority = h.get_last_authority_for_user(
+                authority_type='additional',
+                user_id=context.get('auth_user_obj').id
+            )
+
+            activity_type = 'dataset_agreement_additional_authority'
+        else:
+            authority = h.get_last_authority_for_user(
+                authority_type='general',
+                user_id=context.get('auth_user_obj').id
+            )
+            activity_type = 'dataset_agreement_general_authority'
+
+        data = {
+            'authority_id': authority.id,
+            'dataset_id': dataset.get('id')
+        }
+
+        userAuthorityDataset = UserAuthorityDataset(**data)
+        userAuthorityDataset.save()
+
+        current_authority_file = '/uploads/authorities/{0}'.format(
+            authority.authority_file
+        )
+
+        dataset_url = core_helpers.url_for(
+            controller='package',
+            action='read',
+            id=dataset.get('id')
+        )
+
+        data_dict = {
+            'user_id': context.get('user'),
+            'object_id': context.get('user'),
+            'activity_type': activity_type,
+            'data': {
+                'current_authority_file': current_authority_file,
+                'dataset_url': dataset_url,
+                'dataset_name': dataset.get('title')
+            }
+        }
+
+        toolkit.get_action('activity_create')({'ignore_auth': True}, data_dict)
+
+    return dataset
 
 
 def resource_create(context, data_dict):
@@ -546,10 +618,12 @@ def _validate_link(link):
 
 
 def user_create(context, data_dict):
+    """ Overridden to be able to upload authority file """
+
     if data_dict.get('authority_file_url') == '':
         raise ValidationError({_('authority'): [_('Missing value')]})
 
-    authority_file = _upload_authority_file(data_dict)
+    authority_file = _upload_authority_file(data_dict, is_required=True)
 
     created_user = _user_create(context, data_dict)
 
@@ -565,15 +639,22 @@ def user_create(context, data_dict):
     return created_user
 
 
-def _upload_authority_file(data_dict):
-    if data_dict.get('authority_file_url') == '':
+def _upload_authority_file(data_dict, is_required=False):
+    if is_required and data_dict.get('authority_file_url') == '':
         raise ValidationError({_('authority'): [_('Missing value')]})
 
-    if request.files.get('authority_file_upload'):
+    if is_flask_request():
+        authority_file_upload = request.files.get('authority_file_upload')
+        is_upload = authority_file_upload
+    else:
+        authority_file_upload = data_dict.get('authority_file_upload')
+        is_upload = isinstance(authority_file_upload, cgi.FieldStorage)
+
+    if is_upload:
         max_authority_size =\
             int(config.get('ckanext.datagovmk.authority_file_max_size', 10))
         data_dict['authority_file_upload'] =\
-            request.files.get('authority_file_upload')
+            authority_file_upload
         upload = uploader.get_uploader(
             'authorities',
             data_dict['authority_file_url']
@@ -588,8 +669,8 @@ def _upload_authority_file(data_dict):
             upload.upload(max_size=max_authority_size)
         except toolkit.ValidationError:
             data_dict['authority_file_url'] =\
-                request.files.get('authority_file_upload').filename
-            raise ValidationError({_('authority'): [_('Uploaded authority file is too large. Maximum allowed size is {0}MB.'.format(max_authority_size))]})
+                authority_file_upload.filename
+            raise ValidationError({_('authority'): [_('Uploaded authority file is too large. Maximum allowed size is {size}MB.').format(size=max_authority_size)]})
 
         authority_file = upload.filename
 
@@ -601,15 +682,20 @@ def _upload_authority_file(data_dict):
 
 
 def user_update(context, data_dict):
+    """ Overridden to be able to manage uploaded authority file """
+
     if data_dict.get('authority_file_url') == '':
         raise ValidationError({_('authority'): [_('Missing value')]})
 
-    authority_file = _upload_authority_file(data_dict)
+    authority_file = _upload_authority_file(data_dict, is_required=True)
 
     updated_user = _user_update(context, data_dict)
 
     if request.files.get('authority_file_upload'):
-        last_general_authority = h.get_last_general_authority_for_user(updated_user.get('id'))
+        last_general_authority = h.get_last_authority_for_user(
+            authority_type='general',
+            user_id=updated_user.get('id')
+        )
         data = {
             'user_id': updated_user.get('id'),
             'authority_file': authority_file,
@@ -619,7 +705,7 @@ def user_update(context, data_dict):
         userAuthority = UserAuthority(**data)
         userAuthority.save()
 
-        previous_authority_file = '/uploads/authorities/{0}'.format(last_general_authority)
+        previous_authority_file = '/uploads/authorities/{0}'.format(last_general_authority.authority_file)
         current_authority_file = '/uploads/authorities/{0}'.format(authority_file)
 
         data_dict = {
@@ -639,15 +725,17 @@ def user_update(context, data_dict):
 
 @toolkit.side_effect_free
 def user_activity_list(context, data_dict):
-    """ Override this action to filter out activities for
-    updated_user_general_authority that are only shown for sysadmins and users
-    that updated their general activites. """
+    """ Override this action to filter out activities related to uploaded
+    authorities and dataset agreement that are only shown for sysadmins and
+    users that have updated their general activites. """
 
     activities = _user_activity_list(context, data_dict)
     filtered_activities = []
 
     for activity in activities:
-        if activity.get('activity_type') == 'updated_user_general_authority':
+        if activity.get('activity_type') == 'updated_user_general_authority' or \
+           activity.get('activity_type') == 'dataset_agreement_general_authority' or \
+           activity.get('activity_type') == 'dataset_agreement_additional_authority':
             if context.get('auth_user_obj') is None:
                 continue
 
@@ -664,9 +752,9 @@ def user_activity_list(context, data_dict):
 def user_activity_list_html(context, data_dict):
     '''Return a user's public activity stream as HTML.
 
-    Override this action to filter out activities for
-    updated_user_general_authority that are only shown for sysadmins and users
-    that updated their general activites.
+    Override this action to filter out activities related to uploaded
+    authorities and dataset agreement that are only shown for sysadmins and
+    users that have updated their general activites.
 
     The activity stream is rendered as a snippet of HTML meant to be included
     in an HTML page, i.e. it doesn't have any HTML header or footer.
@@ -698,15 +786,17 @@ def user_activity_list_html(context, data_dict):
 
 @toolkit.side_effect_free
 def dashboard_activity_list(context, data_dict):
-    """ Override this action to filter out activities for
-    updated_user_general_authority that are only shown for sysadmins and users
-    that updated their general activites. """
+    """ Override this action to filter out activities related to uploaded
+    authorities and dataset agreement that are only shown for sysadmins and
+    users that have updated their general activites. """
 
     activities = _dashboard_activity_list(context, data_dict)
     filtered_activities = []
 
     for activity in activities:
-        if activity.get('activity_type') == 'updated_user_general_authority':
+        if activity.get('activity_type') == 'updated_user_general_authority' or \
+           activity.get('activity_type') == 'dataset_agreement_general_authority' or \
+           activity.get('activity_type') == 'dataset_agreement_additional_authority':
             if context.get('auth_user_obj') is None:
                 continue
             if activity.get('user_id') == context.get('auth_user_obj').id or \
@@ -723,9 +813,9 @@ def dashboard_activity_list_html(context, data_dict):
     '''Return the authorized (via login or API key) user's dashboard activity
        stream as HTML.
 
-    Override this action to filter out activities for
-    updated_user_general_authority that are only shown for sysadmins and users
-    that updated their general activites.
+    Override this action to filter out activities related to uploaded
+    authorities and dataset agreement that are only shown for sysadmins and
+    users that have updated their general activites.
 
     The activity stream is rendered as a snippet of HTML meant to be included
     in an HTML page, i.e. it doesn't have any HTML header or footer.

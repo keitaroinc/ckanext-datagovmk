@@ -1,4 +1,8 @@
+{% resource 'datagovmk/js/modules/dataset-form-upload-attr.js' %}
+
 {% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
 
 {% block errors %}
   {%- if errors -%}
@@ -36,4 +40,27 @@
             {% snippet 'snippets/custom_form_fields.html', extras=data.extras, errors=errors, limit=3 %}
         {% endblock %}
     {% endblock %}
+
+    <div class="form-group control-medium">
+      <label class="control-label" for="add_dataset_agreement"><span title="{{ _("This field is required") }}" class="control-required">*</span>{{ _('Add dataset agreement') }}</label>
+      <div class="controls">
+        <fieldset class="checkboxes">
+          <label>
+            <input id="add_dataset_agreement" type="checkbox" {% if data.add_dataset_agreement %} checked {% endif %} name="add_dataset_agreement">
+            {{ _('Agree that you have provided an authority to add this dataset.') }}
+          </label>
+        </fieldset>
+        {% if errors[_('Add dataset agreement')] %}
+          <span class="error-block">{{ _('You must agree to add this dataset.') }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% set authority_file_url = data.authority_file_url %}
+    {% set is_upload = authority_file_url and not authority_file_url.startswith('http') %}
+    {% set is_url = authority_file_url and authority_file_url.startswith('http') %}
+    {% set is_upload_enabled = h.uploads_enabled() %}
+
+    {% snippet 'snippets/upload_authority.html', data=data, errors=errors, is_upload_enabled=is_upload_enabled, upload_label=_('If necessary, attach a file with additional authority to add this dataset'), field_url='authority_file_url', field_upload='authority_file_upload', is_url=is_url, is_upload=is_upload, url_label= _('Uploaded authority file'), is_required=false %}
 {% endblock %}
+
