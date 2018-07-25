@@ -34,7 +34,9 @@
               {% for item in news %}
               <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/' + item.name) }}">
                 {% if item.image %}
-                <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                <span class="image-wrap">
+                  <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                </span>
                 <span class="body">
                   <span class="title" role="heading">{{ item.title }}</span>
                   <span class="date" role="text">{{ h.render_datetime(item.publish_date) }}</span>
@@ -59,7 +61,9 @@
               {% for item in blogs %}
               <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/' + item.name) }}">
                 {% if item.image %}
-                <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                <span class="image-wrap">
+                  <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
+                </span>
                 <span class="body">
                   <span class="title" role="heading">{{ item.title }}</span>
                   <span class="description" role="text">{{ item.content|striptags|truncate(300) }}</span>
