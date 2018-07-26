@@ -676,19 +676,19 @@ def user_create(context, data_dict):
 
     try:
         request_activation(user)
-
-        data = {
-            'user_id': created_user.get('id'),
-            'authority_file': authority_file,
-            'authority_type': 'general'
-        }
-        userAuthority = UserAuthority(**data)
-        userAuthority.save()
     except Exception as e:
         get_action('user_delete')(context, {'id': user.id})
         msg = _('Error sending activation email, ' +
                 'the user was not created: {0}'.format(str(e)))
         raise ValidationError({'message': msg}, error_summary=msg)
+
+    data = {
+        'user_id': created_user.get('id'),
+        'authority_file': authority_file,
+        'authority_type': 'general'
+    }
+    userAuthority = UserAuthority(**data)
+    userAuthority.save()
 
     return created_user
 
