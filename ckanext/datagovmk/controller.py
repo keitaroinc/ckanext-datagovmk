@@ -246,7 +246,7 @@ class DatagovmkUserController(UserController):
             h.flash_success(_('Your account has been activated.'))
             h.redirect_to(controller='user', action='login')
         except NotAuthorized:
-            h.flash_error(_('Unauthorized to edit user %') % id)
+            h.flash_error(_('Unauthorized to edit user %s') % id)
         except NotFound, e:
             h.flash_error(_('User not found'))
         except DataError:
@@ -282,7 +282,7 @@ class DatagovmkUserController(UserController):
             error_summary = e.error_summary
             return self.new(data_dict, errors, error_summary)
 
-        h.flash_success(_('A confirmation email has been sent to "%s". '
+        h.flash_success(_('A confirmation email has been sent to %s. '
                           'Please use the link in the email to continue.') %
                           data_dict['email'])
         if not c.user:
@@ -295,8 +295,8 @@ class DatagovmkUserController(UserController):
                 # h.redirect_to(controller='user', action='me')
                 h.redirect_to(controller='user', action='login')
         else:
-            h.flash_success(_('User "%s" is now registered but you are still '
-                            'logged in as "%s" from before') %
+            h.flash_success(_('User %s is now registered but you are still '
+                            'logged in as %s from before') %
                             (data_dict['name'], c.user))
             if authz.is_sysadmin(c.user):
                 h.redirect_to(controller='user',

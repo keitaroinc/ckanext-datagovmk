@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 23:33+0200\n"
+"POT-Creation-Date: 2018-07-26 17:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,68 +18,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:128
+#: ckanext/datagovmk/actions.py:126
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:333
+#: ckanext/datagovmk/actions.py:328
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:45
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:53
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:665
-#: ckanext/datagovmk/actions.py:685 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/actions.py:328 ckanext/datagovmk/actions.py:621
+#: ckanext/datagovmk/actions.py:641 ckanext/datagovmk/actions.py:683
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
-#: ckanext/datagovmk/actions.py:552 ckanext/datagovmk/actions.py:558
-#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
+#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
+#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
+#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:552
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:558
+#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:516 ckanext/datagovmk/actions.py:530
+#: ckanext/datagovmk/actions.py:518 ckanext/datagovmk/actions.py:532
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
+#: ckanext/datagovmk/actions.py:618 ckanext/datagovmk/actions.py:621
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:650
-msgid "No script was found for the provided name"
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:665 ckanext/datagovmk/actions.py:685
-#: ckanext/datagovmk/actions.py:714 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/actions.py:628 ckanext/datagovmk/actions.py:657
+#: ckanext/datagovmk/actions.py:686 ckanext/datagovmk/actions.py:701
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:10
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:714
+#: ckanext/datagovmk/actions.py:649
+msgid "Error sending activation email, the user was not created: {0}"
+msgstr ""
+
+#: ckanext/datagovmk/actions.py:686
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:61
+#: ckanext/datagovmk/controller.py:72
 msgid "Resource not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:70
+#: ckanext/datagovmk/controller.py:81
 msgid "Resource data not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:80
+#: ckanext/datagovmk/controller.py:91
 msgid "No download is available"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:233 ckanext/datagovmk/controller.py:251
+#: ckanext/datagovmk/controller.py:273
+msgid "User not found"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:237
+msgid "Invalid activation key. Please try again."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:246
+msgid "Your account has been activated."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:249
+#, python-format
+msgid "Unauthorized to edit user %s"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:253 ckanext/datagovmk/controller.py:275
+msgid "Integrity Error"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:271
+#, python-format
+msgid "Unauthorized to create user %s"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:277
+msgid "Bad Captcha. Please try again."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:285
+#, python-format
+msgid ""
+"A confirmation email has been sent to %s. Please use the link in the email to"
+" continue."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:298
+#, python-format
+msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
 
 #: ckanext/datagovmk/monkey_patch.py:10
@@ -96,14 +140,14 @@ msgstr ""
 msgid "{actor} "
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:25
+#: ckanext/datagovmk/monkey_patch.py:27
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using general <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:40
+#: ckanext/datagovmk/monkey_patch.py:42
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
@@ -546,7 +590,7 @@ msgstr ""
 msgid "Share on Google+"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:17
 msgid "Clear Upload"
 msgstr ""
 
@@ -628,6 +672,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:65
 msgid "Update Profile"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new.html:9
+msgid "Register for an Account"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:10
