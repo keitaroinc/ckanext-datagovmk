@@ -175,6 +175,11 @@ Additional configuration settings::
     # (optional, default: https://lz4.overpass-api.de/api/interpreter).
     ckanext.datagovmk.osm_overpass_url = https://lz4.overpass-api.de/api/interpreter
 
+    # Alternative admin email. If configured, issues reported will be send to this email.
+    # If not configured, the issues will be send to the CKANs sysadmin account.
+    # Don't set this if there is no special need for it.
+    ckanext.datagovmk.site_admin_email = sysadmin@example.com
+
 
 ------------------------
 Development Installation
