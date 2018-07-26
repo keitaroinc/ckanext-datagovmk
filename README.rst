@@ -130,7 +130,7 @@ goes at the end.
 
 The plugins list should look something like this::
 
-    ckan.plugins = <other plugins> dcat datagovmk scheming_datasets repeating  mk_dcatap 
+    ckan.plugins = <other plugins> dcat datagovmk scheming_datasets repeating  mk_dcatap
 
 
 
@@ -179,6 +179,10 @@ Additional configuration settings::
     # If not configured, the issues will be send to the CKANs sysadmin account.
     # Don't set this if there is no special need for it.
     ckanext.datagovmk.site_admin_email = sysadmin@example.com
+
+    # Maximum allowed size for uploaded authority files in MB. Default is 10.
+    ckanext.datagovmk.authority_file_max_size = 50
+
 
 
 ------------------------
