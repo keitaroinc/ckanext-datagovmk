@@ -1,10 +1,10 @@
 {% ckan_extends %}
 
 {% block featured_charts_wrapper %}
-<div class="featured-charts-wrap">
-  <div class="featured-charts container-fluid">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+<div class="featured-charts-wrap container-fluid">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="featured-charts">
         {% block featured_charts %}
           {{ super() }}
         {% endblock %}
