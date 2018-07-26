@@ -178,6 +178,22 @@ Additional configuration settings::
     # Maximum allowed size for uploaded authority files in MB. Default is 10.
     ckanext.datagovmk.authority_file_max_size = 50
 
+SMTP configuration settings:
+    # SMTP server in format: <server>:<port>
+    smtp.server = <server_name>:<port>
+
+    # User email address
+    smtp.user = full_email_address
+
+    # User password
+    smtp.password = password
+
+    # User email address
+    smtp.mail_from = email_address
+
+    # Must be True for secure connection
+    smtp.starttls = True
+
 
 ------------------------
 Development Installation

@@ -130,8 +130,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_activity_list': actions.user_activity_list,
             'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
-            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
-            'datagovmk_user_create': actions.datagovmk_user_create
+            'dashboard_activity_list_html': actions.dashboard_activity_list_html
         }
 
     # IAuthFunctions

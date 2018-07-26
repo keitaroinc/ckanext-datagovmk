@@ -206,11 +206,21 @@ class BulkDownloadController(BaseController):
 
 
 class DatagovmkUserController(UserController):
+    """Overrides CKAN's UserController to send activation email to the user."""
 
     def datagovmk_register(self, data=None, errors=None, error_summary=None):
+        """ Wrapper around UserController's register method"""
+
         return self.register(data, errors, error_summary)
 
     def perform_activation(self, id):
+        """ Activates user account
+
+        :param id: user ID
+        :type id: string
+
+        """
+
         context = {'model': model, 'session': model.Session,
                    'user': id, 'keep_email': True}
 
@@ -256,7 +266,7 @@ class DatagovmkUserController(UserController):
                 logic.tuplize_dict(logic.parse_params(request.params))))
             context['message'] = data_dict.get('log_message', '')
             captcha.check_recaptcha(request)
-            user = get_action('datagovmk_user_create')(context, data_dict)
+            user = get_action('user_create')(context, data_dict)
         except NotAuthorized:
             abort(403, _('Unauthorized to create user %s') % '')
         except NotFound, e:
@@ -272,34 +282,28 @@ class DatagovmkUserController(UserController):
             error_summary = e.error_summary
             return self.new(data_dict, errors, error_summary)
 
-        h.flash_success(_('A confirmation email has been sent to "%s". Please '
-                          'use the link in the email to continue.') %
-                         data_dict['email'])
+        h.flash_success(_('A confirmation email has been sent to "%s". '
+                          'Please use the link in the email to continue.') %
+                          data_dict['email'])
         if not c.user:
-            # line below which logs the user in programatically is commented out
-            # as we expect new accounts to be in the PENDING state by default.
+            # Do not log in the user programatically
             # set_repoze_user(data_dict['name'])
             if came_from:
                 h.redirect_to(came_from)
             else:
+                # redirect user to login page
                 # h.redirect_to(controller='user', action='me')
-                ## instead of redirected above, redirect to the login page=
                 h.redirect_to(controller='user', action='login')
         else:
-            # #1799 User has managed to register whilst logged in - warn user
-            # they are not re-logged in as new user.
             h.flash_success(_('User "%s" is now registered but you are still '
                             'logged in as "%s" from before') %
                             (data_dict['name'], c.user))
             if authz.is_sysadmin(c.user):
-                # the sysadmin created a new user. We redirect him to the
-                # activity page for the newly created user
                 h.redirect_to(controller='user',
                                 action='activity',
                                 id=data_dict['name'])
             else:
                 return render('user/logout_first.html')
-
 
 
 def _export_resources_json(zip_file, pkg_dict, request, response):
