@@ -130,7 +130,7 @@ goes at the end.
 
 The plugins list should look something like this::
 
-    ckan.plugins = <other plugins> dcat datagovmk scheming_datasets repeating  mk_dcatap 
+    ckan.plugins = <other plugins> dcat datagovmk scheming_datasets repeating  mk_dcatap
 
 
 
@@ -174,6 +174,9 @@ Additional configuration settings::
     # Openstreetmap Overpass API URL.
     # (optional, default: https://lz4.overpass-api.de/api/interpreter).
     ckanext.datagovmk.osm_overpass_url = https://lz4.overpass-api.de/api/interpreter
+
+    # Maximum allowed size for uploaded authority files in MB. Default is 10.
+    ckanext.datagovmk.authority_file_max_size = 50
 
 
 ------------------------
