@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-24 16:48+0200\n"
+"POT-Creation-Date: 2018-07-26 17:23+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -34,26 +34,25 @@ msgstr "Согланост за додавање на податочен сет"
 msgid "Missing value"
 msgstr "Недостасува вредност"
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:433
-#: ckanext/datagovmk/actions.py:549 ckanext/datagovmk/actions.py:555
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
+#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
+#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
 msgid "message"
 msgstr "порака"
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:549
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
 msgid "Resource already exists"
 msgstr "Ресурсот веќе постои"
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:555
+#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
 msgid "Resource file is missing"
 msgstr "Недостасува датотека на ресурсот"
 
-#: ckanext/datagovmk/actions.py:513 ckanext/datagovmk/actions.py:527
-#, fuzzy
+#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:447
 msgid "Resource was not found."
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
 msgid "Invalid URL"
 msgstr "Невалиден линк"
 
@@ -75,9 +74,8 @@ msgid "Resource data not found"
 msgstr "Податоците за ресурсот не се пронајдени"
 
 #: ckanext/datagovmk/controller.py:80
-#, fuzzy
 msgid "No download is available"
-msgstr "Нема достапни податочни сетови."
+msgstr "Преземањето не е достапно."
 
 #: ckanext/datagovmk/monkey_patch.py:13
 msgid ""
@@ -176,18 +174,34 @@ msgstr "Датотека"
 msgid "Address"
 msgstr "Адреса"
 
+#: ckanext/datagovmk/templates/footer.html:18
+msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
+msgstr "бул. Св. Кирил и Методиј бр.54 1000 Скопје, Република Македонија"
+
 #: ckanext/datagovmk/templates/footer.html:20
 #: ckanext/datagovmk/templates/footer.html:60
 msgid "E-mail"
 msgstr "Е-пошта"
 
+#: ckanext/datagovmk/templates/footer.html:21
+msgid "info@otvorenipodatoci.gov.mk"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:22
 msgid "Phone"
 msgstr "Телефон"
 
+#: ckanext/datagovmk/templates/footer.html:23
+msgid "+389 (0)2 3200 889"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:24
 msgid "Fax"
 msgstr "Факс"
+
+#: ckanext/datagovmk/templates/footer.html:25
+msgid "+389 (0)2 3200 881"
+msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:28
 msgid "Terms of use"
@@ -208,6 +222,10 @@ msgstr "Претплатете се на нашиот билтен"
 #: ckanext/datagovmk/templates/footer.html:58
 msgid "Stay updated with "
 msgstr "Бидете во тек со "
+
+#: ckanext/datagovmk/templates/footer.html:58
+msgid "Subscribe to our free newsletter"
+msgstr "Претплатете се на нашиот бесплатен билтен"
 
 #: ckanext/datagovmk/templates/footer.html:62
 msgid "Your e-mail address"
@@ -252,11 +270,11 @@ msgid "News"
 msgstr "Новости"
 
 #: ckanext/datagovmk/templates/home/index.html:31
-#: ckanext/datagovmk/templates/home/index.html:56
+#: ckanext/datagovmk/templates/home/index.html:58
 msgid "Archive"
 msgstr "Архива"
 
-#: ckanext/datagovmk/templates/home/index.html:54
+#: ckanext/datagovmk/templates/home/index.html:56
 msgid "Blog"
 msgstr "Блог"
 
@@ -518,8 +536,6 @@ msgstr "пр. Јован Јовановски"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:12
 #: ckanext/datagovmk/templates/user/new_user_form.html:12
-#, fuzzy
-#| msgid "E-mail"
 msgid "Email"
 msgstr "Е-пошта"
 

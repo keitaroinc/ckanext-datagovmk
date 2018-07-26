@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-24 16:48+0200\n"
+"POT-Creation-Date: 2018-07-26 17:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,25 +33,26 @@ msgstr ""
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:433
-#: ckanext/datagovmk/actions.py:549 ckanext/datagovmk/actions.py:555
 #: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
+#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
+#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:549
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:555
+#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:513 ckanext/datagovmk/actions.py:527
+#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:447
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
 msgid "Invalid URL"
 msgstr ""
 
@@ -158,17 +159,33 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: ckanext/datagovmk/templates/footer.html:18
+msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:20
 #: ckanext/datagovmk/templates/footer.html:60
 msgid "E-mail"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:21
+msgid "info@otvorenipodatoci.gov.mk"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:22
 msgid "Phone"
 msgstr ""
 
+#: ckanext/datagovmk/templates/footer.html:23
+msgid "+389 (0)2 3200 889"
+msgstr ""
+
 #: ckanext/datagovmk/templates/footer.html:24
 msgid "Fax"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:25
+msgid "+389 (0)2 3200 881"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:28
@@ -189,6 +206,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:58
 msgid "Stay updated with "
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:58
+msgid "Subscribe to our free newsletter"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:62
@@ -229,11 +250,11 @@ msgid "News"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:31
-#: ckanext/datagovmk/templates/home/index.html:56
+#: ckanext/datagovmk/templates/home/index.html:58
 msgid "Archive"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/index.html:54
+#: ckanext/datagovmk/templates/home/index.html:56
 msgid "Blog"
 msgstr ""
 
