@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-25 11:25+0200\n"
+"POT-Creation-Date: 2018-07-26 11:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,72 +22,51 @@ msgstr ""
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
-#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
-msgid "message"
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
-msgid "Resource already exists"
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
-msgid "Resource file is missing"
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:447
-msgid "Resource was not found."
-msgstr ""
-
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
-msgid "Invalid URL"
-msgstr ""
-
-#: ckanext/datagovmk/controller.py:66
-#: ckanext/datagovmk/actions.py:328
+#: ckanext/datagovmk/actions.py:331
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:45
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:53
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:328 ckanext/datagovmk/actions.py:621
-#: ckanext/datagovmk/actions.py:641 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:331 ckanext/datagovmk/actions.py:624
+#: ckanext/datagovmk/actions.py:644 ckanext/datagovmk/actions.py:688
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:433
-#: ckanext/datagovmk/actions.py:549 ckanext/datagovmk/actions.py:555
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:428 ckanext/datagovmk/actions.py:434
+#: ckanext/datagovmk/actions.py:550 ckanext/datagovmk/actions.py:556
+#: ckanext/datagovmk/actions.py:614 ckanext/datagovmk/actions.py:617
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:549
+#: ckanext/datagovmk/actions.py:428 ckanext/datagovmk/actions.py:550
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:555
+#: ckanext/datagovmk/actions.py:434 ckanext/datagovmk/actions.py:556
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:513 ckanext/datagovmk/actions.py:527
+#: ckanext/datagovmk/actions.py:514 ckanext/datagovmk/actions.py:528
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
+#: ckanext/datagovmk/actions.py:614 ckanext/datagovmk/actions.py:617
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:621 ckanext/datagovmk/actions.py:641
-#: ckanext/datagovmk/actions.py:670 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:624 ckanext/datagovmk/actions.py:644
+#: ckanext/datagovmk/actions.py:673 ckanext/datagovmk/actions.py:688
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:10
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:670
-msgid "Uploaded authority file is too large. Maximum allowed size is {0}MB."
+#: ckanext/datagovmk/actions.py:673
+msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:61
+#: ckanext/datagovmk/controller.py:66
 msgid "Resource not found"
 msgstr ""
 
@@ -111,17 +90,7 @@ msgstr ""
 msgid "The issue has been reported."
 msgstr ""
 
-#: ckanext/datagovmk/utils.py:459
-msgid "Email message was successfully sent."
-msgstr ""
-
-#: ckanext/datagovmk/utils.py:467
-msgid "Invalid email recepient, maintainer not found"
-msgstr ""
-
-#: ckanext/datagovmk/utils.py:479
-msgid "An error occured while sending the email. Try again."
-#: ckanext/datagovmk/monkey_patch.py:13
+#: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
 "\n"
 "    replaced their <a href=\"{previous_authority_file}\" "
@@ -135,18 +104,30 @@ msgstr ""
 msgid "{actor} "
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:27
+#: ckanext/datagovmk/monkey_patch.py:25
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using general <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:42
+#: ckanext/datagovmk/monkey_patch.py:40
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:459
+msgid "Email message was successfully sent."
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:467
+msgid "Invalid email recepient, maintainer not found"
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:479
+msgid "An error occured while sending the email. Try again."
 msgstr ""
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:66
@@ -275,6 +256,7 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:9
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:14
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:39
 msgid "Report an issue"
 msgstr ""
 
@@ -321,11 +303,11 @@ msgid "News"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:31
-#: ckanext/datagovmk/templates/home/index.html:56
+#: ckanext/datagovmk/templates/home/index.html:58
 msgid "Archive"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/index.html:54
+#: ckanext/datagovmk/templates/home/index.html:56
 msgid "Blog"
 msgstr ""
 
@@ -560,7 +542,7 @@ msgstr ""
 msgid "Share on Google+"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:17
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr ""
 
