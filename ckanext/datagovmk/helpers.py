@@ -12,6 +12,8 @@ from ckanext.datagovmk.model.stats import (get_stats_for_package,
 
 from logging import getLogger
 from ckanext.datagovmk.model.user_authority import UserAuthority
+from ckan.lib import helpers as core_helpers
+
 log = getLogger(__name__)
 
 def _get_action(action, context_dict, data_dict):
@@ -245,3 +247,8 @@ def get_last_authority_for_user(authority_type, user_id):
     )
 
     return user_authority
+
+
+def translate_field(data_dict, field_name):
+    if isinstance(data_dict, dict):
+        return core_helpers.get_translated(data_dict, field_name)

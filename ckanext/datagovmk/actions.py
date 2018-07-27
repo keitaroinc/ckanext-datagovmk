@@ -28,6 +28,7 @@ from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
 from ckan.lib import helpers as core_helpers
+from ckan.logic.action.get import package_search as _package_search
 
 log = getLogger(__name__)
 
@@ -843,3 +844,14 @@ def dashboard_activity_list_html(context, data_dict):
     }
     return activity_streams.activity_list_to_html(context, activity_stream,
                                                   extra_vars)
+
+
+def package_search(context, data_dict):
+    """ Override to translate title and description of the dataset. """
+    data = _package_search(context, data_dict)
+
+    for result in data.get('results'):
+        result['title'] = h.translate_field(result, 'title')
+        result['notes'] = h.translate_field(result, 'notes')
+
+    return data
