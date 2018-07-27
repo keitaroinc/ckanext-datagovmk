@@ -3,6 +3,7 @@ import uuid
 import requests
 import zipfile
 import hashlib
+import subprocess
 import cgi
 
 from ckan.plugins import toolkit
@@ -11,6 +12,7 @@ from ckanext.datagovmk import helpers as h
 from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
+from ckan.common import config
 
 import ckan.logic as logic
 import ckan.plugins as plugins
@@ -617,6 +619,45 @@ def _validate_link(link):
         raise ValidationError({_('message'): [_('Invalid URL')]})
 
 
+def start_script(context, data_dict):
+    """ This action is only intended to be used for starting scripts as cron
+    jobs on the server. It's only available for system administrators.
+
+    Scripts are located at `ckanext-datagovmk/scripts/cron_jobs`.
+
+    :param name: The name of the script to be executed. Available script name
+    is the name of the file of the script located at
+    `ckanext-datagovmk/scripts/cron_jobs`. For example `archiver`.
+    :type name: string
+
+    :returns: Message that the script has been successfully executed. Since
+    the script is executed as a subprocess, if there is an error it is not
+    caught in the process where CKAN is started.
+    :rtype: string
+    """
+
+    check_access('datagovmk_start_script', context, data_dict)
+
+    name = get_or_bust(data_dict, 'name')
+    cron_jobs_dir = os.path.join(
+        os.path.dirname(__file__), '..', '..', 'scripts', 'cron_jobs'
+    )
+    available_script_names = [os.path.splitext(filename)[0]
+                              for filename in os.listdir(cron_jobs_dir)]
+
+    if name not in available_script_names:
+        raise ValidationError({
+            'name': _('No script was found for the provided name')
+        })
+
+    script_location = os.path.join(cron_jobs_dir, '{0}.sh'.format(name))
+    config_file_location = config['__file__']
+
+    subprocess.call(['/bin/sh', script_location, config_file_location])
+
+    return 'Script was successfully executed.'
+
+  
 def user_create(context, data_dict):
     """ Overridden to be able to upload authority file """
 

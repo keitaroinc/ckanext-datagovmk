@@ -124,6 +124,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
             'resource_update': actions.resource_update,
+            'datagovmk_start_script': actions.start_script,
             'user_create': actions.user_create,
             'user_update': actions.user_update,
             'user_activity_list': actions.user_activity_list,
@@ -137,7 +138,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_auth_functions(self):
         return {
             'datagovmk_get_related_datasets': auth.get_related_datasets,
-            'datagovmk_get_groups': helpers.get_groups
+            'datagovmk_get_groups': helpers.get_groups,
+            'datagovmk_start_script': auth.start_script,
         }
 
     def update_config_schema(self, schema):
