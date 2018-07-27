@@ -1,10 +1,15 @@
+{% resource 'datagovmk/js/modules/store-selected-language.js' %}
+
 {% set current_lang = request.environ.CKAN_LANG %}
 {% set locale = h.get_available_locales() %}
 {% if locale %}
   <ul class="list-inline list-language-switch">
   {% for locale in locale %}
     <li>
-      <a class="{% if locale.identifier == current_lang %}active{% endif %}" href="{% url_for h.current_url(), locale=locale.short_name %}">{{ locale }}</a>
+      <a class="{% if locale.identifier == current_lang %}active{% endif %}"
+         href="{% url_for h.current_url(), locale=locale.short_name %}"
+         data-module="datagovmk-store-selected-language"
+         data-module-locale="{{ locale }}">{{ locale }}</a>
     </li>
   {% endfor %}
   </ul>
