@@ -661,7 +661,7 @@ def start_script(context, data_dict):
 
     return 'Script was successfully executed.'
 
-  
+
 def user_create(context, data_dict):
     """ Overridden to be able to send activation mail and upload authority file """
 
@@ -772,7 +772,6 @@ def user_update(context, data_dict):
                     'current_authority_file': current_authority_file,
                 }
             }
-        }
 
             toolkit.get_action('activity_create')({'ignore_auth': True}, data_dict)
 
