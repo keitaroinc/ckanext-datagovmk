@@ -9,9 +9,18 @@ from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
 from ckanext.datagovmk.logic import import_spatial_data
+from ckanext.datagovmk.model.user_authority \
+    import setup as setup_user_authority_table
+from ckanext.datagovmk.model.user_authority_dataset \
+    import setup as setup_user_authority_dataset_table
+from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
 from ckan.common import config
+
+
+monkey_patch.activity_streams()
+monkey_patch.validators()
 
 
 def _notifications_for_activities(activities, user_dict):
@@ -60,7 +69,7 @@ def _notifications_for_activities(activities, user_dict):
 
     return notifications
 
-email_notifications._notifications_for_activities=_notifications_for_activities
+email_notifications._notifications_for_activities = _notifications_for_activities
 
 
 class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -70,6 +79,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IConfigurable)
 
     # IConfigurer
 
@@ -94,7 +104,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_total_downloads':
                 helpers.get_total_package_downloads,
             'datagovmk_get_related_datasets':
-                helpers.get_related_datasets
+                helpers.get_related_datasets,
+            'datagovmk_get_user_id':
+                helpers.get_user_id,
+            'datagovmk_get_last_authority_for_user':
+                helpers.get_last_authority_for_user,
         }
 
     # IActions
@@ -111,6 +125,12 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'resource_create': actions.resource_create,
             'resource_update': actions.resource_update,
             'datagovmk_start_script': actions.start_script,
+            'user_create': actions.user_create,
+            'user_update': actions.user_update,
+            'user_activity_list': actions.user_activity_list,
+            'user_activity_list_html': actions.user_activity_list_html,
+            'dashboard_activity_list': actions.dashboard_activity_list,
+            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
         }
 
     # IAuthFunctions
@@ -156,3 +176,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     action='download_package_metadata')
 
         return map
+
+    def configure(self, config):
+        setup_user_authority_table()
+        setup_user_authority_dataset_table()

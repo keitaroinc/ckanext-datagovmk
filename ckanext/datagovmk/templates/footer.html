@@ -15,14 +15,14 @@
                 <dl>
                   <dt>{{ _('Address') }}</dt>
                   <dd>
-                      <address>бул. „Св.Кирил и Методиј“ бр.54 1000 Скопје, Република Македонија</address>
+                      <address>{{ _('Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia') }}</address>
                   </dd>
                   <dt>{{ _('E-mail') }}</dt>
-                  <dd><a href="mailto:info@otvorenipodatoci.gov.mk">info@otvorenipodatoci.gov.mk</a></dd>
+                  <dd><a href="mailto:info@otvorenipodatoci.gov.mk">{{ _('info@otvorenipodatoci.gov.mk') }}</a></dd>
                   <dt>{{ _('Phone') }}</dt>
-                  <dd><a href="tel:+38923200889">+389 (0)2 3200 889</a></dd>
+                  <dd><a href="tel:+38923200889">{{ _('+389 (0)2 3200 889') }}</a></dd>
                   <dt>{{ _('Fax') }}</dt>
-                  <dd><a href="tel:+38923200881">+389 (0)2 3200 881</a></dd>
+                  <dd><a href="tel:+38923200881">{{ _('+389 (0)2 3200 881') }}</a></dd>
                 </dl>
                 <ul class="list-inline">
                     <li><a href="#">{{ _('Terms of use') }}</a></li>
@@ -55,7 +55,7 @@
                 id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                 <div id="mc_embed_signup_scroll">
                   <h3 class="title text-uppercase">{{ _('Subscribe to our newsletter') }}</h3>
-                  <p>{{ _('Stay updated with ') + g.site_title + '. Subscribe to our free newsletter.' }}</p>
+                  <p>{{ _('Stay updated with ') + g.site_title + '. ' + _('Subscribe to our free newsletter') + '.' }}</p>
                   <hr>
                   <label class="sr-only" for="mce-EMAIL">{{ _('E-mail') }}</label>
                   <div class="input-group">
