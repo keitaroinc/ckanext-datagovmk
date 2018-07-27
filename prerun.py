@@ -61,6 +61,7 @@ def init_db():
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
     analytics_command = ['paster', '--plugin=ckanext-googleanalytics', 'initdb', '-c', ckan_ini]
     validation_command = ['paster', '--plugin=ckanext-validation', 'validation', 'init-db', '-c', ckan_ini]
+    issues_command = ['paster', '--plugin=ckanext-issues', 'issues', 'init_db', '-c', ckan_ini]
 
     print '[prerun] Initializing or upgrading db - start'
     try:
@@ -72,6 +73,7 @@ def init_db():
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
         subprocess.check_output(analytics_command, stderr=subprocess.STDOUT)
         subprocess.check_output(validation_command, stderr=subprocess.STDOUT)
+        subprocess.check_output(issues_command, stderr=subprocess.STDOUT)
 
         print '[prerun] Initializing or upgrading db - end'
     except subprocess.CalledProcessError, e:
