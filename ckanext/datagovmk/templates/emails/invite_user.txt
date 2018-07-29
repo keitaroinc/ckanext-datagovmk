@@ -1,0 +1,59 @@
+Почитуван/a {{ user_name }},
+
+
+Вие сте поканети на {{site_title}}.
+
+Корисникот веќе е креиран за вас со корисничкото име {{user_name}}. Можете да го промените подоцна.
+
+Вие сте додадени на {{group_type}} {(group_title}} со следнава улога: {{role_name}}.
+
+За да ја прифатите оваа покана, Ве молиме да ја ресетирате вашата лозинка на:
+
+{{reset_link}}
+
+
+Пријатен ден.
+Порака пратена од: {{ site_title }} ({{ site_url }})
+
+---
+
+I/E dashur {{ user_name }}, 
+
+
+Ju jeni ftuar në {{site_title}}.
+
+Një përdorues tashmë është krijuar për ju me emrin e përdoruesit {{user_name}}. Ju mund ta ndryshoni atë më vonë.
+
+Ju jeni shtuar në {{group_type}} {{group_title}} me rolin e mëposhtëm: {{role_name}}.
+
+Për të pranuar këtë ftesë, rivendosni fjalëkalimin në:
+
+{{reset_link}}
+
+
+Ditën e mirë.
+Mesazhi i dërguar nga: {{ site_title }} ({{ site_url }})
+
+---
+
+Dear {{ user_name }},
+
+
+You have been invited to {{ site_title }}.
+
+A user has already been created for you with the username {{ user_name }}. You can change it later.
+
+You have been added to the {{ group_type }} {{ group_title }} with the following role: {{ role_name }}.
+
+To accept this invite, please reset your password at:
+
+{{ reset_link }}
+
+
+Have a nice day.
+Message sent by: {{ site_title }} ({{ site_url }})
+
+
+
+
+
