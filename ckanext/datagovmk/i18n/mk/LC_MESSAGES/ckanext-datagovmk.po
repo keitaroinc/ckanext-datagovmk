@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-26 17:23+0200\n"
+"POT-Creation-Date: 2018-07-29 16:28+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -19,51 +19,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:126
+#: ckanext/datagovmk/actions.py:128
 msgid "Missing dataset id"
 msgstr "Недостасува ИД на податочен сет"
 
-#: ckanext/datagovmk/actions.py:328
+#: ckanext/datagovmk/actions.py:333
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:45
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:53
 msgid "Add dataset agreement"
 msgstr "Согланост за додавање на податочен сет"
 
-#: ckanext/datagovmk/actions.py:328 ckanext/datagovmk/actions.py:621
-#: ckanext/datagovmk/actions.py:641 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:665
+#: ckanext/datagovmk/actions.py:685 ckanext/datagovmk/actions.py:729
 msgid "Missing value"
 msgstr "Недостасува вредност"
 
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
-#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
+#: ckanext/datagovmk/actions.py:552 ckanext/datagovmk/actions.py:558
+#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
 msgid "message"
 msgstr "порака"
 
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:552
 msgid "Resource already exists"
 msgstr "Ресурсот веќе постои"
 
-#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:558
 msgid "Resource file is missing"
 msgstr "Недостасува датотека на ресурсот"
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:447
+#: ckanext/datagovmk/actions.py:516 ckanext/datagovmk/actions.py:530
 msgid "Resource was not found."
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
+#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
 msgid "Invalid URL"
 msgstr "Невалиден линк"
 
-#: ckanext/datagovmk/actions.py:621 ckanext/datagovmk/actions.py:641
-#: ckanext/datagovmk/actions.py:670 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:650
+msgid "No script was found for the provided name"
+msgstr "Не е пронајдена скрипта за даденото име"
+
+#: ckanext/datagovmk/actions.py:665 ckanext/datagovmk/actions.py:685
+#: ckanext/datagovmk/actions.py:714 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:10
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr "овластување"
 
-#: ckanext/datagovmk/actions.py:670
+#: ckanext/datagovmk/actions.py:714
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
-msgstr "Прикачената датотека за овластување е премногу голема. Максимално дозволена големина е {size}MB."
+msgstr ""
+"Прикачената датотека за овластување е премногу голема. Максимално "
+"дозволена големина е {size}MB."
 
 #: ckanext/datagovmk/controller.py:61
 msgid "Resource not found"
@@ -77,7 +85,7 @@ msgstr "Податоците за ресурсот не се пронајден�
 msgid "No download is available"
 msgstr "Преземањето не е достапно."
 
-#: ckanext/datagovmk/monkey_patch.py:13
+#: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
 "\n"
 "    replaced their <a href=\"{previous_authority_file}\" "
@@ -96,26 +104,28 @@ msgstr ""
 msgid "{actor} "
 msgstr "{actor} "
 
-#: ckanext/datagovmk/monkey_patch.py:27
+#: ckanext/datagovmk/monkey_patch.py:25
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using general <a href=\"{current_authority_file}\""
 "\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
-"даде согласност за креирање на податочниот сет <a href=\"{dataset_url}\">\n"
-"    {dataset_name}</a> користејќи генерално <a href=\"{current_authority_file}\""
+"даде согласност за креирање на податочниот сет <a href=\"{dataset_url}\">"
 "\n"
+"    {dataset_name}</a> користејќи генерално <a "
+"href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">овластување</a>"
 
-#: ckanext/datagovmk/monkey_patch.py:42
+#: ckanext/datagovmk/monkey_patch.py:40
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using additional <a "
 "href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
-"даде согласност за креирање на податочниот сет <a href=\"{dataset_url}\">\n"
+"даде согласност за креирање на податочниот сет <a href=\"{dataset_url}\">"
+"\n"
 "    {dataset_name}</a> користејќи дополнително <a "
 "href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">овластување</a>"
@@ -264,6 +274,33 @@ msgstr ""
 "Внесете листа од линкови - еден по линија - за да се прикаже како листа "
 "вофутер во навигација. Форматирајте ги линковите со Markdown (п.р. * "
 "[Пример линк](https://www.example.com))."
+
+#: ckanext/datagovmk/templates/admin/index.html:7
+msgid "Administer CKAN"
+msgstr "Администрирајте CKAN"
+
+#: ckanext/datagovmk/templates/admin/index.html:13
+msgid ""
+"As a sysadmin user you have full control over this CKAN instance. Proceed"
+" with care!"
+msgstr "Како систем администратор Вие имате целосна контрола врз оваа CKAN инстанца. Продолжете"
+" со внимание!"
+#: ckanext/datagovmk/templates/admin/index.html:14
+msgid "For guidance on using sysadmin features, see the CKAN"
+msgstr "За насоки за користење на функциите на системскиот администратор, видете го CKAN"
+
+#: ckanext/datagovmk/templates/admin/index.html:16
+msgid "sysadmin guide"
+msgstr "прирачникот за употреба"
+
+#: ckanext/datagovmk/templates/admin/index.html:19
+#, python-format
+msgid ""
+" <p>As a sysadmin user you have full control over this CKAN instance. "
+"Proceed with care!</p> <p>For guidance on using sysadmin features, see "
+"the CKAN <a href=\"%(docs_url)s\" target=\"_blank\">sysadmin "
+"guide</a></p> "
+msgstr "Јас сум збор"
 
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
@@ -420,7 +457,9 @@ msgstr "Ова поле е задолжително"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:50
 msgid "Agree that you have provided an authority to add this dataset."
-msgstr "Дадете согласност дека сте доставиле овластување за да го додадете овој податочен сет."
+msgstr ""
+"Дадете согласност дека сте доставиле овластување за да го додадете овој "
+"податочен сет."
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:54
 msgid "You must agree to add this dataset."
@@ -428,7 +467,9 @@ msgstr "Мора да се согласете за да го додадете о
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:64
 msgid "If necessary, attach a file with additional authority to add this dataset"
-msgstr "Доколку е потребно, прикачете датотека со дополнително овластување за прикачување на овој податочен сет"
+msgstr ""
+"Доколку е потребно, прикачете датотека со дополнително овластување за "
+"прикачување на овој податочен сет"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:64
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
@@ -513,7 +554,7 @@ msgstr "Сподели на Twitter"
 msgid "Share on Google+"
 msgstr "Сподели на Google+"
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:17
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr "Исчисти прикачување"
 

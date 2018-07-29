@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-26 17:23+0200\n"
+"POT-Creation-Date: 2018-07-29 16:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:126
+#: ckanext/datagovmk/actions.py:128
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:328
+#: ckanext/datagovmk/actions.py:333
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:45
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:53
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:328 ckanext/datagovmk/actions.py:621
-#: ckanext/datagovmk/actions.py:641 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:665
+#: ckanext/datagovmk/actions.py:685 ckanext/datagovmk/actions.py:729
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:613 ckanext/datagovmk/actions.py:616
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:353
-#: ckanext/datagovmk/actions.py:469 ckanext/datagovmk/actions.py:475
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
+#: ckanext/datagovmk/actions.py:552 ckanext/datagovmk/actions.py:558
+#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:469
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:552
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:353 ckanext/datagovmk/actions.py:475
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:558
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:447
+#: ckanext/datagovmk/actions.py:516 ckanext/datagovmk/actions.py:530
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:533 ckanext/datagovmk/actions.py:536
+#: ckanext/datagovmk/actions.py:616 ckanext/datagovmk/actions.py:619
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:621 ckanext/datagovmk/actions.py:641
-#: ckanext/datagovmk/actions.py:670 ckanext/datagovmk/actions.py:683
+#: ckanext/datagovmk/actions.py:650
+msgid "No script was found for the provided name"
+msgstr ""
+
+#: ckanext/datagovmk/actions.py:665 ckanext/datagovmk/actions.py:685
+#: ckanext/datagovmk/actions.py:714 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:10
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:670
-msgid "Uploaded authority file is too large. Maximum allowed size is {0}MB."
+#: ckanext/datagovmk/actions.py:714
+msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
 #: ckanext/datagovmk/controller.py:61
@@ -77,7 +82,7 @@ msgstr ""
 msgid "No download is available"
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:13
+#: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
 "\n"
 "    replaced their <a href=\"{previous_authority_file}\" "
@@ -91,14 +96,14 @@ msgstr ""
 msgid "{actor} "
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:27
+#: ckanext/datagovmk/monkey_patch.py:25
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using general <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 
-#: ckanext/datagovmk/monkey_patch.py:42
+#: ckanext/datagovmk/monkey_patch.py:40
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
@@ -243,6 +248,32 @@ msgid ""
 "Enter a list of links - one per line - to be shown as a list withing the "
 "secondary footer navigation. Please format the links with Markdown (i.e. * "
 "[Example link](https://www.example.com))."
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:7
+msgid "Administer CKAN"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:13
+msgid ""
+"As a sysadmin user you have full control over this CKAN instance. Proceed "
+"with care!"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:14
+msgid "For guidance on using sysadmin features, see the CKAN"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:16
+msgid "sysadmin guide"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:19
+#, python-format
+msgid ""
+" <p>As a sysadmin user you have full control over this CKAN instance. Proceed"
+" with care!</p> <p>For guidance on using sysadmin features, see the CKAN <a "
+"href=\"%(docs_url)s\" target=\"_blank\">sysadmin guide</a></p> "
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:29
@@ -489,7 +520,7 @@ msgstr ""
 msgid "Share on Google+"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:17
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr ""
 
