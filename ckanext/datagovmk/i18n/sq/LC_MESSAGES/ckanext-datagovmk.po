@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 19:10+0200\n"
+"POT-Creation-Date: 2018-07-29 23:33+0200\n"
 "PO-Revision-Date: 2018-07-23 20:57+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -156,6 +156,29 @@ msgstr "Hiqni të gjitha"
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:7
 msgid "Mark All"
 msgstr "Shënoji të gjitha"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:41
+msgid "Reorder resources"
+msgstr "Rregullo resurset"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:56
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:55
+msgid "Save order"
+msgstr "Ruaj rendin"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:59
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:58
+msgid "Cancel"
+msgstr "Anuloj"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:69
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:68
+msgid "Saving..."
+msgstr "Kursim..."
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:41
+msgid "Reorder resource view"
+msgstr "Rregullo shikimin e resurseve"
 
 #: ckanext/datagovmk/fanstatic/js/modules/upload-authority.js:60
 msgid "Upload"
@@ -387,6 +410,10 @@ msgstr "grupet"
 msgid "Related datasets"
 msgstr "Seti i të dhënave të ngjashme"
 
+#: ckanext/datagovmk/templates/package/recource_view.html:9
+msgid "This resource has no views"
+msgstr "Ky burim nuk ka pamje"
+
 #: ckanext/datagovmk/templates/package/resource_read.html:8
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:16
 msgid "Download Metadata"
@@ -428,6 +455,15 @@ msgstr "Formati"
 #: ckanext/datagovmk/templates/snippets/license.html:4
 msgid "License"
 msgstr "Licenca"
+
+#: ckanext/datagovmk/templates/package/resources.html:12
+#, python-format
+msgid ""
+" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
+" add some?</a></p> "
+msgstr ""
+" <p class=\"empty\">Ky grup i të dhënave nuk ka të dhëna, <a href=\"%(url)s\"> pse jo"
+" shtoni disa?</a></p>"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
 msgid "Download Dataset Metadata"
@@ -665,6 +701,6 @@ msgid ""
 "Enter your username into the box and we will send you an email with a "
 "link to enter a new password."
 msgstr ""
-"Shtypni emrin tuaj të përdoruesit në kuti dhe ne do të ju dërgojmë një lidhje "
-"për të shtypur një fjalëkalim të ri."
+"Shtypni emrin tuaj të përdoruesit në kuti dhe ne do të ju dërgojmë një "
+"lidhje për të shtypur një fjalëkalim të ri."
 

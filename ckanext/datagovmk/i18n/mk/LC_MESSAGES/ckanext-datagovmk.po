@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 19:10+0200\n"
+"POT-Creation-Date: 2018-07-29 23:33+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -157,6 +157,29 @@ msgstr "Отстрани ознаки на сите"
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:7
 msgid "Mark All"
 msgstr "Означи ги сите"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:41
+msgid "Reorder resources"
+msgstr "Промени редослед на ресурси"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:56
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:55
+msgid "Save order"
+msgstr "Зачувај редослед"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:59
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:58
+msgid "Cancel"
+msgstr "Откажи"
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:69
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:68
+msgid "Saving..."
+msgstr "Се зачувува..."
+
+#: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:41
+msgid "Reorder resource view"
+msgstr "Промени редослед за приказ на ресурс"
 
 #: ckanext/datagovmk/fanstatic/js/modules/upload-authority.js:60
 msgid "Upload"
@@ -390,6 +413,10 @@ msgstr "групи"
 msgid "Related datasets"
 msgstr "Поврзани податочни сетови"
 
+#: ckanext/datagovmk/templates/package/recource_view.html:9
+msgid "This resource has no views"
+msgstr "Овој ресурс нема прегледи"
+
 #: ckanext/datagovmk/templates/package/resource_read.html:8
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:16
 msgid "Download Metadata"
@@ -431,6 +458,13 @@ msgstr "Формат"
 #: ckanext/datagovmk/templates/snippets/license.html:4
 msgid "License"
 msgstr "Лиценца"
+
+#: ckanext/datagovmk/templates/package/resources.html:12
+#, python-format
+msgid ""
+" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
+" add some?</a></p> "
+msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
 msgid "Download Dataset Metadata"
