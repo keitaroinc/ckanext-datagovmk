@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 16:28+0200\n"
+"POT-Creation-Date: 2018-07-29 19:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,26 +254,18 @@ msgstr ""
 msgid "Administer CKAN"
 msgstr ""
 
-#: ckanext/datagovmk/templates/admin/index.html:13
+#: ckanext/datagovmk/templates/admin/index.html:14
 msgid ""
 "As a sysadmin user you have full control over this CKAN instance. Proceed "
 "with care!"
 msgstr ""
 
-#: ckanext/datagovmk/templates/admin/index.html:14
+#: ckanext/datagovmk/templates/admin/index.html:17
 msgid "For guidance on using sysadmin features, see the CKAN"
 msgstr ""
 
-#: ckanext/datagovmk/templates/admin/index.html:16
+#: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
-msgstr ""
-
-#: ckanext/datagovmk/templates/admin/index.html:19
-#, python-format
-msgid ""
-" <p>As a sysadmin user you have full control over this CKAN instance. Proceed"
-" with care!</p> <p>For guidance on using sysadmin features, see the CKAN <a "
-"href=\"%(docs_url)s\" target=\"_blank\">sysadmin guide</a></p> "
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:29
@@ -626,5 +618,19 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:25
 msgid "Create Account"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/request_reset.html:5
+msgid "Request Reset"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/request_reset.html:10
+msgid "How does this work?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/request_reset.html:12
+msgid ""
+"Enter your username into the box and we will send you an email with a link to"
+" enter a new password."
 msgstr ""
 

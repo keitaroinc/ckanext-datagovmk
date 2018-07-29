@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 16:28+0200\n"
+"POT-Creation-Date: 2018-07-29 19:10+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -195,7 +195,7 @@ msgstr "Е-пошта"
 
 #: ckanext/datagovmk/templates/footer.html:21
 msgid "info@otvorenipodatoci.gov.mk"
-msgstr ""
+msgstr "info@otvorenipodatoci.gov.mk"
 
 #: ckanext/datagovmk/templates/footer.html:22
 msgid "Phone"
@@ -203,7 +203,7 @@ msgstr "Телефон"
 
 #: ckanext/datagovmk/templates/footer.html:23
 msgid "+389 (0)2 3200 889"
-msgstr ""
+msgstr "+389 (0)2 3200 889"
 
 #: ckanext/datagovmk/templates/footer.html:24
 msgid "Fax"
@@ -211,7 +211,7 @@ msgstr "Факс"
 
 #: ckanext/datagovmk/templates/footer.html:25
 msgid "+389 (0)2 3200 881"
-msgstr ""
+msgstr "+389 (0)2 3200 881"
 
 #: ckanext/datagovmk/templates/footer.html:28
 msgid "Terms of use"
@@ -279,28 +279,23 @@ msgstr ""
 msgid "Administer CKAN"
 msgstr "Администрирајте CKAN"
 
-#: ckanext/datagovmk/templates/admin/index.html:13
+#: ckanext/datagovmk/templates/admin/index.html:14
 msgid ""
 "As a sysadmin user you have full control over this CKAN instance. Proceed"
 " with care!"
-msgstr "Како систем администратор Вие имате целосна контрола врз оваа CKAN инстанца. Продолжете"
-" со внимание!"
-#: ckanext/datagovmk/templates/admin/index.html:14
-msgid "For guidance on using sysadmin features, see the CKAN"
-msgstr "За насоки за користење на функциите на системскиот администратор, видете го CKAN"
+msgstr ""
+"Како систем администратор Вие имате целосна контрола врз оваа CKAN "
+"инстанца. Продолжете со внимание!"
 
-#: ckanext/datagovmk/templates/admin/index.html:16
+#: ckanext/datagovmk/templates/admin/index.html:17
+msgid "For guidance on using sysadmin features, see the CKAN"
+msgstr ""
+"За насоки за користење на функциите на системскиот администратор, видете "
+"го CKAN"
+
+#: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
 msgstr "прирачникот за употреба"
-
-#: ckanext/datagovmk/templates/admin/index.html:19
-#, python-format
-msgid ""
-" <p>As a sysadmin user you have full control over this CKAN instance. "
-"Proceed with care!</p> <p>For guidance on using sysadmin features, see "
-"the CKAN <a href=\"%(docs_url)s\" target=\"_blank\">sysadmin "
-"guide</a></p> "
-msgstr "Јас сум збор"
 
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
@@ -438,12 +433,10 @@ msgid "License"
 msgstr "Лиценца"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
-#, fuzzy
 msgid "Download Dataset Metadata"
 msgstr "Преземи мета податоци"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
-#, fuzzy
 msgid "Additional Info"
 msgstr "Дополнителни информации"
 
@@ -661,4 +654,20 @@ msgstr "Потврдете"
 #: ckanext/datagovmk/templates/user/new_user_form.html:25
 msgid "Create Account"
 msgstr "Креирајте сметка"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:5
+msgid "Request Reset"
+msgstr "Ресетирај"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:10
+msgid "How does this work?"
+msgstr "Како ова работи?"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:12
+msgid ""
+"Enter your username into the box and we will send you an email with a "
+"link to enter a new password."
+msgstr ""
+"Внесете го Вашето корисничко име во полето и ние ќе Ви испратиме "
+"електронска порака со линк за влез и нова лозинка."
 

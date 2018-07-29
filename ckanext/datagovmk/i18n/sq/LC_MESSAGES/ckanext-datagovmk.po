@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-29 16:28+0200\n"
+"POT-Creation-Date: 2018-07-29 19:10+0200\n"
 "PO-Revision-Date: 2018-07-23 20:57+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -69,7 +69,6 @@ msgstr "autoritet"
 
 #: ckanext/datagovmk/actions.py:714
 #, fuzzy
-#| msgid "Uploaded authority file is too large. Maximum allowed size is {0}MB."
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 "Dosja e ngarkuar e autoritetit është shumë e madhe. Madhësia maksimale e "
@@ -95,10 +94,10 @@ msgid ""
 "    general authority file with a <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">new</a> one"
 msgstr ""
-"\ n"
-"u zëvendësuan nga <a href =\"{previous_authority_file}\" "
+"\\ nu zëvendësuan nga <a href =\"{previous_authority_file}\" "
 "target=\"_blank\">vjetër</a>\n"
-"skedari i autoritetit të përgjithshëm me një <a href=\"{current_authority_file}\"\n"
+"skedari i autoritetit të përgjithshëm me një <a "
+"href=\"{current_authority_file}\"\n"
 "target=\"_blank\">i ri</a> një"
 
 #: ckanext/datagovmk/monkey_patch.py:17 ckanext/datagovmk/monkey_patch.py:32
@@ -114,8 +113,8 @@ msgid ""
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 "ranë dakord për të krijuar dataset <a href=\"{dataset_url}\">\n"
-"{dataset_name}</a> duke përdorur të përgjithshme <a href=\"{current_authority_file}\""
-"\n"
+"{dataset_name}</a> duke përdorur të përgjithshme <a "
+"href=\"{current_authority_file}\"\n"
 "target=\"_blank\">dosja e autoritetit</a>"
 
 #: ckanext/datagovmk/monkey_patch.py:40
@@ -279,19 +278,19 @@ msgstr ""
 msgid "Administer CKAN"
 msgstr "Administroni CKAN"
 
-#: ckanext/datagovmk/templates/admin/index.html:13
+#: ckanext/datagovmk/templates/admin/index.html:14
 msgid ""
 "As a sysadmin user you have full control over this CKAN instance. Proceed"
 " with care!"
 msgstr ""
-"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull CKAN.Vazhdoni"
-" me kujdes!"
+"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull "
+"CKAN.Vazhdoni me kujdes!"
 
-#: ckanext/datagovmk/templates/admin/index.html:14
+#: ckanext/datagovmk/templates/admin/index.html:17
 msgid "For guidance on using sysadmin features, see the CKAN"
 msgstr "Për udhëzime mbi përdorimin e karakteristikave të sistemit, shikoni CKAN"
 
-#: ckanext/datagovmk/templates/admin/index.html:16
+#: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
 msgstr "udhëzues i sysadmin"
 
@@ -652,3 +651,20 @@ msgstr "Konfirmo"
 #: ckanext/datagovmk/templates/user/new_user_form.html:25
 msgid "Create Account"
 msgstr "Krijo llogari"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:5
+msgid "Request Reset"
+msgstr "Rivendosur"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:10
+msgid "How does this work?"
+msgstr "Si funksionon kjo?"
+
+#: ckanext/datagovmk/templates/user/request_reset.html:12
+msgid ""
+"Enter your username into the box and we will send you an email with a "
+"link to enter a new password."
+msgstr ""
+"Shtypni emrin tuaj të përdoruesit në kuti dhe ne do të ju dërgojmë një lidhje "
+"për të shtypur një fjalëkalim të ri."
+
