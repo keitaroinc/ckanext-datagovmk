@@ -465,6 +465,8 @@ msgid ""
 " <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
 " add some?</a></p> "
 msgstr ""
+" <p class=\"empty\">Овој податочен сет нема податоци, <a href=\"%(url)s\">зошто не"
+" додатете?</a></p> "
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
 msgid "Download Dataset Metadata"
@@ -705,3 +707,5 @@ msgstr ""
 "Внесете го Вашето корисничко име во полето и ние ќе Ви испратиме "
 "електронска порака со линк за влез и нова лозинка."
 
+msgid "Key"
+msgstr "Клуч"

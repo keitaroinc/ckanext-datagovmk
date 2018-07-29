@@ -704,3 +704,6 @@ msgstr ""
 "Shtypni emrin tuaj të përdoruesit në kuti dhe ne do të ju dërgojmë një "
 "lidhje për të shtypur një fjalëkalim të ri."
 
+msgid "Key"
+msgstr "Celës"
+
