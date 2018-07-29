@@ -1,4 +1,4 @@
-{% set num = activities|length %}{{ ungettext("Вие имате {num} нови активности на Вашата {site_title} табла.", "Вие имате {num} нови активности на Вашата {site_title} табла", num).format(site_title=g.site_title, num=num) }} {{ _('За да ја видите контролната табла, кликнете на овој линк:') }}
+{% set num = activities|length %}{{ 'Број на нови активности: {num}, на Вашата {site_title} табла.'.format(site_title=g.site_title, num=num) }} {{ _('За да ја видите контролната табла, кликнете на овој линк:') }}
 
 {{ g.site_url + '/dashboard' }}
 
@@ -8,17 +8,17 @@
 
 
 
-{% set num = activities|length %}{{ ungettext("Ju keni {num} aktivitet të ri në panelin e kontrollit tuaj {site_title}.", "Ju keni aktivitete të reja {num} në panelin e kontrollit {site_title}", num).format(site_title=g.site_title, num=num) }} {{ _('Për të parë pultin tuaj, klikoni në këtë link:') }}
+{% set num = activities|length %}{{ 'Numri i aktiviteteve të reja: {num}, në tabelën {site_title}.'.format(site_title=g.site_title, num=num) }} {{ _('Për të parë pultin tuaj, klikoni në këtë link:') }}
 
 {{ g.site_url + '/dashboard' }}
 
-{{ "Ju mund të çaktivizoni këto njoftime përmes emailit në preferencat tuaja {site_title}. Për të ndryshuar preferencat tuaja, klikoni në këtë link:".format(site_title=g.site_title) }}
+{{ 'Ju mund të çaktivizoni këto njoftime përmes emailit në preferencat tuaja {site_title}. Për të ndryshuar preferencat tuaja, klikoni në këtë link:'.format(site_title=g.site_title) }}
 
 {{ g.site_url + '/user/edit' }}
 
 
 
-{% set num = activities|length %}{{ ungettext("You have {num} new activity on your {site_title} dashboard.", "You have {num} new activities on your {site_title} dashboard", num).format(site_title=g.site_title, num=num) }} {{ _('To view your dashboard, click on this link:') }}
+{% set num = activities|length %}{{ 'Number of new activities: {num}, on your {site_title} board.'.format(site_title=g.site_title, num=num) }} {{ _('To view your dashboard, click on this link:') }}
 
 {{ g.site_url + '/dashboard' }}
 
