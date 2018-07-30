@@ -1,0 +1,44 @@
+Здраво {username},
+<p>
+Рокот за ажурирање на податочниот сет <a href="{dataset_url}">{dataset_title}</a> е надминат.
+
+<p>
+Прегледајте го податочниот сет <a href="{dataset_url}">тука</a>.
+
+<p>
+Податочниот сет можете да го ажурирате <a href="{dataset_update_url}">тука</a>.
+
+<p>
+Ви благодариме,
+
+{site_title}
+---
+<p>
+Përditësimi i dataset <a href="{dataset_url}">{dataset_title}</a> është i vonuar.
+
+<p>
+<a href="{dataset_url}">Këtu</a> mund të shikoni të dhënat e të dhënave.
+
+<p>
+Përditëso grupin e të dhënave <a href="{dataset_update_url}">këtu</a>.
+<p>
+Të fala,
+
+{site_title}
+---
+---
+
+Hellp  {username},
+<p>
+The update of dataset <a href="{dataset_url}">{dataset_title}</a> is overdue.
+
+<p>
+You can preview the dataset <a href="{dataset_url}">here</a>.
+
+<p>
+Update the dataset <a href="{dataset_update_url}">here</a>.
+<p>
+Best Regards,
+
+{site_title}
+---
