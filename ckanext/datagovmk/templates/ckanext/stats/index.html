@@ -1,6 +1,8 @@
 {# This page should be removed once
   https://github.com/ckan/ckan/issues/4336 is fixed
-  and the fix is included in CKAN core. #}
+  and the fix is included in CKAN core. Please do a
+  comparison with the core file for any customizations,
+  before deleting. #}
 
 {% extends "page.html" %}
 
@@ -15,7 +17,7 @@
 
       {% set xaxis = {'mode': 'time', 'timeformat': '%y-%b'} %}
       {% set yaxis = {'min': 0} %}
-      <table class="table table-chunky table-bordered table-striped" data-module="plot" data-module-xaxis="{{ h.dump_json(xaxis) }}" data-module-yaxis="{{ h.dump_json(yaxis) }}">
+      <table class="table table-bordered table-striped" data-module="plot" data-module-xaxis="{{ h.dump_json(xaxis) }}" data-module-yaxis="{{ h.dump_json(yaxis) }}">
         <thead>
           <tr>
             <th>{{ _("Date") }}</th>
@@ -38,7 +40,7 @@
 
       {% set xaxis = {'mode': 'time', 'timeformat': '%y-%b'} %}
       {% set lines = {'fill': 1} %}
-      <table class="table table-chunky table-bordered table-striped" data-module="plot" data-module-xaxis="{{ h.dump_json(xaxis) }}" data-module-lines="{{ h.dump_json(lines) }}">
+      <table class="table table-bordered table-striped" data-module="plot" data-module-xaxis="{{ h.dump_json(xaxis) }}" data-module-lines="{{ h.dump_json(lines) }}">
         <thead>
           <tr>
             <th>{{ _("Date") }}</th>
@@ -61,7 +63,7 @@
     <section id="stats-top-rated" class="module-content tab-content">
       <h2>{{ _('Top Rated Datasets') }}</h2>
       {% if c.top_rated_packages %}
-        <table class="table table-chunky table-bordered table-striped">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Dataset</th>
@@ -87,7 +89,7 @@
     <section id="stats-most-edited" class="module-content tab-content">
       <h2>{{ _('Most Edited Datasets') }}</h2>
       {% if c.most_edited_packages %}
-        <table class="table table-chunky table-bordered table-striped">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>{{ _('Dataset') }}</th>
@@ -111,7 +113,7 @@
     <section id="stats-largest-groups" class="module-content tab-content">
       <h2>{{ _('Largest Groups') }}</h2>
       {% if c.largest_groups %}
-        <table class="table table-chunky table-bordered table-striped">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>{{ _('Group') }}</th>
@@ -134,7 +136,7 @@
 
     <section id="stats-top-tags" class="module-content tab-content">
       <h2>{{ _('Top Tags') }}</h2>
-      <table class="table table-chunky table-bordered table-striped">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>{{ _('Tag Name') }}</th>
@@ -154,7 +156,7 @@
 
     <section id="stats-most-create" class="module-content tab-content">
       <h2>{{ _('Users Creating Most Datasets') }}</h2>
-      <table class="table table-chunky table-bordered table-striped">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>{{ _('User') }}</th>
@@ -178,7 +180,7 @@
   <section class="module module-narrow">
     <h2 class="module-heading"><i class="fa fa-bar-chart-o"></i> {{ _('Statistics Menu') }}</h2>
     <nav data-module="stats-nav">
-      <ul class="unstyled nav nav-simple">
+      <ul class="list-unstyled nav nav-simple">
         <li class="nav-item active"><a href="#stats-total-datasets" data-toggle="tab">{{ _('Total Number of Datasets') }}</a></li>
         <li class="nav-item"><a href="#stats-dataset-revisions" data-toggle="tab">{{ _('Dataset Revisions per Week') }}</a></li>
         <li class="nav-item"><a href="#stats-top-rated" data-toggle="tab">{{ _('Top Rated Datasets') }}</a></li>
