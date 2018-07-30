@@ -581,6 +581,20 @@ msgstr "Формат"
 msgid "License"
 msgstr "Лиценца"
 
+#: ckanext/datagovmk/templates/package/resource_read.html:86
+#: ckanext/datagovmk/templates/package/resource_read.html:88
+msgid "URL:"
+msgstr "URL:"
+
+#: ckanext/datagovmk/templates/package/resource_read.html:96
+msgid "From the dataset abstract"
+msgstr "Од апстрактот на податочниот сет"
+
+#: ckanext/datagovmk/templates/package/resource_read.html:98
+#, python-format
+msgid "Source: <a href=\"%(url)s\">%(dataset)s</a>"
+msgstr "Извор: <a href=\"%(url)s\">%(dataset)s</a>"
+
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""

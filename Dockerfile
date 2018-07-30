@@ -85,7 +85,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-likes.git#egg=ckanext-likes" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-likes/requirements.txt" && \
     # issues
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-issues.git@dgm-stable#egg=ckanext-issues"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-issues.git@dgm-stable#egg=ckanext-issues" && \
+    # fluent
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent"
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -118,13 +120,16 @@ ENV CKAN__PLUGINS envvars \
                   pages \
                   requestdata \
                   scheming_datasets \
+                  scheming_organizations \
+                  scheming_groups \
                   repeating \
                   mk_dcatap \
                   organogram \
                   validation \
                   experience \
                   likes \
-                  issues
+                  issues \
+                  fluent
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default

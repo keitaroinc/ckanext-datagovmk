@@ -1,0 +1,10 @@
+{%- set form_languages = h.fluent_form_languages(schema, field) -%}
+{%- set values = data[field.field_name] -%}
+{%- set current_lang = h.lang() -%}
+
+{%- if values and values.get(current_lang) -%}
+  {{ values[current_lang] }}
+{%- endif -%}
+{%- if not values.get(current_lang) -%}
+  {{ values[h.get_default_locale()]}}
+{%- endif -%}
