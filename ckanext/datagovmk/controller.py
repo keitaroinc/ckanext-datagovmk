@@ -8,6 +8,7 @@ import zipfile
 from logging import getLogger
 import json
 import csv
+import re
 from io import StringIO
 
 from ckan.controllers.package import PackageController
@@ -22,15 +23,18 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      export_package_to_rdf)
 from ckanext.datagovmk.lib import (verify_activation_link,
                                    create_activation_key)
-from ckan.lib.base import BaseController, abort
+from ckan.lib.base import BaseController, abort, render
 from ckan.plugins import toolkit
-from ckan.common import _, c, request, response
+from ckan.common import _, c, request, response, config
 from ckan.lib.navl import dictization_functions
 
 import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
+from ckan.controllers.admin import get_sysadmins
+import bleach
+from datetime import datetime
 import ckan.lib.captcha as captcha
 
 NotFound = logic.NotFound
@@ -404,3 +408,93 @@ def _open_temp_zipfile():
     file_path = get_storage_path_for('temp-datagovmk') + '/' + file_name
 
     return zipfile.ZipFile(file_path, 'w')
+
+
+class ReportIssueController(BaseController):
+    """Controller for the issue reporting (site wide) form.
+    """
+    def report_issue_form(self):
+        """Renders the issue reporting form and reports the issue by sending
+        an email to the system admin with the issue.
+        """
+        login_required = False
+        if not c.user:
+            login_required = True
+
+        data_dict = {}
+        errors = {
+            'issue_title': [],
+            'issue_description': []
+        }
+        extra_vars = {
+            'data': data_dict,
+            'errors': errors,
+            'login_required': login_required
+        }
+        if request.method == 'POST':
+            data_dict['issue_title'] = request.params.get('issue_title')
+            data_dict['issue_description'] = request.params.get('issue_description')
+
+        if login_required:
+            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+
+
+        if request.method != 'POST':
+            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+
+        
+            
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'auth_user_obj': c.userobj}
+
+        to_email = get_admin_email()
+
+        if not to_email:
+            h.flash_error(_('Unable to send the issue report to the system admin.'))
+            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+        
+        from_email = c.userobj.email
+
+        issue_title = data_dict['issue_title'].strip()
+
+        issue_description = h.render_markdown(data_dict['issue_description'])
+
+        email_content = render('datagovmk/issue_email_template.html', extra_vars={
+            'title': issue_title,
+            'description': issue_description,
+            'date': datetime.now(),
+            'username': c.userobj.fullname or c.userobj.name
+        })
+
+        subject = toolkit._('Issue: {title}').format(title=issue_title)
+        
+        result = send_email(from_email, to_email, subject, email_content)
+        
+        if not result['success']:
+            h.flash_error(result['message'])
+        else:
+            h.flash_success(toolkit._('The issue has been reported.'))
+            extra_vars['successfuly_reported'] = True
+        return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+
+
+def get_admin_email():
+    """Loads the admin email.
+
+    If a system configuration is present, it is preffered to the CKAN sysadmins.
+    The configuration property is ``ckanext.datagovmk.site_admin_email``.
+
+    If no email is configured explicitly, then the email of the first CKAN 
+    sysadmin is used.
+
+    :returns: ``str`` the email of the sysadmin to which to send emails with
+        issues.
+        
+    """
+    sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
+    if sysadmin_email:
+        return sysadmin_email
+    sysadmins = get_sysadmins()
+    if sysadmins:
+        return sysadmins[0].email
+    return None

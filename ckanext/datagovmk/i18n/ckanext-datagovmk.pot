@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 10:45+0200\n"
+"POT-Creation-Date: 2018-07-30 14:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,59 +74,71 @@ msgstr ""
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:72
+#: ckanext/datagovmk/controller.py:76
 msgid "Resource not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:81
+#: ckanext/datagovmk/controller.py:85
 msgid "Resource data not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:91
+#: ckanext/datagovmk/controller.py:95
 msgid "No download is available"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:233 ckanext/datagovmk/controller.py:251
-#: ckanext/datagovmk/controller.py:273
+#: ckanext/datagovmk/controller.py:237 ckanext/datagovmk/controller.py:255
+#: ckanext/datagovmk/controller.py:277
 msgid "User not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:237
+#: ckanext/datagovmk/controller.py:241
 msgid "Invalid activation key. Please try again."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:246
+#: ckanext/datagovmk/controller.py:250
 msgid "Your account has been activated."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:249
+#: ckanext/datagovmk/controller.py:253
 #, python-format
 msgid "Unauthorized to edit user %s"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:253 ckanext/datagovmk/controller.py:275
+#: ckanext/datagovmk/controller.py:257 ckanext/datagovmk/controller.py:279
 msgid "Integrity Error"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:271
+#: ckanext/datagovmk/controller.py:275
 #, python-format
 msgid "Unauthorized to create user %s"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:277
+#: ckanext/datagovmk/controller.py:281
 msgid "Bad Captcha. Please try again."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:285
+#: ckanext/datagovmk/controller.py:289
 #, python-format
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the email to"
 " continue."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:298
+#: ckanext/datagovmk/controller.py:302
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:453
+msgid "Unable to send the issue report to the system admin."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:469
+msgid "Issue: {title}"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:476
+msgid "The issue has been reported."
 msgstr ""
 
 #: ckanext/datagovmk/monkey_patch.py:10
@@ -155,6 +167,18 @@ msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
 "    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:459
+msgid "Email message was successfully sent."
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:467
+msgid "Invalid email recepient, maintainer not found"
+msgstr ""
+
+#: ckanext/datagovmk/utils.py:479
+msgid "An error occured while sending the email. Try again."
 msgstr ""
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:66
@@ -196,6 +220,7 @@ msgstr ""
 
 #: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:59
 #: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:58
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:47
 msgid "Cancel"
 msgstr ""
 
@@ -239,7 +264,7 @@ msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "E-mail"
 msgstr ""
 
@@ -275,37 +300,41 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:57
+#: ckanext/datagovmk/templates/footer.html:41
+msgid "Report site issue"
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:60
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:58
+#: ckanext/datagovmk/templates/footer.html:61
 msgid "Stay updated with "
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:58
+#: ckanext/datagovmk/templates/footer.html:61
 msgid "Subscribe to our free newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "Your e-mail address"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:64
+#: ckanext/datagovmk/templates/footer.html:67
 msgid "Subscribe"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:83
+#: ckanext/datagovmk/templates/footer.html:86
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:87
+#: ckanext/datagovmk/templates/footer.html:90
 msgid "CKAN API"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:88
+#: ckanext/datagovmk/templates/footer.html:91
 msgid "CKAN Association"
 msgstr ""
 
@@ -336,6 +365,46 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:9
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:14
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:39
+msgid "Report an issue"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:24
+msgid "Please login before reporting an issue."
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:25
+msgid "Login"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:31
+msgid ""
+"The issue has been successfully reported. You can report another issue by "
+"clicking the button below."
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:32
+msgid "Report issue"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
+msgid "Title"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
+msgid "The issue title"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:43
+msgid "Description"
+msgstr ""
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:48
+msgid "Submit"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:29

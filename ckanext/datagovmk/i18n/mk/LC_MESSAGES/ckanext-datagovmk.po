@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 10:45+0200\n"
+"POT-Creation-Date: 2018-07-30 14:13+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -49,7 +49,6 @@ msgid "Resource file is missing"
 msgstr "Недостасува датотека на ресурсот"
 
 #: ckanext/datagovmk/actions.py:520 ckanext/datagovmk/actions.py:534
-#, fuzzy
 msgid "Resource was not found."
 msgstr "Ресурсот не е пронајден"
 
@@ -70,7 +69,7 @@ msgstr "овластување"
 
 #: ckanext/datagovmk/actions.py:682
 msgid "Error sending activation email, the user was not created: {0}"
-msgstr "Грешка при испраќање на е-пошта за активирање, корисникот не е креиран"
+msgstr "Настана грешка при испраќањето на активациската електронска пошта. Корисникот не беше креиран: {0}"
 
 #: ckanext/datagovmk/actions.py:727
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
@@ -78,52 +77,50 @@ msgstr ""
 "Прикачената датотека за овластување е премногу голема. Максимално "
 "дозволена големина е {size}MB."
 
-#: ckanext/datagovmk/controller.py:72
+#: ckanext/datagovmk/controller.py:76
 msgid "Resource not found"
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:81
+#: ckanext/datagovmk/controller.py:85
 msgid "Resource data not found"
 msgstr "Податоците за ресурсот не се пронајдени"
 
-#: ckanext/datagovmk/controller.py:91
-#, fuzzy
+#: ckanext/datagovmk/controller.py:95
 msgid "No download is available"
 msgstr "Преземањето не е достапно."
 
-#: ckanext/datagovmk/controller.py:233 ckanext/datagovmk/controller.py:251
-#: ckanext/datagovmk/controller.py:273
-#, fuzzy
+#: ckanext/datagovmk/controller.py:237 ckanext/datagovmk/controller.py:255
+#: ckanext/datagovmk/controller.py:277
 msgid "User not found"
 msgstr "Корисникот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:237
+#: ckanext/datagovmk/controller.py:241
 msgid "Invalid activation key. Please try again."
 msgstr "Неважечки клуч за активирање. Ве молиме обидете се повторно"
 
-#: ckanext/datagovmk/controller.py:246
+#: ckanext/datagovmk/controller.py:250
 msgid "Your account has been activated."
 msgstr "Вашата сметка е активна"
 
-#: ckanext/datagovmk/controller.py:249
+#: ckanext/datagovmk/controller.py:253
 #, python-format
 msgid "Unauthorized to edit user %s"
 msgstr "Не сте овластени за да го промените корисникот %s"
 
-#: ckanext/datagovmk/controller.py:253 ckanext/datagovmk/controller.py:275
+#: ckanext/datagovmk/controller.py:257 ckanext/datagovmk/controller.py:279
 msgid "Integrity Error"
 msgstr "Грешка при интегритет"
 
-#: ckanext/datagovmk/controller.py:271
+#: ckanext/datagovmk/controller.py:275
 #, python-format
 msgid "Unauthorized to create user %s"
 msgstr "Не сте овластени за да го креирате корисникот %s"
 
-#: ckanext/datagovmk/controller.py:277
+#: ckanext/datagovmk/controller.py:281
 msgid "Bad Captcha. Please try again."
 msgstr "Captcha не е точна. Ве молиме обидете се повторно."
 
-#: ckanext/datagovmk/controller.py:285
+#: ckanext/datagovmk/controller.py:289
 #, python-format
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the "
@@ -132,12 +129,24 @@ msgstr ""
 "Е-порака за потврда е испратена до %s. Ве молиме користете го линкот во "
 "е-поштата за да продолжите."
 
-#: ckanext/datagovmk/controller.py:298
+#: ckanext/datagovmk/controller.py:302
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
 "Корисник %s е регистриран сега но вие сеуште сте најавени како %s од "
 "порано"
+
+#: ckanext/datagovmk/controller.py:453
+msgid "Unable to send the issue report to the system admin."
+msgstr "Не успеа да се испрати проблемот до администраторот."
+
+#: ckanext/datagovmk/controller.py:469
+msgid "Issue: {title}"
+msgstr "Проблем: {title}"
+
+#: ckanext/datagovmk/controller.py:476
+msgid "The issue has been reported."
+msgstr "Проблемот беше пријавен."
 
 #: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
@@ -184,6 +193,18 @@ msgstr ""
 "href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">овластување</a>"
 
+#: ckanext/datagovmk/utils.py:459
+msgid "Email message was successfully sent."
+msgstr "Пораката беше успешно испратена по е-пошта."
+
+#: ckanext/datagovmk/utils.py:467
+msgid "Invalid email recepient, maintainer not found"
+msgstr "Невалидна е-пошта на примачот, не постои тој одржувач"
+
+#: ckanext/datagovmk/utils.py:479
+msgid "An error occured while sending the email. Try again."
+msgstr "Настана грешка при испраќањето на електронската пошта. Обидете се повторно."
+
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:66
 msgid "Preparing zip archive..."
 msgstr "Архивата се подготвува..."
@@ -223,6 +244,7 @@ msgstr "Зачувај редослед"
 
 #: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:59
 #: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:58
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:47
 msgid "Cancel"
 msgstr "Откажи"
 
@@ -266,7 +288,7 @@ msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
 msgstr "бул. Св. Кирил и Методиј бр.54 1000 Скопје, Република Македонија"
 
 #: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "E-mail"
 msgstr "Е-пошта"
 
@@ -302,27 +324,31 @@ msgstr "Политика за приватност"
 msgid "Navigation"
 msgstr "Навигација"
 
-#: ckanext/datagovmk/templates/footer.html:57
+#: ckanext/datagovmk/templates/footer.html:41
+msgid "Report site issue"
+msgstr "Пријавете проблем со сајтот"
+
+#: ckanext/datagovmk/templates/footer.html:60
 msgid "Subscribe to our newsletter"
 msgstr "Претплатете се на нашиот билтен"
 
-#: ckanext/datagovmk/templates/footer.html:58
+#: ckanext/datagovmk/templates/footer.html:61
 msgid "Stay updated with "
 msgstr "Бидете во тек со "
 
-#: ckanext/datagovmk/templates/footer.html:58
+#: ckanext/datagovmk/templates/footer.html:61
 msgid "Subscribe to our free newsletter"
 msgstr "Претплатете се на нашиот бесплатен билтен"
 
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "Your e-mail address"
 msgstr "Вашата е-пошта"
 
-#: ckanext/datagovmk/templates/footer.html:64
+#: ckanext/datagovmk/templates/footer.html:67
 msgid "Subscribe"
 msgstr "Претплатете се"
 
-#: ckanext/datagovmk/templates/footer.html:83
+#: ckanext/datagovmk/templates/footer.html:86
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
@@ -330,11 +356,11 @@ msgstr ""
 "<strong>Придвижувано од</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 
-#: ckanext/datagovmk/templates/footer.html:87
+#: ckanext/datagovmk/templates/footer.html:90
 msgid "CKAN API"
 msgstr "API на CKAN"
 
-#: ckanext/datagovmk/templates/footer.html:88
+#: ckanext/datagovmk/templates/footer.html:91
 msgid "CKAN Association"
 msgstr "Асоцијација CKAN"
 
@@ -373,6 +399,48 @@ msgstr ""
 #: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
 msgstr "прирачникот за употреба"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:9
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:14
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:39
+msgid "Report an issue"
+msgstr "Пријавете проблем"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:24
+msgid "Please login before reporting an issue."
+msgstr "Ве молиме најавете се за да пријавите проблем."
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:25
+msgid "Login"
+msgstr "Најавете се"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:31
+msgid ""
+"The issue has been successfully reported. You can report another issue by"
+" clicking the button below."
+msgstr ""
+"Проблемот беше успешно пријавен. Кликнете подолу на копчето за да "
+"пријавите друг проблем."
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:32
+msgid "Report issue"
+msgstr "Пријави проблем"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
+msgid "Title"
+msgstr "Наслов"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
+msgid "The issue title"
+msgstr "Наслов на проблемот"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:43
+msgid "Description"
+msgstr "Опис"
+
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:48
+msgid "Submit"
+msgstr "Испрати"
 
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
@@ -523,12 +591,10 @@ msgstr ""
 "href=\"%(url)s\">зошто не додатете?</a></p> "
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
-#, fuzzy
 msgid "Download Dataset Metadata"
 msgstr "Преземи мета податоци"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
-#, fuzzy
 msgid "Additional Info"
 msgstr "Дополнителни информации"
 
@@ -662,7 +728,6 @@ msgstr "пр. Јован Јовановски"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:12
 #: ckanext/datagovmk/templates/user/new_user_form.html:12
-#, fuzzy
 msgid "Email"
 msgstr "Е-пошта"
 

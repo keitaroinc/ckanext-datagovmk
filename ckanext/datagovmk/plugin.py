@@ -180,6 +180,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('register', '/user/register', action='datagovmk_register')
             m.connect('/user/activate/{id:.*}', action='perform_activation')
 
+        map.connect('/issues/report_site_issue', 
+                    controller='ckanext.datagovmk.controller:ReportIssueController',
+                    action='report_issue_form')
+
         return map
 
     def configure(self, config):
