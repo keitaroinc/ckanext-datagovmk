@@ -120,6 +120,8 @@ ENV CKAN__PLUGINS envvars \
                   pages \
                   requestdata \
                   scheming_datasets \
+                  scheming_organizations \
+                  scheming_groups \
                   repeating \
                   mk_dcatap \
                   organogram \
