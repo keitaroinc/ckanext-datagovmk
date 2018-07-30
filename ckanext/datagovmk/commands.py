@@ -14,7 +14,7 @@ import os
 import io
 import inspect
 
-log = getLogger(__name__)
+log = getLogger('ckanext.datagovmk')
 
 BULK_SIZE = 5
 
@@ -73,8 +73,6 @@ class CheckOutdatedDatasets(CkanCommand):
                     process_dataset(dataset)
                 except Exception as e:
                     log.debug('An error has occured while processing dataset. Error: %s', e)
-                    import traceback
-                    traceback.print_exc()
             page += 1
             if page*BULK_SIZE >= datasets['count']:
                 break
@@ -103,10 +101,10 @@ class CheckOutdatedDatasets(CkanCommand):
         now = datetime.now()
 
         diff = now - last_modified
-        print "dif f=", diff, ", periodicity =", periodicity
         if diff >= periodicity:
-            print "  => send notif"
+            log.debug('Dataset %s needs to be updated.', dataset['id'])
             self.notify_dataset_outdated(dataset, last_modified)
+            log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
     
 
     def _get_last_modified(self, dataset):
@@ -148,9 +146,7 @@ class CheckOutdatedDatasets(CkanCommand):
     def notify_dataset_outdated(self, dataset, last_modified):
         dataset_url = h.url_for(controller='package', action='read', id=dataset['name'], qualified=True)
         dataset_update_url = h.url_for(controller='package', action='edit', id=dataset['name'], qualified=True)
-        print "      ", dataset_update_url
         dataset_title = dataset.get('title') or dataset.get('name')
-        print "      title=>", dataset_title
 
         dataset_users = self._get_dataset_users(dataset)
 
@@ -158,8 +154,6 @@ class CheckOutdatedDatasets(CkanCommand):
             try:
                 self._send_notification(dataset_url, dataset_update_url, dataset_title, user)
             except Exception as e:
-                import traceback
-                traceback.print_exc()
                 log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
     
     def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
@@ -167,7 +161,7 @@ class CheckOutdatedDatasets(CkanCommand):
                   u'Kujtesë për përditësimin e të dhënave "{title}" | '\
                   u'Reminder to update dataset "{title}"'.format(title=dataset_title)
         try:
-            body =_load_resource_from_path('ckanext.datagovmk:templates/datagovmk/outdated_dataset_email.txt').format(**{
+            body =_load_resource_from_path('ckanext.datagovmk:templates/datagovmk/outdated_dataset_email.html').format(**{
                 'username': user['username'],
                 'dataset_url': dataset_url,
                 'dataset_title': dataset_title,
@@ -180,8 +174,6 @@ class CheckOutdatedDatasets(CkanCommand):
                                            'Content-Type': 'text/html; charset=UTF-8',
                                        })
         except ckan_mailer.MailerException as e:
-            import traceback
-            traceback.print_exc()
             log.error('Failed to send notification message for updating the obsolete dataset %s: %s', dataset_title, e)
 
 
