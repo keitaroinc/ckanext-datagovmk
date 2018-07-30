@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-27 11:10+0200\n"
+"POT-Creation-Date: 2018-07-30 10:45+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -74,7 +74,9 @@ msgstr "Грешка при испраќање на е-пошта за акти�
 
 #: ckanext/datagovmk/actions.py:727
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
-msgstr "Прикачената датотека за овластување е премногу голема. Максимално дозволена големина е {size}MB."
+msgstr ""
+"Прикачената датотека за овластување е премногу голема. Максимално "
+"дозволена големина е {size}MB."
 
 #: ckanext/datagovmk/controller.py:72
 msgid "Resource not found"
@@ -126,13 +128,16 @@ msgstr "Captcha не е точна. Ве молиме обидете се пов
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the "
 "email to continue."
-msgstr "Е-порака за потврда е испратена до %s. Ве молиме користете го линкот во "
+msgstr ""
+"Е-порака за потврда е испратена до %s. Ве молиме користете го линкот во "
 "е-поштата за да продолжите."
 
 #: ckanext/datagovmk/controller.py:298
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
-msgstr "Корисник %s е регистриран сега но вие сеуште сте најавени како %s од порано"
+msgstr ""
+"Корисник %s е регистриран сега но вие сеуште сте најавени како %s од "
+"порано"
 
 #: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
@@ -508,14 +513,14 @@ msgstr "Формат"
 msgid "License"
 msgstr "Лиценца"
 
-#: ckanext/datagovmk/templates/package/resources.html:12
+#: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
 " <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
 " add some?</a></p> "
 msgstr ""
-" <p class=\"empty\">Овој податочен сет нема податоци, <a href=\"%(url)s\">зошто не"
-" додатете?</a></p> "
+" <p class=\"empty\">Овој податочен сет нема податоци, <a "
+"href=\"%(url)s\">зошто не додатете?</a></p> "
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
 #, fuzzy
@@ -537,7 +542,9 @@ msgstr "Ова поле е задолжително"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:50
 msgid "Agree that you have provided an authority to add this dataset."
-msgstr "Дадете согласност дека сте доставиле овластување за да го додадете овој податочен сет."
+msgstr ""
+"Дадете согласност дека сте доставиле овластување за да го додадете овој "
+"податочен сет."
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:54
 msgid "You must agree to add this dataset."
@@ -545,7 +552,9 @@ msgstr "Мора да се согласете за да го додадете о
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:64
 msgid "If necessary, attach a file with additional authority to add this dataset"
-msgstr "Доколку е потребно, прикачете датотека со дополнително овластување за прикачување на овој податочен сет"
+msgstr ""
+"Доколку е потребно, прикачете датотека со дополнително овластување за "
+"прикачување на овој податочен сет"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:64
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
@@ -654,7 +663,6 @@ msgstr "пр. Јован Јовановски"
 #: ckanext/datagovmk/templates/user/edit_user_form.html:12
 #: ckanext/datagovmk/templates/user/new_user_form.html:12
 #, fuzzy
-#| msgid "E-mail"
 msgid "Email"
 msgstr "Е-пошта"
 
@@ -760,5 +768,6 @@ msgstr ""
 "Внесете го Вашето корисничко име во полето и ние ќе Ви испратиме "
 "електронска порака со линк за влез и нова лозинка."
 
-msgid "Key"
-msgstr "Клуч"
+#~ msgid "Key"
+#~ msgstr "Клуч"
+

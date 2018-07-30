@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-27 11:10+0200\n"
+"POT-Creation-Date: 2018-07-30 10:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -475,7 +475,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/resources.html:12
+#: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
 " <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not add"
@@ -593,7 +593,7 @@ msgstr ""
 msgid "Share on Google+"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:17
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr ""
 
