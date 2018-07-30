@@ -3,6 +3,7 @@
 {%- for lang in h.fluent_form_languages(schema, field) -%}
 
   {% set attribs = field.form_attrs if 'form_attrs' in field else {} %}
+  {% set classes = field.classes if 'classes' in field else ['control-full', 'control-large'] %}
 
   {% if loop.first %}
     {% set attribs = field.first_form_attrs if 'first_form_attrs' in field else attribs %}
@@ -16,7 +17,7 @@
     value=data.get(field.field_name, {})[lang]
         or data[field.field_name + '-' + lang],
     error=errors[field.field_name + '-' + lang],
-    classes=['control-full', 'control-large'],
+    classes=classes,
     attrs=attribs,
     is_required=h.scheming_field_required(field)
     )  }}

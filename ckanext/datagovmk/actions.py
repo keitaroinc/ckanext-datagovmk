@@ -29,6 +29,9 @@ from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
 from ckan.lib import helpers as core_helpers
 from ckan.logic.action.get import package_search as _package_search
+from ckan.logic.action.get import resource_show as _resource_show
+from ckan.logic.action.get import organization_show as _organization_show
+from ckan.logic.action.get import group_show as _group_show
 
 log = getLogger(__name__)
 
@@ -846,6 +849,7 @@ def dashboard_activity_list_html(context, data_dict):
                                                   extra_vars)
 
 
+@toolkit.side_effect_free
 def package_search(context, data_dict):
     """ Override to translate title and description of the dataset. """
     data = _package_search(context, data_dict)
@@ -853,5 +857,40 @@ def package_search(context, data_dict):
     for result in data.get('results'):
         result['title'] = h.translate_field(result, 'title')
         result['notes'] = h.translate_field(result, 'notes')
+
+    return data
+
+
+@toolkit.side_effect_free
+def resource_show(context, data_dict):
+    """ Override to translate title and description of the resource. """
+    data = _resource_show(context, data_dict)
+
+    data['name'] = h.translate_field(data, 'name')
+    data['description'] = h.translate_field(data, 'description')
+
+    return data
+
+
+@toolkit.side_effect_free
+def organization_show(context, data_dict):
+    """ Override to translate title and description of the organization. """
+    data = _organization_show(context, data_dict)
+
+    data['display_name'] = h.translate_field(data, 'title')
+    data['title'] = h.translate_field(data, 'title')
+    data['description'] = h.translate_field(data, 'description')
+
+    return data
+
+
+@toolkit.side_effect_free
+def group_show(context, data_dict):
+    """ Override to translate title and description of the group. """
+    data = _group_show(context, data_dict)
+
+    data['display_name'] = h.translate_field(data, 'title')
+    data['title'] = h.translate_field(data, 'title')
+    data['description'] = h.translate_field(data, 'description')
 
     return data

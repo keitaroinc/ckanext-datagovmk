@@ -109,6 +109,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_user_id,
             'datagovmk_get_last_authority_for_user':
                 helpers.get_last_authority_for_user,
+            'datagovmk_get_org_title':
+                helpers.get_org_title,
+            'datagovmk_get_org_description':
+                helpers.get_org_description,
         }
 
     # IActions
@@ -131,6 +135,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'dashboard_activity_list': actions.dashboard_activity_list,
             'dashboard_activity_list_html': actions.dashboard_activity_list_html,
             'package_search': actions.package_search,
+            'resource_show': actions.resource_show,
+            'organization_show': actions.organization_show,
+            'group_show': actions.group_show,
         }
 
     # IAuthFunctions
