@@ -8,10 +8,14 @@
       var selectedLocale = window.localStorage.selected_locale
       var parser = document.createElement('a')
       parser.href = "{{ locale_root }}"
-      var currentLocale = parser.pathname.split('/')[1] || 'mk'
-
+      var currentLocale = parser.pathname.split('/')[1]
       if (selectedLocale && (selectedLocale !== currentLocale)) {
-        window.location.href = window.location.origin + '/' + selectedLocale + '/' + location.pathname.split('/').slice(2).join('/')
+        if (currentLocale) {
+          var urlRest = location.pathname.split('/').slice(2).join('/')
+        } else {
+          var urlRest = location.pathname.split('/').slice(1).join('/')
+        }
+        window.location.href = window.location.origin + '/' + selectedLocale + '/' + urlRest
       }
     }
 
