@@ -1,0 +1,9 @@
+{% ckan_extends %}
+
+{% block title %}
+    <h3 class="media-heading">{{ h.datagovmk_get_org_title(organization.id) }}</h3>
+{% endblock %}
+
+{% block description %}
+    <p>{{ h.markdown_extract(h.datagovmk_get_org_description(organization.id), extract_length=80) }}</p>
+{% endblock %}

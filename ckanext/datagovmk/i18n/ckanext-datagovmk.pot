@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 14:13+0200\n"
+"POT-Creation-Date: 2018-07-30 16:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -544,6 +544,20 @@ msgstr ""
 msgid "License"
 msgstr ""
 
+#: ckanext/datagovmk/templates/package/resource_read.html:86
+#: ckanext/datagovmk/templates/package/resource_read.html:88
+msgid "URL:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:96
+msgid "From the dataset abstract"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:98
+#, python-format
+msgid "Source: <a href=\"%(url)s\">%(dataset)s</a>"
+msgstr ""
+
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
@@ -664,6 +678,14 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/edit.html:5
+msgid "Account Info"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/edit.html:7
+msgid "Your profile lets other CKAN users know about who you are and what you do."
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:7
