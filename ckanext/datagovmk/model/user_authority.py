@@ -59,7 +59,7 @@ def define_user_authority_table():
         'user_authority',
         metadata,
         Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        Column('user_id', types.UnicodeText, ForeignKey('user.id')),
+        Column('user_id', types.UnicodeText),
         Column('authority_file', types.UnicodeText),
         Column('authority_type', types.UnicodeText),
         Column('created', types.DateTime, default=datetime.datetime.now),
