@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 10:45+0200\n"
+"POT-Creation-Date: 2018-07-30 14:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,59 +74,71 @@ msgstr ""
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:72
+#: ckanext/datagovmk/controller.py:76
 msgid "Resource not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:81
+#: ckanext/datagovmk/controller.py:85
 msgid "Resource data not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:91
+#: ckanext/datagovmk/controller.py:95
 msgid "No download is available"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:233 ckanext/datagovmk/controller.py:251
-#: ckanext/datagovmk/controller.py:273
+#: ckanext/datagovmk/controller.py:237 ckanext/datagovmk/controller.py:255
+#: ckanext/datagovmk/controller.py:277
 msgid "User not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:237
+#: ckanext/datagovmk/controller.py:241
 msgid "Invalid activation key. Please try again."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:246
+#: ckanext/datagovmk/controller.py:250
 msgid "Your account has been activated."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:249
+#: ckanext/datagovmk/controller.py:253
 #, python-format
 msgid "Unauthorized to edit user %s"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:253 ckanext/datagovmk/controller.py:275
+#: ckanext/datagovmk/controller.py:257 ckanext/datagovmk/controller.py:279
 msgid "Integrity Error"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:271
+#: ckanext/datagovmk/controller.py:275
 #, python-format
 msgid "Unauthorized to create user %s"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:277
+#: ckanext/datagovmk/controller.py:281
 msgid "Bad Captcha. Please try again."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:285
+#: ckanext/datagovmk/controller.py:289
 #, python-format
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the email to"
 " continue."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:298
+#: ckanext/datagovmk/controller.py:302
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:453
+msgid "Unable to send the issue report to the system admin."
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:469
+msgid "Issue: {title}"
+msgstr ""
+
+#: ckanext/datagovmk/controller.py:476
+msgid "The issue has been reported."
 msgstr ""
 
 #: ckanext/datagovmk/monkey_patch.py:10
@@ -208,6 +220,7 @@ msgstr ""
 
 #: ckanext/datagovmk/fanstatic/js/modules/resource-reorder.js:59
 #: ckanext/datagovmk/fanstatic/js/modules/resource-view-reorder.js:58
+#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:47
 msgid "Cancel"
 msgstr ""
 
@@ -299,11 +312,11 @@ msgstr ""
 msgid "Stay updated with "
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:58
+#: ckanext/datagovmk/templates/footer.html:61
 msgid "Subscribe to our free newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "Your e-mail address"
 msgstr ""
 
@@ -334,6 +347,24 @@ msgid ""
 "Enter a list of links - one per line - to be shown as a list withing the "
 "secondary footer navigation. Please format the links with Markdown (i.e. * "
 "[Example link](https://www.example.com))."
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:7
+msgid "Administer CKAN"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:14
+msgid ""
+"As a sysadmin user you have full control over this CKAN instance. Proceed "
+"with care!"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:17
+msgid "For guidance on using sysadmin features, see the CKAN"
+msgstr ""
+
+#: ckanext/datagovmk/templates/admin/index.html:18
+msgid "sysadmin guide"
 msgstr ""
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:9
@@ -372,28 +403,8 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:47
-msgid "Cancel"
-msgstr ""
-
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:48
 msgid "Submit"
-#: ckanext/datagovmk/templates/admin/index.html:7
-msgid "Administer CKAN"
-msgstr ""
-
-#: ckanext/datagovmk/templates/admin/index.html:14
-msgid ""
-"As a sysadmin user you have full control over this CKAN instance. Proceed "
-"with care!"
-msgstr ""
-
-#: ckanext/datagovmk/templates/admin/index.html:17
-msgid "For guidance on using sysadmin features, see the CKAN"
-msgstr ""
-
-#: ckanext/datagovmk/templates/admin/index.html:18
-msgid "sysadmin guide"
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:29
