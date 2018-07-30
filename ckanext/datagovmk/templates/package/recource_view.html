@@ -1,0 +1,11 @@
+{% resource "datagovmk/js/modules/resource-view-reorder" %}
+
+{% ckan_extends %}
+
+{% block primary_content_inner %}
+  {% if c.views %}
+    {% snippet "package/snippets/resource_views_list.html", views=c.views, pkg=pkg, is_edit=true, extra_attributes='data-module = datagovmk-resource-view-reorder data-module-id=' + c.resource.id, extra_class='resource-view-list nav-pills nav-stacked' %}
+  {% else %}
+    <p class="empty">{{ _('This resource has no views') }}</p>
+  {% endif %}
+{% endblock %}

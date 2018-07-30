@@ -175,8 +175,30 @@ Additional configuration settings::
     # (optional, default: https://lz4.overpass-api.de/api/interpreter).
     ckanext.datagovmk.osm_overpass_url = https://lz4.overpass-api.de/api/interpreter
 
+    # Alternative admin email. If configured, issues reported will be send to this email.
+    # If not configured, the issues will be send to the CKANs sysadmin account.
+    # Don't set this if there is no special need for it.
+    ckanext.datagovmk.site_admin_email = sysadmin@example.com
+
     # Maximum allowed size for uploaded authority files in MB. Default is 10.
     ckanext.datagovmk.authority_file_max_size = 50
+
+SMTP configuration settings:
+    # SMTP server in format: <server>:<port>
+    smtp.server = <server_name>:<port>
+
+    # User email address
+    smtp.user = full_email_address
+
+    # User password
+    smtp.password = password
+
+    # User email address
+    smtp.mail_from = email_address
+
+    # Must be True for secure connection
+    smtp.starttls = True
+
 
 
 ------------------------
