@@ -6,3 +6,5 @@ paster --plugin=ckanext-archiver archiver init --config="${APP_DIR}/production.i
 paster --plugin=ckanext-qa qa init --config="${APP_DIR}/production.ini"
 # harvester init
 paster --plugin=ckanext-harvest harvester initdb --config="${APP_DIR}/production.ini"
+# issues init
+paster --plugin=ckanext-issues issues init_db --config="${APP_DIR}/production.ini"

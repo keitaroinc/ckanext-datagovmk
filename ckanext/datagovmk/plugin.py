@@ -124,12 +124,13 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
             'resource_update': actions.resource_update,
+            'datagovmk_start_script': actions.start_script,
             'user_create': actions.user_create,
             'user_update': actions.user_update,
             'user_activity_list': actions.user_activity_list,
             'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
-            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
+            'dashboard_activity_list_html': actions.dashboard_activity_list_html
         }
 
     # IAuthFunctions
@@ -137,7 +138,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_auth_functions(self):
         return {
             'datagovmk_get_related_datasets': auth.get_related_datasets,
-            'datagovmk_get_groups': helpers.get_groups
+            'datagovmk_get_groups': helpers.get_groups,
+            'datagovmk_start_script': auth.start_script,
         }
 
     def update_config_schema(self, schema):
@@ -157,8 +159,15 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             controller='ckanext.datagovmk.controller:ApiController',
             action='i18n_js_translations'
         )
+        map.connect('/api/download/{package_id}/resources',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_resources_metadata')
+        map.connect('/api/download/{package_id}/metadata',
+                    controller='ckanext.datagovmk.controller:BulkDownloadController',
+                    action='download_package_metadata')
+
+        # Override the resource download links, so we can count the number of downloads.
         with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
-            # Override the resource download links, so we can count the number of downloads.
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download',
                       action='resource_download')
@@ -166,12 +175,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
 
-        map.connect('/api/download/{package_id}/resources',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_resources_metadata')
-        map.connect('/api/download/{package_id}/metadata',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_package_metadata')
+        # map user routes
+        with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
+            m.connect('register', '/user/register', action='datagovmk_register')
+            m.connect('/user/activate/{id:.*}', action='perform_activation')
 
         map.connect('/issues/report_site_issue', 
                     controller='ckanext.datagovmk.controller:ReportIssueController',
