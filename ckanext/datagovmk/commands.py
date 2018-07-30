@@ -117,9 +117,6 @@ class CheckOutdatedDatasets(CkanCommand):
                     last_modified.append(parser.parse(lm))
 
             return min(last_modified)
-        last_modified = dataset.get('metadata_modified') or dataset.get('metadata_created')
-        if last_modified:
-            return parser.parse(last_modified)
         return None
 
     def _get_dataset_users(self, dataset):
