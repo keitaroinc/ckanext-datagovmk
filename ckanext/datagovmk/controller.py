@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Controllers definitions and overrides.
 """
 import os
@@ -467,7 +469,7 @@ class ReportIssueController(BaseController):
             'username': c.userobj.fullname or c.userobj.name
         })
 
-        subject = toolkit._('Issue: {title}').format(title=issue_title)
+        subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
         
         result = send_email(from_email, to_email, subject, email_content)
         
