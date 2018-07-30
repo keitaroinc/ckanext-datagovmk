@@ -544,6 +544,20 @@ msgstr ""
 msgid "License"
 msgstr ""
 
+#: ckanext/datagovmk/templates/package/resource_read.html:86
+#: ckanext/datagovmk/templates/package/resource_read.html:88
+msgid "URL:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:96
+msgid "From the dataset abstract"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/resource_read.html:98
+#, python-format
+msgid "Source: <a href=\"%(url)s\">%(dataset)s</a>"
+msgstr ""
+
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
