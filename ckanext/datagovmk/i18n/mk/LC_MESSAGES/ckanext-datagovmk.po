@@ -841,6 +841,8 @@ msgstr ""
 "Внесете го Вашето корисничко име во полето и ние ќе Ви испратиме "
 "електронска порака со линк за влез и нова лозинка."
 
-#~ msgid "Key"
-#~ msgstr "Клуч"
+msgid "Key"
+msgstr "Клуч"
 
+msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
+msgstr "пр. http://example.com/image.jpg (доколку е празно, го користи УРЛ-от на ресурсот)"
