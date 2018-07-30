@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 14:13+0200\n"
+"POT-Creation-Date: 2018-07-30 16:59+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -581,6 +581,20 @@ msgstr "Формат"
 msgid "License"
 msgstr "Лиценца"
 
+#: ckanext/datagovmk/templates/package/resource_read.html:86
+#: ckanext/datagovmk/templates/package/resource_read.html:88
+msgid "URL:"
+msgstr "URL:"
+
+#: ckanext/datagovmk/templates/package/resource_read.html:96
+msgid "From the dataset abstract"
+msgstr "Од апстрактот на податочниот сет"
+
+#: ckanext/datagovmk/templates/package/resource_read.html:98
+#, python-format
+msgid "Source: <a href=\"%(url)s\">%(dataset)s</a>"
+msgstr "Извор: <a href=\"%(url)s\">%(dataset)s</a>"
+
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
@@ -708,6 +722,14 @@ msgstr "Сподели на Google+"
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr "Исчисти прикачување"
+
+#: ckanext/datagovmk/templates/user/edit.html:5
+msgid "Account Info"
+msgstr "Информации за сметката"
+
+#: ckanext/datagovmk/templates/user/edit.html:7
+msgid "Your profile lets other CKAN users know about who you are and what you do."
+msgstr "Вашиот профил овозможува другите CKAN корисници да дознаат кој сте Вие и што правите."
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:7
 msgid "Change details"

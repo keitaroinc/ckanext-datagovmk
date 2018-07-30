@@ -1,0 +1,72 @@
+{
+    "scheming_version": 1,
+    "group_type": "group",
+    "about_url": "http://github.com/ketaroinc/ckanext-datagovmk",
+    "fields": [{
+        "field_name": "title_translated",
+        "label": {
+            "en": "Name",
+            "mk": "Име",
+            "sq": "Emri"
+        },
+        "form_snippet": "datagovmk_fluent_text.html",
+        "display_snippet": "datagovmk_fluent_text.html",
+        "validators": "fluent_text",
+        "output_validators": "fluent_core_translated_output",
+        "form_attrs": {
+            "class": "form-control"
+        },
+        "first_form_attrs": {
+            "data-module": "slug-preview-target",
+            "class": "form-control"
+        },
+        "classes": ["control-full"],
+        "form_placeholder": {
+            "en": "My Group",
+            "mk": "Моја Група",
+            "sq": "Grupi im"
+        }
+    },
+    {
+        "field_name": "name",
+        "label": "URL",
+        "validators": "not_empty unicode name_validator group_name_validator",
+        "form_snippet": "slug.html",
+        "form_placeholder": {
+            "en": "my-group",
+            "mk": "моја-група",
+            "sq": "grupi-im"
+        }
+    },
+    {
+        "field_name": "description_translated",
+        "label": {
+            "en": "Description",
+            "mk": "Опис",
+            "sq": "Përshkrimi"
+        },
+        "form_placeholder": {
+            "en": "A little information about my group...",
+            "mk": "Малку информации за мојата grupa...",
+            "sq": "Pak informacione rreth grupit tim..."
+        },
+        "form_snippet": "fluent_markdown.html",
+        "display_snippet": "fluent_markdown.html",
+        "validators": "fluent_text",
+        "output_validators": "fluent_core_translated_output",
+        "form_attrs": {
+            "class": "form-control"
+        }
+    },
+    {
+      "field_name": "image_url",
+      "label": "Image URL",
+      "form_placeholder": "http://example.com/my-image.jpg",
+      "validators": "ignore_missing unicode remove_whitespace",
+      "form_snippet": "datagovmk_upload.html",
+      "upload_field": "image_upload",
+      "upload_clear": "clear_upload",
+      "upload_label": "Image"
+    }
+  ]
+}

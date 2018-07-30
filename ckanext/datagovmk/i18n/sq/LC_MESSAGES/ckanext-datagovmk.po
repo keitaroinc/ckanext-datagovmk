@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-30 14:13+0200\n"
+"POT-Creation-Date: 2018-07-30 16:59+0200\n"
 "PO-Revision-Date: 2018-07-23 20:57+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -72,7 +72,6 @@ msgid "Error sending activation email, the user was not created: {0}"
 msgstr "Gabim gjatë dërgimit të email aktivizimit, përdoruesi nuk u krijua: {0}"
 
 #: ckanext/datagovmk/actions.py:727
-#, fuzzy
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 "Dosja e ngarkuar e autoritetit është shumë e madhe. Madhësia maksimale e "
@@ -710,6 +709,14 @@ msgstr "Shpërndaje në Google+"
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:16
 msgid "Clear Upload"
 msgstr "Ngarko qartë"
+
+#: ckanext/datagovmk/templates/user/edit.html:5
+msgid "Account Info"
+msgstr "Informacioni i llogarisë"
+
+#: ckanext/datagovmk/templates/user/edit.html:7
+msgid "Your profile lets other CKAN users know about who you are and what you do."
+msgstr "Profili juaj u lejon përdoruesve të tjerë të CKAN të dinë se kush jeni dhe çfarë bëni."
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:7
 msgid "Change details"
