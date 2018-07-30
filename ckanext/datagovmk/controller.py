@@ -20,7 +20,8 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      export_dict_to_csv,
                                      to_utf8_str,
                                      export_package_to_xml,
-                                     export_package_to_rdf)
+                                     export_package_to_rdf,
+                                     send_email)
 from ckanext.datagovmk.lib import (verify_activation_link,
                                    create_activation_key)
 from ckan.lib.base import BaseController, abort, render
