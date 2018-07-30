@@ -13,6 +13,9 @@ from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
 from ckan.common import config
+from ckan.model import State as model_state
+from socket import error as socket_error
+import ckan.lib.mailer as mailer
 
 import ckan.logic as logic
 import ckan.plugins as plugins
@@ -26,6 +29,7 @@ from ckan.logic.action.create import package_create as _package_create
 from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
+from ckanext.datagovmk.lib import request_activation
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
@@ -657,23 +661,32 @@ def start_script(context, data_dict):
 
     return 'Script was successfully executed.'
 
-  
+
 def user_create(context, data_dict):
-    """ Overridden to be able to upload authority file """
+    """ Overridden to be able to send activation mail and upload authority file """
 
     if data_dict.get('authority_file_url') == '':
         raise ValidationError({_('authority'): [_('Missing value')]})
 
     authority_file = _upload_authority_file(data_dict, is_required=True)
 
+    data_dict['state'] = model_state.PENDING
     created_user = _user_create(context, data_dict)
+    user = context['model'].User.get(created_user.get('id'))
+
+    try:
+        request_activation(user)
+    except Exception as e:
+        get_action('user_delete')(context, {'id': user.id})
+        msg = _('Error sending activation email, ' +
+                'the user was not created: {0}'.format(str(e)))
+        raise ValidationError({'message': msg}, error_summary=msg)
 
     data = {
         'user_id': created_user.get('id'),
         'authority_file': authority_file,
         'authority_type': 'general'
     }
-
     userAuthority = UserAuthority(**data)
     userAuthority.save()
 
@@ -732,34 +745,35 @@ def user_update(context, data_dict):
 
     updated_user = _user_update(context, data_dict)
 
-    if request.files.get('authority_file_upload'):
-        last_general_authority = h.get_last_authority_for_user(
-            authority_type='general',
-            user_id=updated_user.get('id')
-        )
-        data = {
-            'user_id': updated_user.get('id'),
-            'authority_file': authority_file,
-            'authority_type': 'general'
-        }
-
-        userAuthority = UserAuthority(**data)
-        userAuthority.save()
-
-        previous_authority_file = '/uploads/authorities/{0}'.format(last_general_authority.authority_file)
-        current_authority_file = '/uploads/authorities/{0}'.format(authority_file)
-
-        data_dict = {
-            'user_id': context.get('user'),
-            'object_id': context.get('user'),
-            'activity_type': 'updated_user_general_authority',
-            'data': {
-                'previous_authority_file': previous_authority_file,
-                'current_authority_file': current_authority_file,
+    if hasattr(request, 'files'):
+        if request.files.get('authority_file_upload'):
+            last_general_authority = h.get_last_authority_for_user(
+                authority_type='general',
+                user_id=updated_user.get('id')
+            )
+            data = {
+                'user_id': updated_user.get('id'),
+                'authority_file': authority_file,
+                'authority_type': 'general'
             }
-        }
 
-        toolkit.get_action('activity_create')({'ignore_auth': True}, data_dict)
+            userAuthority = UserAuthority(**data)
+            userAuthority.save()
+
+            previous_authority_file = '/uploads/authorities/{0}'.format(last_general_authority.authority_file)
+            current_authority_file = '/uploads/authorities/{0}'.format(authority_file)
+
+            data_dict = {
+                'user_id': context.get('user'),
+                'object_id': context.get('user'),
+                'activity_type': 'updated_user_general_authority',
+                'data': {
+                    'previous_authority_file': previous_authority_file,
+                    'current_authority_file': current_authority_file,
+                }
+            }
+
+            toolkit.get_action('activity_create')({'ignore_auth': True}, data_dict)
 
     return updated_user
 

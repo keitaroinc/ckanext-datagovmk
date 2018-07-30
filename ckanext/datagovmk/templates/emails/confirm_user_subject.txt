@@ -1,0 +1,1 @@
+{{ site_title }} Корисничка Сметка Бара Активација    {{ site_title }} Kërkohet Aktivizimi i Llogarisë së Përdoruesit    {{ site_title }} User Account Activation Required
