@@ -88,6 +88,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'datagovmk')
 
+        config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
+
     # ITemplateHelpers
     def get_helpers(self):
         return {
