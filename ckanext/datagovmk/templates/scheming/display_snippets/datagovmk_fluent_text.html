@@ -6,5 +6,5 @@
   {{ values[current_lang] }}
 {%- endif -%}
 {%- if not values.get(current_lang) -%}
-  {{ values[h.get_default_locale()]}}
+  {{ values[h.lang()]}}
 {%- endif -%}
