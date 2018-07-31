@@ -1,0 +1,45 @@
+[
+
+      {
+        "domain_content": true, 
+        "domain_data": true, 
+        "domain_software": false, 
+        "family": "", 
+        "id": "cc-zero", 
+        "is_generic": false, 
+        "maintainer": "", 
+        "od_conformance": "approved", 
+        "osd_conformance": "not reviewed", 
+        "status": "active", 
+        "title": "Creative Commons CCZero", 
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      {
+        "domain_content": false, 
+        "domain_data": false, 
+        "domain_software": false, 
+        "family": "", 
+        "id": "cc-by", 
+        "is_generic": false, 
+        "maintainer": "", 
+        "od_conformance": "approved", 
+        "osd_conformance": "not reviewed", 
+        "status": "active", 
+        "title": "Creative Commons Attribution", 
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      {
+        "domain_content": true, 
+        "domain_data": false, 
+        "domain_software": false, 
+        "family": "", 
+        "id": "other-pd", 
+        "is_generic": true, 
+        "maintainer": "", 
+        "od_conformance": "approved", 
+        "osd_conformance": "not reviewed", 
+        "status": "active", 
+        "title": "Other (Public Domain)", 
+        "url": "http://creativecommons.org/publicdomain/mark/1.0/"
+      }
+  ]
