@@ -448,13 +448,11 @@ class ReportIssueController(BaseController):
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
-        to_email = get_admin_email()
+        to_user = get_admin_email()
 
-        if not to_email:
+        if not to_user:
             h.flash_error(_('Unable to send the issue report to the system admin.'))
             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
-        
-        from_email = c.userobj.email
 
         issue_title = data_dict['issue_title'].strip()
 
@@ -462,14 +460,17 @@ class ReportIssueController(BaseController):
 
         email_content = render('datagovmk/issue_email_template.html', extra_vars={
             'title': issue_title,
+            'site_title': config.get('ckan.site_title', 'CKAN'),
             'description': issue_description,
             'date': datetime.now(),
-            'username': c.userobj.fullname or c.userobj.name
+            'username': c.userobj.fullname or c.userobj.name,
+            'user': c.userobj,
+            'user_url': h.url_for(controller='user', action='read', id=c.user, qualified=True)
         })
 
         subject = toolkit._('Issue: {title}').format(title=issue_title)
         
-        result = send_email(from_email, to_email, subject, email_content)
+        result = send_email(to_user['name'], to_user['email'], subject, email_content)
         
         if not result['success']:
             h.flash_error(result['message'])
@@ -494,8 +495,15 @@ def get_admin_email():
     """
     sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
     if sysadmin_email:
-        return sysadmin_email
+        name = sysadmin_email.split('@')[0]
+        return { 
+            'email': sysadmin_email,
+            'name': name
+        }
     sysadmins = get_sysadmins()
     if sysadmins:
-        return sysadmins[0].email
+        return {
+            'email': sysadmins[0].email,
+            'name': sysadmins[0].fullname or sysadmins[0].name
+        }
     return None
