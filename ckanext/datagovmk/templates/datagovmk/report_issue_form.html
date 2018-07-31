@@ -2,6 +2,10 @@
 
 {% extends "page.html" %}
 
+{% set form_url = h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') %}
+{% set login_url = h.url_for(controller='user', action='login') %}
+{% set successfuly_reported = successfuly_reported if successfuly_reported is defined else False %}
+
 {% block page_header %}
   {# Don't render anything in this block. #}
 {% endblock %}
@@ -14,7 +18,7 @@
   {{ super() }}
   {% block breadcrumb_content_inner %}
     <li class="active">
-        <a href="#">{{ _('Report an issue') }}</a>
+      <a href="{{ form_url }}">{{ _('Report an issue') }}</a>
     </li>
   {% endblock %}
 {% endblock %}
@@ -23,10 +27,6 @@
 
 {% block primary_content_inner %}
 {{ super() }}
-
-{% set form_url = h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') %}
-{% set login_url = h.url_for(controller='user', action='login') %}
-{% set successfuly_reported = successfuly_reported if successfuly_reported is defined else False %}
 
   {% if login_required %}
     <p class="alert alert-warning">{{ _('Please login before reporting an issue.')}}</p>
