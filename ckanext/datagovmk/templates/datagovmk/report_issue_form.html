@@ -2,6 +2,14 @@
 
 {% extends "page.html" %}
 
+{% block page_header %}
+  {# Don't render anything in this block. #}
+{% endblock %}
+
+{% block secondary %}
+  {# Don't render anything in this block. #}
+{% endblock %}
+
 {% block breadcrumb_content %}
   {{ super() }}
   {% block breadcrumb_content_inner %}
@@ -13,42 +21,30 @@
 
 {% block subtitle %}{{ _('Report an issue') }}{% endblock %}
 
-{% block primary %}
+{% block primary_content_inner %}
 {{ super() }}
+
 {% set form_url = h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') %}
 {% set login_url = h.url_for(controller='user', action='login') %}
 {% set successfuly_reported = successfuly_reported if successfuly_reported is defined else False %}
-{% if login_required %}
-<div class="row">
-    <div class="col-md-12">
-        <p class="lead">{{ _('Please login before reporting an issue.')}}</p>
-        <p><a href="{{ login_url }}" class="btn btn-primary pull-right">{{_('Login')}}</a></p>
-    </div>
-</div>
-{% elif successfuly_reported %}
-<div class="row">
-    <div class="col-md-12">
-        <p class="lead">{{ _('The issue has been successfully reported. You can report another issue by clicking the button below.') }}</p>
-        <p><a href="{{ form_url }}" class="btn btn-primary pull-right">{{_('Report issue')}}</a></p>
-    </div>
-</div>
-{% else %}
-<form action="{{ form_url }}" method="POST">
-    <div class="row">
-        <div class="col-md-12">
-                <h2>{{ _('Report an issue') }}</h2>
-                
-                {{ form.input('issue_title', id='field-title', label=_('Title'), placeholder=_('The issue title'), value='', error=errors.issue_title, classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
-        
-                {{ form.markdown('issue_description', id='field-description', label=_('Description'), value='', error='', classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
+
+  {% if login_required %}
+    <p class="alert alert-warning">{{ _('Please login before reporting an issue.')}}</p>
+    <p><a href="{{ login_url }}" class="btn btn-primary">{{_('Login')}}</a></p>
+  {% elif successfuly_reported %}
+    <p class="alert alert-success">{{ _('The issue has been successfully reported. You can report another issue by clicking the button below.') }}</p>
+    <p><a href="{{ form_url }}" class="btn btn-primary">{{_('Report issue')}}</a></p>
+  {% else %}
+    <form action="{{ form_url }}" method="POST">
+        <h2>{{ _('Report an issue') }}</h2>
+
+        {{ form.input('issue_title', id='field-title', label=_('Title'), placeholder=_('The issue title'), value='', error=errors.issue_title, classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
+
+        {{ form.markdown('issue_description', id='field-description', label=_('Description'), value='', error='', classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
+        <div class="form-actions">
+          <button class="btn btn-danger pull-left">{{ _('Cancel') }}</button>
+          <button type="submit" class="btn btn-primary btn-submit">{{ _('Submit') }}</button>
         </div>
-        <div class="col-md-12">
-            <div class="pull-right">
-                <button class="btn btn-cancel">{{ _('Cancel') }}</button>
-                <button type="submit" class="btn btn-primary btn-submit">{{ _('Submit') }}</button>
-            </div>
-        </div>
-    </div>
-</form>
-{% endif %}
+    </form>
+  {% endif %}
 {% endblock %}
