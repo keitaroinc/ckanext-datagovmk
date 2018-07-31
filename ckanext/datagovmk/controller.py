@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Controllers definitions and overrides.
 """
 import os
@@ -468,7 +470,7 @@ class ReportIssueController(BaseController):
             'user_url': h.url_for(controller='user', action='read', id=c.user, qualified=True)
         })
 
-        subject = toolkit._('Issue: {title}').format(title=issue_title)
+        subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
         
         result = send_email(to_user['name'], to_user['email'], subject, email_content)
         
