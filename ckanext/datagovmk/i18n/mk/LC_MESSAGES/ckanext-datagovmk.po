@@ -411,7 +411,7 @@ msgstr "прирачникот за употреба"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:16
 msgid "Total number of Datasets"
-msgstr ""
+msgstr "Вкупен број на податочни сетови"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:23
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:46
