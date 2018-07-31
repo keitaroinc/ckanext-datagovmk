@@ -4,6 +4,7 @@
 
   {% set attribs = field.form_attrs if 'form_attrs' in field else {} %}
   {% set classes = field.classes if 'classes' in field else ['control-full', 'control-large'] %}
+  {% set is_required = true if lang == 'mk' else false %}
 
   {% if loop.first %}
     {% set attribs = field.first_form_attrs if 'first_form_attrs' in field else attribs %}
@@ -19,6 +20,6 @@
     error=errors[field.field_name + '-' + lang],
     classes=classes,
     attrs=attribs,
-    is_required=h.scheming_field_required(field)
+    is_required=is_required
     )  }}
 {%- endfor -%}

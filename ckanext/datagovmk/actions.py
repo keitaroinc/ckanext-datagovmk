@@ -332,18 +332,23 @@ def add_spatial_data(package_action, context, data_dict):
     except Exception as e:
         log.warning(e)
 
-    if package_action.func_name == 'package_create':
+    dataset_type = data_dict.get('type')
+
+    if package_action.func_name == 'package_create' and \
+       dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
 
     if package_action.func_name == 'package_create' and \
-       data_dict.get('add_dataset_agreement') is None:
+       data_dict.get('add_dataset_agreement') is None and \
+       dataset_type == 'dataset':
         raise ValidationError({
             _('Add dataset agreement'): [_('Missing value')]
         })
 
     dataset = package_action(context, data_dict)
 
-    if package_action.func_name == 'package_create':
+    if package_action.func_name == 'package_create' and \
+       dataset_type == 'dataset':
         if data_dict.get('authority_file_url'):
             data = {
                 'user_id': context.get('auth_user_obj').id,

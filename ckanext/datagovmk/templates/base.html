@@ -15,7 +15,7 @@
         } else {
           var urlRest = location.pathname.split('/').slice(1).join('/')
         }
-        window.location.href = window.location.origin + '/' + selectedLocale + '/' + urlRest
+        window.location.href = window.location.origin + '/' + selectedLocale + '/' + urlRest + location.search
       }
     }
 
