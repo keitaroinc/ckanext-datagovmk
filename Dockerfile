@@ -118,6 +118,7 @@ ENV CKAN__PLUGINS envvars \
                   c3charts \
                   googleanalytics \
                   pages \
+                  likes \
                   requestdata \
                   scheming_datasets \
                   scheming_organizations \
@@ -127,7 +128,6 @@ ENV CKAN__PLUGINS envvars \
                   organogram \
                   validation \
                   experience \
-                  likes \
                   issues \
                   fluent
 

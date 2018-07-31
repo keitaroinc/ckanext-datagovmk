@@ -154,7 +154,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
     
     def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
-        subject = u'CKAN: Потестување за ажурирање на податочниот сет „{title}“ | '\
+        subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
                   u'Kujtesë për përditësimin e të dhënave "{title}" | '\
                   u'Reminder to update dataset "{title}"'.format(title=dataset_title)
         try:
