@@ -3461,9 +3461,9 @@ msgid ""
 "target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
 "\">Markdown formatting</a> here"
 msgstr ""
-"Mund të përdorni <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"Mund të përdorni <a href=\"#markdown\" title=\"Referencë e shpejtë e Markdown\" data-"
 "target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
-"\">Markdown formatimin</a> here"
+"\">Markdown formatimin</a> këtu"
 
 #: ckan/templates/macros/form.html:277
 msgid "This field is required"
