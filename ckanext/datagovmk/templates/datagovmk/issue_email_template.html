@@ -1,9 +1,47 @@
-<p>Hello {{username}},</p>
 <p>
-An issue has been reported:<br/>
-{{description}}
+Некој пријави проблем на  {{site_title}} - "{{ title }}".<br>
+
+    <p>
+        Проблемот е:
+        <p>
+            {{description}}
+        </p> 
+    </p>
+    <p>
+        Пријавено од: {{ user.fullname or user.name }}.<br/>
+        Проблемот беше пријавен на: {{date}}.
+    </p>
 </p>
+---<br/>
+
 <p>
-    -----------------------------------------------------<br/>
-    The issue has been reported on {{date}}
+Dikush ka raportuar një çështje në  {{site_title}} - "{{ title }}".<br>
+
+    <p>
+        Problemi është:
+        <p>
+            {{description}}
+        </p> 
+    </p>
+    <p>
+        I raportuar nga: {{ user.fullname or user.name }}.<br/>
+        Problemi është raportuar në: {{date}}.
+    </p>
 </p>
+---<br/>
+
+<p>
+Someone has reported an issue on {{site_title}} - "{{ title }}".<br>
+
+    <p>
+        The issue is:
+        <p>
+            {{description}}
+        </p> 
+    </p>
+    <p>
+        Reported by: {{ user.fullname or user.name }}.<br/>
+        The issue has been reported on: {{date}}.
+    </p>
+</p>
+---<br/>
