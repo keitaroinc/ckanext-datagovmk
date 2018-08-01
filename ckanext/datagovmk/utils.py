@@ -304,7 +304,7 @@ def export_dict_to_csv(value_dict):
     for prop in fieldnames:
         val = value_dict[prop]
         if isinstance(val, list) or isinstance(val, dict):
-            val = json.dumps(val)
+            val = json.dumps(val, ensure_ascii=False)
         row.append(to_utf8_str(val))
     
     writer.writerow([to_utf8_str(f) for f in fieldnames])
