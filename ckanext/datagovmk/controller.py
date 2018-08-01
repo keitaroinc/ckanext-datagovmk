@@ -314,17 +314,31 @@ class DatagovmkUserController(UserController):
 
 
 def _export_resources_json(zip_file, pkg_dict, request, response):
+    file_names = {}
     for resource in pkg_dict['resources']:
-        rc_filename = '%s.json' % resource.get('name') or resource['id']
-        zip_file.writestr(rc_filename, json.dumps(resource))
+        resource_name = h.resource_display_name(resource)
+        if file_names.get(resource_name):
+            resource_name = u'%s_%s' % (resource_name, resource['id'])
+        else:
+            file_names[resource_name] = True
+
+        rc_filename = u'%s.json' % resource_name
+        zip_file.writestr(rc_filename.encode('utf-8'), json.dumps(resource, indent=4, ensure_ascii=False).encode('utf-8'))
 
 
 def _export_to_rdf(zip_file, pkg_dict, request, response, file_ext='rdf'):
+    file_names = {}
     for resource in pkg_dict['resources']:
-        file_name = '%s.rdf' % resource.get('name') or resource['id']
-        output = export_resource_to_rdf(resource, pkg_dict)
-        zip_file.writestr(file_name, output)
+        resource_name = h.resource_display_name(resource)
+        if file_names.get(resource_name):
+            resource_name = u'%s_%s' % (resource_name, resource['id'])
+        else:
+            file_names[resource_name] = True
 
+        file_name = u'%s.rdf' % resource_name
+
+        output = export_resource_to_rdf(resource, pkg_dict)
+        zip_file.writestr(file_name.encode('utf-8'), output)
 
 
 def _export_resources_rdf(zip_file, pkg_dict, request, response):
@@ -332,15 +346,28 @@ def _export_resources_rdf(zip_file, pkg_dict, request, response):
 
 
 def _export_resources_xml(zip_file, pkg_dict, request, response):
+    file_names = {}
     for resource in pkg_dict['resources']:
-        file_name = '%s.xml' % resource.get('name') or resource['id']
+        resource_name = h.resource_display_name(resource)
+        if file_names.get(resource_name):
+            resource_name = u'%s_%s' % (resource_name, resource['id'])
+        else:
+            file_names[resource_name] = True
+        file_name = u'%s.xml' % resource_name
         output = export_resource_to_xml(resource)
         zip_file.writestr(file_name.encode('utf-8'), output.encode('utf-8'))
 
 
 def _export_resources_csv(zip_file, pkg_dict, request, response):
+    file_names = {}
     for resource in pkg_dict['resources']:
-        rc_filename =to_utf8_str('%s.csv' % resource.get('name') or resource['id'])
+        resource_name = h.resource_display_name(resource)
+        if file_names.get(resource_name):
+            resource_name = u'%s_%s' % (resource_name, resource['id'])
+        else:
+            file_names[resource_name] = True
+
+        rc_filename =to_utf8_str('%s.csv' % resource_name)
         output = export_dict_to_csv(resource)
         zip_file.writestr(rc_filename, output)
 
@@ -353,7 +380,7 @@ _SUPPORTED_EXPORTS = {
 
 
 def _export_package_json(package_dict, request, response):
-    json.dump(package_dict, response, indent=4)
+    json.dump(package_dict, response, indent=4, ensure_ascii=False)
 
 
 def _export_package_xml(package_dict, request, response):
@@ -409,6 +436,7 @@ _SUPPORTED_PACKAGE_EXPORTS = {
 def _open_temp_zipfile():
     file_name = uuid.uuid4().hex + '.{ext}'.format(ext='zip')
     file_path = get_storage_path_for('temp-datagovmk') + '/' + file_name
+
 
     return zipfile.ZipFile(file_path, 'w')
 
