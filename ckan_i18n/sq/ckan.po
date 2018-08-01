@@ -3461,9 +3461,9 @@ msgid ""
 "target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
 "\">Markdown formatting</a> here"
 msgstr ""
-"Mund të përdorni <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"Mund të përdorni <a href=\"#markdown\" title=\"Referencë e shpejtë e Markdown\" data-"
 "target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
-"\">Markdown formatimin</a> here"
+"\">Markdown formatimin</a> këtu"
 
 #: ckan/templates/macros/form.html:277
 msgid "This field is required"
@@ -4831,3 +4831,11 @@ msgstr "Kërko përdorues"
 #: ckan/views/user.py:588
 msgid "Your password must be 8 characters or longer."
 msgstr "Fjalëkalimi juaj duhet të jetë 8 ose më shumë."
+
+msgid "Key"
+msgstr "Celës"
+
+msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
+msgstr ""
+"p.sh. http://example.com/image.jpg  (nëse është "
+"bosh, përdor burimin URL në burim)"
