@@ -4831,3 +4831,11 @@ msgstr "Kërko përdorues"
 #: ckan/views/user.py:588
 msgid "Your password must be 8 characters or longer."
 msgstr "Fjalëkalimi juaj duhet të jetë 8 ose më shumë."
+
+msgid "Key"
+msgstr "Celës"
+
+msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
+msgstr ""
+"p.sh. http://example.com/image.jpg  (nëse është "
+"bosh, përdor burimin URL në burim)"

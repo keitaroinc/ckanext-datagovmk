@@ -4826,3 +4826,11 @@ msgstr "Пребарувај корисници"
 #: ckan/views/user.py:588
 msgid "Your password must be 8 characters or longer."
 msgstr "Вашата лозинка мора да е 8 карактери или повеќе."
+
+msgid "Key"
+msgstr "Клуч"
+
+msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
+msgstr ""
+"пр. http://example.com/image.jpg (доколку е "
+"празно, го користи УРЛ-от на ресурсот)"
