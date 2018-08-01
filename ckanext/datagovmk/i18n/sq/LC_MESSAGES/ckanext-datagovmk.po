@@ -974,11 +974,3 @@ msgstr ""
 "Shtypni emrin tuaj të përdoruesit në kuti dhe ne do të ju dërgojmë një "
 "lidhje për të shtypur një fjalëkalim të ri."
 
-#~ msgid "Key"
-#~ msgstr "Celës"
-
-#~ msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
-#~ msgstr ""
-#~ "p.sh. http://example.com/image.jpg  (nëse është "
-#~ "bosh, përdor burimin URL në burim)"
-
