@@ -353,7 +353,7 @@ _SUPPORTED_EXPORTS = {
 
 
 def _export_package_json(package_dict, request, response):
-    json.dump(package_dict, response, indent=4)
+    json.dump(package_dict, response, indent=4, ensure_ascii=False)
 
 
 def _export_package_xml(package_dict, request, response):
