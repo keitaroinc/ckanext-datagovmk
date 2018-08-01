@@ -42,7 +42,7 @@
 
         {{ form.markdown('issue_description', id='field-description', label=_('Description'), value='', error='', classes=['control-full'], is_required=true,attrs={'required': 'required', 'class': 'form-control'}) }}
         <div class="form-actions">
-          <button class="btn btn-danger pull-left">{{ _('Cancel') }}</button>
+          <a href="{{ h.url_for('home.index') }}" class="btn btn-danger pull-left">{{ _('Cancel') }}</a>
           <button type="submit" class="btn btn-primary btn-submit">{{ _('Submit') }}</button>
         </div>
     </form>
