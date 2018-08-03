@@ -92,7 +92,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dataexplorer.git#egg=ckanext-dataexplorer" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dataexplorer/requirements.txt" && \
     # datarequests
-    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datarequests.git#egg=ckanext-datarequests"
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datarequests.git@dgm-stable#egg=ckanext-datarequests"
 
 
 
