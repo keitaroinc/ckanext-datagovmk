@@ -152,7 +152,8 @@ def get_related_datasets(context, data_dict):
         for group_dataset in group_datasets:
             group_dataset_id = group_dataset.get('id')
             if group_dataset_id != dataset.get('id') and \
-               group_dataset_id not in related_datasets_ids:
+               group_dataset_id not in related_datasets_ids and \
+               group_dataset['type'] == 'dataset':
                 related_datasets.append(group_dataset)
                 related_datasets_ids.append(group_dataset_id)
 
@@ -168,7 +169,8 @@ def get_related_datasets(context, data_dict):
         for tag_dataset in tag_datasets:
             tag_dataset_id = tag_dataset.get('id')
             if tag_dataset_id != dataset.get('id') and \
-               tag_dataset_id not in related_datasets_ids:
+               tag_dataset_id not in related_datasets_ids and \
+               tag_dataset['type'] == 'dataset':
                 related_datasets.append(tag_dataset)
                 related_datasets_ids.append(tag_dataset_id)
 
