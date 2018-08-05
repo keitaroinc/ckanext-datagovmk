@@ -90,7 +90,9 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent" && \
     # dataexplorer
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dataexplorer.git#egg=ckanext-dataexplorer" && \
-    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dataexplorer/requirements.txt"
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dataexplorer/requirements.txt" && \
+    # datarequests
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datarequests.git@dgm-stable#egg=ckanext-datarequests"
 
 
 
@@ -133,7 +135,8 @@ ENV CKAN__PLUGINS envvars \
                   validation \
                   experience \
                   issues \
-                  fluent 
+                  fluent \
+                  datarequests
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
