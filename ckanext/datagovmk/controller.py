@@ -561,7 +561,6 @@ def get_admin_email():
 class OverrideDatastoreController(DatastoreController):
 
     def dump(self, resource_id):
-        print " ------> THIS DUMP"
         try:
             offset = int_validator(request.GET.get('offset', 0), {})
         except toolkit.Invalid as e:
@@ -613,7 +612,6 @@ def dump_to(resource_id, output, fmt, offset, limit, options):
         writer_factory = xml_writer
         records_format = 'objects'
 
-    print '   ----> this dump_to FO REAL'
     def start_writer(fields):
         bom = options.get(u'bom', False)
         return writer_factory(output, fields, resource_id, bom)
