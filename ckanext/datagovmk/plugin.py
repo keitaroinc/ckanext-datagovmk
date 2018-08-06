@@ -194,6 +194,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.datagovmk.controller:ReportIssueController',
                     action='report_issue_form')
 
+        map.connect('/datastore/dump/{resource_id}',
+                    controller='ckanext.datagovmk.controller:OverrideDatastoreController',
+                    action='dump')
+
         return map
 
     def configure(self, config):
