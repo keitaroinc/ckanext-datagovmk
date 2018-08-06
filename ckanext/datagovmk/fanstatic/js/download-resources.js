@@ -79,7 +79,7 @@ $(document).ready(function () {
 
       if (zip_id) {
         var link = document.createElement('a');
-        url = window.location.origin + '/api/action/datagovmk_download_zip?id=' + zip_id;
+        url = window.location.origin + '/download/zip/' + zip_id;
         link.style.display = 'none';
         link.href = url;
         document.body.appendChild(link);

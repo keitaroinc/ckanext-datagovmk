@@ -125,7 +125,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
-            'datagovmk_download_zip': actions.download_zip,
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
@@ -184,6 +183,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
+            m.connect('download_zip',
+                      '/download/zip/{zip_id}',
+                      action='download_zip')
 
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
