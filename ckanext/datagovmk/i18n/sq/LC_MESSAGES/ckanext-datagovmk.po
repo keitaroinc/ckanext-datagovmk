@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-01 11:54+0200\n"
+"POT-Creation-Date: 2018-08-07 19:36+0200\n"
 "PO-Revision-Date: 2018-07-23 20:57+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -19,109 +19,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:136
+#: ckanext/datagovmk/actions.py:139
 msgid "Missing dataset id"
 msgstr "ID i seti të dhënave mungon"
 
-#: ckanext/datagovmk/actions.py:345
+#: ckanext/datagovmk/actions.py:329
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:45
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:53
 msgid "Add dataset agreement"
 msgstr "Shto marrëveshje dataset"
 
-#: ckanext/datagovmk/actions.py:345 ckanext/datagovmk/actions.py:678
-#: ckanext/datagovmk/actions.py:707 ckanext/datagovmk/actions.py:751
+#: ckanext/datagovmk/actions.py:329 ckanext/datagovmk/actions.py:694
+#: ckanext/datagovmk/actions.py:723 ckanext/datagovmk/actions.py:767
 msgid "Missing value"
 msgstr "Vlera mungon"
 
-#: ckanext/datagovmk/actions.py:443 ckanext/datagovmk/actions.py:449
-#: ckanext/datagovmk/actions.py:565 ckanext/datagovmk/actions.py:571
-#: ckanext/datagovmk/actions.py:629 ckanext/datagovmk/actions.py:632
+#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:433
+#: ckanext/datagovmk/actions.py:554 ckanext/datagovmk/actions.py:560
+#: ckanext/datagovmk/actions.py:645 ckanext/datagovmk/actions.py:648
 msgid "message"
 msgstr "mesazh"
 
-#: ckanext/datagovmk/actions.py:443 ckanext/datagovmk/actions.py:565
+#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:554
 msgid "Resource already exists"
 msgstr "Burimet tashmë ekzistojnë"
 
-#: ckanext/datagovmk/actions.py:449 ckanext/datagovmk/actions.py:571
+#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:560
 msgid "Resource file is missing"
 msgstr "Dosja e burimeve mungon"
 
-#: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:543
+#: ckanext/datagovmk/actions.py:518 ckanext/datagovmk/actions.py:532
 msgid "Resource was not found."
 msgstr "Burimi nuk u gjet."
 
-#: ckanext/datagovmk/actions.py:629 ckanext/datagovmk/actions.py:632
+#: ckanext/datagovmk/actions.py:645 ckanext/datagovmk/actions.py:648
 msgid "Invalid URL"
 msgstr "URL e pavlefshme"
 
-#: ckanext/datagovmk/actions.py:663
+#: ckanext/datagovmk/actions.py:679
 msgid "No script was found for the provided name"
 msgstr "Asnjë skript nuk u gjet për emrin e dhënë"
 
-#: ckanext/datagovmk/actions.py:678 ckanext/datagovmk/actions.py:707
-#: ckanext/datagovmk/actions.py:736 ckanext/datagovmk/actions.py:751
+#: ckanext/datagovmk/actions.py:694 ckanext/datagovmk/actions.py:723
+#: ckanext/datagovmk/actions.py:752 ckanext/datagovmk/actions.py:767
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:10
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr "autoritet"
 
-#: ckanext/datagovmk/actions.py:691
+#: ckanext/datagovmk/actions.py:707
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr "Gabim gjatë dërgimit të email aktivizimit, përdoruesi nuk u krijua: {0}"
 
-#: ckanext/datagovmk/actions.py:736
+#: ckanext/datagovmk/actions.py:752
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 "Dosja e ngarkuar e autoritetit është shumë e madhe. Madhësia maksimale e "
 "lejuar është {0}MB."
 
-#: ckanext/datagovmk/controller.py:79
+#: ckanext/datagovmk/controller.py:107
 msgid "Resource not found"
 msgstr "Burimi nuk u gjet"
 
-#: ckanext/datagovmk/controller.py:88
+#: ckanext/datagovmk/controller.py:116 ckanext/datagovmk/controller.py:131
+#: ckanext/datagovmk/controller.py:136
 msgid "Resource data not found"
 msgstr "Të dhënat e resurseve nuk u gjetën"
 
-#: ckanext/datagovmk/controller.py:98
+#: ckanext/datagovmk/controller.py:126
 msgid "No download is available"
 msgstr "Nuk ka shkarkim në dispozicion"
 
-#: ckanext/datagovmk/controller.py:240 ckanext/datagovmk/controller.py:258
-#: ckanext/datagovmk/controller.py:280
-#, fuzzy
+#: ckanext/datagovmk/controller.py:162 ckanext/datagovmk/controller.py:356
+msgid "Not authorized to see this page"
+msgstr "Nuk është i autorizuar për të parë këtë faqe"
+
+#: ckanext/datagovmk/controller.py:274
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:3
+msgid "Organizations"
+msgstr "Organizatat"
+
+#: ckanext/datagovmk/controller.py:275
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:4
+msgid "Groups"
+msgstr "Grupet"
+
+#: ckanext/datagovmk/controller.py:276
+msgid "Tags"
+msgstr "Tags"
+
+#: ckanext/datagovmk/controller.py:277
+msgid "Formats"
+msgstr "Formati"
+
+#: ckanext/datagovmk/controller.py:278
+msgid "Licenses"
+msgstr "Licencat"
+
+#: ckanext/datagovmk/controller.py:345
+msgid "Invalid search query: {error_message}"
+msgstr "Kërkimi i kërkimit i pavlefshëm: {error_message}"
+
+#: ckanext/datagovmk/controller.py:364
+msgid "Parameter \"{parameter_name}\" is not an integer"
+msgstr "Parametri \"{parameter_name}\" nuk është një numër i plotë"
+
+#: ckanext/datagovmk/controller.py:515 ckanext/datagovmk/controller.py:533
+#: ckanext/datagovmk/controller.py:555
 msgid "User not found"
 msgstr "Burimi nuk u gjet"
 
-#: ckanext/datagovmk/controller.py:244
+#: ckanext/datagovmk/controller.py:519
 msgid "Invalid activation key. Please try again."
 msgstr "Çelësi i aktivizimit i pavlefshëm. Ju lutemi provoni përsëri."
 
-#: ckanext/datagovmk/controller.py:253
+#: ckanext/datagovmk/controller.py:528
 msgid "Your account has been activated."
 msgstr "Llogaria jote është aktivizuar"
 
-#: ckanext/datagovmk/controller.py:256
+#: ckanext/datagovmk/controller.py:531
 #, python-format
 msgid "Unauthorized to edit user %s"
 msgstr "E paautorizuar për të redaktuar përdoruesin: %s"
 
-#: ckanext/datagovmk/controller.py:260 ckanext/datagovmk/controller.py:282
+#: ckanext/datagovmk/controller.py:535 ckanext/datagovmk/controller.py:557
 msgid "Integrity Error"
 msgstr "Gabim i integritetit"
 
-#: ckanext/datagovmk/controller.py:278
+#: ckanext/datagovmk/controller.py:553
 #, python-format
 msgid "Unauthorized to create user %s"
 msgstr "I paautorizuar për të krijuar përdorues %s"
 
-#: ckanext/datagovmk/controller.py:284
+#: ckanext/datagovmk/controller.py:559
 msgid "Bad Captcha. Please try again."
 msgstr "Captcha i pavlefshëm. Ju lutemi provoni përsëri."
 
-#: ckanext/datagovmk/controller.py:292
+#: ckanext/datagovmk/controller.py:567
 #, python-format
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the "
@@ -130,20 +164,29 @@ msgstr ""
 "Një email konfirmimi është dërguar në %s. Ju lutemi përdorni linkun në "
 "email për të vazhduar."
 
-#: ckanext/datagovmk/controller.py:305
+#: ckanext/datagovmk/controller.py:580
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
 "Përdoruesi %s është regjistruar tani, por ju jeni ende i regjistruar si "
 "%s nga më parë"
 
-#: ckanext/datagovmk/controller.py:456
+#: ckanext/datagovmk/controller.py:759
 msgid "Unable to send the issue report to the system admin."
 msgstr "E pamundur për të dërguar raportin tek administratori i sistemit."
 
-#: ckanext/datagovmk/controller.py:480
+#: ckanext/datagovmk/controller.py:783
 msgid "The issue has been reported."
 msgstr "Problemi është raportuar."
+
+#: ckanext/datagovmk/controller.py:832
+#, python-format
+msgid "format: must be one of %s"
+msgstr "format: duhet të jetë një nga %s"
+
+#: ckanext/datagovmk/controller.py:844
+msgid "DataStore resource not found"
+msgstr "Burimi i të dhënave nuk u gjet"
 
 #: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
@@ -193,9 +236,8 @@ msgid "Email message was successfully sent."
 msgstr "Mesazhi me email u dërgua me sukses."
 
 #: ckanext/datagovmk/utils.py:442
-#, fuzzy
 msgid "An error occured while sending the email. Try again."
-msgstr "Ndodhi një gabim gjatë përgatitjes së një arkivi zip."
+msgstr "Ndodhi një gabim gjatë dërgimit të emailit. Provo përsëri."
 
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:66
 msgid "Preparing zip archive..."
@@ -516,14 +558,12 @@ msgstr ""
 "tjetër duke klikuar butonin më poshtë"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:36
-#, fuzzy
 msgid "Report issue"
 msgstr "Raportet"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
-#, fuzzy
 msgid "Title"
-msgstr "Rang"
+msgstr "Titull"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:41
 msgid "The issue title"
@@ -699,6 +739,38 @@ msgstr ""
 " <p class=\"empty\">Ky grup i të dhënave nuk ka të dhëna, <a "
 "href=\"%(url)s\"> pse jo shtoni disa?</a></p>"
 
+#: ckanext/datagovmk/templates/package/search.html:17
+msgid "Relevance"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:18
+msgid "Name Ascending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:19
+msgid "Name Descending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:20
+msgid "Last Modified"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:21
+msgid "Total Downloads Ascending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:22
+msgid "Total Downloads Descending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:23
+msgid "File Size Ascending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:24
+msgid "File Size Descending"
+msgstr ""
+
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
 msgid "Download Dataset Metadata"
 msgstr "Shkarko Metadatat e të dhënave"
@@ -769,14 +841,6 @@ msgstr "Formulari përmban shënime të pavlefshme:"
 msgid "Datasets"
 msgstr "Seti i të dhënave"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:3
-msgid "Organizations"
-msgstr "Organizatat"
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:4
-msgid "Groups"
-msgstr "Grupet"
-
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
@@ -797,6 +861,18 @@ msgstr "Përvojë"
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
 msgstr "Raportet"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+msgid "Data Requests"
+msgstr "Kërkesat e të dhënave"
+
+#: ckanext/datagovmk/templates/snippets/search_form.html:9
+msgid "From"
+msgstr "Nga"
+
+#: ckanext/datagovmk/templates/snippets/search_form.html:22
+msgid "To"
+msgstr "Deri"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4
 msgid "Share"

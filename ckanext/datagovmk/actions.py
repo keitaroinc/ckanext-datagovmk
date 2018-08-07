@@ -29,7 +29,9 @@ from ckan.logic.action.create import package_create as _package_create
 from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
+from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
+from ckanext.datagovmk.solr.stats import update_package_stats as update_package_stats_solr
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
@@ -38,6 +40,7 @@ from ckan.logic.action.get import package_search as _package_search
 from ckan.logic.action.get import resource_show as _resource_show
 from ckan.logic.action.get import organization_show as _organization_show
 from ckan.logic.action.get import group_show as _group_show
+from ckan.logic import chained_action
 
 log = getLogger(__name__)
 
@@ -475,6 +478,11 @@ def resource_create(context, data_dict):
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.after_create(context, resource)
 
+    try:
+        update_package_stats(resource['package_id'])
+    except Exception as e:
+        log.error(e)
+
     return resource
 
 
@@ -587,7 +595,34 @@ def resource_update(context, data_dict):
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.after_update(context, resource)
 
+    try:
+        update_package_stats(resource['package_id'])
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+
     return resource
+
+
+@chained_action
+def resource_delete(action, context, data_dict):
+    package_id = None
+    try:
+        resource = get_action('resource_show')({'ignore_auth': True}, {'id': data_dict['id']})
+        package_id = resource['package_id']
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+
+    result = action(context, data_dict)
+    
+    try:
+        if package_id:
+            update_package_stats(package_id)
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+    return result
 
 
 def _calculate_checksum(file):
@@ -935,3 +970,27 @@ def group_show(context, data_dict):
     data['description'] = h.translate_field(data, 'description')
 
     return data
+
+
+def get_package_stats(package_id):
+    pkg_dict = {}
+    try:
+        pkg_dict = get_action('package_show')({'ignore_auth': True}, {'id': package_id})
+    except toolkit.NotFound:
+        return None
+
+    sizes = [rc.get('size', 0) for rc in pkg_dict.get('resources', [])]
+    max_file_size = 0
+    if sizes:
+        max_file_size = max(sizes)
+    total_downloads = get_total_package_downloads(package_id)
+
+    return {
+        'file_size': max_file_size,
+        'total_downloads': total_downloads
+    }
+
+
+def update_package_stats(package_id):
+    stats = get_package_stats(package_id)
+    update_package_stats_solr(package_id, stats)
