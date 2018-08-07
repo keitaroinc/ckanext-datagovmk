@@ -434,22 +434,20 @@ def resource_create(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError({_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
         _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
-
 
     if 'mimetype' not in data_dict:
         if hasattr(upload, 'mimetype'):
@@ -555,20 +553,21 @@ def resource_update(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError(
-                {_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
-        _validate_link(data_dict.get('url'))
+        # if url_type is not upload then it is Link
+        if resource.url_type != 'upload':
+            data_dict['checksum'] = ''
+            _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
 
