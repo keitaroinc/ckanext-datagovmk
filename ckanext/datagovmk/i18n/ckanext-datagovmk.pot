@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-01 11:54+0200\n"
+"POT-Creation-Date: 2018-08-07 23:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,55 +22,55 @@ msgstr ""
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:345
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:45
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:53
+#: ckanext/datagovmk/actions.py:347
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:51
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:59
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:345 ckanext/datagovmk/actions.py:678
-#: ckanext/datagovmk/actions.py:707 ckanext/datagovmk/actions.py:751
+#: ckanext/datagovmk/actions.py:347 ckanext/datagovmk/actions.py:680
+#: ckanext/datagovmk/actions.py:709 ckanext/datagovmk/actions.py:753
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:443 ckanext/datagovmk/actions.py:449
-#: ckanext/datagovmk/actions.py:565 ckanext/datagovmk/actions.py:571
-#: ckanext/datagovmk/actions.py:629 ckanext/datagovmk/actions.py:632
+#: ckanext/datagovmk/actions.py:445 ckanext/datagovmk/actions.py:451
+#: ckanext/datagovmk/actions.py:567 ckanext/datagovmk/actions.py:573
+#: ckanext/datagovmk/actions.py:631 ckanext/datagovmk/actions.py:634
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:443 ckanext/datagovmk/actions.py:565
+#: ckanext/datagovmk/actions.py:445 ckanext/datagovmk/actions.py:567
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:449 ckanext/datagovmk/actions.py:571
+#: ckanext/datagovmk/actions.py:451 ckanext/datagovmk/actions.py:573
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:529 ckanext/datagovmk/actions.py:543
+#: ckanext/datagovmk/actions.py:531 ckanext/datagovmk/actions.py:545
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:629 ckanext/datagovmk/actions.py:632
+#: ckanext/datagovmk/actions.py:631 ckanext/datagovmk/actions.py:634
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:663
+#: ckanext/datagovmk/actions.py:665
 msgid "No script was found for the provided name"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:678 ckanext/datagovmk/actions.py:707
-#: ckanext/datagovmk/actions.py:736 ckanext/datagovmk/actions.py:751
+#: ckanext/datagovmk/actions.py:680 ckanext/datagovmk/actions.py:709
+#: ckanext/datagovmk/actions.py:738 ckanext/datagovmk/actions.py:753
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:10
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:691
+#: ckanext/datagovmk/actions.py:693
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:736
+#: ckanext/datagovmk/actions.py:738
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
@@ -129,11 +129,11 @@ msgstr ""
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:456
+#: ckanext/datagovmk/controller.py:484
 msgid "Unable to send the issue report to the system admin."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:480
+#: ckanext/datagovmk/controller.py:508
 msgid "The issue has been reported."
 msgstr ""
 
@@ -565,28 +565,40 @@ msgstr ""
 msgid "Popular tags"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:9
 msgid "dataset"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:9
 msgid "datasets"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:16
 msgid "organization"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:16
 msgid "organizations"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:23
 msgid "group"
 msgstr ""
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:23
 msgid "groups"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:30
+msgid "catalog"
+msgstr ""
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:30
+msgid "catalogs"
+msgstr ""
+
+#: ckanext/datagovmk/templates/organization/read.html:9
+msgid "Datasets catalog"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/read.html:19
@@ -607,12 +619,12 @@ msgid "Additional Information"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/resource_read.html:30
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:35
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
 msgid "Field"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/resource_read.html:31
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:37
 msgid "Value"
 msgstr ""
 
@@ -660,35 +672,35 @@ msgid ""
 " some?</a></p> "
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:16
 msgid "Download Dataset Metadata"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:32
 msgid "Additional Info"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:56
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:57
 msgid "State"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:45
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:51
 msgid "This field is required"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:50
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:56
 msgid "Agree that you have provided an authority to add this dataset."
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:54
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:60
 msgid "You must agree to add this dataset."
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:64
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 msgid "If necessary, attach a file with additional authority to add this dataset"
 msgstr ""
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:64
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
 #: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Uploaded authority file"
@@ -753,6 +765,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+msgid "Data Requests"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4

@@ -80,6 +80,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
 
@@ -115,6 +116,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_org_title,
             'datagovmk_get_org_description':
                 helpers.get_org_description,
+            'datagovmk_get_org_catalog':
+                helpers.get_org_catalog,
+            'datagovmk_get_catalog_count':
+                helpers.get_catalog_count
         }
 
     # IActions
@@ -199,3 +204,17 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def configure(self, config):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
+
+    # IPackageController
+
+    def before_search(self, search_params):
+        """ Before making a search with package_search, make sure to exclude
+        datasets that are marked as catalogs. """
+        fq = search_params.get('fq', '')
+        q = search_params.get('q', '')
+
+        if 'extras_org_catalog_enabled' not in fq and \
+           'extras_org_catalog_enabled:true' not in q:
+            search_params.update({'fq': fq + ' -extras_org_catalog_enabled:true'})
+
+        return search_params
