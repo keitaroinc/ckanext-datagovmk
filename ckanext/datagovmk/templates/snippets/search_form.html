@@ -1,6 +1,7 @@
 {% import 'macros/form.html' as form %}
 {% ckan_extends %}
 {% block search_input %}
+{%- if type == 'dataset' -%}
 <div class="row">
     <div class="col-md-6">
             {% call form.input(
@@ -29,5 +30,6 @@
             {% endcall %}
     </div>
 </div>
+{%- endif -%}
 {{ super() }}
 {% endblock %}
