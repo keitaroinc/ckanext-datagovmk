@@ -1,0 +1,18 @@
+{% ckan_extends %}
+
+{% block page_primary_action %}
+    {% block related_datasets %}
+        {% set catalog = h.datagovmk_get_org_catalog(c.group_dict.id) %}
+
+        {% if catalog %}
+            <section class="related-datasets">
+            <h3 class="title">{{ _('Datasets catalog') }}</h3>
+            <ul class="dataset-list list-unstyled">
+                {% snippet 'snippets/package_item.html', package=catalog %}
+            </ul>
+            </section>
+        {% endif %}
+    {% endblock %}
+
+    {{ super() }}
+{% endblock %}
