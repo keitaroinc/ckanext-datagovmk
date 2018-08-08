@@ -1,7 +1,10 @@
+{% resource 'datagovmk/js/setup_increment_downloads.js' %}
+{% resource 'datagovmk/js/modules/increment-downloads.js' %}
+
 {% ckan_extends %}
 
 {% block resource_additional_information_inner %}
-  <div class="module-content">
+  <div class="module-content" data-resource-id="{{ res.id }}">
       {%- block resource_metadata_download -%}
       <div class="btn-group pull-right download-metadata-control">
           <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}"

@@ -15,7 +15,6 @@ from io import StringIO
 
 from ckan.controllers.package import PackageController
 from ckan.controllers.user import UserController
-from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.helpers import get_storage_path_for
 from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      export_resource_to_xml,
@@ -86,8 +85,6 @@ class DownloadController(PackageController):
         :param resource_id: resource id
         :type resource_id: string
         """
-        increment_downloads(resource_id)
-
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
@@ -116,7 +113,7 @@ class DownloadController(PackageController):
         elif 'url' not in rsc:
             abort(404, toolkit._('No download is available'))
         h.redirect_to(rsc['url'])
-    
+
     def download_zip(self, zip_id):
         if not zip_id:
             abort(404, toolkit._('Resource data not found'))
@@ -125,7 +122,7 @@ class DownloadController(PackageController):
 
         if not os.path.isfile(file_path):
             abort(404, toolkit._('Resource data not found'))
-            
+
         if not package_name:
             package_name = 'resources'
         package_name += '.zip'
@@ -512,8 +509,8 @@ class ReportIssueController(BaseController):
         if request.method != 'POST':
             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
-        
-            
+
+
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
@@ -538,9 +535,9 @@ class ReportIssueController(BaseController):
         })
 
         subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
-        
+
         result = send_email(to_user['name'], to_user['email'], subject, email_content)
-        
+
         if not result['success']:
             h.flash_error(result['message'])
         else:
@@ -555,17 +552,17 @@ def get_admin_email():
     If a system configuration is present, it is preffered to the CKAN sysadmins.
     The configuration property is ``ckanext.datagovmk.site_admin_email``.
 
-    If no email is configured explicitly, then the email of the first CKAN 
+    If no email is configured explicitly, then the email of the first CKAN
     sysadmin is used.
 
     :returns: ``str`` the email of the sysadmin to which to send emails with
         issues.
-        
+
     """
     sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
     if sysadmin_email:
         name = sysadmin_email.split('@')[0]
-        return { 
+        return {
             'email': sysadmin_email,
             'name': name
         }
