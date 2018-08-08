@@ -789,7 +789,7 @@ msgstr "Големина на датотека - растечки"
 
 #: ckanext/datagovmk/templates/package/search.html:24
 msgid "File Size Descending"
-msgstr "Вкупен број на спуштања - опаѓачки"
+msgstr "Големина на датотека - опаѓачки"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:16
 msgid "Download Dataset Metadata"
