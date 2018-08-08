@@ -1,16 +1,21 @@
 {% import 'macros/form.html' as form %}
+{% resource 'ckanext-pages/main' %}
+
 {% ckan_extends %}
 {% block search_input %}
 {%- if type == 'dataset' -%}
+{%- set start_date = start_date if start_date is defined else '' -%}
+{%- set end_date = end_date if end_date is defined else '' -%}
 <div class="row">
     <div class="col-md-6">
             {% call form.input(
                 '_start_date',
                 id='field-start-date',
                 label= _('From'),
-                type='date',
+                value=start_date,
+                type='text',
                 classes=['control-medium'],
-                attrs={"class": "form-control"},
+                attrs={"class": "form-control", "data-module": "datepicker"},
                 is_required=False
                 )
             %}
@@ -21,9 +26,10 @@
                 '_end_date',
                 id='field-start-date',
                 label= _('To'),
-                type='date',
+                value=end_date,
+                type='text',
                 classes=['control-medium'],
-                attrs={"class": "form-control"},
+                attrs={"class": "form-control", "data-module": "datepicker"},
                 is_required=False
                 )
             %}

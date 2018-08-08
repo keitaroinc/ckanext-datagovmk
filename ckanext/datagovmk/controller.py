@@ -12,6 +12,7 @@ import json
 import csv
 import re
 from urllib import urlencode
+import pytz
 from io import StringIO
 
 
@@ -308,9 +309,13 @@ class DownloadController(PackageController):
                 if not start_date:
                     start_date = datetime(year=1900, month=1, day=1)
                 if not end_date:
-                    end_date = datetime(year=2100, month=1, day=1)
+                    end_date = datetime(year=2100, month=1, day=1, hour=23, minute=59,second=59, microsecond=999999)
+                else:
+                    end_date = datetime_to_utc(end_date)
+                    end_date = end_date.replace(hour=23, minute=59,second=59, microsecond=999999)
                 
-                fq = fq + ' +metadata_modified:[%s TO %s]' % (start_date.strftime('%Y-%m-%dT%H:%M:%SZ'), end_date.strftime('%Y-%m-%dT%H:%M:%SZ'))
+                fq = fq + ' +metadata_modified:[%s TO %s]' % (datetime_to_utc(start_date).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                                              datetime_to_utc(end_date).strftime('%Y-%m-%dT%H:%M:%SZ'))
             
             data_dict = {
                 'q': q,
@@ -369,6 +374,7 @@ class DownloadController(PackageController):
                                        package_type=package_type)
 
         extra_vars['dataset_type'] = package_type
+        print " ==> ", extra_vars
         return render(self._search_template(package_type),
                       extra_vars=extra_vars)
 
@@ -976,12 +982,12 @@ def xml_writer(response, fields, name=None, bom=False):
 
 def extract_date(datestr):
     datestr = datestr.strip() if datestr else ''
-    m = re.match(r'(?P<mm>\d{1,2})/(?P<dd>\d{1,2})/(?P<yyyy>\d{4})', datestr)
+    m = re.match(r'(?P<mm>\d{1,2})(?P<sep>[-/])(?P<dd>\d{1,2})[-/](?P<yyyy>\d{4})', datestr)
     if m:
         if int(m.group('mm')) > 12:
-            return _strptime('%m/%d/%Y', datestr)
+            return _strptime('%m/%d/%Y' if m.group('sep') == '/' else '%m-%d-%Y', datestr)
         else:
-            return _strptime('%d/%m/%Y', datestr)
+            return _strptime('%d/%m/%Y' if m.group('sep') == '/' else '%d-%m-%Y', datestr)
     
     if re.match(r'\d{4}-\d{2}-\d{2}', datestr):
         return _strptime('%Y-%m-%d', datestr)
@@ -993,3 +999,6 @@ def _strptime(format_, datestr):
         return datetime.strptime(datestr, format_)
     except Exception as e:
         return None
+
+def datetime_to_utc(dt):
+    return dt.replace(tzinfo=pytz.UTC)
