@@ -244,27 +244,6 @@ def prepare_zip_resources(context, data_dict):
     return {'zip_id': None}
 
 
-@toolkit.side_effect_free
-def download_zip(context, data_dict):
-    """Downloads a zip file
-
-    :param id: an id of the created zip archive, format: filename::packagename
-    :type id: string
-    """
-    file_name, package_name = data_dict.get('id').split('::')
-    file_path = h.get_storage_path_for('temp-datagovmk/' + file_name)
-
-    if not package_name:
-        package_name = 'resources'
-    package_name += '.zip'
-
-    with open(file_path, 'r') as f:
-        toolkit.response.write(f.read())
-
-    toolkit.response.content_disposition = 'attachment; filename=' + package_name
-    os.remove(file_path)
-
-
 def safe_override(action):
     """Decorator for save override of standard CKAN actions.
     When overriding CKAN actions you must be aware of the extensions
