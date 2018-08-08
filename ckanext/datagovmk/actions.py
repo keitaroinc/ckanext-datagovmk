@@ -152,7 +152,8 @@ def get_related_datasets(context, data_dict):
         for group_dataset in group_datasets:
             group_dataset_id = group_dataset.get('id')
             if group_dataset_id != dataset.get('id') and \
-               group_dataset_id not in related_datasets_ids:
+               group_dataset_id not in related_datasets_ids and \
+               group_dataset['type'] == 'dataset':
                 related_datasets.append(group_dataset)
                 related_datasets_ids.append(group_dataset_id)
 
@@ -168,7 +169,8 @@ def get_related_datasets(context, data_dict):
         for tag_dataset in tag_datasets:
             tag_dataset_id = tag_dataset.get('id')
             if tag_dataset_id != dataset.get('id') and \
-               tag_dataset_id not in related_datasets_ids:
+               tag_dataset_id not in related_datasets_ids and \
+               tag_dataset['type'] == 'dataset':
                 related_datasets.append(tag_dataset)
                 related_datasets_ids.append(tag_dataset_id)
 
@@ -240,27 +242,6 @@ def prepare_zip_resources(context, data_dict):
     os.remove(file_path)
 
     return {'zip_id': None}
-
-
-@toolkit.side_effect_free
-def download_zip(context, data_dict):
-    """Downloads a zip file
-
-    :param id: an id of the created zip archive, format: filename::packagename
-    :type id: string
-    """
-    file_name, package_name = data_dict.get('id').split('::')
-    file_path = h.get_storage_path_for('temp-datagovmk/' + file_name)
-
-    if not package_name:
-        package_name = 'resources'
-    package_name += '.zip'
-
-    with open(file_path, 'r') as f:
-        toolkit.response.write(f.read())
-
-    toolkit.response.content_disposition = 'attachment; filename=' + package_name
-    os.remove(file_path)
 
 
 def safe_override(action):
@@ -432,22 +413,20 @@ def resource_create(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError({_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
         _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
-
 
     if 'mimetype' not in data_dict:
         if hasattr(upload, 'mimetype'):
@@ -542,10 +521,13 @@ def resource_update(context, data_dict):
         log.error('Could not find resource %s after all', id)
         raise NotFound(_('Resource was not found.'))
 
-    # Persist the datastore_active extra if already present and not provided
+    # Persist the datastore_active and checksum extras if already present and not provided
     if ('datastore_active' in resource.extras and
             'datastore_active' not in data_dict):
         data_dict['datastore_active'] = resource.extras['datastore_active']
+    if ('checksum' in resource.extras and
+            'checksum' not in data_dict):
+        data_dict['checksum'] = resource.extras['checksum']
 
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.before_update(context, pkg_dict['resources'][n], data_dict)
@@ -553,20 +535,21 @@ def resource_update(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError(
-                {_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
-        _validate_link(data_dict.get('url'))
+        # if url_type is not upload then it is Link
+        if resource.url_type != 'upload':
+            data_dict['checksum'] = ''
+            _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
 

@@ -490,29 +490,41 @@ msgstr "Кërko"
 msgid "Popular tags"
 msgstr "Tags-at më të popullarizaura"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:9
 msgid "dataset"
 msgstr "set i të dhënave"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:8
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:9
 msgid "datasets"
 msgstr "Setet e të dhënave"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:16
 msgid "organization"
 msgstr "organizatë"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:15
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:16
 msgid "organizations"
 msgstr "organizatat"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:23
 msgid "group"
 msgstr "grup"
 
-#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:22
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:23
 msgid "groups"
 msgstr "grupet"
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:30
+msgid "catalog"
+msgstr "katalog"
+
+#: ckanext/datagovmk/templates/home/snippets/stats_alt.html:30
+msgid "catalogs"
+msgstr "katalogjet"
+
+#: ckanext/datagovmk/templates/organization/read.html:9
+msgid "Datasets catalog"
+msgstr "Katalogu i të dhënave"
 
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
@@ -532,12 +544,12 @@ msgid "Additional Information"
 msgstr "Informacione shtesë"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:30
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:35
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
 msgid "Field"
 msgstr "Fusha"
 
 #: ckanext/datagovmk/templates/package/resource_read.html:31
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:37
 msgid "Value"
 msgstr "Vlera"
 
@@ -572,37 +584,37 @@ msgstr ""
 " <p class=\"empty\">Ky set i të dhënave nuk ka të dhëna, <a href=\"%(url)s\"> pse të mos "
 "shtoni disa?</a></p>"
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:15
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:16
 msgid "Download Dataset Metadata"
 msgstr "Shkarko Setin e të dhënave Metadata"
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:31
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:32
 msgid "Additional Info"
 msgstr "Informacione shtesë"
 
-#: ckanext/datagovmk/templates/package/snippets/additional_info.html:56
+#: ckanext/datagovmk/templates/package/snippets/additional_info.html:57
 msgid "State"
 msgstr "Gjendja"
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:45
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:51
 msgid "This field is required"
 msgstr "Kjo fushë duhet të plotësohet"
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:50
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:56
 msgid "Agree that you have provided an authority to add this dataset."
 msgstr "Pajtohuni se ju i keni dhënë një autoriteti për të shtuar këtë set të të dhënave."
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:54
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:60
 msgid "You must agree to add this dataset."
 msgstr "Duhet të pranoni të shtoni këtë set të të të dhënave."
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:64
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 msgid "If necessary, attach a file with additional authority to add this dataset"
 msgstr ""
 "Nëse është e nevojshme, bashkëngjitni një skedar me autoritet shtesë për të shtuar këtë set "
 "të dhënash"
 
-#: ckanext/datagovmk/templates/package/snippets/package_form.html:64
+#: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
 #: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Uploaded authority file"
@@ -668,6 +680,10 @@ msgstr "Përvojë"
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
 msgstr "Raportet"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+msgid "Data Requests"
+msgstr "Kërkesat e të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/social_media.html:4
 msgid "Share"

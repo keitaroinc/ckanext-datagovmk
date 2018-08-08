@@ -264,3 +264,24 @@ def get_org_description(id):
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
     return translate_field(org, 'description')
+
+
+def get_org_catalog(id):
+    """ Get the catalog for an organization. A catalog is represented as a
+    dataset. """
+    try:
+        data_dict = {
+            'fq': '(owner_org:{0} AND extras_org_catalog_enabled:true)'.format(id)
+        }
+        data = toolkit.get_action('package_search')(data_dict=data_dict)
+        return data['results'][0]
+    except Exception:
+        return None
+
+
+def get_catalog_count():
+    """ Count how many catalogs (datasets) are in the portal. """
+    data_dict = {
+        'fq': 'extras_org_catalog_enabled:true'
+    }
+    return toolkit.get_action('package_search')(data_dict=data_dict)['count']

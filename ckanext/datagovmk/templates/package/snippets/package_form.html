@@ -23,9 +23,15 @@
   {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
   {%- for field in schema.dataset_fields -%}
     {%- if field.form_snippet is not none -%}
-      {%- snippet 'scheming/snippets/form_field.html',
+      {% if field.field_name == 'org_catalog_enabled' and not request.params.get('metadata') %}
+        {%- snippet 'scheming/snippets/form_field.html',
+          field=field, data=data, errors=errors, licenses=c.licenses,
+          entity_type='dataset', object_type=dataset_type -%}
+      {% elif field.field_name != 'org_catalog_enabled' %}
+        {%- snippet 'scheming/snippets/form_field.html',
         field=field, data=data, errors=errors, licenses=c.licenses,
         entity_type='dataset', object_type=dataset_type -%}
+      {% endif %}
     {%- endif -%}
   {%- endfor -%}
   {%- if 'resource_fields' not in schema -%}
@@ -62,5 +68,20 @@
     {% set is_upload_enabled = h.uploads_enabled() %}
 
     {% snippet 'snippets/upload_authority.html', data=data, errors=errors, is_upload_enabled=is_upload_enabled, upload_label=_('If necessary, attach a file with additional authority to add this dataset'), field_url='authority_file_url', field_upload='authority_file_upload', is_url=is_url, is_upload=is_upload, url_label= _('Uploaded authority file'), is_required=false %}
+
+    {#{% if not request.params.get('metadata') %}
+      <div class="form-group control-medium">
+        <label class="control-label" for="catalog_enabled">{{ _('Organization catalog') }}</label>
+        <div class="controls">
+          <fieldset class="checkboxes">
+            <label>
+              <input id="catalog_enabled" type="checkbox" {% if data.catalog_enabled %} checked {% endif %} name="catalog_enabled">
+              {{ _('Mark this dataset as a catalog for organization') }}
+            </label>
+          </fieldset>
+        </div>
+      </div>
+    {% endif %}#}
 {% endblock %}
+
 

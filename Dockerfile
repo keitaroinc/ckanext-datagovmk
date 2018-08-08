@@ -87,7 +87,13 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
     # issues
     pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-issues.git@dgm-stable#egg=ckanext-issues" && \
     # fluent
-    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent"
+    pip install --no-cache-dir -e "git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent" && \
+    # dataexplorer
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dataexplorer.git#egg=ckanext-dataexplorer" && \
+    pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-dataexplorer/requirements.txt" && \
+    # datarequests
+    pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datarequests.git@dgm-stable#egg=ckanext-datarequests"
+
 
 
 # Dirty fix for https://github.com/ckan/ckan/issues/3610
@@ -104,7 +110,7 @@ ENV CKAN__PLUGINS envvars \
                   stats \
                   text_view \
                   image_view \
-                  recline_view \
+                  dataexplorer \
                   datastore \
                   datapusher \
                   odata \
@@ -129,13 +135,17 @@ ENV CKAN__PLUGINS envvars \
                   validation \
                   experience \
                   issues \
-                  fluent
+                  fluent \
+                  datarequests
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
 
 # Load envvars plugin on ini file
 RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
+
+# We must replace the recline_view with dataexplorer view
+RUN paster --plugin=ckan config-tool ${APP_DIR}/production.ini "ckan.views.default_views = image_view text_view dataexplorer"
 
 COPY prerun.py /srv/app/prerun.py
 COPY extra_scripts.sh /srv/app/extra_scripts.sh

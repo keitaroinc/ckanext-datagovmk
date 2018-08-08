@@ -80,6 +80,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
 
@@ -115,6 +116,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_org_title,
             'datagovmk_get_org_description':
                 helpers.get_org_description,
+            'datagovmk_get_org_catalog':
+                helpers.get_org_catalog,
+            'datagovmk_get_catalog_count':
+                helpers.get_catalog_count
         }
 
     # IActions
@@ -125,7 +130,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
-            'datagovmk_download_zip': actions.download_zip,
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
@@ -184,6 +188,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
+            m.connect('download_zip',
+                      '/download/zip/{zip_id}',
+                      action='download_zip')
 
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
@@ -194,8 +201,26 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.datagovmk.controller:ReportIssueController',
                     action='report_issue_form')
 
+        map.connect('/datastore/dump/{resource_id}',
+                    controller='ckanext.datagovmk.controller:OverrideDatastoreController',
+                    action='dump')
+
         return map
 
     def configure(self, config):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
+
+    # IPackageController
+
+    def before_search(self, search_params):
+        """ Before making a search with package_search, make sure to exclude
+        datasets that are marked as catalogs. """
+        fq = search_params.get('fq', '')
+        q = search_params.get('q', '')
+
+        if 'extras_org_catalog_enabled' not in fq and \
+           'extras_org_catalog_enabled:true' not in q:
+            search_params.update({'fq': fq + ' -extras_org_catalog_enabled:true'})
+
+        return search_params
