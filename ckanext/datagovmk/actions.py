@@ -31,7 +31,8 @@ from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
 from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
-from ckanext.datagovmk.solr.stats import update_package_stats as update_package_stats_solr
+from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
+                                          increment_total_downloads as increment_total_downloads_solr)
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
@@ -1001,7 +1002,17 @@ def update_package_stats(package_id):
     update_package_stats_solr(package_id, stats)
 
 
+@toolkit.side_effect_free
 def increment_downloads_for_resource(context, data_dict):
     resource_id = data_dict.get('resource_id')
     increment_downloads(resource_id)
+    # Also, update the stats in dataset indexed metadata
+    try:
+        resource = get_action('resource_show')({'ignore_auth': True}, {'id': resource_id})
+        increment_total_downloads_solr(resource['package_id'])
+    except Exception as e:
+        log.debug(e)
+        import traceback
+        traceback.print_exc()
+
     return 'success'
