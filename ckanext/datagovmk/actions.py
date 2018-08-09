@@ -41,6 +41,7 @@ from ckan.logic.action.get import resource_show as _resource_show
 from ckan.logic.action.get import organization_show as _organization_show
 from ckan.logic.action.get import group_show as _group_show
 from ckan.logic import chained_action
+from ckanext.datagovmk.model.stats import increment_downloads
 
 log = getLogger(__name__)
 
@@ -240,6 +241,8 @@ def prepare_zip_resources(context, data_dict):
         pass
 
     if resourceArchived:
+        for resource_id in resource_ids:
+            increment_downloads(resource_id)
         return {'zip_id': zip_id}
 
     os.remove(file_path)
@@ -996,3 +999,9 @@ def get_package_stats(package_id):
 def update_package_stats(package_id):
     stats = get_package_stats(package_id)
     update_package_stats_solr(package_id, stats)
+
+
+def increment_downloads_for_resource(context, data_dict):
+    resource_id = data_dict.get('resource_id')
+    increment_downloads(resource_id)
+    return 'success'
