@@ -4,3 +4,26 @@
     {% snippet "spatial/snippets/spatial_query.html" %}
     {{ super() }}
 {% endblock %}
+
+{% block form %}
+{%- set start_date = start_date if start_date is defined else '' -%}
+{%- set end_date = end_date if end_date is defined else '' -%}
+    {% set facets = {
+        'fields': c.fields_grouped,
+        'search': c.search_facets,
+        'titles': c.facet_titles,
+        'translated_fields': c.translated_fields,
+        'remove_field': c.remove_field }
+    %}
+    {% set sorting = [
+        (_('Relevance'), 'score desc, metadata_modified desc'),
+        (_('Name Ascending'), 'title_string asc'),
+        (_('Name Descending'), 'title_string desc'),
+        (_('Last Modified'), 'metadata_modified desc'),
+        (_('Total Downloads Ascending'), 'extras_total_downloads asc'),
+        (_('Total Downloads Descending'), 'extras_total_downloads desc'),
+        (_('File Size Ascending'), 'extras_file_size asc'),
+        (_('File Size Descending'), 'extras_file_size desc') ]
+    %}
+    {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type + 's') + '...', facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields, start_date=start_date, end_date=end_date %}
+{% endblock %}
