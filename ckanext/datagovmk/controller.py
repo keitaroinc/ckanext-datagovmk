@@ -11,11 +11,15 @@ from logging import getLogger
 import json
 import csv
 import re
+from urllib import urlencode
+import pytz
 from io import StringIO
 
-from ckan.controllers.package import PackageController
+
+from paste.deploy.converters import asbool
+
+from ckan.controllers.package import PackageController, search_url, _encode_params
 from ckan.controllers.user import UserController
-from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.helpers import get_storage_path_for
 from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      export_resource_to_xml,
@@ -26,9 +30,11 @@ from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      send_email)
 from ckanext.datagovmk.lib import (verify_activation_link,
                                    create_activation_key)
+from ckanext.datagovmk.actions import update_package_stats
 from ckan.lib.base import BaseController, abort, render
 from ckan.plugins import toolkit
-from ckan.common import _, c, request, response, config
+import ckan.plugins as p
+from ckan.common import _, c, request, response, config, OrderedDict
 from ckan.lib.navl import dictization_functions
 
 import ckan.model as model
@@ -62,6 +68,7 @@ ValidationError = logic.ValidationError
 DataError = dictization_functions.DataError
 
 get_action = logic.get_action
+check_access = logic.check_access
 
 unflatten = dictization_functions.unflatten
 
@@ -86,8 +93,6 @@ class DownloadController(PackageController):
         :param resource_id: resource id
         :type resource_id: string
         """
-        increment_downloads(resource_id)
-
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
@@ -116,7 +121,7 @@ class DownloadController(PackageController):
         elif 'url' not in rsc:
             abort(404, toolkit._('No download is available'))
         h.redirect_to(rsc['url'])
-    
+
     def download_zip(self, zip_id):
         if not zip_id:
             abort(404, toolkit._('Resource data not found'))
@@ -125,7 +130,7 @@ class DownloadController(PackageController):
 
         if not os.path.isfile(file_path):
             abort(404, toolkit._('Resource data not found'))
-            
+
         if not package_name:
             package_name = 'resources'
         package_name += '.zip'
@@ -136,6 +141,237 @@ class DownloadController(PackageController):
         response.headers['Content-Type'] = 'application/octet-stream'
         response.content_disposition = 'attachment; filename=' + package_name
         os.remove(file_path)
+    
+    def search(self):
+        from ckan.lib.search import SearchError, SearchQueryError
+
+        package_type = self._guess_package_type()
+        
+        extra_vars={'dataset_type': package_type}
+
+        try:
+            context = {'model': model, 'user': c.user,
+                       'auth_user_obj': c.userobj}
+            check_access('site_read', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        # unicode format (decoded from utf8)
+        q = c.q = request.params.get('q', u'')
+        c.query_error = False
+        page = h.get_page_number(request.params)
+
+        limit = int(config.get('ckan.datasets_per_page', 20))
+
+        # most search operations should reset the page counter:
+        params_nopage = [(k, v) for k, v in request.params.items()
+                         if k != 'page']
+
+        def drill_down_url(alternative_url=None, **by):
+            return h.add_url_param(alternative_url=alternative_url,
+                                   controller='package', action='search',
+                                   new_params=by)
+
+        c.drill_down_url = drill_down_url
+
+        def remove_field(key, value=None, replace=None):
+            return h.remove_url_param(key, value=value, replace=replace,
+                                      controller='package', action='search',
+                                      alternative_url=package_type)
+
+        c.remove_field = remove_field
+
+        sort_by = request.params.get('sort', None)
+        params_nosort = [(k, v) for k, v in params_nopage if k != 'sort']
+
+        def _sort_by(fields):
+            """
+            Sort by the given list of fields.
+
+            Each entry in the list is a 2-tuple: (fieldname, sort_order)
+
+            eg - [('metadata_modified', 'desc'), ('name', 'asc')]
+
+            If fields is empty, then the default ordering is used.
+            """
+            params = params_nosort[:]
+
+            if fields:
+                sort_string = ', '.join('%s %s' % f for f in fields)
+                params.append(('sort', sort_string))
+            return search_url(params, package_type)
+
+        c.sort_by = _sort_by
+        if not sort_by:
+            c.sort_by_fields = []
+        else:
+            c.sort_by_fields = [field.split()[0]
+                                for field in sort_by.split(',')]
+
+        def pager_url(q=None, page=None):
+            params = list(params_nopage)
+            params.append(('page', page))
+            return search_url(params, package_type)
+
+        c.search_url_params = urlencode(_encode_params(params_nopage))
+
+        try:
+            c.fields = []
+            # c.fields_grouped will contain a dict of params containing
+            # a list of values eg {'tags':['tag1', 'tag2']}
+            c.fields_grouped = {}
+            search_extras = {}
+            fq = ''
+            for (param, value) in request.params.items():
+                if param not in ['q', 'page', 'sort'] \
+                        and len(value) and not param.startswith('_'):
+                    if not param.startswith('ext_'):
+                        c.fields.append((param, value))
+                        fq += ' %s:"%s"' % (param, value)
+                        if param not in c.fields_grouped:
+                            c.fields_grouped[param] = [value]
+                        else:
+                            c.fields_grouped[param].append(value)
+                    else:
+                        search_extras[param] = value
+
+            context = {'model': model, 'session': model.Session,
+                       'user': c.user, 'for_view': True,
+                       'auth_user_obj': c.userobj}
+
+            # Unless changed via config options, don't show other dataset
+            # types any search page. Potential alternatives are do show them
+            # on the default search page (dataset) or on one other search page
+            search_all_type = config.get(
+                                  'ckan.search.show_all_types', 'dataset')
+            search_all = False
+
+            try:
+                # If the "type" is set to True or False, convert to bool
+                # and we know that no type was specified, so use traditional
+                # behaviour of applying this only to dataset type
+                search_all = asbool(search_all_type)
+                search_all_type = 'dataset'
+            # Otherwise we treat as a string representing a type
+            except ValueError:
+                search_all = True
+
+            if not package_type:
+                package_type = 'dataset'
+
+            if not search_all or package_type != search_all_type:
+                # Only show datasets of this particular type
+                fq += ' +dataset_type:{type}'.format(type=package_type)
+
+            facets = OrderedDict()
+
+            default_facet_titles = {
+                'organization': _('Organizations'),
+                'groups': _('Groups'),
+                'tags': _('Tags'),
+                'res_format': _('Formats'),
+                'license_id': _('Licenses'),
+                }
+
+            for facet in h.facets():
+                if facet in default_facet_titles:
+                    facets[facet] = default_facet_titles[facet]
+                else:
+                    facets[facet] = facet
+
+            # Facet titles
+            for plugin in p.PluginImplementations(p.IFacets):
+                facets = plugin.dataset_facets(facets, package_type)
+
+            c.facet_titles = facets
+
+            # Date interval search
+
+            start_date = None
+            end_date = None
+
+            if request.params.get('_start_date'):
+                start_date = extract_date(request.params.get('_start_date'))
+                if start_date:
+                    extra_vars['start_date'] = request.params.get('_start_date')
+            
+            if request.params.get('_end_date'):
+                end_date = extract_date(request.params.get('_end_date'))
+                if end_date:
+                    extra_vars['end_date'] = request.params.get('_end_date')
+            
+            if start_date or end_date:
+                if not start_date:
+                    start_date = datetime(year=1900, month=1, day=1)
+                if not end_date:
+                    end_date = datetime(year=2100, month=1, day=1, hour=23, minute=59,second=59, microsecond=999999)
+                else:
+                    end_date = datetime_to_utc(end_date)
+                    end_date = end_date.replace(hour=23, minute=59,second=59, microsecond=999999)
+                
+                fq = fq + ' +metadata_modified:[%s TO %s]' % (datetime_to_utc(start_date).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                                              datetime_to_utc(end_date).strftime('%Y-%m-%dT%H:%M:%SZ'))
+            
+            data_dict = {
+                'q': q,
+                'fq': fq.strip(),
+                'facet.field': facets.keys(),
+                'rows': limit,
+                'start': (page - 1) * limit,
+                'sort': sort_by,
+                'extras': search_extras,
+                'include_private': asbool(config.get(
+                    'ckan.search.default_include_private', True)),
+            }
+
+            query = get_action('package_search')(context, data_dict)
+            c.sort_by_selected = query['sort']
+
+            c.page = h.Page(
+                collection=query['results'],
+                page=page,
+                url=pager_url,
+                item_count=query['count'],
+                items_per_page=limit
+            )
+            c.search_facets = query['search_facets']
+            c.page.items = query['results']
+        except SearchQueryError as se:
+            # User's search parameters are invalid, in such a way that is not
+            # achievable with the web interface, so return a proper error to
+            # discourage spiders which are the main cause of this.
+            log.info('Dataset search query rejected: %r', se.args)
+            abort(400, _('Invalid search query: {error_message}')
+                  .format(error_message=str(se)))
+        except SearchError as se:
+            # May be bad input from the user, but may also be more serious like
+            # bad code causing a SOLR syntax error, or a problem connecting to
+            # SOLR
+            log.error('Dataset search error: %r', se.args)
+            c.query_error = True
+            c.search_facets = {}
+            c.page = h.Page(collection=[])
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        c.search_facets_limits = {}
+        for facet in c.search_facets.keys():
+            try:
+                limit = int(request.params.get('_%s_limit' % facet,
+                            int(config.get('search.facets.default', 10))))
+            except ValueError:
+                abort(400, _('Parameter "{parameter_name}" is not '
+                             'an integer').format(
+                      parameter_name='_%s_limit' % facet))
+            c.search_facets_limits[facet] = limit
+
+        self._setup_template_variables(context, {},
+                                       package_type=package_type)
+
+        extra_vars['dataset_type'] = package_type
+        print " ==> ", extra_vars
+        return render(self._search_template(package_type),
+                      extra_vars=extra_vars)
 
 
 class ApiController(BaseController):
@@ -512,8 +748,8 @@ class ReportIssueController(BaseController):
         if request.method != 'POST':
             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
-        
-            
+
+
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj}
 
@@ -538,9 +774,9 @@ class ReportIssueController(BaseController):
         })
 
         subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
-        
+
         result = send_email(to_user['name'], to_user['email'], subject, email_content)
-        
+
         if not result['success']:
             h.flash_error(result['message'])
         else:
@@ -555,17 +791,17 @@ def get_admin_email():
     If a system configuration is present, it is preffered to the CKAN sysadmins.
     The configuration property is ``ckanext.datagovmk.site_admin_email``.
 
-    If no email is configured explicitly, then the email of the first CKAN 
+    If no email is configured explicitly, then the email of the first CKAN
     sysadmin is used.
 
     :returns: ``str`` the email of the sysadmin to which to send emails with
         issues.
-        
+
     """
     sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
     if sysadmin_email:
         name = sysadmin_email.split('@')[0]
-        return { 
+        return {
             'email': sysadmin_email,
             'name': name
         }
@@ -737,3 +973,28 @@ def xml_writer(response, fields, name=None, bom=False):
     response.write(b'<data>\n')
     yield XMLWriter(response, [f['id'] for f in fields])
     response.write(b'</data>\n')
+
+
+def extract_date(datestr):
+    datestr = datestr.strip() if datestr else ''
+    m = re.match(r'(?P<mm>\d{1,2})(?P<sep>[-/])(?P<dd>\d{1,2})[-/](?P<yyyy>\d{4})', datestr)
+    if m:
+        if int(m.group('mm')) > 12:
+            return _strptime('%m/%d/%Y' if m.group('sep') == '/' else '%m-%d-%Y', datestr)
+        else:
+            return _strptime('%d/%m/%Y' if m.group('sep') == '/' else '%d-%m-%Y', datestr)
+    
+    if re.match(r'\d{4}-\d{2}-\d{2}', datestr):
+        return _strptime('%Y-%m-%d', datestr)
+    
+    return None
+    
+def _strptime(format_, datestr):
+    try:
+        return datetime.strptime(datestr, format_)
+    except Exception as e:
+        return None
+
+
+def datetime_to_utc(dt):
+    return dt.replace(tzinfo=pytz.UTC)

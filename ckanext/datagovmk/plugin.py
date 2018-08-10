@@ -127,9 +127,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         package_create = get_action('package_create')
         package_update = get_action('package_update')
+        #resource_delete = get_action('resource_delete')
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
+            'datagovmk_increment_downloads_for_resource': actions.increment_downloads_for_resource,
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
@@ -145,6 +147,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'resource_show': actions.resource_show,
             'organization_show': actions.organization_show,
             'group_show': actions.group_show,
+            'resource_delete': actions.resource_delete
         }
 
     # IAuthFunctions
@@ -191,6 +194,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('download_zip',
                       '/download/zip/{zip_id}',
                       action='download_zip')
+            m.connect('search', 
+                      '/dataset',
+                      action='search')
 
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
@@ -211,7 +217,19 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
 
+
     # IPackageController
+    def before_index(self, pkg_dict):
+        stats = actions.get_package_stats(pkg_dict['id'])
+        if stats:
+            pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
+            pkg_dict['extras_total_downloads'] = str(stats.get('total_downloads') or '0').rjust(24, '0')
+
+        return pkg_dict
+    
+    def before_view(self, pkg_dict):
+        return pkg_dict
+    
 
     def before_search(self, search_params):
         """ Before making a search with package_search, make sure to exclude

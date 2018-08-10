@@ -40,7 +40,14 @@ $(document).ready(function () {
   // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
   $('.btn-mark-all').click(function (e) {
     var $el = $(this);
-    if (!$el.data('status')) {
+    var atLeastOneChecked = false;
+
+    $.each(resourceCheckboxes, function (i, el) {
+      if (el.checked) {
+        atLeastOneChecked = true;
+      }
+    });
+    if (atLeastOneChecked) {
       $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
         elem.addClass('btn-success');
         elem.removeAttr('disabled');
