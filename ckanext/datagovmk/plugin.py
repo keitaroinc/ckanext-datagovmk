@@ -13,6 +13,7 @@ from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk.model.user_authority_dataset \
     import setup as setup_user_authority_dataset_table
+from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
@@ -224,6 +225,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         if stats:
             pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
             pkg_dict['extras_total_downloads'] = str(stats.get('total_downloads') or '0').rjust(24, '0')
+
+        populate_location_name_from_spatial_uri(pkg_dict)
 
         return pkg_dict
     

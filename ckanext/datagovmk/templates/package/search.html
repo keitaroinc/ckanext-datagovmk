@@ -25,7 +25,9 @@
         (_('Total Downloads Ascending'), 'extras_total_downloads asc'),
         (_('Total Downloads Descending'), 'extras_total_downloads desc'),
         (_('File Size Ascending'), 'extras_file_size asc'),
-        (_('File Size Descending'), 'extras_file_size desc') ]
+        (_('File Size Descending'), 'extras_file_size desc'),
+        (_('Location Ascending'), 'extras_spatial_location_name asc'),
+        (_('Location Descending'), 'extras_spatial_location_name desc')]
     %}
     {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type + 's') + '...', facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields, start_date=start_date, end_date=end_date %}
 {% endblock %}
