@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-13 14:05+0200\n"
+"POT-Creation-Date: 2018-08-13 14:59+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -776,18 +776,26 @@ msgid "Last Modified"
 msgstr "Изменето"
 
 #: ckanext/datagovmk/templates/package/search.html:23
+msgid "Organization Ascending"
+msgstr "Организација - растечки"
+
+#: ckanext/datagovmk/templates/package/search.html:24
+msgid "Organization Descending"
+msgstr "Организација - опаѓачки"
+
+#: ckanext/datagovmk/templates/package/search.html:25
 msgid "Total Downloads Ascending"
 msgstr "Вкупен број на спуштања - растечки"
 
-#: ckanext/datagovmk/templates/package/search.html:24
+#: ckanext/datagovmk/templates/package/search.html:26
 msgid "Total Downloads Descending"
 msgstr "Вкупен број на спуштања - опаѓачки"
 
-#: ckanext/datagovmk/templates/package/search.html:25
+#: ckanext/datagovmk/templates/package/search.html:27
 msgid "File Size Ascending"
 msgstr "Големина на датотека - растечки"
 
-#: ckanext/datagovmk/templates/package/search.html:26
+#: ckanext/datagovmk/templates/package/search.html:28
 msgid "File Size Descending"
 msgstr "Големина на датотека - опаѓачки"
 
