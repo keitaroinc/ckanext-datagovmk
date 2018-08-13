@@ -336,6 +336,16 @@ def get_package_location_geojson(package_dict):
     return geojson_value
 
 
+def populate_location_name_from_spatial_uri(package_dict):
+    if package_dict.get('spatial_uri'):
+        try:
+            name = _get_helper('mk_dcatap_spatial_name_from_code')(package_dict['spatial_uri'])
+            if name:
+                package_dict['extras_spatial_location_name'] = name
+        except Exception as e:
+            log.debug('Failed to set location name: %s', e)
+
+
 def _extract_spatial_resource_id(location_uri):
     """Extracts the resource_id from the spatial URI.
     """
