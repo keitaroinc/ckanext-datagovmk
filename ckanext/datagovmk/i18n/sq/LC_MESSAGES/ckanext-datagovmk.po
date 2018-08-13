@@ -449,12 +449,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:23
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:46
-#, fuzzy
 msgid "Date"
 msgstr "set i të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:24
-#, fuzzy
 msgid "Total datasets"
 msgstr "Setet e të dhënave"
 
@@ -468,13 +466,11 @@ msgid "All dataset revisions"
 msgstr ""
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:48
-#, fuzzy
 msgid "New datasets"
 msgstr "Setet e të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:64
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:166
-#, fuzzy
 msgid "Top Rated Datasets"
 msgstr "Seti i të dhënave të ngjashme"
 
@@ -487,73 +483,63 @@ msgid "Number of ratings"
 msgstr ""
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:85
-#, fuzzy
 msgid "No ratings"
-msgstr "organizatat"
+msgstr "Nuk ka vlerësime"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:90
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:167
-#, fuzzy
 msgid "Most Edited Datasets"
 msgstr "Seti i të dhënave të ngjashme"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:95
-#, fuzzy
 msgid "Dataset"
-msgstr "set i të dhënave"
+msgstr "Dataset"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:96
 msgid "Number of edits"
-msgstr ""
+msgstr "Numri i redaktimeve"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:109
-#, fuzzy
 msgid "No edited datasets"
 msgstr "Seti i të dhënave të ngjashme"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:114
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:168
-#, fuzzy
 msgid "Largest Groups"
-msgstr "grupet"
+msgstr "Grupet më të mëdha"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:119
-#, fuzzy
 msgid "Group"
-msgstr "grup"
+msgstr "Grup"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:120
-#, fuzzy
 msgid "Number of datasets"
-msgstr "Kërko Setet e të dhënave"
+msgstr "Numri i grupeve të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:133
-#, fuzzy
 msgid "No groups"
-msgstr "grupet"
+msgstr "Asnjë grup"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:138
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:169
-#, fuzzy
 msgid "Top Tags"
-msgstr "Tags-at më të popullarizaura"
+msgstr "Top Tags"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:142
 msgid "Tag Name"
-msgstr ""
+msgstr "Emri i tagit"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:143
-#, fuzzy
 msgid "Number of Datasets"
-msgstr "Kërko Setet e të dhënave"
+msgstr "Numri i Datasets"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:161
 msgid "Statistics Menu"
-msgstr ""
+msgstr "Menyja e statistikave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:164
 msgid "Total Number of Datasets"
-msgstr ""
+msgstr "Numri total i Datasets"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:21
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:26
@@ -815,8 +801,6 @@ msgid "Location Ascending"
 msgstr "Vend Ngjitës"
 
 #: ckanext/datagovmk/templates/package/search.html:30
-#, fuzzy
-#| msgid "Name Descending"
 msgid "Location Descending"
 msgstr "Vend zbritës"
 
