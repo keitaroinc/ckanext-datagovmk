@@ -81,7 +81,7 @@ class TestActions(ActionsBase):
         userAuthority.save()
         
         user = User(sysadmin.get('id'))
-        result = spatial_data({'user': 'default', 'auth_user_obj': user}, data_dict)
+        result = spatial_data({'user': sysadmin.get('name'), 'auth_user_obj': user}, data_dict)
         assert result.get('extras')[0].get('key') == 'spatial'
 
     def test_resource_create_invalid_url(self):
