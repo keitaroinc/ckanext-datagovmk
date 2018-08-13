@@ -1,0 +1,50 @@
+{% import 'macros/form.html' as form %}
+{% resource 'ckanext-pages/main' %}
+
+{% ckan_extends %}
+{% block search_input %}
+{%- if type == 'dataset' -%}
+{%- set start_date = start_date if start_date is defined else '' -%}
+{%- set end_date = end_date if end_date is defined else '' -%}
+<div class="row">
+    <div class="col-md-6">
+            {% call form.input(
+                '_start_date',
+                id='field-start-date',
+                label= _('From'),
+                value=start_date,
+                type='text',
+                classes=['control-medium'],
+                attrs={"class": "form-control", "data-module": "datepicker", "datepicker-show-direction": "bottom"},
+                is_required=False
+                )
+            %}
+            {% endcall %}
+    </div>
+    <div class="col-md-6">
+            {% call form.input(
+                '_end_date',
+                id='field-start-date',
+                label= _('To'),
+                value=end_date,
+                type='text',
+                classes=['control-medium'],
+                attrs={"class": "form-control", "data-module": "datepicker", "datepicker-show-direction": "bottom"},
+                is_required=False
+                )
+            %}
+            {% endcall %}
+    </div>
+</div>
+{%- endif -%}
+<div class="input-group search-input-group">
+  <input aria-label="{% block header_site_search_label %}{{ placeholder }}{% endblock %}" id="field-giant-search" type="text" class="form-control input-lg" name="q" {% if query != 'extras_org_catalog_enabled:true' %}value="{{ query }}" {% endif %} autocomplete="off" placeholder="{{ placeholder }}">
+  {% block search_input_button %}
+  <span class="input-group-btn">
+    <button class="btn btn-default btn-lg" type="submit" value="search">
+      <i class="fa fa-search"></i>
+    </button>
+  </span>
+  {% endblock %}
+</div>
+{% endblock %}

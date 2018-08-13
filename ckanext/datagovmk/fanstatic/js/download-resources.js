@@ -40,7 +40,14 @@ $(document).ready(function () {
   // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
   $('.btn-mark-all').click(function (e) {
     var $el = $(this);
-    if (!$el.data('status')) {
+    var atLeastOneChecked = false;
+
+    $.each(resourceCheckboxes, function (i, el) {
+      if (el.checked) {
+        atLeastOneChecked = true;
+      }
+    });
+    if (atLeastOneChecked) {
       $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
         elem.addClass('btn-success');
         elem.removeAttr('disabled');
@@ -79,7 +86,7 @@ $(document).ready(function () {
 
       if (zip_id) {
         var link = document.createElement('a');
-        url = window.location.origin + '/api/action/datagovmk_download_zip?id=' + zip_id;
+        url = window.location.origin + '/download/zip/' + zip_id;
         link.style.display = 'none';
         link.href = url;
         document.body.appendChild(link);

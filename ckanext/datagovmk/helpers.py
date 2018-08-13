@@ -12,6 +12,8 @@ from ckanext.datagovmk.model.stats import (get_stats_for_package,
 
 from logging import getLogger
 from ckanext.datagovmk.model.user_authority import UserAuthority
+from ckan.lib import helpers as core_helpers
+
 log = getLogger(__name__)
 
 def _get_action(action, context_dict, data_dict):
@@ -69,7 +71,7 @@ def get_most_active_organizations(limit=5):
             'id': org_name,
             'include_datasets': True,
             'include_dataset_count': False,
-            'include_extras': False,
+            'include_extras': True,
             'include_users': False,
             'include_groups': False,
             'include_tags': False,
@@ -245,3 +247,41 @@ def get_last_authority_for_user(authority_type, user_id):
     )
 
     return user_authority
+
+
+def translate_field(data_dict, field_name):
+    if isinstance(data_dict, dict):
+        return core_helpers.get_translated(data_dict, field_name)
+
+
+def get_org_title(id):
+    org = toolkit.get_action('organization_show')(data_dict={'id': id})
+
+    return translate_field(org, 'title')
+
+
+def get_org_description(id):
+    org = toolkit.get_action('organization_show')(data_dict={'id': id})
+
+    return translate_field(org, 'description')
+
+
+def get_org_catalog(id):
+    """ Get the catalog for an organization. A catalog is represented as a
+    dataset. """
+    try:
+        data_dict = {
+            'fq': '(owner_org:{0} AND extras_org_catalog_enabled:true)'.format(id)
+        }
+        data = toolkit.get_action('package_search')(data_dict=data_dict)
+        return data['results'][0]
+    except Exception:
+        return None
+
+
+def get_catalog_count():
+    """ Count how many catalogs (datasets) are in the portal. """
+    data_dict = {
+        'fq': 'extras_org_catalog_enabled:true'
+    }
+    return toolkit.get_action('package_search')(data_dict=data_dict)['count']

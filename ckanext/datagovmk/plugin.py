@@ -13,6 +13,7 @@ from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk.model.user_authority_dataset \
     import setup as setup_user_authority_dataset_table
+from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
@@ -80,6 +81,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
 
@@ -87,6 +89,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'datagovmk')
+
+        config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
 
     # ITemplateHelpers
     def get_helpers(self):
@@ -109,6 +113,14 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_user_id,
             'datagovmk_get_last_authority_for_user':
                 helpers.get_last_authority_for_user,
+            'datagovmk_get_org_title':
+                helpers.get_org_title,
+            'datagovmk_get_org_description':
+                helpers.get_org_description,
+            'datagovmk_get_org_catalog':
+                helpers.get_org_catalog,
+            'datagovmk_get_catalog_count':
+                helpers.get_catalog_count
         }
 
     # IActions
@@ -116,10 +128,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         package_create = get_action('package_create')
         package_update = get_action('package_update')
+        #resource_delete = get_action('resource_delete')
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
-            'datagovmk_download_zip': actions.download_zip,
+            'datagovmk_increment_downloads_for_resource': actions.increment_downloads_for_resource,
             'package_create': actions.add_spatial_data(package_create),
             'package_update': actions.add_spatial_data(package_update),
             'resource_create': actions.resource_create,
@@ -130,7 +143,12 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_activity_list': actions.user_activity_list,
             'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
-            'dashboard_activity_list_html': actions.dashboard_activity_list_html
+            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
+            'package_search': actions.package_search,
+            'resource_show': actions.resource_show,
+            'organization_show': actions.organization_show,
+            'group_show': actions.group_show,
+            'resource_delete': actions.resource_delete
         }
 
     # IAuthFunctions
@@ -174,18 +192,60 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('resource_download',
                       '/dataset/{id}/resource/{resource_id}/download/{filename}',
                       action='resource_download')
+            m.connect('download_zip',
+                      '/download/zip/{zip_id}',
+                      action='download_zip')
+            m.connect('search', 
+                      '/dataset',
+                      action='search')
 
         # map user routes
         with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
             m.connect('register', '/user/register', action='datagovmk_register')
             m.connect('/user/activate/{id:.*}', action='perform_activation')
 
-        map.connect('/issues/report_site_issue', 
+        map.connect('/issues/report_site_issue',
                     controller='ckanext.datagovmk.controller:ReportIssueController',
                     action='report_issue_form')
+
+        map.connect('/datastore/dump/{resource_id}',
+                    controller='ckanext.datagovmk.controller:OverrideDatastoreController',
+                    action='dump')
+
+        map.connect('/stats',
+                    controller="ckanext.datagovmk.controller:StatsController",
+                    action="index")
 
         return map
 
     def configure(self, config):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
+
+
+    # IPackageController
+    def before_index(self, pkg_dict):
+        stats = actions.get_package_stats(pkg_dict['id'])
+        if stats:
+            pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
+            pkg_dict['extras_total_downloads'] = str(stats.get('total_downloads') or '0').rjust(24, '0')
+
+        populate_location_name_from_spatial_uri(pkg_dict)
+
+        return pkg_dict
+    
+    def before_view(self, pkg_dict):
+        return pkg_dict
+    
+
+    def before_search(self, search_params):
+        """ Before making a search with package_search, make sure to exclude
+        datasets that are marked as catalogs. """
+        fq = search_params.get('fq', '')
+        q = search_params.get('q', '')
+
+        if 'extras_org_catalog_enabled' not in fq and \
+           'extras_org_catalog_enabled:true' not in q:
+            search_params.update({'fq': fq + ' -extras_org_catalog_enabled:true'})
+
+        return search_params

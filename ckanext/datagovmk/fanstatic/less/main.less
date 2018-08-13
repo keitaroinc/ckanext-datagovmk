@@ -279,9 +279,15 @@
   }
 }
 
+.primary{
+  .news,
+  .blog{
+    margin-top: @grid-gutter-width;
+  }
+}
+
 .news,
 .blog {
-  margin-top: @grid-gutter-width;
   @media (min-width: @screen-lg-min) {
     margin-bottom: @grid-gutter-width;
   }
@@ -442,5 +448,15 @@
   .intro,
   .accent {
     flex-basis: 100%;
+  }
+}
+
+[data-module="stats-nav"] {
+  .nav-item {
+    &.active {
+      a{
+        background-color: #8ca0a6;
+      }
+    }
   }
 }

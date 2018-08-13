@@ -29,11 +29,20 @@ from ckan.logic.action.create import package_create as _package_create
 from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
+from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
+from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
+                                          increment_total_downloads as increment_total_downloads_solr)
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
 import ckan.lib.activity_streams as activity_streams
 from ckan.lib import helpers as core_helpers
+from ckan.logic.action.get import package_search as _package_search
+from ckan.logic.action.get import resource_show as _resource_show
+from ckan.logic.action.get import organization_show as _organization_show
+from ckan.logic.action.get import group_show as _group_show
+from ckan.logic import chained_action
+from ckanext.datagovmk.model.stats import increment_downloads
 
 log = getLogger(__name__)
 
@@ -148,7 +157,8 @@ def get_related_datasets(context, data_dict):
         for group_dataset in group_datasets:
             group_dataset_id = group_dataset.get('id')
             if group_dataset_id != dataset.get('id') and \
-               group_dataset_id not in related_datasets_ids:
+               group_dataset_id not in related_datasets_ids and \
+               group_dataset['type'] == 'dataset':
                 related_datasets.append(group_dataset)
                 related_datasets_ids.append(group_dataset_id)
 
@@ -164,7 +174,8 @@ def get_related_datasets(context, data_dict):
         for tag_dataset in tag_datasets:
             tag_dataset_id = tag_dataset.get('id')
             if tag_dataset_id != dataset.get('id') and \
-               tag_dataset_id not in related_datasets_ids:
+               tag_dataset_id not in related_datasets_ids and \
+               tag_dataset['type'] == 'dataset':
                 related_datasets.append(tag_dataset)
                 related_datasets_ids.append(tag_dataset_id)
 
@@ -231,32 +242,13 @@ def prepare_zip_resources(context, data_dict):
         pass
 
     if resourceArchived:
+        for resource_id in resource_ids:
+            increment_downloads(resource_id)
         return {'zip_id': zip_id}
 
     os.remove(file_path)
 
     return {'zip_id': None}
-
-
-@toolkit.side_effect_free
-def download_zip(context, data_dict):
-    """Downloads a zip file
-
-    :param id: an id of the created zip archive, format: filename::packagename
-    :type id: string
-    """
-    file_name, package_name = data_dict.get('id').split('::')
-    file_path = h.get_storage_path_for('temp-datagovmk/' + file_name)
-
-    if not package_name:
-        package_name = 'resources'
-    package_name += '.zip'
-
-    with open(file_path, 'r') as f:
-        toolkit.response.write(f.read())
-
-    toolkit.response.content_disposition = 'attachment; filename=' + package_name
-    os.remove(file_path)
 
 
 def safe_override(action):
@@ -328,18 +320,23 @@ def add_spatial_data(package_action, context, data_dict):
     except Exception as e:
         log.warning(e)
 
-    if package_action.func_name == 'package_create':
+    dataset_type = data_dict.get('type')
+
+    if package_action.func_name == 'package_create' and \
+       dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
 
     if package_action.func_name == 'package_create' and \
-       data_dict.get('add_dataset_agreement') is None:
+       data_dict.get('add_dataset_agreement') is None and \
+       dataset_type == 'dataset':
         raise ValidationError({
             _('Add dataset agreement'): [_('Missing value')]
         })
 
     dataset = package_action(context, data_dict)
 
-    if package_action.func_name == 'package_create':
+    if package_action.func_name == 'package_create' and \
+       dataset_type == 'dataset':
         if data_dict.get('authority_file_url'):
             data = {
                 'user_id': context.get('auth_user_obj').id,
@@ -423,22 +420,20 @@ def resource_create(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError({_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
         _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
-
 
     if 'mimetype' not in data_dict:
         if hasattr(upload, 'mimetype'):
@@ -484,6 +479,11 @@ def resource_create(context, data_dict):
 
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.after_create(context, resource)
+
+    try:
+        update_package_stats(resource['package_id'])
+    except Exception as e:
+        log.error(e)
 
     return resource
 
@@ -533,10 +533,13 @@ def resource_update(context, data_dict):
         log.error('Could not find resource %s after all', id)
         raise NotFound(_('Resource was not found.'))
 
-    # Persist the datastore_active extra if already present and not provided
+    # Persist the datastore_active and checksum extras if already present and not provided
     if ('datastore_active' in resource.extras and
             'datastore_active' not in data_dict):
         data_dict['datastore_active'] = resource.extras['datastore_active']
+    if ('checksum' in resource.extras and
+            'checksum' not in data_dict):
+        data_dict['checksum'] = resource.extras['checksum']
 
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.before_update(context, pkg_dict['resources'][n], data_dict)
@@ -544,20 +547,21 @@ def resource_update(context, data_dict):
     upload = uploader.get_resource_uploader(data_dict)
 
     if hasattr(upload, 'upload_file'):
-        # Checksum calculated for resource file must be different from checksum calculaated
-        # by Datapushes that's why '-resource' string is added to the checksum
         checksum = '%s-%s' % (_calculate_checksum(upload.upload_file), 'resource')
 
-        rsc = model.Session.query(model.Resource).\
-            filter_by(package_id=pkg_dict['id'], hash=checksum, state='active').\
-            first()
-        if rsc:
-            raise ValidationError(
-                {_('message'): [_('Resource already exists')]})
-        else:
-            data_dict['hash'] = checksum
+        resources = model.Session.query(model.Resource).\
+            filter_by(package_id=pkg_dict['id'], state='active').all()
+        for rsc in resources:
+            if rsc.extras.get('checksum') == checksum:
+                raise ValidationError(
+                    {_('message'): [_('Resource already exists')]})
+
+        data_dict['checksum'] = checksum
     elif data_dict.get('url'):
-        _validate_link(data_dict.get('url'))
+        # if url_type is not upload then it is Link
+        if resource.url_type != 'upload':
+            data_dict['checksum'] = ''
+            _validate_link(data_dict.get('url'))
     else:
         raise ValidationError({_('message'): [_('Resource file is missing')]})
 
@@ -597,7 +601,34 @@ def resource_update(context, data_dict):
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.after_update(context, resource)
 
+    try:
+        update_package_stats(resource['package_id'])
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+
     return resource
+
+
+@chained_action
+def resource_delete(action, context, data_dict):
+    package_id = None
+    try:
+        resource = get_action('resource_show')({'ignore_auth': True}, {'id': data_dict['id']})
+        package_id = resource['package_id']
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+
+    result = action(context, data_dict)
+    
+    try:
+        if package_id:
+            update_package_stats(package_id)
+    except Exception as e:
+        log.error(e)
+        log.exception(e)
+    return result
 
 
 def _calculate_checksum(file):
@@ -898,3 +929,90 @@ def dashboard_activity_list_html(context, data_dict):
     }
     return activity_streams.activity_list_to_html(context, activity_stream,
                                                   extra_vars)
+
+
+@toolkit.side_effect_free
+def package_search(context, data_dict):
+    """ Override to translate title and description of the dataset. """
+    data = _package_search(context, data_dict)
+
+    for result in data.get('results'):
+        result['title'] = h.translate_field(result, 'title')
+        result['notes'] = h.translate_field(result, 'notes')
+
+    return data
+
+
+@toolkit.side_effect_free
+def resource_show(context, data_dict):
+    """ Override to translate title and description of the resource. """
+    data = _resource_show(context, data_dict)
+
+    data['name'] = h.translate_field(data, 'name')
+    data['description'] = h.translate_field(data, 'description')
+
+    return data
+
+
+@toolkit.side_effect_free
+def organization_show(context, data_dict):
+    """ Override to translate title and description of the organization. """
+    data = _organization_show(context, data_dict)
+
+    data['display_name'] = h.translate_field(data, 'title')
+    data['title'] = h.translate_field(data, 'title')
+    data['description'] = h.translate_field(data, 'description')
+
+    return data
+
+
+@toolkit.side_effect_free
+def group_show(context, data_dict):
+    """ Override to translate title and description of the group. """
+    data = _group_show(context, data_dict)
+
+    data['display_name'] = h.translate_field(data, 'title')
+    data['title'] = h.translate_field(data, 'title')
+    data['description'] = h.translate_field(data, 'description')
+
+    return data
+
+
+def get_package_stats(package_id):
+    pkg_dict = {}
+    try:
+        pkg_dict = get_action('package_show')({'ignore_auth': True}, {'id': package_id})
+    except toolkit.NotFound:
+        return None
+
+    sizes = [rc.get('size', 0) for rc in pkg_dict.get('resources', [])]
+    max_file_size = 0
+    if sizes:
+        max_file_size = max(sizes)
+    total_downloads = get_total_package_downloads(package_id)
+
+    return {
+        'file_size': max_file_size,
+        'total_downloads': total_downloads
+    }
+
+
+def update_package_stats(package_id):
+    stats = get_package_stats(package_id)
+    update_package_stats_solr(package_id, stats)
+
+
+@toolkit.side_effect_free
+def increment_downloads_for_resource(context, data_dict):
+    resource_id = data_dict.get('resource_id')
+    increment_downloads(resource_id)
+    # Also, update the stats in dataset indexed metadata
+    try:
+        resource = get_action('resource_show')({'ignore_auth': True}, {'id': resource_id})
+        increment_total_downloads_solr(resource['package_id'])
+    except Exception as e:
+        log.debug(e)
+        import traceback
+        traceback.print_exc()
+
+    return 'success'

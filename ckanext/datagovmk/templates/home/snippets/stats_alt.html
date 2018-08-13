@@ -1,4 +1,5 @@
 {% set stats = h.get_site_statistics() %}
+{% set catalog_count = h.datagovmk_get_catalog_count() %}
 
 <div class="quick-stats">
   <a href="{{ h.url_for(controller='package', action='search') }}">
@@ -20,6 +21,13 @@
     <span class="wrap">
         <span class="value">{{ h.SI_number_span(stats.group_count) }}</span>
         <span class="title">{{ _('group') if stats.group_count == 1 else _('groups') }}</span>
+    </span>
+  </a>
+  <a href="{{ h.url_for(controller='package', action='search', q='extras_org_catalog_enabled:true') }}">
+    <i class="fa fa-book"></i>
+    <span class="wrap">
+        <span class="value">{{ h.SI_number_span(catalog_count) }}</span>
+        <span class="title">{{ _('catalog') if catalog_count == 1 else _('catalogs') }}</span>
     </span>
   </a>
 </div>

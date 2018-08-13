@@ -1,7 +1,10 @@
+{% resource 'datagovmk/js/setup_increment_downloads.js' %}
+{% resource 'datagovmk/js/modules/increment-downloads.js' %}
+
 {% ckan_extends %}
 
 {% block resource_additional_information_inner %}
-  <div class="module-content">
+  <div class="module-content" data-resource-id="{{ res.id }}">
       {%- block resource_metadata_download -%}
       <div class="btn-group pull-right download-metadata-control">
           <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}"
@@ -79,9 +82,26 @@
 
 {% endblock %}
 
-{%- block resource_actions_inner -%}
-  {{ super() }}
-{%- endblock-%}
+{% block resource_content %}
+  {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
+  {% block resource_read_url %}
+    {% if res.url and h.is_url(res.url) %}
+      <p class="text-muted ellipsis">{{ _('URL:') }} <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+    {% elif res.url %}
+      <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
+    {% endif %}
+  {% endblock %}
+  <div class="prose notes" property="rdfs:label">
+    {% if res.description %}
+      {{ h.render_markdown(h.get_translated(res, 'description')) }}
+    {% endif %}
+    {% if not res.description and c.package.notes %}
+      <h3>{{ _('From the dataset abstract') }}</h3>
+      <blockquote>{{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}</blockquote>
+      <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+    {% endif %}
+  </div>
+{% endblock %}
 
 {%- block secondary_content -%}
   {%- block resource_stats -%}
