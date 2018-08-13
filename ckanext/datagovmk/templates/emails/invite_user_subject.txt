@@ -1,1 +1,1 @@
-Покана за {{ site_title }} / Invite for {{ site_title }} / Ftoni për {{site_title}}
+Покана за {{ site_title }} / Invite for {{ site_title }} / Ftesë për {{site_title}}
