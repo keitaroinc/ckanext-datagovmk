@@ -370,7 +370,6 @@ class DownloadController(PackageController):
                                        package_type=package_type)
 
         extra_vars['dataset_type'] = package_type
-        print " ==> ", extra_vars
         return render(self._search_template(package_type),
                       extra_vars=extra_vars)
 
@@ -818,7 +817,6 @@ def get_admin_email():
 class StatsController(BaseController):
 
     def index(self):
-        print " **** NASHITE STATS ******"
         from ckanext.datagovmk import stats as stats_lib
         c = p.toolkit.c
         stats = stats_lib.Stats()
@@ -831,14 +829,10 @@ class StatsController(BaseController):
         c.new_packages_by_week = rev_stats.get_by_week('new_packages')
         c.deleted_packages_by_week = rev_stats.get_by_week('deleted_packages')
         c.num_packages_by_week = stats_lib.RevisionStats.get_num_packages_by_week()
-        print "povikano -> " 
         c.package_revisions_by_week = rev_stats.get_by_week('package_revisions')
 
         c.raw_packages_by_week = []
-        print " Number of packages by week"
-        print "----------------------------"
         for week_date, num_packages, cumulative_num_packages in c.num_packages_by_week:
-            print week_date,",",num_packages,",",cumulative_num_packages
             c.raw_packages_by_week.append({'date': h.date_str_to_datetime(week_date), 'total_packages': cumulative_num_packages})
 
         c.all_package_revisions = []
