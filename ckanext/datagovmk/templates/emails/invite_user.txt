@@ -17,22 +17,22 @@
 
 ---
 
-I/E dashur {{ user_name }}, 
+I/e ndruar {{ user_name }},
 
 
-Ju jeni ftuar në {{site_title}}.
+Ju jeni thirrur në {{site_title}}.
 
-Një përdorues tashmë është krijuar për ju me emrin e përdoruesit {{user_name}}. Ju mund ta ndryshoni atë më vonë.
+Përdoruesi tashmë është krijuar për ju me një emër përdoruesi {{user_name}}. Ju mund ta ndryshoni atë më vonë.
 
-Ju jeni shtuar në {{group_type}} {{group_title}} me rolin e mëposhtëm: {{role_name}}.
+Ju jeni shtuar në {{group_type}} {{group_title}} me rolin e ardhshëm: {{role_name}}.
 
-Për të pranuar këtë ftesë, rivendosni fjalëkalimin në:
+Për të pranuar këtë ftesë, ju lutemi regjistrojeni fjalëkalimin  tuaj:
 
 {{reset_link}}
 
 
 Ditën e mirë.
-Mesazhi i dërguar nga: {{ site_title }} ({{ site_url }})
+Mesazhi u dergua prej {{site_title}} ({{site_url}})
 
 ---
 

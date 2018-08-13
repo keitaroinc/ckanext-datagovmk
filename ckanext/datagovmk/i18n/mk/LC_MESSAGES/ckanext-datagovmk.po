@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-08 09:16+0200\n"
+"POT-Creation-Date: 2018-08-13 14:05+0200\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -19,102 +19,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:139
+#: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
 msgstr "Недостасува ИД на податочен сет"
 
-#: ckanext/datagovmk/actions.py:329
+#: ckanext/datagovmk/actions.py:333
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:51
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:59
 msgid "Add dataset agreement"
 msgstr "Согланост за додавање на податочен сет"
 
-#: ckanext/datagovmk/actions.py:329 ckanext/datagovmk/actions.py:694
-#: ckanext/datagovmk/actions.py:723 ckanext/datagovmk/actions.py:767
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:700
+#: ckanext/datagovmk/actions.py:729 ckanext/datagovmk/actions.py:773
 msgid "Missing value"
 msgstr "Недостасува вредност"
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:433
-#: ckanext/datagovmk/actions.py:554 ckanext/datagovmk/actions.py:560
-#: ckanext/datagovmk/actions.py:645 ckanext/datagovmk/actions.py:648
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
+#: ckanext/datagovmk/actions.py:557 ckanext/datagovmk/actions.py:566
+#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
 msgid "message"
 msgstr "порака"
 
-#: ckanext/datagovmk/actions.py:427 ckanext/datagovmk/actions.py:554
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:557
 msgid "Resource already exists"
 msgstr "Ресурсот веќе постои"
 
-#: ckanext/datagovmk/actions.py:433 ckanext/datagovmk/actions.py:560
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:566
 msgid "Resource file is missing"
 msgstr "Недостасува датотека на ресурсот"
 
-#: ckanext/datagovmk/actions.py:518 ckanext/datagovmk/actions.py:532
+#: ckanext/datagovmk/actions.py:520 ckanext/datagovmk/actions.py:534
 msgid "Resource was not found."
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/actions.py:645 ckanext/datagovmk/actions.py:648
+#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
 msgid "Invalid URL"
 msgstr "Невалиден линк"
 
-#: ckanext/datagovmk/actions.py:679
+#: ckanext/datagovmk/actions.py:685
 msgid "No script was found for the provided name"
 msgstr "Не е пронајденa скрипта за даденото име"
 
-#: ckanext/datagovmk/actions.py:694 ckanext/datagovmk/actions.py:723
-#: ckanext/datagovmk/actions.py:752 ckanext/datagovmk/actions.py:767
+#: ckanext/datagovmk/actions.py:700 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/actions.py:758 ckanext/datagovmk/actions.py:773
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:10
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr "овластување"
 
-#: ckanext/datagovmk/actions.py:707
+#: ckanext/datagovmk/actions.py:713
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
 "Настана грешка при испраќањето на активациската електронска пошта. "
 "Корисникот не беше креиран: {0}"
 
-#: ckanext/datagovmk/actions.py:752
+#: ckanext/datagovmk/actions.py:758
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 "Прикачената датотека за овластување е премногу голема. Максимално "
 "дозволена големина е {size}MB."
 
-#: ckanext/datagovmk/controller.py:107
+#: ckanext/datagovmk/controller.py:103
 msgid "Resource not found"
 msgstr "Ресурсот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:116 ckanext/datagovmk/controller.py:131
-#: ckanext/datagovmk/controller.py:136
+#: ckanext/datagovmk/controller.py:112 ckanext/datagovmk/controller.py:127
+#: ckanext/datagovmk/controller.py:132
 msgid "Resource data not found"
 msgstr "Податоците за ресурсот не се пронајдени"
 
-#: ckanext/datagovmk/controller.py:126
+#: ckanext/datagovmk/controller.py:122
 msgid "No download is available"
 msgstr "Преземањето не е достапно."
 
-#: ckanext/datagovmk/controller.py:161 ckanext/datagovmk/controller.py:355
+#: ckanext/datagovmk/controller.py:157 ckanext/datagovmk/controller.py:355
 msgid "Not authorized to see this page"
 msgstr "Не сте овластени за да го креирате корисникот %s"
 
-#: ckanext/datagovmk/controller.py:273
+#: ckanext/datagovmk/controller.py:269
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:3
 msgid "Organizations"
 msgstr "Организации"
 
-#: ckanext/datagovmk/controller.py:274
+#: ckanext/datagovmk/controller.py:270
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:4
 msgid "Groups"
 msgstr "Групи"
 
-#: ckanext/datagovmk/controller.py:275
+#: ckanext/datagovmk/controller.py:271
 msgid "Tags"
 msgstr "Тагови"
 
-#: ckanext/datagovmk/controller.py:276
+#: ckanext/datagovmk/controller.py:272
 msgid "Formats"
 msgstr "Формати"
 
-#: ckanext/datagovmk/controller.py:277
+#: ckanext/datagovmk/controller.py:273
 msgid "Licenses"
 msgstr "Лиценци"
 
@@ -126,38 +126,38 @@ msgstr "Невалидно пребарување: {error_message}"
 msgid "Parameter \"{parameter_name}\" is not an integer"
 msgstr "Параметарот \"{parameter_name}\" не е цел број"
 
-#: ckanext/datagovmk/controller.py:514 ckanext/datagovmk/controller.py:532
-#: ckanext/datagovmk/controller.py:554
+#: ckanext/datagovmk/controller.py:515 ckanext/datagovmk/controller.py:533
+#: ckanext/datagovmk/controller.py:555
 msgid "User not found"
 msgstr "Корисникот не е пронајден"
 
-#: ckanext/datagovmk/controller.py:518
+#: ckanext/datagovmk/controller.py:519
 msgid "Invalid activation key. Please try again."
 msgstr "Неважечки клуч за активирање. Ве молиме обидете се повторно"
 
-#: ckanext/datagovmk/controller.py:527
+#: ckanext/datagovmk/controller.py:528
 msgid "Your account has been activated."
 msgstr "Вашата сметка е активна"
 
-#: ckanext/datagovmk/controller.py:530
+#: ckanext/datagovmk/controller.py:531
 #, python-format
 msgid "Unauthorized to edit user %s"
 msgstr "Не сте овластени за да го промените корисникот %s"
 
-#: ckanext/datagovmk/controller.py:534 ckanext/datagovmk/controller.py:556
+#: ckanext/datagovmk/controller.py:535 ckanext/datagovmk/controller.py:557
 msgid "Integrity Error"
 msgstr "Грешка при интегритет"
 
-#: ckanext/datagovmk/controller.py:552
+#: ckanext/datagovmk/controller.py:553
 #, python-format
 msgid "Unauthorized to create user %s"
 msgstr "Не сте овластени за да го креирате корисникот %s"
 
-#: ckanext/datagovmk/controller.py:558
+#: ckanext/datagovmk/controller.py:559
 msgid "Bad Captcha. Please try again."
 msgstr "Captcha не е точна. Ве молиме обидете се повторно."
 
-#: ckanext/datagovmk/controller.py:566
+#: ckanext/datagovmk/controller.py:567
 #, python-format
 msgid ""
 "A confirmation email has been sent to %s. Please use the link in the "
@@ -166,27 +166,27 @@ msgstr ""
 "Е-порака за потврда е испратена до %s. Ве молиме користете го линкот во "
 "е-поштата за да продолжите."
 
-#: ckanext/datagovmk/controller.py:579
+#: ckanext/datagovmk/controller.py:580
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
 "Корисник %s е регистриран сега но вие сеуште сте најавени како %s од "
 "порано"
 
-#: ckanext/datagovmk/controller.py:758
+#: ckanext/datagovmk/controller.py:759
 msgid "Unable to send the issue report to the system admin."
 msgstr "Не успеа да се испрати проблемот до администраторот."
 
-#: ckanext/datagovmk/controller.py:782
+#: ckanext/datagovmk/controller.py:783
 msgid "The issue has been reported."
 msgstr "Проблемот беше пријавен."
 
-#: ckanext/datagovmk/controller.py:831
+#: ckanext/datagovmk/controller.py:832
 #, python-format
 msgid "format: must be one of %s"
 msgstr "формат: мора да е едно од %s"
 
-#: ckanext/datagovmk/controller.py:843
+#: ckanext/datagovmk/controller.py:844
 msgid "DataStore resource not found"
 msgstr "Ресурсот од датастор не е пронајден"
 
@@ -245,22 +245,22 @@ msgstr ""
 "Настана грешка при испраќањето на електронската пошта. Обидете се "
 "повторно."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:66
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:73
 msgid "Preparing zip archive..."
 msgstr "Архивата се подготвува..."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:78
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:93
-#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:10
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:85
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:100
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:12
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
 msgid "Download"
 msgstr "Преземи"
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:89
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:96
 msgid "Could not create a zip archive."
 msgstr "Не може да се создаде архива."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:95
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:102
 msgid "An error occured while preparing zip archive."
 msgstr "Настана грешка при подготвувањето на архивата."
 
@@ -694,58 +694,58 @@ msgstr "Поврзани податочни сетови"
 msgid "This resource has no views"
 msgstr "Овој ресурс нема прегледи"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:8
+#: ckanext/datagovmk/templates/package/resource_read.html:11
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:16
 msgid "Download Metadata"
 msgstr "Преземи мета податоци"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:26
+#: ckanext/datagovmk/templates/package/resource_read.html:29
 msgid "Additional Information"
 msgstr "Дополнителни информации"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:30
+#: ckanext/datagovmk/templates/package/resource_read.html:33
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:36
 msgid "Field"
 msgstr "Поле"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:31
+#: ckanext/datagovmk/templates/package/resource_read.html:34
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:37
 msgid "Value"
 msgstr "Вредност"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:37
+#: ckanext/datagovmk/templates/package/resource_read.html:40
 msgid "Last updated"
 msgstr "Последно ажурирање"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:38
-#: ckanext/datagovmk/templates/package/resource_read.html:44
-#: ckanext/datagovmk/templates/package/resource_read.html:50
+#: ckanext/datagovmk/templates/package/resource_read.html:41
+#: ckanext/datagovmk/templates/package/resource_read.html:47
+#: ckanext/datagovmk/templates/package/resource_read.html:53
 msgid "unknown"
 msgstr "непознато"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:43
+#: ckanext/datagovmk/templates/package/resource_read.html:46
 msgid "Created"
 msgstr "Креиран"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:49
+#: ckanext/datagovmk/templates/package/resource_read.html:52
 msgid "Format"
 msgstr "Формат"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:55
+#: ckanext/datagovmk/templates/package/resource_read.html:58
 #: ckanext/datagovmk/templates/snippets/license.html:4
 msgid "License"
 msgstr "Лиценца"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:86
-#: ckanext/datagovmk/templates/package/resource_read.html:88
+#: ckanext/datagovmk/templates/package/resource_read.html:89
+#: ckanext/datagovmk/templates/package/resource_read.html:91
 msgid "URL:"
 msgstr "URL:"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:96
+#: ckanext/datagovmk/templates/package/resource_read.html:99
 msgid "From the dataset abstract"
 msgstr "Од апстрактот на податочниот сет"
 
-#: ckanext/datagovmk/templates/package/resource_read.html:98
+#: ckanext/datagovmk/templates/package/resource_read.html:101
 #, python-format
 msgid "Source: <a href=\"%(url)s\">%(dataset)s</a>"
 msgstr "Извор: <a href=\"%(url)s\">%(dataset)s</a>"
@@ -759,35 +759,35 @@ msgstr ""
 " <p class=\"empty\">Овој податочен сет нема податоци, <a "
 "href=\"%(url)s\">зошто не додатете?</a></p> "
 
-#: ckanext/datagovmk/templates/package/search.html:17
+#: ckanext/datagovmk/templates/package/search.html:19
 msgid "Relevance"
 msgstr "Релевантност"
 
-#: ckanext/datagovmk/templates/package/search.html:18
+#: ckanext/datagovmk/templates/package/search.html:20
 msgid "Name Ascending"
 msgstr "Име - растечки"
 
-#: ckanext/datagovmk/templates/package/search.html:19
+#: ckanext/datagovmk/templates/package/search.html:21
 msgid "Name Descending"
 msgstr "Име - опаѓачки"
 
-#: ckanext/datagovmk/templates/package/search.html:20
+#: ckanext/datagovmk/templates/package/search.html:22
 msgid "Last Modified"
 msgstr "Изменето"
 
-#: ckanext/datagovmk/templates/package/search.html:21
+#: ckanext/datagovmk/templates/package/search.html:23
 msgid "Total Downloads Ascending"
 msgstr "Вкупен број на спуштања - растечки"
 
-#: ckanext/datagovmk/templates/package/search.html:22
+#: ckanext/datagovmk/templates/package/search.html:24
 msgid "Total Downloads Descending"
 msgstr "Вкупен број на спуштања - опаѓачки"
 
-#: ckanext/datagovmk/templates/package/search.html:23
+#: ckanext/datagovmk/templates/package/search.html:25
 msgid "File Size Ascending"
 msgstr "Големина на датотека - растечки"
 
-#: ckanext/datagovmk/templates/package/search.html:24
+#: ckanext/datagovmk/templates/package/search.html:26
 msgid "File Size Descending"
 msgstr "Големина на датотека - опаѓачки"
 
@@ -829,15 +829,15 @@ msgstr ""
 msgid "Uploaded authority file"
 msgstr "Прикачена датотека за овластување"
 
-#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:4
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:6
 msgid "View"
 msgstr "Преглед"
 
-#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:6
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:8
 msgid "API Endpoint"
 msgstr "Крајна точка на API"
 
-#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:8
+#: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:10
 msgid "Go to resource"
 msgstr "Отвори ресурс"
 
@@ -886,11 +886,11 @@ msgstr "Извештаи"
 msgid "Data Requests"
 msgstr "Барања за податочни сетови"
 
-#: ckanext/datagovmk/templates/snippets/search_form.html:9
+#: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
 msgstr "Од"
 
-#: ckanext/datagovmk/templates/snippets/search_form.html:22
+#: ckanext/datagovmk/templates/snippets/search_form.html:28
 msgid "To"
 msgstr "До"
 

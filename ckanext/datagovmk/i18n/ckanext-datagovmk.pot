@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-09 10:42+0200\n"
+"POT-Creation-Date: 2018-08-13 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/datagovmk/actions.py:140
+#: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:332
+#: ckanext/datagovmk/actions.py:333
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:51
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:59
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:332 ckanext/datagovmk/actions.py:699
-#: ckanext/datagovmk/actions.py:728 ckanext/datagovmk/actions.py:772
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:700
+#: ckanext/datagovmk/actions.py:729 ckanext/datagovmk/actions.py:773
 msgid "Missing value"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:429 ckanext/datagovmk/actions.py:435
-#: ckanext/datagovmk/actions.py:556 ckanext/datagovmk/actions.py:565
-#: ckanext/datagovmk/actions.py:650 ckanext/datagovmk/actions.py:653
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
+#: ckanext/datagovmk/actions.py:557 ckanext/datagovmk/actions.py:566
+#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:429 ckanext/datagovmk/actions.py:556
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:557
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:435 ckanext/datagovmk/actions.py:565
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:566
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:519 ckanext/datagovmk/actions.py:533
+#: ckanext/datagovmk/actions.py:520 ckanext/datagovmk/actions.py:534
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:650 ckanext/datagovmk/actions.py:653
+#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:684
+#: ckanext/datagovmk/actions.py:685
 msgid "No script was found for the provided name"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:699 ckanext/datagovmk/actions.py:728
-#: ckanext/datagovmk/actions.py:757 ckanext/datagovmk/actions.py:772
+#: ckanext/datagovmk/actions.py:700 ckanext/datagovmk/actions.py:729
+#: ckanext/datagovmk/actions.py:758 ckanext/datagovmk/actions.py:773
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:10
 #: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:712
+#: ckanext/datagovmk/actions.py:713
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:757
+#: ckanext/datagovmk/actions.py:758
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
