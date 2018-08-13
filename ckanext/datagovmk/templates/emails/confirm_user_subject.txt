@@ -1,1 +1,1 @@
-{{ site_title }} Потребна е активација на корисничка сметка    {{ site_title }} Kërkohet Aktivizimi i Llogarisë së Përdoruesit    {{ site_title }} User Account Activation Required
+{{ site_title }} Потребна е активација на корисничка сметка    {{ site_title }} Кërkohet aktivizimi i llogarisë së përdoruesit   {{ site_title }} User Account Activation Required

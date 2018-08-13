@@ -9,21 +9,23 @@
 Имајте убав ден.
 
 --
+
 Порака пратена од {{ site_title }} ({{ site_url }})
 
 
-Përshëndetje {{user_name}},
+Përshëndetje {{ user_name }},
 
-Një llogari përdoruesi është krijuar në {{ site_title }}.
+llogaria e përdoruesit është krijuar {{ site_title }}.
 
-Për të aktivizuar llogarinë, ju lutemi përdorni lidhjen më poshtë:
+Për të aktivizuar llogarin ju lutemi shfrytëzoni linkun më posht:
 
      {{activation_link}}
 
 Keni një ditë të këndshme.
 
--
-Mesazhi i dërguar nga {{ site_title }} ({{ site_url }})
+--
+
+Mesazhi u dërgua prej {{ site_title }} ({{ site_url }})
 
 
 Hello {{ user_name }},

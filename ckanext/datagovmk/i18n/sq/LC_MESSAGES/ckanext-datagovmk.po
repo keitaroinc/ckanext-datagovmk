@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-13 14:14+0200\n"
-"PO-Revision-Date: 2018-08-07 23:31+0200\n"
+"POT-Creation-Date: 2018-08-13 14:07+0200\n"
+"PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -70,14 +71,13 @@ msgstr "autoritetet"
 #: ckanext/datagovmk/actions.py:713
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
-"Gabim gjatë dërgimit të aktivizimit të e-mailit, përdoruesi nuk u krijua:"
-" {0}"
+"Gabim gjatë dërgimit të aktivizimit të e-mailit, përdoruesi nuk u krijua: {0}"
 
 #: ckanext/datagovmk/actions.py:758
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
-"Skedari i ngarkuar i autoritetit është shumë i madh. Madhësia maksimale e"
-" lejuar është {0}MB."
+"Skedari i ngarkuar i autoritetit është shumë i madh. Madhësia maksimale e lejuar "
+"është {0}MB."
 
 #: ckanext/datagovmk/controller.py:103
 msgid "Resource not found"
@@ -160,18 +160,18 @@ msgstr "Captcha e pavlefshme. Ju lutemi provoni përsëri."
 #: ckanext/datagovmk/controller.py:567
 #, python-format
 msgid ""
-"A confirmation email has been sent to %s. Please use the link in the "
-"email to continue."
+"A confirmation email has been sent to %s. Please use the link in the email to "
+"continue."
 msgstr ""
-"Një email konfirmimi është dërguar në %s. Ju lutemi përdorni link-unun në"
-" e-mail për të vazhduar."
+"Një email konfirmimi është dërguar në %s. Ju lutemi përdorni link-unun në e-mail "
+"për të vazhduar."
 
 #: ckanext/datagovmk/controller.py:580
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
-"Përdoruesi %s është regjistruar tani, por ju jeni ende i identifikuarsi "
-"%s nga më parë"
+"Përdoruesi %s është regjistruar tani, por ju jeni ende i identifikuarsi %s nga "
+"më parë"
 
 #: ckanext/datagovmk/controller.py:759
 msgid "Unable to send the issue report to the system admin."
@@ -193,16 +193,16 @@ msgstr "Burimi i të dhënave nuk u gjet"
 #: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
 "\n"
-"    replaced their <a href=\"{previous_authority_file}\" "
-"target=\"_blank\">old</a>\n"
+"    replaced their <a href=\"{previous_authority_file}\" target=\"_blank\">old</"
+"a>\n"
 "    general authority file with a <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">new</a> one"
 msgstr ""
 "\n"
-"    u zëvendësuan nga <a href =\"{previous_authority_file}\" "
-"target=\"_blank\">vjetër</a>\n"
-"    dosja e përgjithshme e autoritetit me një <a "
-"href=\"{current_authority_file}\"\n"
+"    u zëvendësuan nga <a href =\"{previous_authority_file}\" target=\"_blank"
+"\">vjetër</a>\n"
+"    dosja e përgjithshme e autoritetit me një <a href="
+"\"{current_authority_file}\"\n"
 "    target=\"_blank\">i ri</a> një"
 
 #: ckanext/datagovmk/monkey_patch.py:17 ckanext/datagovmk/monkey_patch.py:32
@@ -213,25 +213,22 @@ msgstr "{aktor} "
 #: ckanext/datagovmk/monkey_patch.py:25
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
-"    {dataset_name}</a> using general <a href=\"{current_authority_file}\""
-"\n"
+"    {dataset_name}</a> using general <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 "ranë dakord për të krijuar setin e të dhënave <a href=\"{dataset_url}\">\n"
-"{dataset_name}</a> duke përdorur në përgjithësi<a "
-"href=\"{current_authority_file}\"\n"
+"{dataset_name}</a> duke përdorur në përgjithësi<a href="
+"\"{current_authority_file}\"\n"
 "target=\"_blank\">dosja e autoritetit</a>"
 
 #: ckanext/datagovmk/monkey_patch.py:40
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
-"    {dataset_name}</a> using additional <a "
-"href=\"{current_authority_file}\"\n"
+"    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 "ranë dakord për të krijuar setin e të dhënave <a href=\"{dataset_url}\">\n"
-"{dataset_name}</a> duke përdorur shtesë <a "
-"href=\"{current_authority_file}\"\n"
+"{dataset_name}</a> duke përdorur shtesë <a href=\"{current_authority_file}\"\n"
 "target=\"_ blank\">dosja e autoritetit</a>"
 
 #: ckanext/datagovmk/utils.py:446
@@ -368,7 +365,7 @@ msgstr "Raporti içështjes së faqes"
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:10
 #: ckanext/datagovmk/templates/footer.html:41
 msgid "Statistics"
-msgstr ""
+msgstr "Statistikat"
 
 #: ckanext/datagovmk/templates/footer.html:59
 msgid "Subscribe to our newsletter"
@@ -392,11 +389,11 @@ msgstr "Abonohu"
 
 #: ckanext/datagovmk/templates/footer.html:85
 msgid ""
-"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
-"href=\"http://ckan.org\">CKAN</a>"
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\">CKAN</a>"
 msgstr ""
-"<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" "
-"href=\"http://ckan.org\">CKAN</a>"
+"<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\">CKAN</a>"
 
 #: ckanext/datagovmk/templates/footer.html:89
 msgid "CKAN API"
@@ -413,13 +410,12 @@ msgstr "Linqet (Lidhjet) e Footer-it"
 #: ckanext/datagovmk/templates/admin/config.html:8
 msgid ""
 "Enter a list of links - one per line - to be shown as a list withing the "
-"secondary footer navigation. Please format the links with Markdown (i.e. "
-"* [Example link](https://www.example.com))."
+"secondary footer navigation. Please format the links with Markdown (i.e. * "
+"[Example link](https://www.example.com))."
 msgstr ""
-"Futni një listë të linqeve (lidhjeve) - një në rresht - që do të shfaqet "
-"si një listë brenda navigacionit të fushës së mesme. Ju lutemi formatoni "
-"lidhjet me Markdown (dmth. * [Shembull i lidhjes] "
-"(https://www.shembull.com))."
+"Futni një listë të linqeve (lidhjeve) - një në rresht - që do të shfaqet si një "
+"listë brenda navigacionit të fushës së mesme. Ju lutemi formatoni lidhjet me "
+"Markdown (dmth. * [Shembull i lidhjes] (https://www.shembull.com))."
 
 #: ckanext/datagovmk/templates/admin/index.html:7
 msgid "Administer CKAN"
@@ -427,17 +423,16 @@ msgstr "Administroni CKAN-in"
 
 #: ckanext/datagovmk/templates/admin/index.html:14
 msgid ""
-"As a sysadmin user you have full control over this CKAN instance. Proceed"
-" with care!"
+"As a sysadmin user you have full control over this CKAN instance. Proceed with "
+"care!"
 msgstr ""
-"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull të "
-"CKAN-it. Vazhdoni me kujdes!"
+"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull të CKAN-"
+"it. Vazhdoni me kujdes!"
 
 #: ckanext/datagovmk/templates/admin/index.html:17
 msgid "For guidance on using sysadmin features, see the CKAN"
 msgstr ""
-"Për udhëzime mbi përdorimin e karakteristikave të sistemit, shikoni CKAN-"
-"IN"
+"Për udhëzime mbi përdorimin e karakteristikave të sistemit, shikoni CKAN-IN"
 
 #: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
@@ -445,42 +440,42 @@ msgstr "udhëzuesI i sysadmin-it"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:16
 msgid "Total number of Datasets"
-msgstr ""
+msgstr "Numri total i setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:23
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:46
 msgid "Date"
-msgstr "set i të dhënave"
+msgstr "Data"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:24
 msgid "Total datasets"
-msgstr "Setet e të dhënave"
+msgstr "Totali i setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:39
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:165
 msgid "Dataset Revisions per Week"
-msgstr ""
+msgstr "Rishikimet e setit të të dhënave në javë"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:47
 msgid "All dataset revisions"
-msgstr ""
+msgstr "Të gjitha rishikimet e setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:48
 msgid "New datasets"
-msgstr "Setet e të dhënave"
+msgstr "Të dhënat e reja të setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:64
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:166
 msgid "Top Rated Datasets"
-msgstr "Seti i të dhënave të ngjashme"
+msgstr "Seti i të dhënave më të vlerësuara"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:70
 msgid "Average rating"
-msgstr ""
+msgstr "Vlerësimi mesatar"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:71
 msgid "Number of ratings"
-msgstr ""
+msgstr "Numri i vlerësimeve"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:85
 msgid "No ratings"
@@ -489,11 +484,11 @@ msgstr "Nuk ka vlerësime"
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:90
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:167
 msgid "Most Edited Datasets"
-msgstr "Seti i të dhënave të ngjashme"
+msgstr "Seti i të dhënave më të modifikuara"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:95
 msgid "Dataset"
-msgstr "Dataset"
+msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:96
 msgid "Number of edits"
@@ -501,7 +496,7 @@ msgstr "Numri i redaktimeve"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:109
 msgid "No edited datasets"
-msgstr "Seti i të dhënave të ngjashme"
+msgstr "Asnjë set i të dhënave nuk u redaktua"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:114
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:168
@@ -510,36 +505,36 @@ msgstr "Grupet më të mëdha"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:119
 msgid "Group"
-msgstr "Grup"
+msgstr "Grupi"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:120
 msgid "Number of datasets"
-msgstr "Numri i grupeve të të dhënave"
+msgstr "Numri i setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:133
 msgid "No groups"
-msgstr "Asnjë grup"
+msgstr "Nuk ka grupe"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:138
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:169
 msgid "Top Tags"
-msgstr "Top Tags"
+msgstr "Tags-at kryesorë"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:142
 msgid "Tag Name"
-msgstr "Emri i tagit"
+msgstr "Emri i Tag-ut"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:143
 msgid "Number of Datasets"
-msgstr "Numri i Datasets"
+msgstr "Numri i setit të të dhënave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:161
 msgid "Statistics Menu"
-msgstr "Menyja e statistikave"
+msgstr "Mënyja e statistikave"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:164
 msgid "Total Number of Datasets"
-msgstr "Numri total i Datasets"
+msgstr "Numri total i setit të të dhënave"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:21
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:26
@@ -557,11 +552,11 @@ msgstr "Identifikohu"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:35
 msgid ""
-"The issue has been successfully reported. You can report another issue by"
-" clicking the button below."
+"The issue has been successfully reported. You can report another issue by "
+"clicking the button below."
 msgstr ""
-"Problemi është raportuar me sukses. Ju mund të raportoni një çështje "
-"tjetër duke klikuar butonin më poshtë."
+"Problemi është raportuar me sukses. Ju mund të raportoni një çështje tjetër duke "
+"klikuar butonin më poshtë."
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:36
 msgid "Report issue"
@@ -618,11 +613,11 @@ msgstr "Mirësevini në CKAN"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:10
 msgid ""
-"This is a nice introductory paragraph about CKAN or the site in general. "
-"We don't have any copy to go here yet but soon we will "
+"This is a nice introductory paragraph about CKAN or the site in general. We "
+"don't have any copy to go here yet but soon we will "
 msgstr ""
-"Ky është një paragraf hyrës rreth CKAN-it ose faqës në përgjithësi. Akoma"
-" nuk kemi ndonjë shembull për të treguar këtu, por së shpejti do kemi"
+"Ky është një paragraf hyrës rreth CKAN-it ose faqës në përgjithësi. Akoma nuk "
+"kemi ndonjë shembull për të treguar këtu, por së shpejti do kemi"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
@@ -751,11 +746,11 @@ msgstr "Burim: <a href=\"%(url)s\">%(dataset)s</a>"
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
-" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
-" add some?</a></p> "
+" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not add "
+"some?</a></p> "
 msgstr ""
-" <p class=\"empty\">Ky set i të dhënave nuk ka të dhëna, <a "
-"href=\"%(url)s\"> pse të mos shtoni disa?</a></p>"
+" <p class=\"empty\">Ky set i të dhënave nuk ka të dhëna, <a href=\"%(url)s\"> "
+"pse të mos shtoni disa?</a></p>"
 
 #: ckanext/datagovmk/templates/package/search.html:19
 msgid "Relevance"
@@ -823,8 +818,7 @@ msgstr "Kjo fushë duhet të plotësohet"
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:56
 msgid "Agree that you have provided an authority to add this dataset."
 msgstr ""
-"Pajtohuni se ju i keni dhënë një autoriteti për të shtuar këtë set të të "
-"dhënave."
+"Pajtohuni se ju i keni dhënë një autoriteti për të shtuar këtë set të të dhënave."
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:60
 msgid "You must agree to add this dataset."
@@ -833,8 +827,8 @@ msgstr "Duhet të pranoni të shtoni këtë set të të të dhënave."
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 msgid "If necessary, attach a file with additional authority to add this dataset"
 msgstr ""
-"Nëse është e nevojshme, bashkëngjitni një skedar me autoritet shtesë për "
-"të shtuar këtë set të dhënash"
+"Nëse është e nevojshme, bashkëngjitni një skedar me autoritet shtesë për të "
+"shtuar këtë set të dhënash"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
@@ -934,8 +928,8 @@ msgstr "Informacioni i llogarisë"
 #: ckanext/datagovmk/templates/user/edit.html:7
 msgid "Your profile lets other CKAN users know about who you are and what you do."
 msgstr ""
-"Profili juaj u lejon përdoruesve të tjerë të CKAN -it të dinë se kush "
-"jeni dhe çfarë po bëni."
+"Profili juaj u lejon përdoruesve të tjerë të CKAN -it të dinë se kush jeni dhe "
+"çfarë po bëni."
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:7
 msgid "Change details"
@@ -1055,11 +1049,11 @@ msgstr "Si funksionon kjo?"
 
 #: ckanext/datagovmk/templates/user/request_reset.html:12
 msgid ""
-"Enter your username into the box and we will send you an email with a "
-"link to enter a new password."
+"Enter your username into the box and we will send you an email with a link to "
+"enter a new password."
 msgstr ""
-"Futni emrin tuaj të përdoruesit në kuti dhe ne do t'ju dërgojmë një "
-"e-mail me link-un (lidhje) për të futur një fjalëkalim të ri."
+"Futni emrin tuaj të përdoruesit në kuti dhe ne do t'ju dërgojmë një e-mail me "
+"link-un (lidhje) për të futur një fjalëkalim të ri."
 
 #~ msgid "Issue: {title}"
 #~ msgstr "Çështje: {titull}"
@@ -1069,7 +1063,3 @@ msgstr ""
 
 #~ msgid "Key"
 #~ msgstr "Çelës"
-
-#~ msgid "eg. http://example.com/image.jpg  (if blank uses resource url)"
-#~ msgstr ""
-
