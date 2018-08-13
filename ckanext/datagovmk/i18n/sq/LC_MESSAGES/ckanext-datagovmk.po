@@ -231,11 +231,11 @@ msgstr ""
 "{dataset_name}</a> duke përdorur shtesë <a href=\"{current_authority_file}\"\n"
 "target=\"_ blank\">dosja e autoritetit</a>"
 
-#: ckanext/datagovmk/utils.py:436
+#: ckanext/datagovmk/utils.py:446
 msgid "Email message was successfully sent."
 msgstr "Mesazhi me e-mail u dërgua me sukses."
 
-#: ckanext/datagovmk/utils.py:442
+#: ckanext/datagovmk/utils.py:452
 msgid "An error occured while sending the email. Try again."
 msgstr "Ndodhi një gabim gjatë dërgimit të e-mailit. Ju lutemi provoni përsëri."
 
@@ -769,20 +769,35 @@ msgid "Last Modified"
 msgstr "E modifikuara e fundit"
 
 #: ckanext/datagovmk/templates/package/search.html:23
+msgid "Organization Ascending"
+msgstr "Organizata sipas rendit ngjitës "
+
+msgid "Organization Descending"
+msgstr "Organizatat zbresin rendin"
+
+#: ckanext/datagovmk/templates/package/search.html:25
 msgid "Total Downloads Ascending"
 msgstr "Shkarkime Totali Ascending"
 
-#: ckanext/datagovmk/templates/package/search.html:24
+#: ckanext/datagovmk/templates/package/search.html:26
 msgid "Total Downloads Descending"
 msgstr "Shkarkime gjithsej në zbritje"
 
-#: ckanext/datagovmk/templates/package/search.html:25
+#: ckanext/datagovmk/templates/package/search.html:27
 msgid "File Size Ascending"
 msgstr "Madhësia e dokumentit ngjitet"
 
-#: ckanext/datagovmk/templates/package/search.html:26
+#: ckanext/datagovmk/templates/package/search.html:28
 msgid "File Size Descending"
 msgstr "Madhësia e skedarit zbret"
+
+#: ckanext/datagovmk/templates/package/search.html:29
+msgid "Location Ascending"
+msgstr "Vend Ngjitës"
+
+#: ckanext/datagovmk/templates/package/search.html:30
+msgid "Location Descending"
+msgstr "Vend zbritës"
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:16
 msgid "Download Dataset Metadata"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-13 14:07+0200\n"
+"POT-Creation-Date: 2018-08-13 14:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,11 +209,11 @@ msgid ""
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 
-#: ckanext/datagovmk/utils.py:436
+#: ckanext/datagovmk/utils.py:446
 msgid "Email message was successfully sent."
 msgstr ""
 
-#: ckanext/datagovmk/utils.py:442
+#: ckanext/datagovmk/utils.py:452
 msgid "An error occured while sending the email. Try again."
 msgstr ""
 
@@ -733,19 +733,35 @@ msgid "Last Modified"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/search.html:23
-msgid "Total Downloads Ascending"
+msgid "Organization Ascending"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/search.html:24
-msgid "Total Downloads Descending"
+msgid "Organization Descending"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/search.html:25
-msgid "File Size Ascending"
+msgid "Total Downloads Ascending"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/search.html:26
+msgid "Total Downloads Descending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:27
+msgid "File Size Ascending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:28
 msgid "File Size Descending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:29
+msgid "Location Ascending"
+msgstr ""
+
+#: ckanext/datagovmk/templates/package/search.html:30
+msgid "Location Descending"
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/additional_info.html:16
