@@ -212,6 +212,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.datagovmk.controller:OverrideDatastoreController',
                     action='dump')
 
+        map.connect('/stats',
+                    controller="ckanext.datagovmk.controller:StatsController",
+                    action="index")
+
         return map
 
     def configure(self, config):
