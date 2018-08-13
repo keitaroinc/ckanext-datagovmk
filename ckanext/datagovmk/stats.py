@@ -9,7 +9,6 @@ import ckan.plugins as p
 from ckan.common import config
 
 cache_enabled = p.toolkit.asbool(config.get('ckanext.stats.cache_enabled', 'True'))
-cache_enabled = False
 
 if cache_enabled:
     from pylons import cache
