@@ -21,6 +21,9 @@ class RevisionStats(CoreRevisionStats):
     
     @classmethod
     def get_num_packages_by_week(cls):
+        """
+        overriden
+        """
         def num_packages():
             new_packages_by_week = cls.get_by_week('new_packages')
             deleted_packages_by_week = cls.get_by_week('deleted_packages')
@@ -101,6 +104,9 @@ class RevisionStats(CoreRevisionStats):
     
     @classmethod
     def get_by_week(cls, object_type):
+        '''
+        overriden
+        '''
         cls._object_type = object_type
         def objects_by_week():
             if cls._object_type == 'new_packages':

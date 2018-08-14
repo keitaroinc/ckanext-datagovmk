@@ -657,14 +657,11 @@ def _validate_link(link):
 def start_script(context, data_dict):
     """ This action is only intended to be used for starting scripts as cron
     jobs on the server. It's only available for system administrators.
-
     Scripts are located at `ckanext-datagovmk/scripts/cron_jobs`.
-
     :param name: The name of the script to be executed. Available script name
-    is the name of the file of the script located at
-    `ckanext-datagovmk/scripts/cron_jobs`. For example `archiver`.
+    is the name of the file of the script located at ckanext-datagovmk/scripts/cron_jobs`. 
+    For example `archiver`.
     :type name: string
-
     :returns: Message that the script has been successfully executed. Since
     the script is executed as a subprocess, if there is an error it is not
     caught in the process where CKAN is started.
@@ -902,21 +899,9 @@ def dashboard_activity_list_html(context, data_dict):
     Override this action to filter out activities related to uploaded
     authorities and dataset agreement that are only shown for sysadmins and
     users that have updated their general activites.
-
-    The activity stream is rendered as a snippet of HTML meant to be included
-    in an HTML page, i.e. it doesn't have any HTML header or footer.
-
-    :param offset: where to start getting activity items from
-        (optional, default: ``0``)
-    :type offset: int
-    :param limit: the maximum number of activities to return
-        (optional, default: ``31``, the default value is configurable via the
-        ckan.activity_list_limit setting)
-    :type limit: int
-
-    :rtype: string
-
+    
     '''
+
     activity_stream = toolkit.get_action('dashboard_activity_list')(context, data_dict)
     model = context['model']
     user_id = context['user']
@@ -979,6 +964,15 @@ def group_show(context, data_dict):
 
 
 def get_package_stats(package_id):
+    """ This function returns the dataset statictics
+    :param package_id: the id of the dataset
+    :type package_id: str
+    :returns: The largest resource in file size and the total number
+    of downloads of all resources that belong to this dataset
+    :rtype: dict
+
+    """
+
     pkg_dict = {}
     try:
         pkg_dict = get_action('package_show')({'ignore_auth': True}, {'id': package_id})
@@ -998,12 +992,23 @@ def get_package_stats(package_id):
 
 
 def update_package_stats(package_id):
+    """ This function will update the statistics for the dataset
+    :param package_id: the id of the dataset (package)
+    :type package_id: str
+    """
     stats = get_package_stats(package_id)
     update_package_stats_solr(package_id, stats)
 
 
 @toolkit.side_effect_free
 def increment_downloads_for_resource(context, data_dict):
+    """ This function will increment the total downloads for a resource
+    :param resource_id: the id from the resource
+    :type resource_id: str
+    :returns: message that the action was successful
+    :rtype: str
+
+    """
     resource_id = data_dict.get('resource_id')
     increment_downloads(resource_id)
     # Also, update the stats in dataset indexed metadata

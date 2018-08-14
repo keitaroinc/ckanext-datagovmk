@@ -880,9 +880,13 @@ class OverrideDatastoreController(DatastoreController):
             toolkit.abort(404, _('DataStore resource not found'))
 
 def get_xml_element(element_name):
-    u'''Return element name according XML naming standards
-        Capitalize every word and remove special characters
-       '''
+    '''Return element name according XML naming standards
+    Capitalize every word and remove special characters
+    :param element_name: xml element
+    :type element_name: str
+    :returns: Element name according XML standards
+    :rtype: str
+    '''
     clean_word = u''.join(c.strip(SPECIAL_CHARS) for c in element_name)
     if unicode(clean_word).isnumeric():
         return u'_' + unicode(element_name)
@@ -891,6 +895,7 @@ def get_xml_element(element_name):
 
 
 def dump_to(resource_id, output, fmt, offset, limit, options):
+    """ Overriden method """
     if fmt == 'csv':
         writer_factory = csv_writer
         records_format = 'csv'
@@ -947,6 +952,7 @@ def dump_to(resource_id, output, fmt, offset, limit, options):
 
 
 class XMLWriter(object):
+    """ Overriden class """
     _key_attr = u'key'
     _value_tag = u'value'
 
@@ -975,6 +981,7 @@ class XMLWriter(object):
             element.attrib[self._key_attr] = text_type(key_attr)
 
     def write_records(self, records):
+        """ Overriden """
         for r in records:
             root = Element(u'row')
             if self.id_col:
@@ -1012,6 +1019,12 @@ def xml_writer(response, fields, name=None, bom=False):
 
 
 def extract_date(datestr):
+    """ Change format of the date. Example: 01-08-2018 to 2018-08-01 00:00:00
+    :param datestr: the date string which needs to be converted in different format
+    :type datestr: str
+    :returns: formatted string
+    :rtype: str
+    """
     datestr = datestr.strip() if datestr else ''
     m = re.match(r'(?P<mm>\d{1,2})(?P<sep>[-/])(?P<dd>\d{1,2})[-/](?P<yyyy>\d{4})', datestr)
     if m:
@@ -1032,4 +1045,10 @@ def _strptime(format_, datestr):
         return None
 
 def datetime_to_utc(dt):
+    """Convert datetime to UTC
+    :param dt: datetime
+    :type dt: datetime
+    :returns: converted datetime to UTC
+    :rtype: datetime
+    """
     return dt.replace(tzinfo=pytz.UTC)

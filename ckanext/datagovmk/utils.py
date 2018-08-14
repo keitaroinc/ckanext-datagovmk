@@ -337,6 +337,8 @@ def get_package_location_geojson(package_dict):
 
 
 def populate_location_name_from_spatial_uri(package_dict):
+    """Populates location name from spatial URI
+    """
     if package_dict.get('spatial_uri'):
         try:
             name = _get_helper('mk_dcatap_spatial_name_from_code')(package_dict['spatial_uri'])
@@ -429,6 +431,8 @@ def _code_to_spatial_uri(code):
 
 
 def send_email(to_name, to_email, subject, content):
+    """ This function sends e-mail
+    """
     content = """\
         <html>
           <head></head>
