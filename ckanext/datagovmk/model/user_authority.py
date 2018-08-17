@@ -8,16 +8,9 @@ from ckan.model.domain_object import DomainObject
 
 from sqlalchemy import types, ForeignKey, Column, Table, desc
 
+__all__ = ['UserAuthority', 'user_authority_table', 'setup']
+
 user_authority_table = None
-
-
-def setup():
-    if user_authority_table is None:
-        define_user_authority_table()
-
-        if not user_authority_table.exists() and model.user_table.exists():
-            user_authority_table.create()
-
 
 class UserAuthority(DomainObject):
 
@@ -53,19 +46,20 @@ class UserAuthority(DomainObject):
             raise logic.NotFound
 
 
-def define_user_authority_table():
-    global user_authority_table
-    user_authority_table = Table(
-        'user_authority',
-        metadata,
-        Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        Column('user_id', types.UnicodeText),
-        Column('authority_file', types.UnicodeText),
-        Column('authority_type', types.UnicodeText),
-        Column('created', types.DateTime, default=datetime.datetime.now),
-    )
+user_authority_table = Table(
+    'user_authority',
+    metadata,
+    Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+    Column('user_id', types.UnicodeText),
+    Column('authority_file', types.UnicodeText),
+    Column('authority_type', types.UnicodeText),
+    Column('created', types.DateTime, default=datetime.datetime.now),
+)
 
-    mapper(
-        UserAuthority,
-        user_authority_table,
-    )
+mapper(
+    UserAuthority,
+    user_authority_table,
+)
+
+def setup():
+    metadata.create_all(model.meta.engine)

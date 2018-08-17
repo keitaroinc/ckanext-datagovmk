@@ -95,7 +95,6 @@ def get_most_active_organizations(limit=5):
                     last_modified_resource = resource.get(field)
 
             last_updated_datasets.append(last_modified_resource)
-
         last_updated_datasets = sorted(last_updated_datasets, reverse=True)
 
         if last_updated_datasets:
