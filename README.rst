@@ -218,6 +218,10 @@ do::
 Running the Tests
 -----------------
 
+Run a local dev SMTP server because it is needed for some of the tests::
+
+    sudo python -m smtpd -n -c DebuggingServer localhost:6675
+
 To run the tests, do::
 
     nosetests --nologcapture --with-pylons=test.ini
