@@ -145,6 +145,12 @@ class CheckOutdatedDatasets(CkanCommand):
         return users
 
     def notify_dataset_outdated(self, dataset, last_modified):
+        """ This function will notify if a dataset is outdated
+        :param dataset: the dataset that needs to be checked if it is outdated
+        :type dataset: dict
+        :param last_modified: date of the last time the dataset was modified
+        :type last_modified: str
+        """
         dataset_url = h.url_for(controller='package', action='read', id=dataset['name'], qualified=True)
         dataset_update_url = h.url_for(controller='package', action='edit', id=dataset['name'], qualified=True)
         dataset_title = dataset.get('title') or dataset.get('name')

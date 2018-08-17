@@ -233,6 +233,13 @@ def get_storage_path_for(dirname):
 
 
 def get_user_id(user_name):
+    """ Get the user id from the user name
+    :param user_name: the user name of the user
+    :type user_name: str
+    :returns: id of the user
+    :rtype: str
+    """
+
     try:
         user = toolkit.get_action('user_show')({}, {'id': user_name})
         return user.get('id')
@@ -241,6 +248,14 @@ def get_user_id(user_name):
 
 
 def get_last_authority_for_user(authority_type, user_id):
+    """ Get last authority file for the user
+    :param authority_type: general or additional
+    :type authority_type: str
+    :param user_id: the id of the user
+    :type user_id: str
+    :returns: the last authority file for the user
+    :rtype: str
+    """
     user_authority = UserAuthority.get_last_authority_for_user(
         authority_type, user_id
     )
@@ -249,17 +264,39 @@ def get_last_authority_for_user(authority_type, user_id):
 
 
 def translate_field(data_dict, field_name):
+    """ This function translates the field based on the current locale
+    :param data_dict: data_dict which is the metadata of the dataset/organization/resource/group
+    :type data_dict: dict
+    :param field_name: the field that needs to be translated
+    :type field_name: str
+    :returns: the translated field
+    :rtype: str
+    """
+
     if isinstance(data_dict, dict):
         return core_helpers.get_translated(data_dict, field_name)
 
 
 def get_org_title(id):
+    """ Gets the translated title of the organization
+    :param id: the id of the organization
+    :type id: str
+    returns: the translated title of the organization
+    :rtype: str
+    """
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
     return translate_field(org, 'title')
 
 
 def get_org_description(id):
+    """ Gets the translated description of the organization
+    :param id: the id of the organization
+    :type id: str
+    returns: the translated description of the organization
+    :rtype: str
+    """
+    
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
     return translate_field(org, 'description')
@@ -267,7 +304,12 @@ def get_org_description(id):
 
 def get_org_catalog(id):
     """ Get the catalog for an organization. A catalog is represented as a
-    dataset. """
+    dataset. 
+    :param id: the id of the organization
+    :type id: str
+    :returns: the catalog for an organization
+    :rtype: dict
+    """
     try:
         data_dict = {
             'fq': '(owner_org:{0} AND extras_org_catalog_enabled:true)'.format(id)
@@ -279,7 +321,10 @@ def get_org_catalog(id):
 
 
 def get_catalog_count():
-    """ Count how many catalogs (datasets) are in the portal. """
+    """ Count how many catalogs (datasets) are in the portal.
+    :returns: totat number of catalogs
+    :rtype: list
+    """
     data_dict = {
         'fq': 'extras_org_catalog_enabled:true'
     }

@@ -5,10 +5,20 @@ from ckan.lib import mailer
 
 
 def create_activation_key(user):
+    """ Creates activation key for user
+    :param user: the user for whom an activation key should be created
+    :type user: dict
+    """
     mailer.create_reset_key(user)
 
 
 def get_activation_link(user):
+    """ Get activation link for the user
+    :param user: the user for whom an activation link should be gotten
+    :type user: dict
+    :returns: activation link
+    :rtype: str
+    """ 
     controller_path = 'ckanext.datagovmk.controller:DatagovmkUserController'
     return h.url_for(controller=controller_path,
                      action='perform_activation',
@@ -18,6 +28,11 @@ def get_activation_link(user):
 
 
 def request_activation(user):
+    """ Request activation for user
+    :param user: the user for whom an activation link should be requested
+    :type user: dict
+    """
+    
     create_activation_key(user)
     site_title = config.get('ckan.site_title')
     site_url = config.get('ckan.site_url')
@@ -37,6 +52,12 @@ def request_activation(user):
 
 
 def verify_activation_link(user, key):
+    """ Verifies the activation link
+    :param user: checks if the activation link is verified for the user
+    :type user: object
+    :param key: the activation key
+    :type key: str
+    """
     if not user or not key:
         return False
     if not user.reset_key or len(user.reset_key) < 5:
