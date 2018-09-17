@@ -13,6 +13,10 @@ from ckan.common import config
 import os
 import io
 import inspect
+from ckanext.datagovmk.model.user_authority \
+    import setup as setup_user_authority_table
+from ckanext.datagovmk.model.user_authority_dataset \
+    import setup as setup_user_authority_dataset_table
 
 log = getLogger('ckanext.datagovmk')
 
@@ -195,3 +199,20 @@ def _load_resource_from_path(url):
     p = os.path.join(os.path.dirname(inspect.getfile(m)), file_name)
     with io.open(p, mode='r', encoding='utf-8') as resource_file:
         return resource_file.read()
+
+
+class InitDB(CkanCommand):
+    ''' Initialize UserAuthority tables. '''
+
+    summary = __doc__.split('\n')[0]
+    usage = __doc__
+    max_args = 0
+    min_args = 0
+
+    def command(self):
+        self._load_config()
+        
+        setup_user_authority_table()
+        setup_user_authority_dataset_table()
+
+        log.info('User authorities tables initialized')

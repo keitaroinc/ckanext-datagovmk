@@ -481,7 +481,13 @@ def resource_create(context, data_dict):
         plugin.after_create(context, resource)
 
     try:
-        update_package_stats(resource['package_id'])
+        # When running some of the tests, it gives wrong results caused by
+        # updating SOLR through the update_package_stats. This check is only
+        # for the tests.
+        skip_update_package_stats = data_dict.get('skip_update_package_stats')
+
+        if not skip_update_package_stats:
+            update_package_stats(resource['package_id'])
     except Exception as e:
         log.error(e)
 
@@ -621,7 +627,7 @@ def resource_delete(action, context, data_dict):
         log.exception(e)
 
     result = action(context, data_dict)
-    
+
     try:
         if package_id:
             update_package_stats(package_id)
@@ -659,7 +665,7 @@ def start_script(context, data_dict):
     jobs on the server. It's only available for system administrators.
     Scripts are located at `ckanext-datagovmk/scripts/cron_jobs`.
     :param name: The name of the script to be executed. Available script name
-    is the name of the file of the script located at ckanext-datagovmk/scripts/cron_jobs`. 
+    is the name of the file of the script located at ckanext-datagovmk/scripts/cron_jobs`.
     For example `archiver`.
     :type name: string
     :returns: Message that the script has been successfully executed. Since
@@ -899,7 +905,7 @@ def dashboard_activity_list_html(context, data_dict):
     Override this action to filter out activities related to uploaded
     authorities and dataset agreement that are only shown for sysadmins and
     users that have updated their general activites.
-    
+
     '''
 
     activity_stream = toolkit.get_action('dashboard_activity_list')(context, data_dict)

@@ -9,10 +9,6 @@ from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
 from ckanext.datagovmk.logic import import_spatial_data
-from ckanext.datagovmk.model.user_authority \
-    import setup as setup_user_authority_table
-from ckanext.datagovmk.model.user_authority_dataset \
-    import setup as setup_user_authority_dataset_table
 from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
@@ -80,7 +76,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
-    plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
@@ -217,11 +212,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     action="index")
 
         return map
-
-    def configure(self, config):
-        setup_user_authority_table()
-        setup_user_authority_dataset_table()
-
 
     # IPackageController
     def before_index(self, pkg_dict):

@@ -8,16 +8,6 @@ from ckan.model.domain_object import DomainObject
 
 from sqlalchemy import types, ForeignKey, Column, Table
 
-user_authority_dataset_table = None
-
-
-def setup():
-    if user_authority_dataset_table is None:
-        define_user_authority_dataset_table()
-
-        if not user_authority_dataset_table.exists() and model.user_table.exists():
-            user_authority_dataset_table.create()
-
 
 class UserAuthorityDataset(DomainObject):
 
@@ -44,20 +34,21 @@ class UserAuthorityDataset(DomainObject):
             raise logic.NotFound
 
 
-def define_user_authority_dataset_table():
-    global user_authority_dataset_table
-    user_authority_dataset_table = Table(
-        'user_authority_dataset',
-        metadata,
-        Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        Column('authority_id', types.UnicodeText,
-               ForeignKey('user_authority.id', ondelete='CASCADE')),
-        Column('dataset_id', types.UnicodeText,
-               ForeignKey('package.id', ondelete='CASCADE')),
-        Column('created', types.DateTime, default=datetime.datetime.now),
-    )
+user_authority_dataset_table = Table(
+    'user_authority_dataset',
+    metadata,
+    Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+    Column('authority_id', types.UnicodeText,
+            ForeignKey('user_authority.id', ondelete='CASCADE')),
+    Column('dataset_id', types.UnicodeText,
+            ForeignKey('package.id', ondelete='CASCADE')),
+    Column('created', types.DateTime, default=datetime.datetime.now),
+)
 
-    mapper(
-        UserAuthorityDataset,
-        user_authority_dataset_table,
-    )
+mapper(
+    UserAuthorityDataset,
+    user_authority_dataset_table,
+)
+
+def setup():
+    metadata.create_all(model.meta.engine)
