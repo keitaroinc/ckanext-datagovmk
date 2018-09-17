@@ -38,8 +38,10 @@ user_authority_dataset_table = Table(
     'user_authority_dataset',
     metadata,
     Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-    Column('authority_id', types.UnicodeText),
-    Column('dataset_id', types.UnicodeText),
+    Column('authority_id', types.UnicodeText,
+            ForeignKey('user_authority.id', ondelete='CASCADE')),
+    Column('dataset_id', types.UnicodeText,
+            ForeignKey('package.id', ondelete='CASCADE')),
     Column('created', types.DateTime, default=datetime.datetime.now),
 )
 
