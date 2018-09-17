@@ -39,25 +39,10 @@ $(document).ready(function () {
 
   // When the Mark All button is clicked, toggle the state for checkboxes displayed next to each resource
   $('.btn-mark-all').click(function (e) {
-    var $el = $(this);
-    var atLeastOneChecked = false;
-
-    $.each(resourceCheckboxes, function (i, el) {
-      if (el.checked) {
-        atLeastOneChecked = true;
-      }
-    });
-    if (atLeastOneChecked) {
-      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
-        elem.addClass('btn-success');
-        elem.removeAttr('disabled');
-      });
-    } else {
-      $.each([downloadResourcesBtn, $('.download-metadata-btn'), $('.download-metadata-control .btn')], function (i, elem) {
-        elem.removeClass('btn-success');
-        elem.attr('disabled', 'disabled');
-      });
-    }
+    // reschedule it at the end of the event queue, give it time to enable the checkboxes.
+    setTimeout(function(){
+      toggleDownloadButtons();
+    }, 0);
   });
 
   // Disable/enable the Download button depending if any checkbox is checked.
