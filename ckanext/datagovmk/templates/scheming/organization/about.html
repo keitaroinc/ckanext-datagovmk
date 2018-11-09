@@ -1,0 +1,18 @@
+{% extends "organization/about.html" %}
+
+{% block primary_content_inner %}
+  {% for f in c.scheming_fields %}
+    {% if "_translated" in f.field_name %}
+      {% if "title_translated" == f.field_name %}
+        <h1 class="heading">
+          {{ h.scheming_language_text(c.group_dict[f.field_name]) or ("&nbsp;"|safe) }}
+        </h1>
+      {% endif %}
+      {% if "description_translated" == f.field_name %}
+        <p>
+          {{ h.scheming_language_text(c.group_dict[f.field_name]) or ("&nbsp;"|safe) }}
+        </p>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
