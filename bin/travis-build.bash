@@ -43,4 +43,19 @@ pip install -r requirements.txt
 pip install oauth2client
 cd -
 
+echo "Installing ckanext-c3charts and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-c3charts.git
+cd ckanext-c3charts
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-dcat and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-dcat.git
+cd ckanext-dcat
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
 echo "travis-build.bash is done."
