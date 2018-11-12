@@ -5,6 +5,7 @@ python:
 services:
     - postgresql
     - redis-server
+    - docker
 install:
     - bash bin/travis-build.bash
     - pip install coveralls

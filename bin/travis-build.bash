@@ -18,6 +18,10 @@ python setup.py develop
 sed -i 's/psycopg2==2.4.5/psycopg2==2.7.3.2/' requirements.txt
 pip install -r requirements.txt --allow-all-external
 pip install -r dev-requirements.txt --allow-all-external
+
+docker build --rm=false -f contrib/docker/solr/Dockerfile -t solr .
+docker run -d --name solr solr
+
 cd -
 
 echo "Creating the PostgreSQL user and database..."
