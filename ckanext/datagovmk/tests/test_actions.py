@@ -37,7 +37,7 @@ class FakeFileStorage(cgi.FieldStorage):
 
 class ActionsBase(test_helpers.FunctionalTestBase):
     def setup(self):
-        test_helpers.reset_db()
+        # test_helpers.reset_db()
         init_tables_ga()
         setup_user_authority_table()
         setup_user_authority_dataset_table()
