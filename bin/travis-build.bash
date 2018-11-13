@@ -76,7 +76,7 @@ echo "Installing ckanext-harvest and its requirements..."
 git clone https://github.com/ckan/ckanext-harvest.git
 cd ckanext-harvest
 python setup.py develop
-python install -r pip-requirements.txt
+pip install -r pip-requirements.txt
 cd -
 
 echo "travis-build.bash is done."
