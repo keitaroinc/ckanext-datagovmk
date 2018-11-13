@@ -35,6 +35,9 @@ echo "Installing ckanext-datagovmk and its requirements..."
 python setup.py develop
 pip install -r dev-requirements.txt
 
+# go out of ckanext-datagovmk extension
+cd ..
+
 echo "Installing ckanext-googleanalytics and its requirements..."
 git clone https://github.com/ckan/ckanext-googleanalytics
 cd ckanext-googleanalytics
@@ -214,5 +217,8 @@ cd ckanext-datarequests
 git checkout dgm-stable
 python setup.py develop
 cd -
+
+# return to ckanext-datagovmk extension
+cd ckanext-datagovmk
 
 echo "travis-build.bash is done."
