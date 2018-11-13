@@ -91,11 +91,128 @@ git clone https://github.com/keitaroinc/ckanext-validation.git
 cd ckanext-validation
 git checkout dgm-stable
 python setup.py develop
+pip install --no-cache-dir $(cat requirements.txt | grep -ivE "ckanext-scheming")
 cd -
 
 echo "Installing ckanext-repeating and its requirements..."
 git clone https://github.com/keitaroinc/ckanext-repeating.git
 cd ckanext-repeating
+python setup.py develop
+cd -
+
+echo "Installing ckanext-spatial and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-spatial.git
+cd ckanext-spatial
+git checkout dgm-stable
+python setup.py develop
+pip install -r pip-requirements.txt
+cd -
+
+echo "Installing ckanext-report and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-report.git
+cd ckanext-report
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-archiver and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-archiver.git
+cd ckanext-archiver
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-qa and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-qa.git
+cd ckanext-qa
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-showcase and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-showcase.git
+cd ckanext-showcase
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-disqus and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-disqus.git
+cd ckanext-disqus
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-odata and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-odata.git
+cd ckanext-odata
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-envvars and its requirements..."
+git clone https://github.com/okfn/ckanext-envvars.git
+cd ckanext-envvars
+python setup.py develop
+pip install -r dev-requirements.txt
+cd -
+
+echo "Installing ckanext-pages and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-pages.git
+cd ckanext-pages
+git checkout dgm-stable
+python setup.py develop
+pip install -r dev-requirements.txt
+cd -
+
+echo "Installing ckanext-organogram and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-organogram.git
+cd ckanext-organogram
+python setup.py develop
+cd -
+
+echo "Installing ckanext-experience and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-experience.git
+cd ckanext-experience
+python setup.py develop
+cd -
+
+echo "Installing ckanext-requestdata and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-requestdata.git
+cd ckanext-requestdata
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-likes and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-likes.git
+cd ckanext-likes
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-issues and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-issues.git
+cd ckanext-issues
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-dataexplorer and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-dataexplorer.git
+cd ckanext-dataexplorer
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-datarequests and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-datarequests.git
+cd ckanext-datarequests
+git checkout dgm-stable
 python setup.py develop
 cd -
 
