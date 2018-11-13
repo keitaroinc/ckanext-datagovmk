@@ -199,7 +199,6 @@ git clone https://github.com/keitaroinc/ckanext-issues.git
 cd ckanext-issues
 git checkout dgm-stable
 python setup.py develop
-pip install -r requirements.txt
 cd -
 
 echo "Installing ckanext-dataexplorer and its requirements..."
