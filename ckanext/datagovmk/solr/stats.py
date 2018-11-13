@@ -41,7 +41,8 @@ def increment_total_downloads(package_id):
             total_downloads += 1
             pkg_dict["extras_total_downloads"] = str(total_downloads).rjust(24, '0')
 
-            del pkg_dict['_version_']
+            if '_version_' in pkg_dict:
+                del pkg_dict['_version_']
             conn.add(docs=[pkg_dict], commit=True)
     except pysolr.SolrError, e:
         log.error("Solr returned error: %s", e)
