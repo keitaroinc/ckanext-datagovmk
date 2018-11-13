@@ -10,9 +10,8 @@ sudo apt-get install solr-jetty
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
 cd ckan
-export latest_ckan_release_branch=`git branch --all | grep remotes/origin/release-v | sort -r | sed 's/remotes\/origin\///g' | head -n 1`
-echo "CKAN branch: $latest_ckan_release_branch"
-git checkout $latest_ckan_release_branch
+echo "CKAN branch: ckan-2.8.1"
+git checkout ckan-2.8.1
 python setup.py develop
 pip install -r requirements.txt --allow-all-external
 pip install -r dev-requirements.txt --allow-all-external
@@ -36,8 +35,190 @@ echo "Installing ckanext-datagovmk and its requirements..."
 python setup.py develop
 pip install -r dev-requirements.txt
 
-echo "Moving test.ini into a subdir..."
-mkdir subdir
-mv test.ini subdir
+# go out of ckanext-datagovmk extension
+cd ..
+
+echo "Installing ckanext-googleanalytics and its requirements..."
+git clone https://github.com/ckan/ckanext-googleanalytics
+cd ckanext-googleanalytics
+python setup.py develop
+pip install -r requirements.txt
+pip install oauth2client
+cd -
+
+echo "Installing ckanext-c3charts and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-c3charts.git
+cd ckanext-c3charts
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-dcat and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-dcat.git
+cd ckanext-dcat
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-scheming and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-scheming.git
+cd ckanext-scheming
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-fluent and its requirements..."
+git clone https://github.com/ckan/ckanext-fluent.git
+cd ckanext-fluent
+python setup.py develop
+cd -
+
+echo "Installing ckanext-harvest and its requirements..."
+git clone https://github.com/ckan/ckanext-harvest.git
+cd ckanext-harvest
+python setup.py develop
+pip install -r pip-requirements.txt
+cd -
+
+echo "Installing ckanext-mk_dcatap and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-mk_dcatap
+cd ckanext-mk_dcatap
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-validation and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-validation.git
+cd ckanext-validation
+git checkout dgm-stable
+python setup.py develop
+pip install --no-cache-dir $(cat requirements.txt | grep -ivE "ckanext-scheming")
+cd -
+
+echo "Installing ckanext-repeating and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-repeating.git
+cd ckanext-repeating
+python setup.py develop
+cd -
+
+echo "Installing ckanext-spatial and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-spatial.git
+cd ckanext-spatial
+git checkout dgm-stable
+python setup.py develop
+pip install -r pip-requirements.txt
+cd -
+
+echo "Installing ckanext-report and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-report.git
+cd ckanext-report
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-archiver and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-archiver.git
+cd ckanext-archiver
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-qa and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-qa.git
+cd ckanext-qa
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-showcase and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-showcase.git
+cd ckanext-showcase
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-disqus and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-disqus.git
+cd ckanext-disqus
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-odata and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-odata.git
+cd ckanext-odata
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-envvars and its requirements..."
+git clone https://github.com/okfn/ckanext-envvars.git
+cd ckanext-envvars
+python setup.py develop
+pip install -r dev-requirements.txt
+cd -
+
+echo "Installing ckanext-pages and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-pages.git
+cd ckanext-pages
+git checkout dgm-stable
+python setup.py develop
+pip install -r dev-requirements.txt
+cd -
+
+echo "Installing ckanext-organogram and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-organogram.git
+cd ckanext-organogram
+python setup.py develop
+cd -
+
+echo "Installing ckanext-experience and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-experience.git
+cd ckanext-experience
+python setup.py develop
+cd -
+
+echo "Installing ckanext-requestdata and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-requestdata.git
+cd ckanext-requestdata
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-likes and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-likes.git
+cd ckanext-likes
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-issues and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-issues.git
+cd ckanext-issues
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-dataexplorer and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-dataexplorer.git
+cd ckanext-dataexplorer
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
+echo "Installing ckanext-datarequests and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-datarequests.git
+cd ckanext-datarequests
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+# return to ckanext-datagovmk extension
+cd ckanext-datagovmk
 
 echo "travis-build.bash is done."
