@@ -58,4 +58,25 @@ python setup.py develop
 pip install -r requirements.txt
 cd -
 
+echo "Installing ckanext-scheming and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-scheming.git
+cd ckanext-scheming
+git checkout dgm-stable
+python setup.py develop
+pip install -r requirements.tx
+cd -
+
+echo "Installing ckanext-fluent and its requirements..."
+git clone https://github.com/ckan/ckanext-fluent.git
+cd ckanext-fluent
+python setup.py develop
+cd -
+
+echo "Installing ckanext-harvest and its requirements..."
+git clone https://github.com/ckan/ckanext-harvest.git
+cd ckanext-harvest
+python setup.py develop
+python install -r pip-requirements.txt
+cd -
+
 echo "travis-build.bash is done."
