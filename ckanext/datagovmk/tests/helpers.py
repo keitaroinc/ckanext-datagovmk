@@ -30,7 +30,8 @@ def create_dataset(**kwargs):
         'add_dataset_agreement': 'yes',
         'title_translated-mk': 'title',
         'notes_translated-mk': 'notes',
-        'maintainer': 'John'
+        'maintainer': 'John',
+        '_version_': 'v1.0.0'
     }
     data_dict.update(kwargs)
     return toolkit.get_action('package_create')(context, data_dict)
