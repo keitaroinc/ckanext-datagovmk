@@ -79,4 +79,11 @@ python setup.py develop
 pip install -r pip-requirements.txt
 cd -
 
+echo "Installing ckanext-mk_dcatap and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-mk_dcatap
+cd ckanext-mk_dcatap
+python setup.py develop
+pip install -r requirements.txt
+cd -
+
 echo "travis-build.bash is done."
