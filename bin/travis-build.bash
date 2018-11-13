@@ -86,4 +86,17 @@ python setup.py develop
 pip install -r requirements.txt
 cd -
 
+echo "Installing ckanext-validation and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-validation.git
+cd ckanext-validation
+git checkout dgm-stable
+python setup.py develop
+cd -
+
+echo "Installing ckanext-repeating and its requirements..."
+git clone https://github.com/keitaroinc/ckanext-repeating.git
+cd ckanext-repeating
+python setup.py develop
+cd -
+
 echo "travis-build.bash is done."
