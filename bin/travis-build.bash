@@ -63,7 +63,7 @@ git clone https://github.com/keitaroinc/ckanext-scheming.git
 cd ckanext-scheming
 git checkout dgm-stable
 python setup.py develop
-pip install -r requirements.tx
+pip install -r requirements.txt
 cd -
 
 echo "Installing ckanext-fluent and its requirements..."
