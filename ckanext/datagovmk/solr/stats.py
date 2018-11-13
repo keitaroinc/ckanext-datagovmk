@@ -17,8 +17,9 @@ def update_package_stats(package_id, stats):
             pkg_dict = res.docs[0]
             for key, value in stats.items():
                 pkg_dict["extras_%s" % key] = str(value or '0').rjust(24, '0')
-            
-            del pkg_dict['_version_']
+
+            if '_version_' in pkg_dict:
+                del pkg_dict['_version_']
             conn.add(docs=[pkg_dict], commit=True)
     except pysolr.SolrError, e:
         log.error("Solr returned error: %s", e)
@@ -39,7 +40,7 @@ def increment_total_downloads(package_id):
             total_downloads = int(pkg_dict.get('extras_total_downloads', 0))
             total_downloads += 1
             pkg_dict["extras_total_downloads"] = str(total_downloads).rjust(24, '0')
-            
+
             del pkg_dict['_version_']
             conn.add(docs=[pkg_dict], commit=True)
     except pysolr.SolrError, e:
