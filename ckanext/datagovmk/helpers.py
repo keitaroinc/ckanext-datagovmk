@@ -1,6 +1,7 @@
 """datagovmk custom helpers.
 """
 import os
+import time
 
 from ckan.plugins import toolkit
 from ckan.lib import search
@@ -30,6 +31,9 @@ def get_recently_updated_datasets(limit=5):
     :rtype: list
 
     '''
+
+    start_time = time.time()
+
     try:
         pkg_search_results = toolkit.get_action('package_search')(data_dict={
             'sort': 'metadata_modified desc',
@@ -37,6 +41,7 @@ def get_recently_updated_datasets(limit=5):
         })['results']
 
     except toolkit.ValidationError, search.SearchError:
+        log.info("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
         return []
     else:
         pkgs = []
@@ -47,6 +52,7 @@ def get_recently_updated_datasets(limit=5):
                 package['metadata_modified'].split('T')[0], '%Y-%m-%d')
             package['days_ago_modified'] = ((datetime.now() - modified).days)
             pkgs.append(package)
+        log.info("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
         return pkgs
 
 def get_most_active_organizations(limit=5):
@@ -62,6 +68,7 @@ def get_most_active_organizations(limit=5):
     :rtype: list
 
     '''
+    start_time = time.time()
 
     orgs = toolkit.get_action('organization_list')({}, {})
     last_updated_orgs = []
@@ -111,6 +118,9 @@ def get_most_active_organizations(limit=5):
 
     orgs = map(lambda x: x.get('org'), sorted_orgs)
 
+    log.info("get_most_active_organizations:  %s seconds " %
+             (time.time() - start_time))
+
     return orgs[:limit]
 
 
@@ -127,10 +137,14 @@ def get_related_datasets(id, limit=3):
     :rtype: list
 
     """
+    start_time = time.time()
 
     related_datasets = toolkit.get_action('datagovmk_get_related_datasets')(
         data_dict={'id': id, 'limit': limit}
     )
+
+    log.info("get_related_datasets:  %s seconds " %
+             (time.time() - start_time))
 
     return related_datasets
 
@@ -142,12 +156,18 @@ def get_groups():
     :rtype: list
 
     '''
+
+    start_time = time.time()
+
     data_dict = {
         'sort': 'package_count',
         'all_fields': True
     }
     groups = _get_action('group_list', {}, data_dict)
     groups = [group for group in groups if group.get('package_count') > 0]
+
+    log.info("get_groups:  %s seconds " %
+                (time.time() - start_time))
 
     return groups
 
@@ -167,8 +187,13 @@ def get_dataset_stats(dataset_id):
     :rtype: dictionary
 
     """
+    start_time =  time.time()
 
     stats = get_stats_for_package(dataset_id)
+
+    log.info("get_dataset_stats:  %s seconds " %
+             (time.time() - start_time))
+
     return stats
 
 
@@ -188,7 +213,13 @@ def get_resource_stats(resource_id):
     :rtype: dictionary
 
     """
+    start_time = time.time()
+
     stats = get_stats_for_resource(resource_id)
+
+    log.info("get_resource_stats:  %s seconds " %
+             (time.time() - start_time))
+
     return stats
 
 
@@ -217,6 +248,7 @@ def get_storage_path_for(dirname):
     :returns: a full path for the specified directory name within CKAN's storage path
     :rtype: string
     """
+    start_time = time.time()
     storage_path = config.get('ckan.storage_path')
     target_path = os.path.join(storage_path, 'storage', dirname)
     if not os.path.exists(target_path):
@@ -229,6 +261,9 @@ def get_storage_path_for(dirname):
                 log.info('CKAN storage directory not found also')
                 raise
 
+    log.info("get_storage_path_for:  %s seconds " %
+             (time.time() - start_time))
+
     return target_path
 
 
@@ -239,9 +274,13 @@ def get_user_id(user_name):
     :returns: id of the user
     :rtype: str
     """
-
+    start_time=time.time()
     try:
         user = toolkit.get_action('user_show')({}, {'id': user_name})
+
+        log.info("get_user_id:  %s seconds " %
+                    (time.time() - start_time))
+
         return user.get('id')
     except:
         return None
@@ -256,9 +295,13 @@ def get_last_authority_for_user(authority_type, user_id):
     :returns: the last authority file for the user
     :rtype: str
     """
+    start_time = time.time()
     user_authority = UserAuthority.get_last_authority_for_user(
         authority_type, user_id
     )
+
+    log.info("get_last_authority_for_user:  %s seconds " %
+                (time.time() - start_time))
 
     return user_authority
 
@@ -272,7 +315,6 @@ def translate_field(data_dict, field_name):
     :returns: the translated field
     :rtype: str
     """
-
     if isinstance(data_dict, dict):
         return core_helpers.get_translated(data_dict, field_name)
 
@@ -284,9 +326,15 @@ def get_org_title(id):
     returns: the translated title of the organization
     :rtype: str
     """
+    start_time = time.time()
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
-    return translate_field(org, 'title')
+    title = translate_field(org, 'title')
+
+    log.info("get_org_title:  %s seconds " %
+             (time.time() - start_time))
+
+    return title
 
 
 def get_org_description(id):
@@ -296,27 +344,39 @@ def get_org_description(id):
     returns: the translated description of the organization
     :rtype: str
     """
-    
+    start_time = time.time()
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
-    return translate_field(org, 'description')
+    description = translate_field(org, 'description')
+
+    log.info("get_org_description:  %s seconds " %
+             (time.time() - start_time))
+
+    return description
 
 
 def get_org_catalog(id):
     """ Get the catalog for an organization. A catalog is represented as a
-    dataset. 
+    dataset.
     :param id: the id of the organization
     :type id: str
     :returns: the catalog for an organization
     :rtype: dict
     """
+    start_time = time.time()
     try:
         data_dict = {
             'fq': '(owner_org:{0} AND extras_org_catalog_enabled:true)'.format(id)
         }
         data = toolkit.get_action('package_search')(data_dict=data_dict)
+        log.info("get_org_catalog:  %s seconds " %
+                    (time.time() - start_time))
+
         return data['results'][0]
     except Exception:
+        log.info("get_org_catalog:  %s seconds " %
+                    (time.time() - start_time))
+
         return None
 
 
@@ -325,7 +385,14 @@ def get_catalog_count():
     :returns: totat number of catalogs
     :rtype: list
     """
+    start_time = time.time()
+
     data_dict = {
         'fq': 'extras_org_catalog_enabled:true'
     }
-    return toolkit.get_action('package_search')(data_dict=data_dict)['count']
+    count = toolkit.get_action('package_search')(data_dict=data_dict)['count']
+
+    log.info("get_catalog_count:  %s seconds " %
+                (time.time() - start_time))
+
+    return count

@@ -100,7 +100,7 @@ def get_stats_for_package(package_id):
       Available dict values are:\n
       ``id`` - the package id\n
       ``visits_recently`` - number of recent visits.\n
-      
+
       ``visits_ever`` - total number of visits to this package.\n
 
     :rtype: dictionary
@@ -183,10 +183,15 @@ def get_total_package_downloads(package_id):
 
     :returns: the total number of downloads for all resources for this package id. This is the
         sum of the downloads count for all resurces that belong to this package.
-        
+
     :rtype: integer
 
     """
+
+    import time
+    import logging
+
+    start_time = time.time()
 
     if not is_stats_available():
         return 0
@@ -195,4 +200,8 @@ def get_total_package_downloads(package_id):
     subq = model.Session.query(model.Resource.id).filter(model.Resource.package_id == package_id)
 
     result = model.Session.query(func.sum(resource_stats.c.downloads)).filter(resource_stats.c.resource_id.in_(subq)).scalar()
+
+    logging.getLogger(__name__).info(
+        "get_total_package_downloads:  %s seconds " % (time.time() - start_time))
+
     return result or 0
