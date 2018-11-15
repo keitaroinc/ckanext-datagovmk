@@ -234,71 +234,72 @@ class FetchMostActiveOrganizations(CkanCommand):
 
     def command(self):
         self._load_config()
-        self._fetch_data()
+        fetch_most_active_orgs()
 
-    def _fetch_data(self):
-        orgs = toolkit.get_action('organization_list')({}, {})
-        last_updated_orgs = []
 
-        for org_name in orgs:
-            org = toolkit.get_action('organization_show')({'user': None}, {
-                'id': org_name,
-                'include_datasets': True,
-                'include_dataset_count': False,
-                'include_extras': True,
-                'include_users': False,
-                'include_groups': False,
-                'include_tags': False,
-                'include_followers': False,
+def fetch_most_active_orgs():
+    orgs = toolkit.get_action('organization_list')({}, {})
+    last_updated_orgs = []
+
+    for org_name in orgs:
+        org = toolkit.get_action('organization_show')({'user': None}, {
+            'id': org_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': True,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False,
+        })
+
+        last_updated_datasets = []
+
+        for dataset in org.get('packages'):
+            dataset_full = toolkit.get_action('package_show')({}, {
+                'id': dataset.get('id'),
+            })
+            last_modified_resource = ''
+
+            for resource in dataset_full.get('resources'):
+                field = 'last_modified'
+                if resource.get('last_modified') is None:
+                    field = 'created'
+
+                if resource.get(field) > last_modified_resource:
+                    last_modified_resource = resource.get(field)
+
+            last_updated_datasets.append(last_modified_resource)
+        last_updated_datasets = sorted(last_updated_datasets, reverse=True)
+
+        if last_updated_datasets:
+            last_modified_dataset = last_updated_datasets[0]
+            last_updated_orgs.append({
+                'org': org, 'last_modified': last_modified_dataset
             })
 
-            last_updated_datasets = []
+    sorted_orgs = sorted(
+        last_updated_orgs,
+        key=lambda k: k['last_modified'],
+        reverse=True
+    )
 
-            for dataset in org.get('packages'):
-                dataset_full = toolkit.get_action('package_show')({}, {
-                    'id': dataset.get('id'),
-                })
-                last_modified_resource = ''
+    orgs = map(lambda x: x.get('org'), sorted_orgs)
 
-                for resource in dataset_full.get('resources'):
-                    field = 'last_modified'
-                    if resource.get('last_modified') is None:
-                        field = 'created'
+    Session.query(MostActiveOrganizations).delete()
 
-                    if resource.get(field) > last_modified_resource:
-                        last_modified_resource = resource.get(field)
+    s = Session()
+    objects = []
 
-                last_updated_datasets.append(last_modified_resource)
-            last_updated_datasets = sorted(last_updated_datasets, reverse=True)
+    for org in orgs:
+        data = {
+            'org_id': org.get('id'),
+            'org_name': org.get('name'),
+            'org_display_name': org.get('display_name'),
+        }
+        objects.append(MostActiveOrganizations(**data))
 
-            if last_updated_datasets:
-                last_modified_dataset = last_updated_datasets[0]
-                last_updated_orgs.append({
-                    'org': org, 'last_modified': last_modified_dataset
-                })
+    s.bulk_save_objects(objects)
+    s.commit()
 
-        sorted_orgs = sorted(
-            last_updated_orgs,
-            key=lambda k: k['last_modified'],
-            reverse=True
-        )
-
-        orgs = map(lambda x: x.get('org'), sorted_orgs)
-
-        Session.query(MostActiveOrganizations).delete()
-
-        s = Session()
-        objects = []
-
-        for org in orgs:
-            data = {
-                'org_id': org.get('id'),
-                'org_name': org.get('name'),
-                'org_display_name': org.get('display_name'),
-            }
-            objects.append(MostActiveOrganizations(**data))
-
-        s.bulk_save_objects(objects)
-        s.commit()
-
-        log.info('Successfully cached most active organizations.')
+    log.info('Successfully cached most active organizations.')

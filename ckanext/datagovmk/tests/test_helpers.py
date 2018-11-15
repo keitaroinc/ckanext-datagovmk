@@ -13,9 +13,12 @@ from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk.model.user_authority_dataset \
     import setup as setup_user_authority_dataset_table
+from ckanext.datagovmk.model.most_active_organizations \
+    import setup as setup_most_active_organizations_table
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.c3charts.model.featured_charts import setup as setup_featured_charts_table
 from ckanext.googleanalytics.dbutil import update_package_visits
+from ckanext.datagovmk.commands import fetch_most_active_orgs
 
 
 class HelpersBase(object):
@@ -25,6 +28,7 @@ class HelpersBase(object):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
         setup_featured_charts_table()
+        setup_most_active_organizations_table()
 
         rebuild()
 
@@ -95,17 +99,24 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         dataset4 = factories.Dataset(owner_org=organization3['id'])
         resource7 = factories.Resource(package_id=dataset4['id'], url='http://google.com', skip_update_package_stats=True)
 
+        fetch_most_active_orgs()
         result = helpers.get_most_active_organizations()
+
         assert len(result) == 3
-        assert result[0]['id'] == organization3['id']
+        assert result[0].org_id == organization3['id']
+
         resource8 = factories.Resource(package_id=dataset['id'], url='http://google.com', skip_update_package_stats=True)
+
+        fetch_most_active_orgs()
         result = helpers.get_most_active_organizations()
-        assert result[0]['id'] == organization['id']
+
+        assert result[0].org_id == organization['id']
 
         for i in range(10):
             organizationMultiple = factories.Organization()
             create_dataset(owner_org=organizationMultiple['id'])
 
+        fetch_most_active_orgs()
         result = helpers.get_most_active_organizations(limit=7)
 
         assert len(result) == 7
