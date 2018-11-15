@@ -337,6 +337,26 @@ def get_org_title(id):
     return title
 
 
+def get_org_title_desc(id):
+    """ Gets the translated title and description of the organization
+    :param id: the id of the organization
+    :type id: str
+    returns: the translated title and description of the organization
+    :rtype: tuple
+    """
+
+    start_time = time.time()
+
+    org = toolkit.get_action('organization_show')(data_dict={'id': id})
+
+    title = translate_field(org, 'title')
+    description = translate_field(org, 'description')
+
+    print("get_org_title_desc:  %s seconds " %
+              (time.time() - start_time))
+
+    return title, description
+
 def get_org_description(id):
     """ Gets the translated description of the organization
     :param id: the id of the organization
