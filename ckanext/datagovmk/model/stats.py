@@ -189,7 +189,6 @@ def get_total_package_downloads(package_id):
     """
 
     import time
-    import logging
 
     start_time = time.time()
 
@@ -201,7 +200,6 @@ def get_total_package_downloads(package_id):
 
     result = model.Session.query(func.sum(resource_stats.c.downloads)).filter(resource_stats.c.resource_id.in_(subq)).scalar()
 
-    logging.getLogger(__name__).debug(
-        "get_total_package_downloads:  %s seconds " % (time.time() - start_time))
+    print("get_total_package_downloads:  %s seconds " % (time.time() - start_time))
 
     return result or 0

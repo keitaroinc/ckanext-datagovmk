@@ -41,7 +41,7 @@ def get_recently_updated_datasets(limit=5):
         })['results']
 
     except toolkit.ValidationError, search.SearchError:
-        log.debug("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
+        print("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
         return []
     else:
         pkgs = []
@@ -52,7 +52,7 @@ def get_recently_updated_datasets(limit=5):
                 package['metadata_modified'].split('T')[0], '%Y-%m-%d')
             package['days_ago_modified'] = ((datetime.now() - modified).days)
             pkgs.append(package)
-        log.debug("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
+        print("get_recently_updated_datasets:  %s seconds " % (time.time() - start_time))
         return pkgs
 
 def get_most_active_organizations(limit=5):
@@ -118,7 +118,7 @@ def get_most_active_organizations(limit=5):
 
     orgs = map(lambda x: x.get('org'), sorted_orgs)
 
-    log.debug("get_most_active_organizations:  %s seconds " %
+    print("get_most_active_organizations:  %s seconds " %
              (time.time() - start_time))
 
     return orgs[:limit]
@@ -143,7 +143,7 @@ def get_related_datasets(id, limit=3):
         data_dict={'id': id, 'limit': limit}
     )
 
-    log.debug("get_related_datasets:  %s seconds " %
+    print("get_related_datasets:  %s seconds " %
              (time.time() - start_time))
 
     return related_datasets
@@ -166,7 +166,7 @@ def get_groups():
     groups = _get_action('group_list', {}, data_dict)
     groups = [group for group in groups if group.get('package_count') > 0]
 
-    log.debug("get_groups:  %s seconds " %
+    print("get_groups:  %s seconds " %
                 (time.time() - start_time))
 
     return groups
@@ -191,7 +191,7 @@ def get_dataset_stats(dataset_id):
 
     stats = get_stats_for_package(dataset_id)
 
-    log.debug("get_dataset_stats:  %s seconds " %
+    print("get_dataset_stats:  %s seconds " %
              (time.time() - start_time))
 
     return stats
@@ -217,7 +217,7 @@ def get_resource_stats(resource_id):
 
     stats = get_stats_for_resource(resource_id)
 
-    log.debug("get_resource_stats:  %s seconds " %
+    print("get_resource_stats:  %s seconds " %
              (time.time() - start_time))
 
     return stats
@@ -258,10 +258,10 @@ def get_storage_path_for(dirname):
             log.error('Storage directory creation failed. Error: %s' % exc)
             target_path = os.path.join(storage_path, 'storage')
             if not os.path.exists(target_path):
-                log.debug('CKAN storage directory not found also')
+                print('CKAN storage directory not found also')
                 raise
 
-    log.debug("get_storage_path_for:  %s seconds " %
+    print("get_storage_path_for:  %s seconds " %
              (time.time() - start_time))
 
     return target_path
@@ -278,7 +278,7 @@ def get_user_id(user_name):
     try:
         user = toolkit.get_action('user_show')({}, {'id': user_name})
 
-        log.debug("get_user_id:  %s seconds " %
+        print("get_user_id:  %s seconds " %
                     (time.time() - start_time))
 
         return user.get('id')
@@ -300,7 +300,7 @@ def get_last_authority_for_user(authority_type, user_id):
         authority_type, user_id
     )
 
-    log.debug("get_last_authority_for_user:  %s seconds " %
+    print("get_last_authority_for_user:  %s seconds " %
                 (time.time() - start_time))
 
     return user_authority
@@ -331,7 +331,7 @@ def get_org_title(id):
 
     title = translate_field(org, 'title')
 
-    log.debug("get_org_title:  %s seconds " %
+    print("get_org_title:  %s seconds " %
              (time.time() - start_time))
 
     return title
@@ -349,7 +349,7 @@ def get_org_description(id):
 
     description = translate_field(org, 'description')
 
-    log.debug("get_org_description:  %s seconds " %
+    print("get_org_description:  %s seconds " %
              (time.time() - start_time))
 
     return description
@@ -369,12 +369,12 @@ def get_org_catalog(id):
             'fq': '(owner_org:{0} AND extras_org_catalog_enabled:true)'.format(id)
         }
         data = toolkit.get_action('package_search')(data_dict=data_dict)
-        log.debug("get_org_catalog:  %s seconds " %
+        print("get_org_catalog:  %s seconds " %
                     (time.time() - start_time))
 
         return data['results'][0]
     except Exception:
-        log.debug("get_org_catalog:  %s seconds " %
+        print("get_org_catalog:  %s seconds " %
                     (time.time() - start_time))
 
         return None
@@ -392,7 +392,7 @@ def get_catalog_count():
     }
     count = toolkit.get_action('package_search')(data_dict=data_dict)['count']
 
-    log.debug("get_catalog_count:  %s seconds " %
+    print("get_catalog_count:  %s seconds " %
                 (time.time() - start_time))
 
     return count
