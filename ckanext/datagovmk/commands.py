@@ -17,6 +17,11 @@ from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk.model.user_authority_dataset \
     import setup as setup_user_authority_dataset_table
+from ckanext.datagovmk.model.most_active_organizations \
+    import setup as setup_most_active_organizations_table
+from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganizations
+from ckanext.datagovmk.helpers import get_most_active_organizations
+from ckan.model.meta import Session
 
 log = getLogger('ckanext.datagovmk')
 
@@ -58,7 +63,7 @@ class CheckOutdatedDatasets(CkanCommand):
     def command(self):
         self._load_config()
         self._processl_all_datasets(self._check_dataset_if_outdated)
-    
+
     def _processl_all_datasets(self, process_dataset):
         context = {'ignore_auth': True}
         page = 0
@@ -86,12 +91,12 @@ class CheckOutdatedDatasets(CkanCommand):
         frequency = dataset.get('frequency')
         if not frequency:
             return  # ignore, not scheduled for periodic updates
-        
+
         frequency = frequency.split('/')[-1]
 
         if frequency in IGNORE_PERIODICITY:
             return  # not scheduled by choice
-        
+
         periodicity = PERIODICITY.get(frequency.upper())
         if not periodicity:
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
@@ -101,7 +106,7 @@ class CheckOutdatedDatasets(CkanCommand):
         last_modified = self._get_last_modified(dataset)
         if not last_modified:
             return  # ignore this one
-        
+
         now = datetime.now()
 
         diff = now - last_modified
@@ -109,7 +114,7 @@ class CheckOutdatedDatasets(CkanCommand):
             log.debug('Dataset %s needs to be updated.', dataset['id'])
             self.notify_dataset_outdated(dataset, last_modified)
             log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
-    
+
 
     def _get_last_modified(self, dataset):
         resources = dataset.get('resources')
@@ -130,7 +135,7 @@ class CheckOutdatedDatasets(CkanCommand):
             maintainer['username'] = dataset.get('maintainer') or dataset['maintainer_email'].split('@')[0]
 
             users.append(maintainer)
-        
+
         if dataset.get('creator_user_id'):
             try:
                 creator = toolkit.get_action('user_show')({'ignore_auth' :True}, {'id': dataset['creator_user_id']})
@@ -162,7 +167,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 self._send_notification(dataset_url, dataset_update_url, dataset_title, user)
             except Exception as e:
                 log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
-    
+
     def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
         subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
                   u'Kujtesë për përditësimin e të dhënave "{title}" | '\
@@ -202,7 +207,7 @@ def _load_resource_from_path(url):
 
 
 class InitDB(CkanCommand):
-    ''' Initialize UserAuthority tables. '''
+    ''' Initialize datagovmk DB tables. '''
 
     summary = __doc__.split('\n')[0]
     usage = __doc__
@@ -211,8 +216,90 @@ class InitDB(CkanCommand):
 
     def command(self):
         self._load_config()
-        
+
         setup_user_authority_table()
         setup_user_authority_dataset_table()
+        setup_most_active_organizations_table()
 
-        log.info('User authorities tables initialized')
+        log.info('datagovmk DB tables initialized')
+
+
+class FetchMostActiveOrganizations(CkanCommand):
+    ''' Fetches most active organizations. '''
+
+    summary = __doc__.split('\n')[0]
+    usage = __doc__
+    max_args = 0
+    min_args = 0
+
+    def command(self):
+        self._load_config()
+        fetch_most_active_orgs()
+
+
+def fetch_most_active_orgs():
+    orgs = toolkit.get_action('organization_list')({}, {})
+    last_updated_orgs = []
+
+    for org_name in orgs:
+        org = toolkit.get_action('organization_show')({'user': None}, {
+            'id': org_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': True,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False,
+        })
+
+        last_updated_datasets = []
+
+        for dataset in org.get('packages'):
+            dataset_full = toolkit.get_action('package_show')({}, {
+                'id': dataset.get('id'),
+            })
+            last_modified_resource = ''
+
+            for resource in dataset_full.get('resources'):
+                field = 'last_modified'
+                if resource.get('last_modified') is None:
+                    field = 'created'
+
+                if resource.get(field) > last_modified_resource:
+                    last_modified_resource = resource.get(field)
+
+            last_updated_datasets.append(last_modified_resource)
+        last_updated_datasets = sorted(last_updated_datasets, reverse=True)
+
+        if last_updated_datasets:
+            last_modified_dataset = last_updated_datasets[0]
+            last_updated_orgs.append({
+                'org': org, 'last_modified': last_modified_dataset
+            })
+
+    sorted_orgs = sorted(
+        last_updated_orgs,
+        key=lambda k: k['last_modified'],
+        reverse=True
+    )
+
+    orgs = map(lambda x: x.get('org'), sorted_orgs)
+
+    Session.query(MostActiveOrganizations).delete()
+
+    s = Session()
+    objects = []
+
+    for org in orgs:
+        data = {
+            'org_id': org.get('id'),
+            'org_name': org.get('name'),
+            'org_display_name': org.get('display_name'),
+        }
+        objects.append(MostActiveOrganizations(**data))
+
+    s.bulk_save_objects(objects)
+    s.commit()
+
+    log.info('Successfully cached most active organizations.')
