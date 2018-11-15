@@ -115,7 +115,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_org_catalog':
                 helpers.get_org_catalog,
             'datagovmk_get_catalog_count':
-                helpers.get_catalog_count
+                helpers.get_catalog_count,
+            'datagovmk_get_org_title_desc':
+                helpers.get_org_title_desc
         }
 
     # IActions
@@ -190,7 +192,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('download_zip',
                       '/download/zip/{zip_id}',
                       action='download_zip')
-            m.connect('search', 
+            m.connect('search',
                       '/dataset',
                       action='search')
 
@@ -223,10 +225,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         populate_location_name_from_spatial_uri(pkg_dict)
 
         return pkg_dict
-    
+
     def before_view(self, pkg_dict):
         return pkg_dict
-    
+
 
     def before_search(self, search_params):
         """ Before making a search with package_search, make sure to exclude

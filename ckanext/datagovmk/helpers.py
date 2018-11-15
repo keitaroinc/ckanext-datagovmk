@@ -255,6 +255,18 @@ def get_org_description(id):
 
     return translate_field(org, 'description')
 
+def get_org_title_desc(org):
+    """ Gets the translated title and description of the organization
+    :param org: the organization
+    :type org: dict
+    returns: the translated title and description of the organization
+    :rtype: tuple
+    """
+
+    title = translate_field(org, 'title')
+    description = translate_field(org, 'description')
+
+    return title, description
 
 def get_org_catalog(id):
     """ Get the catalog for an organization. A catalog is represented as a

@@ -308,6 +308,37 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         result = helpers.get_org_description(org['id'])
         assert result == u'përshkrimi i shqiptar'
 
+    def test_get_org_title_desc(self):
+        title_translated = {
+            'en': 'title on english',
+            'mk': u'наслов на македонски',
+            'sq': 'titulli i shqiptar'
+        }
+
+        description_translated = {
+            'en': 'description on english',
+            'mk': u'опис на македонски',
+            'sq': u'përshkrimi i shqiptar'
+        }
+
+        org = factories.Organization(title_translated=title_translated, description_translated=description_translated)
+
+        set_lang('mk')
+        title, desc = helpers.get_org_description(org)
+        assert title == u'наслов на македонски'
+        assert desc == u'опис на македонски'
+
+        set_lang('sq')
+        title, desc = helpers.get_org_description(org)
+        assert title == u'titulli i shqiptar'
+        assert desc == u'përshkrimi i shqiptar'
+
+        set_lang('en')
+        title, desc = helpers.get_org_description(org)
+        assert title == u'title on english'
+        assert desc == u'description on english'
+
+
     @test_helpers.change_config('ckan.auth.create_unowned_dataset', True)
     def test_get_org_catalog(self):
         org = factories.Organization()
