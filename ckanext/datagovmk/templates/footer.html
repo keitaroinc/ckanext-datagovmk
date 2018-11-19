@@ -12,6 +12,9 @@
             <hr>
             <div class="row">
               <div class="col-md-4">
+                <ul class="list-inline list-logos">
+                  <li><a class="mioa-logo" href="http://www.mio.gov.mk"><img class="img-responsive" src="{{ h.url_for_static('/base/images/mioa-logo-mk.png') }}" alt="logo"></a></li>
+                </ul>
                 <dl>
                   <dt>{{ _('Address') }}</dt>
                   <dd>
@@ -78,6 +81,16 @@
               </form>
             </div>
             <!--End mc_embed_signup-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 pull-right">
+            <ul class="list-inline list-logos list-logos-sm">
+              <li><a href="https://www.gov.uk/world/organisations/british-embassy-skopje"><img class="img-responsive" src="{{ h.url_for_static('/base/images/british-embassy-skopje.png') }}" alt="logo"></a></li>
+              <li><a href="http://www.mio.gov.mk"><img class="img-responsive" src="{{ h.url_for_static('/base/images/funded-by-uk-government.png') }}" alt="logo"></a></li>
+              <li><a href="http://www.mio.gov.mk"><img class="img-responsive" src="{{ h.url_for_static('/base/images/cup.png') }}" alt="logo"></a></li>
+            </ul>
+            <p class="text-muted">{{ _("The portal is developed within a programme implemented by the Centre for Change Management, funded by the UK Government with the support of the British Embassy Skopje.") }}</p>
           </div>
         </div>
         <div class="attribution">
