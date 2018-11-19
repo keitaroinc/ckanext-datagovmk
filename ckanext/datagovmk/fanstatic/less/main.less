@@ -246,6 +246,37 @@
   }
 }
 
+.mioa-logo{
+  margin-bottom: @grid-gutter-width/2;
+}
+
+.list-logos{
+  &,
+  li{
+    .flex;
+  }
+  li{
+    .justify-content-between;
+    flex-grow: 1;
+    margin: @grid-gutter-width/2 auto;
+  }
+  a{
+    .flex;
+    .align-items-center;
+    .justify-content-center;
+    flex-basis: 100%;
+    padding: @grid-gutter-width/2;
+    background: @white;
+    border-radius: @border-radius-large*2;
+  }
+}
+
+.list-logos-sm{
+  img{
+    max-width: @grid-gutter-width*4;
+  }
+}
+
 .footer-links {
   ul {
     .list-unstyled;
