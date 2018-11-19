@@ -1,6 +1,7 @@
 """datagovmk custom helpers.
 """
 import os
+import time
 
 from ckan.plugins import toolkit
 from ckan.lib import search
@@ -63,8 +64,11 @@ def get_most_active_organizations(limit=5):
     :rtype: list
 
     '''
+    start_time = time.time()
+
     orgs = MostActiveOrganizations.get_all(limit=limit)
 
+    print("get_most_active_organizations: %s seconds" % (time.time() - start_time))
     return orgs
 
 
@@ -263,8 +267,14 @@ def get_org_title_desc(org):
     :rtype: tuple
     """
 
+    start_time = time.time()
+
     title = translate_field(org, 'title')
     description = translate_field(org, 'description')
+
+    print("get_org_title_desc: %s seconds" %
+            (time.time() - start_time))
+
 
     return title, description
 
