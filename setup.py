@@ -88,6 +88,7 @@ setup(
         [paste.paster_command]
         check_outdated_datasets=ckanext.datagovmk.commands:CheckOutdatedDatasets
         initdb=ckanext.datagovmk.commands:InitDB
+        fetch_most_active_orgs=ckanext.datagovmk.commands:FetchMostActiveOrganizations
     ''',
 
     # If you are changing from the default layout of your extension, you may
