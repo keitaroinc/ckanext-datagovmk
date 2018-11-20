@@ -4,16 +4,16 @@ $(document).ready(function () {
 
     $.each(authorityToggle, function (i, el) {
         if (el.checked) {
-            uploadAuthority.removeClass('invisible')
+            uploadAuthority.removeClass('off')
         }
     });
 
     authorityToggle.click(function (e) {
         $.each(authorityToggle, function (i, el) {
             if (el.checked) {
-                uploadAuthority.removeClass('invisible')
+                uploadAuthority.removeClass('off')
             } else {
-                uploadAuthority.addClass('invisible')
+                uploadAuthority.addClass('off')
             }
         });
     });
