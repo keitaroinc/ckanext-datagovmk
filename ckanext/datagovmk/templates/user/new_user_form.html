@@ -1,9 +1,12 @@
 {% import "macros/form.html" as form %}
 
+{% resource 'datagovmk/js/authority_representative.js' %}
+
 {% set authority_file_url = data.authority_file_url %}
 {% set is_upload = authority_file_url and not authority_file_url.startswith('http') %}
 {% set is_url = authority_file_url and authority_file_url.startswith('http') %}
 {% set is_upload_enabled = h.uploads_enabled() %}
+{% set authority_representative_checked = true if 'authority_representative' in data else false %}
 
 <form id="user-register-form" action="" method="post" enctype="multipart/form-data">
   {{ form.errors(error_summary) }}
@@ -12,6 +15,8 @@
   {{ form.input("email", id="field-email", label=_("Email"), type="email", placeholder=_("joe@example.com"), value=data.email, error=errors.email, classes=["control-medium"], is_required=True) }}
   {{ form.input("password1", id="field-password", label=_("Password"), type="password", placeholder="••••••••", value=data.password1, error=errors.password1, classes=["control-medium"], is_required=True) }}
   {{ form.input("password2", id="field-confirm-password", label=_("Confirm"), type="password", placeholder="••••••••", value=data.password2, error=errors.password1, classes=["control-medium"], is_required=True) }}
+  {{ form.toggle('authority_representative', classes=["upload-authority", "off"], checked=authority_representative_checked, label=_("I am a state institution representative."), hint=_("State institution representatives are required to confirm their identity by providing аn authorization for adding data to the portal. Once the state representative identity is confirmed, the required user privileges are granted by the System Administrator.") ) }}
+
   {% snippet 'snippets/upload_authority.html', data=data, errors=errors, is_upload_enabled=is_upload_enabled, upload_label=_('Upload authority file'), field_url='authority_file_url', field_upload='authority_file_upload', is_url=is_url, is_upload=is_upload, url_label= _('Uploaded authority file'), is_required=true %}
 
   {% if g.recaptcha_publickey %}
