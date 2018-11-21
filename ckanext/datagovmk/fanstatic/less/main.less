@@ -247,34 +247,30 @@
   }
 }
 
-.mioa-logo{
+.mioa-logo {
   margin-bottom: @grid-gutter-width/2;
 }
 
-.list-logos{
+.list-logos {
   &,
-  li{
+  li {
     .flex;
   }
-  li{
+  li {
     .justify-content-between;
     flex-grow: 1;
     margin: @grid-gutter-width/2 auto;
   }
-  a{
+  a {
     .flex;
+    .flex-wrap;
     .align-items-center;
     .justify-content-center;
     flex-basis: 100%;
+    flex-shrink: 1;
     padding: @grid-gutter-width/2;
     background: @white;
     border-radius: @border-radius-large*2;
-  }
-}
-
-.list-logos-sm{
-  img{
-    max-width: @grid-gutter-width*4;
   }
 }
 
@@ -476,8 +472,8 @@
   .upload-authority {
     transition: .4s opacity;
     margin-bottom: @grid-gutter-width;
-    &.off{
-      .help-block{
+    &.off {
+      .help-block {
         display: none;
       }
     }
@@ -497,6 +493,12 @@
   .intro,
   .accent {
     flex-basis: 100%;
+  }
+}
+
+@media (min-width: @screen-lg-min) {
+  .list-logos-wrapper {
+    margin-top: @grid-gutter-width*3.5;
   }
 }
 
