@@ -316,81 +316,92 @@ msgstr "URL"
 msgid "File"
 msgstr "Skedari"
 
-#: ckanext/datagovmk/templates/footer.html:16
+#: ckanext/datagovmk/templates/footer.html:19
 msgid "Address"
 msgstr "Adresa"
 
-#: ckanext/datagovmk/templates/footer.html:18
+#: ckanext/datagovmk/templates/footer.html:21
 msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
 msgstr "Bulevardi. Shën Kirili dhe Metodi nr.54 1000 Shkup, Republika e Maqedonisë"
 
-#: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:23
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "E-mail"
 msgstr "E-mail"
 
-#: ckanext/datagovmk/templates/footer.html:21
+#: ckanext/datagovmk/templates/footer.html:24
 msgid "info@otvorenipodatoci.gov.mk"
 msgstr "info@otvorenipodatoci.gov.mk"
 
-#: ckanext/datagovmk/templates/footer.html:22
+#: ckanext/datagovmk/templates/footer.html:25
 msgid "Phone"
 msgstr "Telefon"
 
-#: ckanext/datagovmk/templates/footer.html:23
+#: ckanext/datagovmk/templates/footer.html:26
 msgid "+389 (0)2 3200 889"
 msgstr "+389 (0)2 3200 889"
 
-#: ckanext/datagovmk/templates/footer.html:24
+#: ckanext/datagovmk/templates/footer.html:27
 msgid "Fax"
 msgstr "Faks"
 
-#: ckanext/datagovmk/templates/footer.html:25
+#: ckanext/datagovmk/templates/footer.html:28
 msgid "+389 (0)2 3200 881"
 msgstr "+389 (0)2 3200 881"
 
-#: ckanext/datagovmk/templates/footer.html:28
+#: ckanext/datagovmk/templates/footer.html:31
 msgid "Terms of use"
 msgstr "Kushtet e përdorimit"
 
-#: ckanext/datagovmk/templates/footer.html:29
+#: ckanext/datagovmk/templates/footer.html:32
 msgid "Privacy Policy"
 msgstr "Politika e privatësisë"
 
-#: ckanext/datagovmk/templates/footer.html:35
+#: ckanext/datagovmk/templates/footer.html:38
 msgid "Navigation"
 msgstr "Navigim"
 
-#: ckanext/datagovmk/templates/footer.html:40
+#: ckanext/datagovmk/templates/footer.html:43
 msgid "Report site issue"
 msgstr "Raporti içështjes së faqes"
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:10
-#: ckanext/datagovmk/templates/footer.html:41
+#: ckanext/datagovmk/templates/footer.html:44
 msgid "Statistics"
 msgstr "Statistikat"
 
-#: ckanext/datagovmk/templates/footer.html:59
+#: ckanext/datagovmk/templates/footer.html:62
 msgid "Subscribe to our newsletter"
 msgstr "Regjistrohu për gazetën tonë"
 
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "Stay updated with "
 msgstr "Qëndro i përditësuar me"
 
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "Subscribe to our free newsletter"
 msgstr "Abonohuni për gazetën tonë falas"
 
-#: ckanext/datagovmk/templates/footer.html:64
+#: ckanext/datagovmk/templates/footer.html:67
 msgid "Your e-mail address"
 msgstr "Adresa juaj e e-mailit"
 
-#: ckanext/datagovmk/templates/footer.html:66
+#: ckanext/datagovmk/templates/footer.html:69
 msgid "Subscribe"
 msgstr "Abonohu"
 
-#: ckanext/datagovmk/templates/footer.html:85
+#: ckanext/datagovmk/templates/footer.html:92
+msgid ""
+"The portal is developed within a programme implemented by the Centre for "
+"Change Management, funded by the UK Government with the support of the "
+"British Embassy Skopje. The data and content provided on this portal are "
+"not under the authority of the UK Government."
+msgstr "Portali është zhvilluar në kuadër të programit të zbatuar nga Qendra "
+"për menaxhim me ndryshime, i financuar nga Qeveria e Mbretërisë së Bashkuar "
+"me mbështetjen e Ambasadës Britanike Shkup. Të dhënat dhe përmbajtja në këtë "
+"portal nuk janë nën përgjegjësinë e Qeveria e Mbretërisë së Bashkuar."
+
+#: ckanext/datagovmk/templates/footer.html:96
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
@@ -398,11 +409,11 @@ msgstr ""
 "<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 
-#: ckanext/datagovmk/templates/footer.html:89
+#: ckanext/datagovmk/templates/footer.html:100
 msgid "CKAN API"
 msgstr "CKAN API"
 
-#: ckanext/datagovmk/templates/footer.html:90
+#: ckanext/datagovmk/templates/footer.html:101
 msgid "CKAN Association"
 msgstr "Shoqata CKAN"
 
