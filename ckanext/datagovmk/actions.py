@@ -699,10 +699,12 @@ def start_script(context, data_dict):
 def user_create(context, data_dict):
     """ Overridden to be able to send activation mail and upload authority file """
 
-    if data_dict.get('authority_file_url') == '':
-        raise ValidationError({_('authority'): [_('Missing value')]})
+    if 'authority_representative' in data_dict:
+        if data_dict.get('authority_file_url') == '':
+            raise ValidationError({_('authority'): [_('Missing value')]})
 
-    authority_file = _upload_authority_file(data_dict, is_required=True)
+        authority_file = _upload_authority_file(data_dict, is_required=True)
+
 
     data_dict['state'] = model_state.PENDING
     created_user = _user_create(context, data_dict)
@@ -716,13 +718,14 @@ def user_create(context, data_dict):
                 'the user was not created: {0}'.format(str(e)))
         raise ValidationError({'message': msg}, error_summary=msg)
 
-    data = {
-        'user_id': created_user.get('id'),
-        'authority_file': authority_file,
-        'authority_type': 'general'
-    }
-    userAuthority = UserAuthority(**data)
-    userAuthority.save()
+    if 'authority_representative' in data_dict:
+        data = {
+            'user_id': created_user.get('id'),
+            'authority_file': authority_file,
+            'authority_type': 'general'
+        }
+        userAuthority = UserAuthority(**data)
+        userAuthority.save()
 
     return created_user
 
@@ -772,10 +775,11 @@ def _upload_authority_file(data_dict, is_required=False):
 def user_update(context, data_dict):
     """ Overridden to be able to manage uploaded authority file """
 
-    if data_dict.get('authority_file_url') == '':
-        raise ValidationError({_('authority'): [_('Missing value')]})
+    if data_dict.get('authority_file_url', None) is not None:
+        if data_dict.get('authority_file_url') == '':
+            raise ValidationError({_('authority'): [_('Missing value')]})
 
-    authority_file = _upload_authority_file(data_dict, is_required=True)
+        authority_file = _upload_authority_file(data_dict, is_required=True)
 
     updated_user = _user_update(context, data_dict)
 

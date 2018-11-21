@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-13 14:07+0200\n"
+"POT-Creation-Date: 2018-11-21 13:04+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 2.0.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -30,99 +29,100 @@ msgstr "ID e setit të të dhënave mungon"
 msgid "Add dataset agreement"
 msgstr "Shto marrëveshjen e setit të të dhënave"
 
-#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:700
-#: ckanext/datagovmk/actions.py:729 ckanext/datagovmk/actions.py:773
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:704
+#: ckanext/datagovmk/actions.py:735 ckanext/datagovmk/actions.py:780
 msgid "Missing value"
 msgstr "Mungon vlera"
 
 #: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
-#: ckanext/datagovmk/actions.py:557 ckanext/datagovmk/actions.py:566
-#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
+#: ckanext/datagovmk/actions.py:563 ckanext/datagovmk/actions.py:572
+#: ckanext/datagovmk/actions.py:657 ckanext/datagovmk/actions.py:660
 msgid "message"
 msgstr "mesazh"
 
-#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:557
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:563
 msgid "Resource already exists"
 msgstr "Burimet tani më ekzistojnë"
 
-#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:566
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:572
 msgid "Resource file is missing"
 msgstr "Skedari i burimeve mungon"
 
-#: ckanext/datagovmk/actions.py:520 ckanext/datagovmk/actions.py:534
+#: ckanext/datagovmk/actions.py:526 ckanext/datagovmk/actions.py:540
 msgid "Resource was not found."
 msgstr "Burimi nuk u gjet."
 
-#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
+#: ckanext/datagovmk/actions.py:657 ckanext/datagovmk/actions.py:660
 msgid "Invalid URL"
 msgstr "URL-ja e pavlefshme"
 
-#: ckanext/datagovmk/actions.py:685
+#: ckanext/datagovmk/actions.py:688
 msgid "No script was found for the provided name"
 msgstr "Asnjë skript nuk u gjet për emrin e dhënë"
 
-#: ckanext/datagovmk/actions.py:700 ckanext/datagovmk/actions.py:729
-#: ckanext/datagovmk/actions.py:758 ckanext/datagovmk/actions.py:773
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:10
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
+#: ckanext/datagovmk/actions.py:704 ckanext/datagovmk/actions.py:735
+#: ckanext/datagovmk/actions.py:764 ckanext/datagovmk/actions.py:780
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:9
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:12
 msgid "authority"
 msgstr "autoritetet"
 
-#: ckanext/datagovmk/actions.py:713
+#: ckanext/datagovmk/actions.py:718
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
-"Gabim gjatë dërgimit të aktivizimit të e-mailit, përdoruesi nuk u krijua: {0}"
+"Gabim gjatë dërgimit të aktivizimit të e-mailit, përdoruesi nuk u krijua:"
+" {0}"
 
-#: ckanext/datagovmk/actions.py:758
+#: ckanext/datagovmk/actions.py:764
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
-"Skedari i ngarkuar i autoritetit është shumë i madh. Madhësia maksimale e lejuar "
-"është {0}MB."
+"Skedari i ngarkuar i autoritetit është shumë i madh. Madhësia maksimale e"
+" lejuar është {0}MB."
 
-#: ckanext/datagovmk/controller.py:103
+#: ckanext/datagovmk/controller.py:104
 msgid "Resource not found"
 msgstr "Burimi nuk u gjet"
 
-#: ckanext/datagovmk/controller.py:112 ckanext/datagovmk/controller.py:127
-#: ckanext/datagovmk/controller.py:132
+#: ckanext/datagovmk/controller.py:113 ckanext/datagovmk/controller.py:128
+#: ckanext/datagovmk/controller.py:133
 msgid "Resource data not found"
 msgstr "Të dhënat e burimeve nuk u gjetën"
 
-#: ckanext/datagovmk/controller.py:122
+#: ckanext/datagovmk/controller.py:123
 msgid "No download is available"
 msgstr "Nuk ka shkarkim në dispozicion"
 
-#: ckanext/datagovmk/controller.py:157 ckanext/datagovmk/controller.py:355
+#: ckanext/datagovmk/controller.py:158 ckanext/datagovmk/controller.py:356
 msgid "Not authorized to see this page"
 msgstr "Nuk është i autorizuar për të parë këtë faqe"
 
-#: ckanext/datagovmk/controller.py:269
+#: ckanext/datagovmk/controller.py:270
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:3
 msgid "Organizations"
 msgstr "Organizatat"
 
-#: ckanext/datagovmk/controller.py:270
+#: ckanext/datagovmk/controller.py:271
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:4
 msgid "Groups"
 msgstr "Grupet"
 
-#: ckanext/datagovmk/controller.py:271
+#: ckanext/datagovmk/controller.py:272
 msgid "Tags"
 msgstr "Tags"
 
-#: ckanext/datagovmk/controller.py:272
+#: ckanext/datagovmk/controller.py:273
 msgid "Formats"
 msgstr "Formati"
 
-#: ckanext/datagovmk/controller.py:273
+#: ckanext/datagovmk/controller.py:274
 msgid "Licenses"
 msgstr "Licencat"
 
-#: ckanext/datagovmk/controller.py:344
+#: ckanext/datagovmk/controller.py:345
 msgid "Invalid search query: {error_message}"
 msgstr "Kërkimi i kërkimit i pavlefshëm: {error_message}"
 
-#: ckanext/datagovmk/controller.py:363
+#: ckanext/datagovmk/controller.py:364
 msgid "Parameter \"{parameter_name}\" is not an integer"
 msgstr "Parametri \"{parameter_name}\" nuk është një numër i plotë"
 
@@ -160,18 +160,18 @@ msgstr "Captcha e pavlefshme. Ju lutemi provoni përsëri."
 #: ckanext/datagovmk/controller.py:567
 #, python-format
 msgid ""
-"A confirmation email has been sent to %s. Please use the link in the email to "
-"continue."
+"A confirmation email has been sent to %s. Please use the link in the "
+"email to continue."
 msgstr ""
-"Një email konfirmimi është dërguar në %s. Ju lutemi përdorni link-unun në e-mail "
-"për të vazhduar."
+"Një email konfirmimi është dërguar në %s. Ju lutemi përdorni link-unun në"
+" e-mail për të vazhduar."
 
 #: ckanext/datagovmk/controller.py:580
 #, python-format
 msgid "User %s is now registered but you are still logged in as %s from before"
 msgstr ""
-"Përdoruesi %s është regjistruar tani, por ju jeni ende i identifikuarsi %s nga "
-"më parë"
+"Përdoruesi %s është regjistruar tani, por ju jeni ende i identifikuarsi "
+"%s nga më parë"
 
 #: ckanext/datagovmk/controller.py:759
 msgid "Unable to send the issue report to the system admin."
@@ -181,28 +181,28 @@ msgstr "Nuk mund të dërgojë raportin e çështjes tek administratori i sistem
 msgid "The issue has been reported."
 msgstr "Çështja është raportuar."
 
-#: ckanext/datagovmk/controller.py:832
+#: ckanext/datagovmk/controller.py:868
 #, python-format
 msgid "format: must be one of %s"
 msgstr "format: duhet të jetë një nga %s"
 
-#: ckanext/datagovmk/controller.py:844
+#: ckanext/datagovmk/controller.py:880
 msgid "DataStore resource not found"
 msgstr "Burimi i të dhënave nuk u gjet"
 
 #: ckanext/datagovmk/monkey_patch.py:10
 msgid ""
 "\n"
-"    replaced their <a href=\"{previous_authority_file}\" target=\"_blank\">old</"
-"a>\n"
+"    replaced their <a href=\"{previous_authority_file}\" "
+"target=\"_blank\">old</a>\n"
 "    general authority file with a <a href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">new</a> one"
 msgstr ""
 "\n"
-"    u zëvendësuan nga <a href =\"{previous_authority_file}\" target=\"_blank"
-"\">vjetër</a>\n"
-"    dosja e përgjithshme e autoritetit me një <a href="
-"\"{current_authority_file}\"\n"
+"    u zëvendësuan nga <a href =\"{previous_authority_file}\" "
+"target=\"_blank\">vjetër</a>\n"
+"    dosja e përgjithshme e autoritetit me një <a "
+"href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">i ri</a> një"
 
 #: ckanext/datagovmk/monkey_patch.py:17 ckanext/datagovmk/monkey_patch.py:32
@@ -213,48 +213,51 @@ msgstr "{aktor} "
 #: ckanext/datagovmk/monkey_patch.py:25
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
-"    {dataset_name}</a> using general <a href=\"{current_authority_file}\"\n"
+"    {dataset_name}</a> using general <a href=\"{current_authority_file}\""
+"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 "ranë dakord për të krijuar setin e të dhënave <a href=\"{dataset_url}\">\n"
-"{dataset_name}</a> duke përdorur në përgjithësi<a href="
-"\"{current_authority_file}\"\n"
+"{dataset_name}</a> duke përdorur në përgjithësi<a "
+"href=\"{current_authority_file}\"\n"
 "target=\"_blank\">dosja e autoritetit</a>"
 
 #: ckanext/datagovmk/monkey_patch.py:40
 msgid ""
 "agreed to create the dataset <a href=\"{dataset_url}\">\n"
-"    {dataset_name}</a> using additional <a href=\"{current_authority_file}\"\n"
+"    {dataset_name}</a> using additional <a "
+"href=\"{current_authority_file}\"\n"
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 "ranë dakord për të krijuar setin e të dhënave <a href=\"{dataset_url}\">\n"
-"{dataset_name}</a> duke përdorur shtesë <a href=\"{current_authority_file}\"\n"
+"{dataset_name}</a> duke përdorur shtesë <a "
+"href=\"{current_authority_file}\"\n"
 "target=\"_ blank\">dosja e autoritetit</a>"
 
-#: ckanext/datagovmk/utils.py:446
+#: ckanext/datagovmk/utils.py:450
 msgid "Email message was successfully sent."
 msgstr "Mesazhi me e-mail u dërgua me sukses."
 
-#: ckanext/datagovmk/utils.py:452
+#: ckanext/datagovmk/utils.py:456
 msgid "An error occured while sending the email. Try again."
 msgstr "Ndodhi një gabim gjatë dërgimit të e-mailit. Ju lutemi provoni përsëri."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:73
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:58
 msgid "Preparing zip archive..."
 msgstr "Përgatitja e një zip-arkivë..."
 
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:70
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:85
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:100
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:12
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
 msgid "Download"
 msgstr "Shkarko"
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:96
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:81
 msgid "Could not create a zip archive."
 msgstr "Nuk mund të krijohet një zip-arkivë."
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:102
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:87
 msgid "An error occured while preparing zip archive."
 msgstr "Ndodhi një gabim gjatë përgatitjes së një zip-arkivi."
 
@@ -389,11 +392,11 @@ msgstr "Abonohu"
 
 #: ckanext/datagovmk/templates/footer.html:85
 msgid ""
-"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
-"\"http://ckan.org\">CKAN</a>"
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
 msgstr ""
-"<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" href="
-"\"http://ckan.org\">CKAN</a>"
+"<strong>Mundësuar nga</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
 
 #: ckanext/datagovmk/templates/footer.html:89
 msgid "CKAN API"
@@ -410,12 +413,13 @@ msgstr "Linqet (Lidhjet) e Footer-it"
 #: ckanext/datagovmk/templates/admin/config.html:8
 msgid ""
 "Enter a list of links - one per line - to be shown as a list withing the "
-"secondary footer navigation. Please format the links with Markdown (i.e. * "
-"[Example link](https://www.example.com))."
+"secondary footer navigation. Please format the links with Markdown (i.e. "
+"* [Example link](https://www.example.com))."
 msgstr ""
-"Futni një listë të linqeve (lidhjeve) - një në rresht - që do të shfaqet si një "
-"listë brenda navigacionit të fushës së mesme. Ju lutemi formatoni lidhjet me "
-"Markdown (dmth. * [Shembull i lidhjes] (https://www.shembull.com))."
+"Futni një listë të linqeve (lidhjeve) - një në rresht - që do të shfaqet "
+"si një listë brenda navigacionit të fushës së mesme. Ju lutemi formatoni "
+"lidhjet me Markdown (dmth. * [Shembull i lidhjes] "
+"(https://www.shembull.com))."
 
 #: ckanext/datagovmk/templates/admin/index.html:7
 msgid "Administer CKAN"
@@ -423,16 +427,17 @@ msgstr "Administroni CKAN-in"
 
 #: ckanext/datagovmk/templates/admin/index.html:14
 msgid ""
-"As a sysadmin user you have full control over this CKAN instance. Proceed with "
-"care!"
+"As a sysadmin user you have full control over this CKAN instance. Proceed"
+" with care!"
 msgstr ""
-"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull të CKAN-"
-"it. Vazhdoni me kujdes!"
+"Si një përdorues sysadmin ju keni kontroll të plotë mbi këtë shembull të "
+"CKAN-it. Vazhdoni me kujdes!"
 
 #: ckanext/datagovmk/templates/admin/index.html:17
 msgid "For guidance on using sysadmin features, see the CKAN"
 msgstr ""
-"Për udhëzime mbi përdorimin e karakteristikave të sistemit, shikoni CKAN-IN"
+"Për udhëzime mbi përdorimin e karakteristikave të sistemit, shikoni CKAN-"
+"IN"
 
 #: ckanext/datagovmk/templates/admin/index.html:18
 msgid "sysadmin guide"
@@ -552,11 +557,11 @@ msgstr "Identifikohu"
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:35
 msgid ""
-"The issue has been successfully reported. You can report another issue by "
-"clicking the button below."
+"The issue has been successfully reported. You can report another issue by"
+" clicking the button below."
 msgstr ""
-"Problemi është raportuar me sukses. Ju mund të raportoni një çështje tjetër duke "
-"klikuar butonin më poshtë."
+"Problemi është raportuar me sukses. Ju mund të raportoni një çështje "
+"tjetër duke klikuar butonin më poshtë."
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:36
 msgid "Report issue"
@@ -613,11 +618,11 @@ msgstr "Mirësevini në CKAN"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:10
 msgid ""
-"This is a nice introductory paragraph about CKAN or the site in general. We "
-"don't have any copy to go here yet but soon we will "
+"This is a nice introductory paragraph about CKAN or the site in general. "
+"We don't have any copy to go here yet but soon we will "
 msgstr ""
-"Ky është një paragraf hyrës rreth CKAN-it ose faqës në përgjithësi. Akoma nuk "
-"kemi ndonjë shembull për të treguar këtu, por së shpejti do kemi"
+"Ky është një paragraf hyrës rreth CKAN-it ose faqës në përgjithësi. Akoma"
+" nuk kemi ndonjë shembull për të treguar këtu, por së shpejti do kemi"
 
 #: ckanext/datagovmk/templates/home/snippets/promoted.html:17
 msgid "Learn more"
@@ -746,11 +751,11 @@ msgstr "Burim: <a href=\"%(url)s\">%(dataset)s</a>"
 #: ckanext/datagovmk/templates/package/resources.html:14
 #, python-format
 msgid ""
-" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not add "
-"some?</a></p> "
+" <p class=\"empty\">This dataset has no data, <a href=\"%(url)s\">why not"
+" add some?</a></p> "
 msgstr ""
-" <p class=\"empty\">Ky set i të dhënave nuk ka të dhëna, <a href=\"%(url)s\"> "
-"pse të mos shtoni disa?</a></p>"
+" <p class=\"empty\">Ky set i të dhënave nuk ka të dhëna, <a "
+"href=\"%(url)s\"> pse të mos shtoni disa?</a></p>"
 
 #: ckanext/datagovmk/templates/package/search.html:19
 msgid "Relevance"
@@ -772,6 +777,7 @@ msgstr "E modifikuara e fundit"
 msgid "Organization Ascending"
 msgstr "Organizata sipas rendit ngjitës "
 
+#: ckanext/datagovmk/templates/package/search.html:24
 msgid "Organization Descending"
 msgstr "Organizatat zbresin rendin"
 
@@ -818,7 +824,8 @@ msgstr "Kjo fushë duhet të plotësohet"
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:56
 msgid "Agree that you have provided an authority to add this dataset."
 msgstr ""
-"Pajtohuni se ju i keni dhënë një autoriteti për të shtuar këtë set të të dhënave."
+"Pajtohuni se ju i keni dhënë një autoriteti për të shtuar këtë set të të "
+"dhënave."
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:60
 msgid "You must agree to add this dataset."
@@ -827,12 +834,12 @@ msgstr "Duhet të pranoni të shtoni këtë set të të të dhënave."
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 msgid "If necessary, attach a file with additional authority to add this dataset"
 msgstr ""
-"Nëse është e nevojshme, bashkëngjitni një skedar me autoritet shtesë për të "
-"shtuar këtë set të dhënash"
+"Nëse është e nevojshme, bashkëngjitni një skedar me autoritet shtesë për "
+"të shtuar këtë set të dhënash"
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:15
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Uploaded authority file"
 msgstr "Dosja e ngarkuar e autoritetit"
 
@@ -917,7 +924,7 @@ msgstr "Shpërndaje në Twitter"
 msgid "Share on Google+"
 msgstr "Shpërndaje në Google+"
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "Clear Upload"
 msgstr "Ngarko qartë"
 
@@ -928,15 +935,15 @@ msgstr "Informacioni i llogarisë"
 #: ckanext/datagovmk/templates/user/edit.html:7
 msgid "Your profile lets other CKAN users know about who you are and what you do."
 msgstr ""
-"Profili juaj u lejon përdoruesve të tjerë të CKAN -it të dinë se kush jeni dhe "
-"çfarë po bëni."
+"Profili juaj u lejon përdoruesve të tjerë të CKAN -it të dinë se kush "
+"jeni dhe çfarë po bëni."
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:7
 msgid "Change details"
 msgstr "Ndrysho detajet"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:8
-#: ckanext/datagovmk/templates/user/new_user_form.html:10
+#: ckanext/datagovmk/templates/user/new_user_form.html:13
 msgid "Username"
 msgstr "Emri përdoruesit"
 
@@ -949,7 +956,7 @@ msgid "eg. Joe Bloggs"
 msgstr "p.sh. Joe Bloggs"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:12
-#: ckanext/datagovmk/templates/user/new_user_form.html:12
+#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Email"
 msgstr "E-mail"
 
@@ -966,7 +973,7 @@ msgid "Subscribe to notification emails"
 msgstr "Abonohuni tek e-mailet (adresat elektronike) të njoftimeve"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:15
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Upload authority file"
 msgstr "Ngarko dosjen e autoritetit"
 
@@ -983,7 +990,7 @@ msgid "Old Password"
 msgstr "Fjalëkalimi i vjetër"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:48
-#: ckanext/datagovmk/templates/user/new_user_form.html:13
+#: ckanext/datagovmk/templates/user/new_user_form.html:16
 msgid "Password"
 msgstr "Fjalëkalimi"
 
@@ -1015,27 +1022,42 @@ msgstr "Përditësoni profilin"
 msgid "Register for an Account"
 msgstr "Regjistrohu për një llogari"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:10
+#: ckanext/datagovmk/templates/user/new_user_form.html:13
 msgid "username"
 msgstr "Emri i përdoruesit"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:11
+#: ckanext/datagovmk/templates/user/new_user_form.html:14
 msgid "Full Name"
 msgstr "Emri i plotë"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:11
+#: ckanext/datagovmk/templates/user/new_user_form.html:14
 msgid "Joe Bloggs"
 msgstr "Joe Bloggs"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:12
+#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "joe@example.com"
 msgstr "joe@example.com"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:14
+#: ckanext/datagovmk/templates/user/new_user_form.html:17
 msgid "Confirm"
 msgstr "Konfirmo"
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:25
+#: ckanext/datagovmk/templates/user/new_user_form.html:18
+msgid "I am a state institution representative."
+msgstr "Unë jam një përfaqësues i institucionit shtetëror."
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:18
+msgid ""
+"State institution representatives are required to confirm their identity "
+"by providing аn authorization for adding data to the portal. Once the "
+"state representative identity is confirmed, the required user privileges "
+"will be granted by the System Administrator."
+msgstr "Përfaqësuesit e institucioneve shtetërore duhet të konfirmojnë "
+"identitetin e tyre duke dhënë një autorizim për shtimin e të dhënave "
+"në portal. Pasi konfirmohet identiteti i përfaqësuesit të shtetit, "
+"privilegjet e kërkuara të përdoruesit do të jepen nga Administratori i Sistemit."
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"
 msgstr "Krijo llogari"
 
@@ -1049,11 +1071,11 @@ msgstr "Si funksionon kjo?"
 
 #: ckanext/datagovmk/templates/user/request_reset.html:12
 msgid ""
-"Enter your username into the box and we will send you an email with a link to "
-"enter a new password."
+"Enter your username into the box and we will send you an email with a "
+"link to enter a new password."
 msgstr ""
-"Futni emrin tuaj të përdoruesit në kuti dhe ne do t'ju dërgojmë një e-mail me "
-"link-un (lidhje) për të futur një fjalëkalim të ri."
+"Futni emrin tuaj të përdoruesit në kuti dhe ne do t'ju dërgojmë një "
+"e-mail me link-un (lidhje) për të futur një fjalëkalim të ri."
 
 #~ msgid "Issue: {title}"
 #~ msgstr "Çështje: {titull}"
@@ -1063,3 +1085,14 @@ msgstr ""
 
 #~ msgid "Key"
 #~ msgstr "Çelës"
+
+#~ msgid ""
+#~ "State institution representatives are required"
+#~ " to confirm their identity by "
+#~ "providing аn authorization for adding "
+#~ "data to the portal. Once the state"
+#~ " representative identity is confirmed, the"
+#~ " required user privileges are granted "
+#~ "by the System Administrator."
+#~ msgstr ""
+

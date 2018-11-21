@@ -65,6 +65,7 @@
 @import "_flex.less";
 @import "_mixins.less";
 @import "_buttons.less";
+@import "_toggle.less";
 @import "_hero.less";
 @import "_featured-groups.less";
 @import "_featured-charts.less";
@@ -279,9 +280,9 @@
   }
 }
 
-.primary{
+.primary {
   .news,
-  .blog{
+  .blog {
     margin-top: @grid-gutter-width;
   }
 }
@@ -440,6 +441,23 @@
   }
 }
 
+#user-register-form {
+  .upload-authority {
+    transition: .4s opacity;
+    margin-bottom: @grid-gutter-width;
+    &.off{
+      .help-block{
+        display: none;
+      }
+    }
+    &.image-upload.off {
+      visibility: hidden;
+      height: @grid-gutter-width;
+      opacity: 0;
+    }
+  }
+}
+
 /* Media queries */
 
 /* Up to the small size breakpoint */
@@ -454,7 +472,7 @@
 [data-module="stats-nav"] {
   .nav-item {
     &.active {
-      a{
+      a {
         background-color: #8ca0a6;
       }
     }
