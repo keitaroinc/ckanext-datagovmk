@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 10:14+0100\n"
+"POT-Creation-Date: 2018-11-21 13:04+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -1057,15 +1057,18 @@ msgstr "Потврдете"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:18
 msgid "I am a state institution representative."
-msgstr ""
+msgstr "Јас сум претставник на државната институција."
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:18
 msgid ""
 "State institution representatives are required to confirm their identity "
 "by providing аn authorization for adding data to the portal. Once the "
 "state representative identity is confirmed, the required user privileges "
-"are granted by the System Administrator."
-msgstr ""
+"will be granted by the System Administrator."
+msgstr "Претставниците на државните институции се обврзани да го потврдат "
+"својот идентитет со обезбедување на овластување за додавање на податоци "
+"на порталот. Откако идентитетот на државниот претставник ќе биде потврден, "
+"потребните кориснички привилегии ќе бидат одобрени од системскиот администратор."
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"
@@ -1092,4 +1095,14 @@ msgstr ""
 
 #~ msgid "Invalid email recepient, maintainer not found"
 #~ msgstr "Невалидна е-пошта на примачот, не постои тој одржувач"
+
+#~ msgid ""
+#~ "State institution representatives are required"
+#~ " to confirm their identity by "
+#~ "providing аn authorization for adding "
+#~ "data to the portal. Once the state"
+#~ " representative identity is confirmed, the"
+#~ " required user privileges are granted "
+#~ "by the System Administrator."
+#~ msgstr ""
 

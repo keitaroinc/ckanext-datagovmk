@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 10:14+0100\n"
+"POT-Creation-Date: 2018-11-21 13:04+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -1055,15 +1055,18 @@ msgstr "Konfirmo"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:18
 msgid "I am a state institution representative."
-msgstr ""
+msgstr "Unë jam një përfaqësues i institucionit shtetëror."
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:18
 msgid ""
 "State institution representatives are required to confirm their identity "
 "by providing аn authorization for adding data to the portal. Once the "
 "state representative identity is confirmed, the required user privileges "
-"are granted by the System Administrator."
-msgstr ""
+"will be granted by the System Administrator."
+msgstr "Përfaqësuesit e institucioneve shtetërore duhet të konfirmojnë "
+"identitetin e tyre duke dhënë një autorizim për shtimin e të dhënave "
+"në portal. Pasi konfirmohet identiteti i përfaqësuesit të shtetit, "
+"privilegjet e kërkuara të përdoruesit do të jepen nga Administratori i Sistemit."
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"
@@ -1093,4 +1096,14 @@ msgstr ""
 
 #~ msgid "Key"
 #~ msgstr "Çelës"
+
+#~ msgid ""
+#~ "State institution representatives are required"
+#~ " to confirm their identity by "
+#~ "providing аn authorization for adding "
+#~ "data to the portal. Once the state"
+#~ " representative identity is confirmed, the"
+#~ " required user privileges are granted "
+#~ "by the System Administrator."
+#~ msgstr ""
 
