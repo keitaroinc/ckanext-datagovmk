@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 13:04+0100\n"
+"POT-Creation-Date: 2018-11-21 14:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -832,6 +832,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/footer_links.html:2
+msgid "Links"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:2
