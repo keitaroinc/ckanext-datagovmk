@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 14:52+0100\n"
+"POT-Creation-Date: 2018-11-23 12:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -802,7 +802,6 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Uploaded authority file"
 msgstr ""
 
@@ -938,7 +937,6 @@ msgid "Subscribe to notification emails"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Upload authority file"
 msgstr ""
 
@@ -1017,6 +1015,14 @@ msgid ""
 "providing аn authorization for adding data to the portal. Once the state "
 "representative identity is confirmed, the required user privileges will be "
 "granted by the System Administrator."
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Upload authorization/nomination"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Uploaded authorization/nomination"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:30

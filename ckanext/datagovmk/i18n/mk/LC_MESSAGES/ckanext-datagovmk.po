@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 14:52+0100\n"
+"POT-Creation-Date: 2018-11-23 12:20+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -853,7 +853,6 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Uploaded authority file"
 msgstr "Прикачена датотека за овластување"
 
@@ -991,7 +990,6 @@ msgid "Subscribe to notification emails"
 msgstr "Зачленете се за известувања преку електронска пошта"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Upload authority file"
 msgstr "Прикачи датотека за овластување"
 
@@ -1076,6 +1074,15 @@ msgstr ""
 "порталот. Откако идентитетот на државниот претставник ќе биде потврден, "
 "потребните кориснички привилегии ќе бидат одобрени од системскиот "
 "администратор."
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Upload authorization/nomination"
+msgstr "Прикачете овластување/номинација"
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+#| msgid "Uploaded authority file"
+msgid "Uploaded authorization/nomination"
+msgstr "Прикачено овластување/номинација"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"

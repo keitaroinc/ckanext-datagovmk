@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-21 14:52+0100\n"
+"POT-Creation-Date: 2018-11-23 12:20+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -852,7 +852,6 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Uploaded authority file"
 msgstr "Dosja e ngarkuar e autoritetit"
 
@@ -990,7 +989,6 @@ msgid "Subscribe to notification emails"
 msgstr "Abonohuni tek e-mailet (adresat elektronike) të njoftimeve"
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:20
 msgid "Upload authority file"
 msgstr "Ngarko dosjen e autoritetit"
 
@@ -1075,6 +1073,15 @@ msgstr ""
 "portal. Pasi konfirmohet identiteti i përfaqësuesit të shtetit, "
 "privilegjet e kërkuara të përdoruesit do të jepen nga Administratori i "
 "Sistemit."
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Upload authorization/nomination"
+msgstr "Ngarko autorizim/nominim"
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+#| msgid "Uploaded authority file"
+msgid "Uploaded authorization/nomination"
+msgstr "Autorizimi i ngarkuar/emërimi"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"
