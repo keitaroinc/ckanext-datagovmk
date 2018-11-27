@@ -1,5 +1,7 @@
 # coding: utf8
 
+import json
+
 from ckan import plugins
 from ckan.tests import helpers as test_helpers
 from ckanext.datagovmk import helpers
@@ -339,11 +341,13 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         assert desc == u'description on english'
 
     def test_get_translated(self):
-        json_str = '''{
+        title_translated = {
             'en': 'title on english',
             'mk': u'наслов на македонски',
             'sq': 'titulli i shqiptar'
-        }'''
+        }
+
+        json_str = json.loads(title_translated)
 
         set_lang('mk')
         t = helpers.get_translated(json_str)
