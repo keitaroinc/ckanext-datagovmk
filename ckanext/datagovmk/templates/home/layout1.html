@@ -33,7 +33,7 @@
               {% if popular_organizations %}
               <ul class="list-unstyled">
                 {% for organization in popular_organizations %}
-                  <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.org_name) }}">{{ organization.org_display_name }}</a></li>
+                  <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.org_name) }}">{{ h.datagovmk_get_translated(organization.org_display_name) }}</a></li>
                 {% endfor %}
               </ul>
               {% else %}

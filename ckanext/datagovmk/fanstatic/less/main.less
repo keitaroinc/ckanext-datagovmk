@@ -65,6 +65,7 @@
 @import "_flex.less";
 @import "_mixins.less";
 @import "_buttons.less";
+@import "_toggle.less";
 @import "_hero.less";
 @import "_featured-groups.less";
 @import "_featured-charts.less";
@@ -246,6 +247,33 @@
   }
 }
 
+.mioa-logo {
+  margin-bottom: @grid-gutter-width/2;
+}
+
+.list-logos {
+  &,
+  li {
+    .flex;
+  }
+  li {
+    .justify-content-between;
+    flex-grow: 1;
+    margin: @grid-gutter-width/2 auto;
+  }
+  a {
+    .flex;
+    .flex-wrap;
+    .align-items-center;
+    .justify-content-center;
+    flex-basis: 100%;
+    flex-shrink: 1;
+    padding: @grid-gutter-width/2;
+    background: @white;
+    border-radius: @border-radius-large*2;
+  }
+}
+
 .footer-links {
   ul {
     .list-unstyled;
@@ -279,9 +307,9 @@
   }
 }
 
-.primary{
+.primary {
   .news,
-  .blog{
+  .blog {
     margin-top: @grid-gutter-width;
   }
 }
@@ -440,6 +468,23 @@
   }
 }
 
+#user-register-form {
+  .upload-authority {
+    transition: .4s opacity;
+    margin-bottom: @grid-gutter-width;
+    &.off {
+      .help-block {
+        display: none;
+      }
+    }
+    &.image-upload.off {
+      visibility: hidden;
+      height: @grid-gutter-width;
+      opacity: 0;
+    }
+  }
+}
+
 /* Media queries */
 
 /* Up to the small size breakpoint */
@@ -451,10 +496,16 @@
   }
 }
 
+@media (min-width: @screen-lg-min) {
+  .list-logos-wrapper {
+    margin-top: @grid-gutter-width*3.5;
+  }
+}
+
 [data-module="stats-nav"] {
   .nav-item {
     &.active {
-      a{
+      a {
         background-color: #8ca0a6;
       }
     }

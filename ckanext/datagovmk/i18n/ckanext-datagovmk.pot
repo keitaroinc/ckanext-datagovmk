@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-13 14:59+0200\n"
+"POT-Creation-Date: 2018-11-23 12:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -28,96 +28,96 @@ msgstr ""
 msgid "Add dataset agreement"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:700
-#: ckanext/datagovmk/actions.py:729 ckanext/datagovmk/actions.py:773
+#: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:704
+#: ckanext/datagovmk/actions.py:735 ckanext/datagovmk/actions.py:780
 msgid "Missing value"
 msgstr ""
 
 #: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
-#: ckanext/datagovmk/actions.py:557 ckanext/datagovmk/actions.py:566
-#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
+#: ckanext/datagovmk/actions.py:563 ckanext/datagovmk/actions.py:572
+#: ckanext/datagovmk/actions.py:657 ckanext/datagovmk/actions.py:660
 msgid "message"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:557
+#: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:563
 msgid "Resource already exists"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:566
+#: ckanext/datagovmk/actions.py:436 ckanext/datagovmk/actions.py:572
 msgid "Resource file is missing"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:520 ckanext/datagovmk/actions.py:534
+#: ckanext/datagovmk/actions.py:526 ckanext/datagovmk/actions.py:540
 msgid "Resource was not found."
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:651 ckanext/datagovmk/actions.py:654
+#: ckanext/datagovmk/actions.py:657 ckanext/datagovmk/actions.py:660
 msgid "Invalid URL"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:685
+#: ckanext/datagovmk/actions.py:688
 msgid "No script was found for the provided name"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:700 ckanext/datagovmk/actions.py:729
-#: ckanext/datagovmk/actions.py:758 ckanext/datagovmk/actions.py:773
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:10
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
+#: ckanext/datagovmk/actions.py:704 ckanext/datagovmk/actions.py:735
+#: ckanext/datagovmk/actions.py:764 ckanext/datagovmk/actions.py:780
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:9
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:12
 msgid "authority"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:713
+#: ckanext/datagovmk/actions.py:718
 msgid "Error sending activation email, the user was not created: {0}"
 msgstr ""
 
-#: ckanext/datagovmk/actions.py:758
+#: ckanext/datagovmk/actions.py:764
 msgid "Uploaded authority file is too large. Maximum allowed size is {size}MB."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:103
+#: ckanext/datagovmk/controller.py:104
 msgid "Resource not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:112 ckanext/datagovmk/controller.py:127
-#: ckanext/datagovmk/controller.py:132
+#: ckanext/datagovmk/controller.py:113 ckanext/datagovmk/controller.py:128
+#: ckanext/datagovmk/controller.py:133
 msgid "Resource data not found"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:122
+#: ckanext/datagovmk/controller.py:123
 msgid "No download is available"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:157 ckanext/datagovmk/controller.py:355
+#: ckanext/datagovmk/controller.py:158 ckanext/datagovmk/controller.py:356
 msgid "Not authorized to see this page"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:269
+#: ckanext/datagovmk/controller.py:270
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:3
 msgid "Organizations"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:270
+#: ckanext/datagovmk/controller.py:271
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:4
 msgid "Groups"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:271
+#: ckanext/datagovmk/controller.py:272
 msgid "Tags"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:272
+#: ckanext/datagovmk/controller.py:273
 msgid "Formats"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:273
+#: ckanext/datagovmk/controller.py:274
 msgid "Licenses"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:344
+#: ckanext/datagovmk/controller.py:345
 msgid "Invalid search query: {error_message}"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:363
+#: ckanext/datagovmk/controller.py:364
 msgid "Parameter \"{parameter_name}\" is not an integer"
 msgstr ""
 
@@ -172,12 +172,12 @@ msgstr ""
 msgid "The issue has been reported."
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:832
+#: ckanext/datagovmk/controller.py:868
 #, python-format
 msgid "format: must be one of %s"
 msgstr ""
 
-#: ckanext/datagovmk/controller.py:844
+#: ckanext/datagovmk/controller.py:880
 msgid "DataStore resource not found"
 msgstr ""
 
@@ -209,30 +209,30 @@ msgid ""
 "    target=\"_blank\">authority file</a>"
 msgstr ""
 
-#: ckanext/datagovmk/utils.py:446
+#: ckanext/datagovmk/utils.py:450
 msgid "Email message was successfully sent."
 msgstr ""
 
-#: ckanext/datagovmk/utils.py:452
+#: ckanext/datagovmk/utils.py:456
 msgid "An error occured while sending the email. Try again."
 msgstr ""
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:73
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:58
 msgid "Preparing zip archive..."
 msgstr ""
 
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:70
 #: ckanext/datagovmk/fanstatic/js/download-resources.js:85
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:100
 #: ckanext/datagovmk/templates/package/snippets/resource_download_button.html:12
 #: ckanext/datagovmk/templates/package/snippets/resources_download.html:11
 msgid "Download"
 msgstr ""
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:96
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:81
 msgid "Could not create a zip archive."
 msgstr ""
 
-#: ckanext/datagovmk/fanstatic/js/download-resources.js:102
+#: ckanext/datagovmk/fanstatic/js/download-resources.js:87
 msgid "An error occured while preparing zip archive."
 msgstr ""
 
@@ -291,91 +291,99 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:16
+#: ckanext/datagovmk/templates/footer.html:19
 msgid "Address"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:18
+#: ckanext/datagovmk/templates/footer.html:21
 msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:20
-#: ckanext/datagovmk/templates/footer.html:62
+#: ckanext/datagovmk/templates/footer.html:23
+#: ckanext/datagovmk/templates/footer.html:65
 msgid "E-mail"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:21
+#: ckanext/datagovmk/templates/footer.html:24
 msgid "info@otvorenipodatoci.gov.mk"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:22
+#: ckanext/datagovmk/templates/footer.html:25
 msgid "Phone"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:23
+#: ckanext/datagovmk/templates/footer.html:26
 msgid "+389 (0)2 3200 889"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:24
+#: ckanext/datagovmk/templates/footer.html:27
 msgid "Fax"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:25
+#: ckanext/datagovmk/templates/footer.html:28
 msgid "+389 (0)2 3200 881"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:28
+#: ckanext/datagovmk/templates/footer.html:31
 msgid "Terms of use"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:29
+#: ckanext/datagovmk/templates/footer.html:32
 msgid "Privacy Policy"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:35
+#: ckanext/datagovmk/templates/footer.html:38
 msgid "Navigation"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:40
+#: ckanext/datagovmk/templates/footer.html:43
 msgid "Report site issue"
 msgstr ""
 
 #: ckanext/datagovmk/templates/ckanext/stats/index.html:10
-#: ckanext/datagovmk/templates/footer.html:41
+#: ckanext/datagovmk/templates/footer.html:44
 msgid "Statistics"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:59
+#: ckanext/datagovmk/templates/footer.html:62
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "Stay updated with "
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:60
+#: ckanext/datagovmk/templates/footer.html:63
 msgid "Subscribe to our free newsletter"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:64
+#: ckanext/datagovmk/templates/footer.html:67
 msgid "Your e-mail address"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:66
+#: ckanext/datagovmk/templates/footer.html:69
 msgid "Subscribe"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:85
+#: ckanext/datagovmk/templates/footer.html:92
+msgid ""
+"The portal is developed within a programme implemented by the Centre for "
+"Change Management, funded by the UK Government with the support of the "
+"British Embassy Skopje. The data and content provided on this portal are not "
+"under the authority of the UK Government."
+msgstr ""
+
+#: ckanext/datagovmk/templates/footer.html:96
 msgid ""
 "<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
 "href=\"http://ckan.org\">CKAN</a>"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:89
+#: ckanext/datagovmk/templates/footer.html:100
 msgid "CKAN API"
 msgstr ""
 
-#: ckanext/datagovmk/templates/footer.html:90
+#: ckanext/datagovmk/templates/footer.html:101
 msgid "CKAN Association"
 msgstr ""
 
@@ -794,7 +802,6 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:70
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Uploaded authority file"
 msgstr ""
 
@@ -824,6 +831,10 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/footer_links.html:2
+msgid "Links"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:2
@@ -879,7 +890,7 @@ msgstr ""
 msgid "Share on Google+"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/upload_authority.html:16
+#: ckanext/datagovmk/templates/snippets/upload_authority.html:14
 msgid "Clear Upload"
 msgstr ""
 
@@ -896,7 +907,7 @@ msgid "Change details"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:8
-#: ckanext/datagovmk/templates/user/new_user_form.html:10
+#: ckanext/datagovmk/templates/user/new_user_form.html:13
 msgid "Username"
 msgstr ""
 
@@ -909,7 +920,7 @@ msgid "eg. Joe Bloggs"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:12
-#: ckanext/datagovmk/templates/user/new_user_form.html:12
+#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Email"
 msgstr ""
 
@@ -926,7 +937,6 @@ msgid "Subscribe to notification emails"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:32
-#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "Upload authority file"
 msgstr ""
 
@@ -943,7 +953,7 @@ msgid "Old Password"
 msgstr ""
 
 #: ckanext/datagovmk/templates/user/edit_user_form.html:48
-#: ckanext/datagovmk/templates/user/new_user_form.html:13
+#: ckanext/datagovmk/templates/user/new_user_form.html:16
 msgid "Password"
 msgstr ""
 
@@ -975,27 +985,47 @@ msgstr ""
 msgid "Register for an Account"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:10
+#: ckanext/datagovmk/templates/user/new_user_form.html:13
 msgid "username"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:11
+#: ckanext/datagovmk/templates/user/new_user_form.html:14
 msgid "Full Name"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:11
+#: ckanext/datagovmk/templates/user/new_user_form.html:14
 msgid "Joe Bloggs"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:12
+#: ckanext/datagovmk/templates/user/new_user_form.html:15
 msgid "joe@example.com"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:14
+#: ckanext/datagovmk/templates/user/new_user_form.html:17
 msgid "Confirm"
 msgstr ""
 
-#: ckanext/datagovmk/templates/user/new_user_form.html:25
+#: ckanext/datagovmk/templates/user/new_user_form.html:18
+msgid "I am a state institution representative."
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:18
+msgid ""
+"State institution representatives are required to confirm their identity by "
+"providing аn authorization for adding data to the portal. Once the state "
+"representative identity is confirmed, the required user privileges will be "
+"granted by the System Administrator."
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Upload authorization/nomination"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:20
+msgid "Uploaded authorization/nomination"
+msgstr ""
+
+#: ckanext/datagovmk/templates/user/new_user_form.html:30
 msgid "Create Account"
 msgstr ""
 
