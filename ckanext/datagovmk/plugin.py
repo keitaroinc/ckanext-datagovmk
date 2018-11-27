@@ -117,7 +117,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_catalog_count':
                 helpers.get_catalog_count,
             'datagovmk_get_org_title_desc':
-                helpers.get_org_title_desc
+                helpers.get_org_title_desc,
+            'datagovmk_get_translated':
+                helpers.get_translated
         }
 
     # IActions

@@ -291,11 +291,13 @@ def fetch_most_active_orgs():
     s = Session()
     objects = []
 
+    import json
+
     for org in orgs:
         data = {
             'org_id': org.get('id'),
             'org_name': org.get('name'),
-            'org_display_name': org.get('display_name'),
+            'org_display_name': json.dumps(org.get('title_translated', None)),
         }
         objects.append(MostActiveOrganizations(**data))
 

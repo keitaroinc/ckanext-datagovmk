@@ -1,9 +1,10 @@
 """datagovmk custom helpers.
 """
 import os
+import json
 
 from ckan.plugins import toolkit
-from ckan.lib import search
+from ckan.lib import search, i18n
 from datetime import datetime
 from ckan.common import config
 from ckanext.datagovmk.model.stats import (get_stats_for_package,
@@ -295,3 +296,19 @@ def get_catalog_count():
         'fq': 'extras_org_catalog_enabled:true'
     }
     return toolkit.get_action('package_search')(data_dict=data_dict)['count']
+
+
+def get_translated(json_str):
+    """ Converts json to dict and get the appropriate value for the current language
+
+    :param json_str: the json with translates, example {'mk': '', 'en': '', 'sq': ''}
+    :type json_str: str/unicode
+    :returns: the appropriate value for the current language from the json
+    :rtype: str
+    """
+    try:
+        lang = i18n.get_lang()
+        d = json.loads(json_str)
+        return d.get(lang, None) if isinstance(d, dict) else ''
+    except:
+        return ''
