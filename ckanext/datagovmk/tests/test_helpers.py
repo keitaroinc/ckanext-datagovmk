@@ -1,5 +1,7 @@
 # coding: utf8
 
+import json
+
 from ckan import plugins
 from ckan.tests import helpers as test_helpers
 from ckanext.datagovmk import helpers
@@ -337,6 +339,27 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         title, desc = helpers.get_org_title_desc(org)
         assert title == u'title on english'
         assert desc == u'description on english'
+
+    def test_get_translated(self):
+        title_translated = {
+            'en': 'title on english',
+            'mk': u'наслов на македонски',
+            'sq': 'titulli i shqiptar'
+        }
+
+        json_str = json.dumps(title_translated)
+
+        set_lang('mk')
+        t = helpers.get_translated(json_str)
+        assert t == u'наслов на македонски'
+
+        set_lang('en')
+        t = helpers.get_translated(json_str)
+        assert t == 'title on english'
+
+        set_lang('sq')
+        t = helpers.get_translated(json_str)
+        assert t == 'titulli i shqiptar'
 
     @test_helpers.change_config('ckan.auth.create_unowned_dataset', True)
     def test_get_org_catalog(self):
