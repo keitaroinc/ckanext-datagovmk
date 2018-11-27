@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import os
+import io
+import inspect
+import json
+
 from logging import getLogger
 from datetime import timedelta, datetime
 from dateutil import parser
@@ -10,9 +15,7 @@ import ckan.lib.helpers as h
 import ckan.lib.mailer as ckan_mailer
 from ckan.lib import base
 from ckan.common import config
-import os
-import io
-import inspect
+
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
 from ckanext.datagovmk.model.user_authority_dataset \
@@ -290,8 +293,6 @@ def fetch_most_active_orgs():
 
     s = Session()
     objects = []
-
-    import json
 
     for org in orgs:
         data = {
