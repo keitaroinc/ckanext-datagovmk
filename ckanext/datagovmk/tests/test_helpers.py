@@ -347,7 +347,7 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
             'sq': 'titulli i shqiptar'
         }
 
-        json_str = json.loads(title_translated)
+        json_str = json.dumps(title_translated)
 
         set_lang('mk')
         t = helpers.get_translated(json_str)
