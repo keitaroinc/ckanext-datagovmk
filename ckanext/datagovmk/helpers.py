@@ -299,7 +299,7 @@ def get_catalog_count():
 
 
 def get_translated(json_str):
-    """ Converts json to dict and get the appropriate value for the current language
+    """ Converts json to dict and gets the appropriate value for the current language
 
     :param json_str: the json with translates, example {'mk': '', 'en': '', 'sq': ''}
     :type json_str: str/unicode

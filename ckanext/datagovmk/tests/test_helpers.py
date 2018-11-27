@@ -338,6 +338,25 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         assert title == u'title on english'
         assert desc == u'description on english'
 
+    def test_get_translated(self):
+        json_str = '''{
+            'en': 'title on english',
+            'mk': u'наслов на македонски',
+            'sq': 'titulli i shqiptar'
+        }'''
+
+        set_lang('mk')
+        t = helpers.get_translated(json_str)
+        assert t == u'наслов на македонски'
+
+        set_lang('en')
+        t = helpers.get_translated(json_str)
+        assert t == 'title on english'
+
+        set_lang('sq')
+        t = helpers.get_translated(json_str)
+        assert t == 'titulli i shqiptar'
+
     @test_helpers.change_config('ckan.auth.create_unowned_dataset', True)
     def test_get_org_catalog(self):
         org = factories.Organization()
