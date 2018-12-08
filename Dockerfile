@@ -26,7 +26,7 @@ RUN apk add bash \
 
 
 # Install our extension
-RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git@9cfcb8562f7bb301a2018d3b91630324501e9598#egg=ckanext-datagovmk" && \
+RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git#egg=ckanext-datagovmk" && \
     pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
     # Install extensions
     # ckanext-spatial and related
