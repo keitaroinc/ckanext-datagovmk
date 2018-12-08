@@ -616,7 +616,7 @@ def resource_update(context, data_dict):
     return resource
 
 
-@chained_action
+# @chained_action
 def resource_delete(action, context, data_dict):
     package_id = None
     try:

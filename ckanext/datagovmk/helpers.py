@@ -64,9 +64,55 @@ def get_most_active_organizations(limit=5):
     :rtype: list
 
     '''
-    orgs = MostActiveOrganizations.get_all(limit=limit)
+    orgs = toolkit.get_action('organization_list')({}, {})
+    last_updated_orgs = []
 
-    return orgs
+    for org_name in orgs:
+        org = toolkit.get_action('organization_show')({'user': None}, {
+            'id': org_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': True,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False,
+        })
+
+        last_updated_datasets = []
+
+        for dataset in org.get('packages'):
+            dataset_full = toolkit.get_action('package_show')({}, {
+                'id': dataset.get('id'),
+            })
+            last_modified_resource = ''
+
+            for resource in dataset_full.get('resources'):
+                field = 'last_modified'
+                if resource.get('last_modified') is None:
+                    field = 'created'
+
+                if resource.get(field) > last_modified_resource:
+                    last_modified_resource = resource.get(field)
+
+            last_updated_datasets.append(last_modified_resource)
+        last_updated_datasets = sorted(last_updated_datasets, reverse=True)
+
+        if last_updated_datasets:
+            last_modified_dataset = last_updated_datasets[0]
+            last_updated_orgs.append({
+                'org': org, 'last_modified': last_modified_dataset
+            })
+
+    sorted_orgs = sorted(
+        last_updated_orgs,
+        key=lambda k: k['last_modified'],
+        reverse=True
+    )
+
+    orgs = map(lambda x: x.get('org'), sorted_orgs)
+
+    return orgs[:limit]
 
 
 def get_related_datasets(id, limit=3):

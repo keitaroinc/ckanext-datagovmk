@@ -222,7 +222,7 @@ class InitDB(CkanCommand):
 
         setup_user_authority_table()
         setup_user_authority_dataset_table()
-        setup_most_active_organizations_table()
+        # setup_most_active_organizations_table()
 
         log.info('datagovmk DB tables initialized')
 
