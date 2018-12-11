@@ -302,7 +302,13 @@ def fetch_most_active_orgs():
         }
         objects.append(MostActiveOrganizations(**data))
 
-    s.bulk_save_objects(objects)
-    s.commit()
+    try:
+        s.bulk_save_objects(objects)
+        s.commit()
+    except:
+        s.rollback()
+        raise
+    finally:
+        s.close()
 
     log.info('Successfully cached most active organizations.')
