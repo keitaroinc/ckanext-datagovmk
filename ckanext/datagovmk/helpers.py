@@ -2,6 +2,7 @@
 """
 import os
 import json
+import ckan.authz as authz
 
 from ckan.plugins import toolkit
 from ckan.lib import search, i18n
@@ -15,6 +16,7 @@ from logging import getLogger
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckan.lib import helpers as core_helpers
 from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganizations
+
 
 log = getLogger(__name__)
 
@@ -287,13 +289,14 @@ def get_org_catalog(id):
         return None
 
 
-def get_catalog_count():
+def get_catalog_count(user):
     """ Count how many catalogs (datasets) are in the portal.
     :returns: totat number of catalogs
     :rtype: list
     """
     data_dict = {
-        'fq': 'extras_org_catalog_enabled:true'
+        'fq': 'extras_org_catalog_enabled:true',
+        'include_private': authz.is_sysadmin(user)
     }
     return toolkit.get_action('package_search')(data_dict=data_dict)['count']
 
@@ -312,3 +315,25 @@ def get_translated(json_str):
         return d.get(lang, None) if isinstance(d, dict) else ''
     except:
         return ''
+
+
+def get_site_statistics(user):
+    """ Count how many datasets, organizations and groups exist for particular user
+
+    :param user: The username of the user
+    :type user: str
+    :returns: the dictionary containing number of datasets, organizations and groups
+    :rtype: dict
+    """
+
+    stats = {}
+    data_dict = {
+        "rows": 1,
+        'include_private': authz.is_sysadmin(user)
+    }
+
+    stats['dataset_count'] = toolkit.get_action('package_search')({}, data_dict)['count']
+    stats['group_count'] = len(toolkit.get_action('group_list')({}, {}))
+    stats['organization_count'] = len(toolkit.get_action('organization_list')({}, {}))
+
+    return stats
