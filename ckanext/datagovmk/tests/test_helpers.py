@@ -377,7 +377,7 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         dataset = factories.Dataset(owner_org=org['id'], extras=extras)
         dataset1 = factories.Dataset(owner_org=org['id'], extras=extras)
 
-        result = helpers.get_catalog_count()
+        result = helpers.get_catalog_count('')
         assert result == 2
 
     def test_get_dataset_stats(self):
@@ -388,3 +388,15 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         assert result.get('id') == dataset.get('id')
         assert result.get('visits_recently') == 10
         assert result.get('visits_ever') == 28
+
+    def test_get_site_statistics(self):
+        group = factories.Group()
+        org = factories.Organization()
+        dataset = factories.Dataset(owner_org=org['id'])
+        dataset1 = factories.Dataset(owner_org=org['id'])
+
+        stats = helpers.get_site_statistics('')
+
+        assert stats.get('dataset_count') == 2
+        assert stats.get('organization_count') == 1
+        assert stats.get('group_count') == 1

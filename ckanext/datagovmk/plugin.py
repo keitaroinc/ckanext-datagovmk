@@ -119,7 +119,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_org_title_desc':
                 helpers.get_org_title_desc,
             'datagovmk_get_translated':
-                helpers.get_translated
+                helpers.get_translated,
+            'datagovmk_get_site_statistics':
+                helpers.get_site_statistics
         }
 
     # IActions

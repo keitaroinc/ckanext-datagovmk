@@ -1,5 +1,5 @@
-{% set stats = h.get_site_statistics() %}
-{% set catalog_count = h.datagovmk_get_catalog_count() %}
+{% set stats = h.datagovmk_get_site_statistics(c.user) %}
+{% set catalog_count = h.datagovmk_get_catalog_count(c.user) %}
 
 <div class="quick-stats">
   <a href="{{ h.url_for(controller='package', action='search') }}">
