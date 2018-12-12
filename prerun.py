@@ -50,7 +50,10 @@ def check_solr_connection(retry=None):
         time.sleep(10)
         check_solr_connection(retry = retry - 1)
     else:
-        eval(connection.read())
+        import re
+        conn_info = connection.read()
+        conn_info = re.sub(r'"zkConnected":true', '"zkConnected":True', conn_info)
+        eval(conn_info)
 
 def init_db():
 
