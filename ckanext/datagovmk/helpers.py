@@ -291,6 +291,8 @@ def get_org_catalog(id):
 
 def get_catalog_count(user):
     """ Count how many catalogs (datasets) are in the portal.
+    :param user: The username of the user
+    :type user: str
     :returns: totat number of catalogs
     :rtype: list
     """
