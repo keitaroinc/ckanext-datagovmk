@@ -1,4 +1,4 @@
-FROM keitaro/ckan:2.8.1
+FROM keitaro/ckan:2.8.1-v1
 
 MAINTAINER Keitaro <info@keitaro.com>
 
@@ -22,7 +22,8 @@ RUN apk add bash \
             musl-dev \
             pcre \
             python2-dev \
-            openssl-dev
+            openssl-dev \
+            py-lxml
 
 
 # Install our extension
