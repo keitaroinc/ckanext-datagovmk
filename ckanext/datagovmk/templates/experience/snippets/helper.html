@@ -1,0 +1,18 @@
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+        <i class="fa fa-info-circle"></i>
+        {{ _('What are Experiences?') }}
+    </h2>
+    <div class="module-content">
+        <p>
+            {% trans %}Open data may be used for different analysis and research purposes. This section outlines the analysis and research
+            findings made using the datasets available on the portal.{% endtrans %}
+        </p>
+        {% if h.check_access('ckanext_experience_admin_add') %}
+        <p>
+            {% trans url=h.url_for(controller='ckanext.experience.controller:ExperienceController', action='manage_experience_admins') %}
+            Sysadmins can manage Experience Admins from the <a href='{{ url }}'>Experience configuration page</a>.{% endtrans %}
+        </p>
+        {% endif %}
+    </div>
+</div>

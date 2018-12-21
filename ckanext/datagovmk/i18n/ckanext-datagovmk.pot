@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 16:16+0100\n"
+"POT-Creation-Date: 2018-12-21 17:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -554,6 +554,24 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:4
+msgid "What are Experiences?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:8
+msgid ""
+"Open data may be used for different analysis and research purposes. This "
+"section outlines the analysis and research findings made using the datasets "
+"available on the portal."
+msgstr ""
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:13
+#, python-format
+msgid ""
+" Sysadmins can manage Experience Admins from the <a href='%(url)s'>Experience"
+" configuration page</a>."
+msgstr ""
+
 #: ckanext/datagovmk/templates/group/snippets/helper.html:4
 msgid "What are Groups?"
 msgstr ""
@@ -852,6 +870,25 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:4
+msgid "What are Showcases?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:8
+msgid ""
+"Datasets have been used to build apps, websites and visualizations. They've "
+"been featured in articles, and written about in news reports and blog posts. "
+"Showcases collect together the best examples of datasets in use, to provide "
+"further insight, ideas, and inspiration."
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:14
+#, python-format
+msgid ""
+"Sysadmins can manage Showcase Admins from the <a href='%(url)s'>Showcase "
+"configuration page</a>."
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:32
