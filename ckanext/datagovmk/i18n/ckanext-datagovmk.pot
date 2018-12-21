@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 17:22+0100\n"
+"POT-Creation-Date: 2018-12-21 17:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -866,6 +866,17 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/package/snippets/stats.html:12
 msgid "Downloads"
+msgstr ""
+
+#: ckanext/datagovmk/templates/report/snippets/helper.html:4
+msgid "What are Reports?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/report/snippets/helper.html:8
+msgid ""
+" Reports are used to check the validity of the links, as well as to identify "
+"unavailable links across a portal. This section also previews the quality of "
+"the open data across organizations, groups and data sets. "
 msgstr ""
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6

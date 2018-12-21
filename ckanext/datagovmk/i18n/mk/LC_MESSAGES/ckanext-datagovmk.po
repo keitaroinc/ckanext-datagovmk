@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 17:22+0100\n"
+"POT-Creation-Date: 2018-12-21 17:32+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -934,6 +934,21 @@ msgstr "Прегледи"
 msgid "Downloads"
 msgstr "Преземања"
 
+#: ckanext/datagovmk/templates/report/snippets/helper.html:4
+#, fuzzy
+#| msgid "What are Groups?"
+msgid "What are Reports?"
+msgstr "Што се извештаи?"
+
+#: ckanext/datagovmk/templates/report/snippets/helper.html:8
+msgid ""
+" Reports are used to check the validity of the links, as well as to "
+"identify unavailable links across a portal. This section also previews "
+"the quality of the open data across organizations, groups and data sets. "
+msgstr ""
+"Извештаите се употребуваат за да се провери валидноста на линковите како и недостапните линкови низ порталот. "
+"Тука е достапен преглед на квалитетот на отворените податоци во организациите, групите и податочните сетови."
+
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
 msgstr "Формата содржи невалидни записи:"
@@ -950,13 +965,12 @@ msgid ""
 "blog posts. Showcases collect together the best examples of datasets in "
 "use, to provide further insight, ideas, and inspiration."
 msgstr ""
-"Врз основа на отворените податоци може да се изработуваат најразлични веб и мобилни апликации. "
-"Овде се прикажуваат апликациите кои се изработени врз основа на објавени отворени податоци."
+"Врз основа на отворените податоци може да се изработуваат најразлични веб"
+" и мобилни апликации. Овде се прикажуваат апликациите кои се изработени "
+"врз основа на објавени отворени податоци."
 
 #: ckanext/datagovmk/templates/showcase/snippets/helper.html:14
 #, fuzzy, python-format
-#| msgid "" " Sysadmins can manage Experience Admins from the <a "
-#| "href='%(url)s'>Experience configuration page</a>."
 msgid ""
 "Sysadmins can manage Showcase Admins from the <a href='%(url)s'>Showcase "
 "configuration page</a>."
@@ -1204,17 +1218,4 @@ msgstr ""
 
 #~ msgid ""
 #~ msgstr ""
-
-#~ msgid ""
-#~ "Different web and mobile applications "
-#~ "may be developed based on the open"
-#~ " data available. This section showcases "
-#~ "the applications developed based on the"
-#~ " published data sets."
-#~ msgstr ""
-#~ "Врз основа на отворените податоци може"
-#~ " да се изработуваат најразлични веб и"
-#~ " мобилни апликации. Овде се прикажуваат "
-#~ "апликациите кои се изработени врз основа"
-#~ " на објавени отворени податоци."
 
