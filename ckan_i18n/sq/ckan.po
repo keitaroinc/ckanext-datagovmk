@@ -779,7 +779,7 @@ msgstr "Logo e Tag faqes"
 #: ckan/templates/organization/read_base.html:19
 #: ckan/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "Rreth nesh"
+msgstr "Rreth portalit"
 
 #: ckan/controllers/admin.py:55 ckan/templates/admin/config.html:25
 msgid "About page text"
