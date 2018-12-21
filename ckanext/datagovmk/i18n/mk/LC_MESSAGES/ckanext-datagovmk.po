@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 17:32+0100\n"
+"POT-Creation-Date: 2018-12-21 17:46+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -936,7 +936,6 @@ msgstr "Преземања"
 
 #: ckanext/datagovmk/templates/report/snippets/helper.html:4
 #, fuzzy
-#| msgid "What are Groups?"
 msgid "What are Reports?"
 msgstr "Што се извештаи?"
 
@@ -946,8 +945,10 @@ msgid ""
 "identify unavailable links across a portal. This section also previews "
 "the quality of the open data across organizations, groups and data sets. "
 msgstr ""
-"Извештаите се употребуваат за да се провери валидноста на линковите како и недостапните линкови низ порталот. "
-"Тука е достапен преглед на квалитетот на отворените податоци во организациите, групите и податочните сетови."
+"Извештаите се употребуваат за да се провери валидноста на линковите како "
+"и недостапните линкови низ порталот. Тука е достапен преглед на "
+"квалитетот на отворените податоци во организациите, групите и податочните "
+"сетови."
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
@@ -1000,34 +1001,29 @@ msgid "Datasets"
 msgstr "Податочни сетови"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
-#: ckanext/datagovmk/templates/user/edit_user_form.html:14
-msgid "About"
-msgstr "За"
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Органограм"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Showcases"
 msgstr "Апликации"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
 msgstr "Искуства"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
 msgstr "Извештаи"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Data Requests"
 msgstr "Барања за податочни сетови"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "За Порталот"
+msgstr "За порталот"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1192,7 +1188,6 @@ msgid "Upload authorization/nomination"
 msgstr "Прикачете овластување/номинација"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
-#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Прикачено овластување/номинација"
 
@@ -1223,19 +1218,5 @@ msgstr ""
 #~ msgstr "Невалидна е-пошта на примачот, не постои тој одржувач"
 
 #~ msgid ""
-#~ "State institution representatives are required"
-#~ " to confirm their identity by "
-#~ "providing аn authorization for adding "
-#~ "data to the portal. Once the state"
-#~ " representative identity is confirmed, the"
-#~ " required user privileges are granted "
-#~ "by the System Administrator."
 #~ msgstr ""
 
-#: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
-msgid "The form contains invalid entries:"
-msgstr "Формата содржи невалидни записи:"
-
-#: ckanext/datagovmk/templates/snippets/facet_list.html:32
-msgid "Show More {facet_type}"
-msgstr ""

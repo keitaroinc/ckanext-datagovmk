@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 17:32+0100\n"
+"POT-Creation-Date: 2018-12-21 17:46+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.3.4\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -935,7 +935,6 @@ msgstr "Shkarkimet"
 
 #: ckanext/datagovmk/templates/report/snippets/helper.html:4
 #, fuzzy
-#| msgid "What are Groups?"
 msgid "What are Reports?"
 msgstr "Çka janë raportet?"
 
@@ -945,9 +944,10 @@ msgid ""
 "identify unavailable links across a portal. This section also previews "
 "the quality of the open data across organizations, groups and data sets. "
 msgstr ""
-"Raportet përdoren për t’u verifikuar vlefshmëria e lidhjeve (validiteti i linqeve) si dhe linqet e "
-"padisponueshme në portal. Këtu ka qasje të pasqyrës së cilësisë së të dhënave të hapura të organizatave, "
-"grupeve dhe setit të të dhënave."
+"Raportet përdoren për t’u verifikuar vlefshmëria e lidhjeve (validiteti i "
+"linqeve) si dhe linqet e padisponueshme në portal. Këtu ka qasje të "
+"pasqyrës së cilësisë së të dhënave të hapura të organizatave, grupeve dhe "
+"setit të të dhënave."
 
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
@@ -999,34 +999,29 @@ msgid "Datasets"
 msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
-#: ckanext/datagovmk/templates/user/edit_user_form.html:14
-msgid "About"
-msgstr "Për"
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Organogram"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Showcases"
 msgstr "Aplikimet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
 msgstr "Përvojë"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
 msgstr "Raportet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Data Requests"
 msgstr "Kërkesat e të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "Rreth portalit"
+msgstr "Për portalin"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1191,7 +1186,6 @@ msgid "Upload authorization/nomination"
 msgstr "Ngarko autorizim/nominim"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
-#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Autorizimi i ngarkuar/emërimi"
 
@@ -1225,20 +1219,5 @@ msgstr ""
 #~ msgstr "Çelës"
 
 #~ msgid ""
-#~ "State institution representatives are required"
-#~ " to confirm their identity by "
-#~ "providing аn authorization for adding "
-#~ "data to the portal. Once the state"
-#~ " representative identity is confirmed, the"
-#~ " required user privileges are granted "
-#~ "by the System Administrator."
 #~ msgstr ""
-
-#: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
-msgid "The form contains invalid entries:"
-msgstr "Formulari përmban shënime të pavlefshme:"
-
-#: ckanext/datagovmk/templates/snippets/facet_list.html:32
-msgid "Show More {facet_type}"
-msgstr ""
 
