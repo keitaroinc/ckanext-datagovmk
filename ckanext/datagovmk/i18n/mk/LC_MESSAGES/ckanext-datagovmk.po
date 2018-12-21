@@ -927,7 +927,7 @@ msgstr "Барања за податочни сетови"
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "За порталот"
+msgstr "За Порталот"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"

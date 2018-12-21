@@ -926,7 +926,7 @@ msgstr "Kërkesat e të dhënave"
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "Për portalin"
+msgstr "Rreth portalit"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
