@@ -3304,7 +3304,7 @@ msgstr "Fshij setin e të dhënave nga ky grupi"
 
 #: ckan/templates/group/snippets/helper.html:4
 msgid "What are Groups?"
-msgstr "Çfarë janë Grupet?"
+msgstr "Çka paraqesin grupet?"
 
 #: ckan/templates/group/snippets/helper.html:8
 msgid ""
@@ -3312,12 +3312,8 @@ msgid ""
 "could be to catalogue datasets for a particular project or team, or on a "
 "particular theme, or as a very simple way to help people find and search your "
 "own published datasets. "
-msgstr ""
-"Ju mund t'i përdorni Grupet e CKAN-it për t'i krijuar dhe menaxhuar koleksionet "
-"e seteve të të dhënave.  Këto mund të përdoren si katalog i seteve të të "
-"dhënave për një projekt apo ekip të veçantë ose për një temë të caktuar, ose "
-"edhe si një mënyrë më e lehtë për t'i ndihmuar të tjerët për të gjetur e "
-"kërkuar setet e publikuara të të dhënave."
+msgstr " Grupet janë përmbledhje e setit të të dhënave nga një temë e caktuar, "
+"duke mundësuar gjetjen më të thjeshtë të setit të të dhënave nga aspekti i ngjashëm."
 
 #: ckan/templates/group/snippets/history_revisions.html:10
 #: ckan/templates/package/snippets/history_revisions.html:10
@@ -3630,7 +3626,7 @@ msgstr "Setet e të dhënave në organizatë: {group}"
 #: ckan/templates/organization/snippets/help.html:4
 #: ckan/templates/organization/snippets/helper.html:4
 msgid "What are Organizations?"
-msgstr "Çfarë janë Organizatat?"
+msgstr "Çka janë organizatat?"
 
 #: ckan/templates/organization/snippets/help.html:7
 msgid ""
@@ -3654,11 +3650,9 @@ msgid ""
 " CKAN Organizations are used to create, manage and publish collections of "
 "datasets. Users can have different roles within an Organization, depending on "
 "their level of authorisation to create, edit and publish. "
-msgstr ""
-"Organizatat e CKAN-it përdoren për të krijuar, menaxhuar dhe publikuar "
-"koleksionet e setit të të dhënave. Përdoruesit mund të kenë role të ndryshme "
-"brenda një Organizate varësisht nga niveli i autorizimit të tyre për të "
-"krijuar, redaktuar dhe për të publikuar."
+msgstr "Organizatat janë organe dhe institucione të sektorit publik, të dhënat të cilat "
+"i përpilojnë në realizimin e kompetencave të tyre i publikojnë në format të të "
+"dhënave të hapura të organizuara në setin e veçantë të të dhënave."
 
 #: ckan/templates/organization/snippets/organization_form.html:10
 msgid "My Organization"

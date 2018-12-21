@@ -3296,12 +3296,8 @@ msgid ""
 "could be to catalogue datasets for a particular project or team, or on a "
 "particular theme, or as a very simple way to help people find and search your "
 "own published datasets. "
-msgstr ""
-" Можете да употребите CKAN групи за да креирате и управувате со колекција од "
-"податочни сетови. Ова може да овозможи каталогно подредување на податочни "
-"сетови за одреден проект или тим, или за одредена тема, или како едноставен "
-"начин да овозможите на луѓето да ги пронајдат и пребараат вашите лично објавени "
-"податочни сетови. "
+msgstr " Групи се збирки на податочни сетови од одредена тема, овозможувајќи "
+" поедноставно пронаоѓање на податочни сетови од сличен контекст."
 
 #: ckan/templates/group/snippets/history_revisions.html:10
 #: ckan/templates/package/snippets/history_revisions.html:10
@@ -3613,7 +3609,7 @@ msgstr "Податочни сетови во организација: {group}"
 #: ckan/templates/organization/snippets/help.html:4
 #: ckan/templates/organization/snippets/helper.html:4
 msgid "What are Organizations?"
-msgstr "Што се Организации?"
+msgstr "Што се oрганизации?"
 
 #: ckan/templates/organization/snippets/help.html:7
 msgid ""
@@ -3638,10 +3634,9 @@ msgid ""
 "datasets. Users can have different roles within an Organization, depending on "
 "their level of authorisation to create, edit and publish. "
 msgstr ""
-" CKAN организациите се користат за креирање, управување и објавување на збирки "
-"на податочни сетови. Корисниците можат да имаат различни улоги во рамките на "
-"една организација, во зависност од нивното ниво на овластување за креирање, "
-"уредување и објавување "
+" Организации се органи и институции од јавниот сектор кои податоците кои ги "
+"создаваат во остварувањето на своите надлежности ги објавуваат во формат на "
+"отворени податоци организирани во посебни податочни сетови на порталот."
 
 #: ckan/templates/organization/snippets/organization_form.html:10
 msgid "My Organization"
