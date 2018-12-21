@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 15:58+0100\n"
+"POT-Creation-Date: 2018-12-21 16:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -552,6 +552,16 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/datagovmk/report_issue_form.html:46
 msgid "Submit"
+msgstr ""
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:8
+msgid ""
+" Groups are sets of data on a specific subject, enabling simple search of "
+"data sets with similar context. "
 msgstr ""
 
 #: ckanext/datagovmk/templates/home/index.html:29

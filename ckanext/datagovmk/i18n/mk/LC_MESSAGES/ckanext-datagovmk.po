@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 15:58+0100\n"
+"POT-Creation-Date: 2018-12-21 16:16+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -597,6 +597,20 @@ msgstr "Опис"
 msgid "Submit"
 msgstr "Испрати"
 
+#: ckanext/datagovmk/templates/group/snippets/helper.html:4
+#, fuzzy
+#| msgid "What are Organizations?"
+msgid "What are Groups?"
+msgstr "Што претставуваат групи?"
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:8
+msgid ""
+" Groups are sets of data on a specific subject, enabling simple search of"
+" data sets with similar context. "
+msgstr ""
+" Групи се збирки на податочни сетови од одредена тема, овозможувајќи поедноставно"
+" пронаоѓање на податочни сетови од сличен контекст."
+
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
 msgstr "Новости"
@@ -700,7 +714,6 @@ msgstr "Каталог на податочни сетови"
 
 #: ckanext/datagovmk/templates/organization/snippets/helper.html:4
 #, fuzzy
-#| msgid "organizations"
 msgid "What are Organizations?"
 msgstr "Што се организации?"
 
@@ -710,9 +723,10 @@ msgid ""
 " publish collections of datasets in an open data format, organized in "
 "special data sets on the portal. "
 msgstr ""
-" Организации се органи и институции од јавниот сектор кои податоците кои ги"
-" создаваат во остварувањето на своите надлежности ги објавуваат во формат "
-" на отворени податоци организирани во посебни податочни сетови на порталот."
+" Организации се органи и институции од јавниот сектор кои податоците кои "
+"ги создаваат во остварувањето на своите надлежности ги објавуваат во "
+"формат  на отворени податоци организирани во посебни податочни сетови на "
+"порталот."
 
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
