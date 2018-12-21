@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 14:15+0100\n"
+"POT-Creation-Date: 2018-12-21 19:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -554,6 +554,34 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:4
+msgid "What are Experiences?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:8
+msgid ""
+"Open data may be used for different analysis and research purposes. This "
+"section outlines the analysis and research findings made using the datasets "
+"available on the portal."
+msgstr ""
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:13
+#, python-format
+msgid ""
+" Sysadmins can manage Experience Admins from the <a href='%(url)s'>Experience"
+" configuration page</a>."
+msgstr ""
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:8
+msgid ""
+" Groups are sets of data on a specific subject, enabling simple search of "
+"data sets with similar context. "
+msgstr ""
+
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
 msgstr ""
@@ -651,6 +679,17 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/organization/read.html:9
 msgid "Datasets catalog"
+msgstr ""
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:4
+msgid "What are Organizations?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:8
+msgid ""
+" Organizations are bodies and public institutions that create, manage and "
+"publish collections of datasets in an open data format, organized in special "
+"data sets on the portal. "
 msgstr ""
 
 #: ckanext/datagovmk/templates/package/read.html:19
@@ -829,8 +868,37 @@ msgstr ""
 msgid "Downloads"
 msgstr ""
 
+#: ckanext/datagovmk/templates/report/snippets/helper.html:4
+msgid "What are Reports?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/report/snippets/helper.html:8
+msgid ""
+" Reports are used to check the validity of the links, as well as to identify "
+"unavailable links across a portal. This section also previews the quality of "
+"the open data across organizations, groups and data sets. "
+msgstr ""
+
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:4
+msgid "What are Showcases?"
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:8
+msgid ""
+"Different web and mobile applications may be developed based on the open data"
+" available. This section showcases the applications developed based on the "
+"published data sets."
+msgstr ""
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:12
+#, python-format
+msgid ""
+"Sysadmins can manage Showcase Admins from the <a href='%(url)s'>Showcase "
+"configuration page</a>."
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:32

@@ -1,0 +1,18 @@
+<div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+        <i class="fa fa-info-circle icon-info-sign"></i>
+        {{ _('What are Showcases?') }}
+    </h2>
+    <div class="module-content">
+        <p>
+            {% trans %}Different web and mobile applications may be developed based on the open data available. This section showcases the applications developed based on the published data sets.{% endtrans %}
+        </p>
+        {% if h.check_access('ckanext_showcase_admin_add') %}
+        <p>
+            {% trans url=h.url_for(controller='ckanext.showcase.controller:ShowcaseController',
+            action='manage_showcase_admins') %}Sysadmins can manage Showcase Admins from the <a href='{{ url }}'>Showcase
+                configuration page</a>.{% endtrans %}
+        </p>
+        {% endif %}
+    </div>
+</div>

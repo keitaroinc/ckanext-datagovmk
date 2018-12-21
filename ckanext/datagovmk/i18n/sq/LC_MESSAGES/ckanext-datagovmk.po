@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-12-21 14:15+0100\n"
+"POT-Creation-Date: 2018-12-21 19:13+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -596,6 +596,42 @@ msgstr "Përshkrim"
 msgid "Submit"
 msgstr "Dërgo"
 
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:4
+msgid "What are Experiences?"
+msgstr "Çka janë hulumtimet?"
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:8
+msgid ""
+"Open data may be used for different analysis and research purposes. This "
+"section outlines the analysis and research findings made using the "
+"datasets available on the portal."
+msgstr ""
+"Të dhënat e hapura mund të përdoren për një gamë të gjerë analizash dhe "
+"hulumtimesh. Në këtë pjesë janë paraqitur analizat dhe hulumtimet të "
+"cilat janë të përgatitura në bazë të të dhënave të hapura të publikuara."
+
+#: ckanext/datagovmk/templates/experience/snippets/helper.html:13
+#, python-format
+msgid ""
+" Sysadmins can manage Experience Admins from the <a "
+"href='%(url)s'>Experience configuration page</a>."
+msgstr ""
+"Administratorët e sistemit mund t'i menaxhojnë administratorët e përvojës"
+" nga <a href='%(url)s'>faqja e konfigurimit të përvojës</a>."
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr "Çka paraqesin grupet?"
+
+#: ckanext/datagovmk/templates/group/snippets/helper.html:8
+msgid ""
+" Groups are sets of data on a specific subject, enabling simple search of"
+" data sets with similar context. "
+msgstr ""
+" Grupet janë përmbledhje e setit të të dhënave nga një temë e caktuar, "
+"duke mundësuar gjetjen më të thjeshtë të setit të të dhënave nga aspekti "
+"i ngjashëm."
+
 #: ckanext/datagovmk/templates/home/index.html:29
 msgid "News"
 msgstr "Lajme"
@@ -696,6 +732,22 @@ msgstr "katalogjet"
 #: ckanext/datagovmk/templates/organization/read.html:9
 msgid "Datasets catalog"
 msgstr "Katalogu i të dhënave"
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:4
+#, fuzzy
+msgid "What are Organizations?"
+msgstr "Çka janë organizatat?"
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:8
+msgid ""
+" Organizations are bodies and public institutions that create, manage and"
+" publish collections of datasets in an open data format, organized in "
+"special data sets on the portal. "
+msgstr ""
+" Organizatat janë organe dhe institucione të sektorit publik, të dhënat "
+"të  cilat i përpilojnë në realizimin e kompetencave të tyre i publikojnë "
+"në format  të të dhënave të hapura të organizuara në setin e veçantë të "
+"të dhënave."
 
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
@@ -879,9 +931,48 @@ msgstr "Pamjet"
 msgid "Downloads"
 msgstr "Shkarkimet"
 
+#: ckanext/datagovmk/templates/report/snippets/helper.html:4
+#, fuzzy
+msgid "What are Reports?"
+msgstr "Çka janë raportet?"
+
+#: ckanext/datagovmk/templates/report/snippets/helper.html:8
+msgid ""
+" Reports are used to check the validity of the links, as well as to "
+"identify unavailable links across a portal. This section also previews "
+"the quality of the open data across organizations, groups and data sets. "
+msgstr ""
+"Raportet përdoren për t’u verifikuar vlefshmëria e lidhjeve (validiteti i"
+" linqeve) si dhe linqet e padisponueshme në portal. Këtu ka qasje të "
+"pasqyrës së cilësisë së të dhënave të hapura të organizatave, grupeve dhe"
+" setit të të dhënave."
+
 #: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
 msgid "The form contains invalid entries:"
 msgstr "Formulari përmban shënime të pavlefshme:"
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:4
+#, fuzzy
+msgid "What are Showcases?"
+msgstr "Çka janë aplikacionet?"
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:8
+msgid ""
+"Different web and mobile applications may be developed based on the open "
+"data available. This section showcases the applications developed based "
+"on the published data sets."
+msgstr "Në bazë të të dhënave të hapura mund të përgatiten web aplikacione "
+"dhe celulare nga më të ndryshmet. Këtu shfaqen aplikacionet të cilat janë "
+"të përgatitura në bazë të të dhënave të hapura të publikuara."
+
+#: ckanext/datagovmk/templates/showcase/snippets/helper.html:12
+#, fuzzy, python-format
+msgid ""
+"Sysadmins can manage Showcase Admins from the <a href='%(url)s'>Showcase "
+"configuration page</a>."
+msgstr ""
+"Sysadminët mund t'i menaxhojnë administratorët e aplikacioneve nga  <a "
+"href='%(url)s'> Faqja e konfigurimit të aplikacioneve."
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:32
 msgid "Show More {facet_type}"
@@ -913,7 +1004,7 @@ msgstr "Aplikimet"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
-msgstr "Përvojë"
+msgstr "Hulumtime"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
@@ -926,7 +1017,7 @@ msgstr "Kërkesat e të dhënave"
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "Rreth portalit"
+msgstr "Për portalin"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1124,12 +1215,22 @@ msgstr ""
 #~ msgstr "Çelës"
 
 #~ msgid ""
-#~ "State institution representatives are required"
-#~ " to confirm their identity by "
-#~ "providing аn authorization for adding "
-#~ "data to the portal. Once the state"
-#~ " representative identity is confirmed, the"
-#~ " required user privileges are granted "
-#~ "by the System Administrator."
 #~ msgstr ""
+
+#~ msgid ""
+#~ "Datasets have been used to build "
+#~ "apps, websites and visualizations. They've "
+#~ "been featured in articles, and written"
+#~ " about in news reports and blog "
+#~ "posts. Showcases collect together the "
+#~ "best examples of datasets in use, "
+#~ "to provide further insight, ideas, and"
+#~ " inspiration."
+#~ msgstr ""
+#~ "Në bazë të të dhënave të hapura"
+#~ " mund të përgatiten web aplikacione "
+#~ "dhe celulare nga më të ndryshmet. "
+#~ "Këtu shfaqen aplikacionet të cilat janë"
+#~ " të përgatitura në bazë të të "
+#~ "dhënave të hapura të publikuara."
 
