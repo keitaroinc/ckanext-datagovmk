@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-23 12:20+0100\n"
+"POT-Creation-Date: 2018-12-21 15:58+0100\n"
 "PO-Revision-Date: 2018-06-09 00:36+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.3.4\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -698,6 +698,22 @@ msgstr "каталози"
 msgid "Datasets catalog"
 msgstr "Каталог на податочни сетови"
 
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:4
+#, fuzzy
+#| msgid "organizations"
+msgid "What are Organizations?"
+msgstr "Што се организации?"
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:8
+msgid ""
+" Organizations are bodies and public institutions that create, manage and"
+" publish collections of datasets in an open data format, organized in "
+"special data sets on the portal. "
+msgstr ""
+" Организации се органи и институции од јавниот сектор кои податоците кои ги"
+" создаваат во остварувањето на своите надлежности ги објавуваат во формат "
+" на отворени податоци организирани во посебни податочни сетови на порталот."
+
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
 msgstr "Поврзани податочни сетови"
@@ -884,6 +900,18 @@ msgstr "Преземања"
 msgid "The form contains invalid entries:"
 msgstr "Формата содржи невалидни записи:"
 
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:36
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:40
+msgid "There are no {facet_type} that match this search"
+msgstr ""
+
 #: ckanext/datagovmk/templates/snippets/footer_links.html:2
 msgid "Links"
 msgstr "Врски"
@@ -893,29 +921,29 @@ msgid "Datasets"
 msgstr "Податочни сетови"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
-#: ckanext/datagovmk/templates/user/edit_user_form.html:14
-msgid "About"
-msgstr "За"
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Органограм"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Showcases"
 msgstr "Апликации"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
 msgstr "Искуства"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
 msgstr "Извештаи"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Data Requests"
 msgstr "Барања за податочни сетови"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/user/edit_user_form.html:14
+msgid "About"
+msgstr "За"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1080,7 +1108,6 @@ msgid "Upload authorization/nomination"
 msgstr "Прикачете овластување/номинација"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
-#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Прикачено овластување/номинација"
 
@@ -1111,12 +1138,5 @@ msgstr ""
 #~ msgstr "Невалидна е-пошта на примачот, не постои тој одржувач"
 
 #~ msgid ""
-#~ "State institution representatives are required"
-#~ " to confirm their identity by "
-#~ "providing аn authorization for adding "
-#~ "data to the portal. Once the state"
-#~ " representative identity is confirmed, the"
-#~ " required user privileges are granted "
-#~ "by the System Administrator."
 #~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-23 12:20+0100\n"
+"POT-Creation-Date: 2018-12-21 15:58+0100\n"
 "PO-Revision-Date: 2018-08-13 14:16+0200\n"
 "Last-Translator: \n"
 "Language: sq\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.3.4\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -697,6 +697,23 @@ msgstr "katalogjet"
 msgid "Datasets catalog"
 msgstr "Katalogu i të dhënave"
 
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:4
+#, fuzzy
+#| msgid "organizations"
+msgid "What are Organizations?"
+msgstr "Çka janë organizatat?"
+
+#: ckanext/datagovmk/templates/organization/snippets/helper.html:8
+msgid ""
+" Organizations are bodies and public institutions that create, manage and"
+" publish collections of datasets in an open data format, organized in "
+"special data sets on the portal. "
+msgstr ""
+" Organizatat janë organe dhe institucione të sektorit publik, të dhënat të "
+" cilat i përpilojnë në realizimin e kompetencave të tyre i publikojnë në format "
+" të të dhënave të hapura të organizuara në setin e veçantë të të dhënave."
+
+
 #: ckanext/datagovmk/templates/package/read.html:19
 msgid "Related datasets"
 msgstr "Seti i të dhënave të ngjashme"
@@ -883,6 +900,18 @@ msgstr "Shkarkimet"
 msgid "The form contains invalid entries:"
 msgstr "Formulari përmban shënime të pavlefshme:"
 
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:36
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:40
+msgid "There are no {facet_type} that match this search"
+msgstr ""
+
 #: ckanext/datagovmk/templates/snippets/footer_links.html:2
 msgid "Links"
 msgstr "Lidhjet"
@@ -892,29 +921,29 @@ msgid "Datasets"
 msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
-#: ckanext/datagovmk/templates/user/edit_user_form.html:14
-msgid "About"
-msgstr "Për"
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Organogram"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Showcases"
 msgstr "Aplikimet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
 msgstr "Përvojë"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
 msgstr "Raportet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Data Requests"
 msgstr "Kërkesat e të dhënave"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/user/edit_user_form.html:14
+msgid "About"
+msgstr "Për"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1079,7 +1108,6 @@ msgid "Upload authorization/nomination"
 msgstr "Ngarko autorizim/nominim"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
-#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Autorizimi i ngarkuar/emërimi"
 
@@ -1113,12 +1141,5 @@ msgstr ""
 #~ msgstr "Çelës"
 
 #~ msgid ""
-#~ "State institution representatives are required"
-#~ " to confirm their identity by "
-#~ "providing аn authorization for adding "
-#~ "data to the portal. Once the state"
-#~ " representative identity is confirmed, the"
-#~ " required user privileges are granted "
-#~ "by the System Administrator."
 #~ msgstr ""
 
