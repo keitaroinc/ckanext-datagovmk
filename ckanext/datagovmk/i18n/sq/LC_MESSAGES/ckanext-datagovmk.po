@@ -597,7 +597,6 @@ msgid "Submit"
 msgstr "Dërgo"
 
 #: ckanext/datagovmk/templates/experience/snippets/helper.html:4
-#, fuzzy
 msgid "What are Experiences?"
 msgstr "Çka janë hulumtimet?"
 
@@ -621,7 +620,6 @@ msgstr ""
 " nga <a href='%(url)s'>faqja e konfigurimit të përvojës</a>."
 
 #: ckanext/datagovmk/templates/group/snippets/helper.html:4
-#, fuzzy
 msgid "What are Groups?"
 msgstr "Çka paraqesin grupet?"
 
@@ -1006,7 +1004,7 @@ msgstr "Aplikimet"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
-msgstr "Përvojë"
+msgstr "Hulumtime"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"

@@ -598,7 +598,6 @@ msgid "Submit"
 msgstr "Испрати"
 
 #: ckanext/datagovmk/templates/experience/snippets/helper.html:4
-#, fuzzy
 msgid "What are Experiences?"
 msgstr "Што се истражувања?"
 
@@ -623,7 +622,6 @@ msgstr ""
 "истражувањe</a>."
 
 #: ckanext/datagovmk/templates/group/snippets/helper.html:4
-#, fuzzy
 msgid "What are Groups?"
 msgstr "Што претставуваат групи?"
 
@@ -737,7 +735,6 @@ msgid "Datasets catalog"
 msgstr "Каталог на податочни сетови"
 
 #: ckanext/datagovmk/templates/organization/snippets/helper.html:4
-#, fuzzy
 msgid "What are Organizations?"
 msgstr "Што се организации?"
 
@@ -935,7 +932,6 @@ msgid "Downloads"
 msgstr "Преземања"
 
 #: ckanext/datagovmk/templates/report/snippets/helper.html:4
-#, fuzzy
 msgid "What are Reports?"
 msgstr "Што се извештаи?"
 
@@ -955,7 +951,6 @@ msgid "The form contains invalid entries:"
 msgstr "Формата содржи невалидни записи:"
 
 #: ckanext/datagovmk/templates/showcase/snippets/helper.html:4
-#, fuzzy
 msgid "What are Showcases?"
 msgstr "Што се апликации?"
 
@@ -969,7 +964,6 @@ msgstr " Врз основа на отворените податоци може
 "основа на објавени отворени податоци."
 
 #: ckanext/datagovmk/templates/showcase/snippets/helper.html:12
-#, fuzzy, python-format
 msgid ""
 "Sysadmins can manage Showcase Admins from the <a href='%(url)s'>Showcase "
 "configuration page</a>."
@@ -1008,7 +1002,7 @@ msgstr "Апликации"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
-msgstr "Искуства"
+msgstr "Истражувања"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
