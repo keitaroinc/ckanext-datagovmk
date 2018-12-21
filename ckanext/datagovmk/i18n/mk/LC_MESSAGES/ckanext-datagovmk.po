@@ -1000,29 +1000,34 @@ msgid "Datasets"
 msgstr "Податочни сетови"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
+#: ckanext/datagovmk/templates/user/edit_user_form.html:14
+msgid "About"
+msgstr "За"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Органограм"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Showcases"
 msgstr "Апликации"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Experiences"
 msgstr "Искуства"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
 msgstr "Извештаи"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 msgid "Data Requests"
 msgstr "Барања за податочни сетови"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "За"
+msgstr "За Порталот"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1187,6 +1192,7 @@ msgid "Upload authorization/nomination"
 msgstr "Прикачете овластување/номинација"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
+#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Прикачено овластување/номинација"
 
@@ -1217,5 +1223,19 @@ msgstr ""
 #~ msgstr "Невалидна е-пошта на примачот, не постои тој одржувач"
 
 #~ msgid ""
+#~ "State institution representatives are required"
+#~ " to confirm their identity by "
+#~ "providing аn authorization for adding "
+#~ "data to the portal. Once the state"
+#~ " representative identity is confirmed, the"
+#~ " required user privileges are granted "
+#~ "by the System Administrator."
 #~ msgstr ""
 
+#: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
+msgid "The form contains invalid entries:"
+msgstr "Формата содржи невалидни записи:"
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+msgstr ""

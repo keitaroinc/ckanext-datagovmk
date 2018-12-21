@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ckanext/datagovmk/actions.py:141
 msgid "Missing dataset id"
@@ -999,29 +999,34 @@ msgid "Datasets"
 msgstr "Seti i të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
+#: ckanext/datagovmk/templates/user/edit_user_form.html:14
+msgid "About"
+msgstr "Për"
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr "Organogram"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Showcases"
 msgstr "Aplikimet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Experiences"
 msgstr "Përvojë"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Reports"
 msgstr "Raportet"
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 msgid "Data Requests"
 msgstr "Kërkesat e të dhënave"
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:10
 #: ckanext/datagovmk/templates/user/edit_user_form.html:14
 msgid "About"
-msgstr "Për"
+msgstr "Rreth portalit"
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
@@ -1186,6 +1191,7 @@ msgid "Upload authorization/nomination"
 msgstr "Ngarko autorizim/nominim"
 
 #: ckanext/datagovmk/templates/user/new_user_form.html:20
+#| msgid "Uploaded authority file"
 msgid "Uploaded authorization/nomination"
 msgstr "Autorizimi i ngarkuar/emërimi"
 
@@ -1219,5 +1225,20 @@ msgstr ""
 #~ msgstr "Çelës"
 
 #~ msgid ""
+#~ "State institution representatives are required"
+#~ " to confirm their identity by "
+#~ "providing аn authorization for adding "
+#~ "data to the portal. Once the state"
+#~ " representative identity is confirmed, the"
+#~ " required user privileges are granted "
+#~ "by the System Administrator."
 #~ msgstr ""
+
+#: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
+msgid "The form contains invalid entries:"
+msgstr "Formulari përmban shënime të pavlefshme:"
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+msgstr ""
 

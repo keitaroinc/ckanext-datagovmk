@@ -1124,3 +1124,10 @@ msgid ""
 " enter a new password."
 msgstr ""
 
+#: ckanext/datagovmk/templates/scheming/snippets/errors.html:6
+msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+
