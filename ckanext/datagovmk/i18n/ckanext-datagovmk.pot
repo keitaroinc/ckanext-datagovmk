@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-datagovmk 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-11-23 12:20+0100\n"
+"POT-Creation-Date: 2018-12-21 14:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -833,6 +833,18 @@ msgstr ""
 msgid "The form contains invalid entries:"
 msgstr ""
 
+#: ckanext/datagovmk/templates/snippets/facet_list.html:32
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:36
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/facet_list.html:40
+msgid "There are no {facet_type} that match this search"
+msgstr ""
+
 #: ckanext/datagovmk/templates/snippets/footer_links.html:2
 msgid "Links"
 msgstr ""
@@ -842,28 +854,28 @@ msgid "Datasets"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/main_navigation.html:5
-#: ckanext/datagovmk/templates/user/edit_user_form.html:14
-msgid "About"
-msgstr ""
-
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Organogram"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:6
 msgid "Showcases"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:7
 msgid "Experiences"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:8
 msgid "Reports"
 msgstr ""
 
-#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:9
 msgid "Data Requests"
+msgstr ""
+
+#: ckanext/datagovmk/templates/snippets/main_navigation.html:10
+#: ckanext/datagovmk/templates/user/edit_user_form.html:14
+msgid "About"
 msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
