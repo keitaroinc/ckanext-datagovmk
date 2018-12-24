@@ -77,7 +77,8 @@ def init_db():
         subprocess.check_output(qa_command, stderr=subprocess.STDOUT)
         subprocess.check_output(harvest_command, stderr=subprocess.STDOUT)
         subprocess.check_output(analytics_command, stderr=subprocess.STDOUT)
-        subprocess.check_output(validation_command, stderr=subprocess.STDOUT)
+        # Disable on restart, enable on first run to init the db
+        # subprocess.check_output(validation_command, stderr=subprocess.STDOUT)
         subprocess.check_output(issues_command, stderr=subprocess.STDOUT)
         subprocess.check_output(datagovmk_command, stderr=subprocess.STDOUT)
 
