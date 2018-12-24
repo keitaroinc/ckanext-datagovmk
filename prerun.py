@@ -63,7 +63,8 @@ def init_db():
     qa_command = ['paster', '--plugin=ckanext-qa', 'qa', 'init', '-c', ckan_ini]
     harvest_command = ['paster', '--plugin=ckanext-harvest', 'harvester', 'initdb', '-c', ckan_ini]
     analytics_command = ['paster', '--plugin=ckanext-googleanalytics', 'initdb', '-c', ckan_ini]
-    validation_command = ['paster', '--plugin=ckanext-validation', 'validation', 'init-db', '-c', ckan_ini]
+    # Disabled for restart. Enable if using on first run, to init the db
+    # validation_command = ['paster', '--plugin=ckanext-validation', 'validation', 'init-db', '-c', ckan_ini]
     issues_command = ['paster', '--plugin=ckanext-issues', 'issues', 'init_db', '-c', ckan_ini]
     datagovmk_command = ['paster', '--plugin=ckanext-datagovmk', 'initdb', '-c', ckan_ini]
 
