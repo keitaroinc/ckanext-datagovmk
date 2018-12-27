@@ -18,7 +18,7 @@ def get_activation_link(user):
     :type user: dict
     :returns: activation link
     :rtype: str
-    """ 
+    """
     controller_path = 'ckanext.datagovmk.controller:DatagovmkUserController'
     return h.url_for(controller=controller_path,
                      action='perform_activation',
@@ -32,7 +32,7 @@ def request_activation(user):
     :param user: the user for whom an activation link should be requested
     :type user: dict
     """
-    
+
     create_activation_key(user)
     site_title = config.get('ckan.site_title')
     site_url = config.get('ckan.site_url')
@@ -48,7 +48,7 @@ def request_activation(user):
     })
     subject = subject.split('\n')[0]
 
-    mailer.mail_user(user, subject, body)
+    mailer.mail_recipient(user.name, user.email, subject, body, headers={})
 
 
 def verify_activation_link(user, key):
