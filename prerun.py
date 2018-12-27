@@ -133,10 +133,12 @@ def run_background_jobs():
     print '[prerun] Starting background jobs - start'
     archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
     archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
+    validator_default_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'default', '-c', ckan_ini]
 
     # run in background
     subprocess.Popen(archiver_bulk_command)
     subprocess.Popen(archiver_priority_command)
+    subprocess.Popen(validator_default_command)
     print '[prerun] Starting background jobs - finish'
 
 if __name__ == '__main__':
