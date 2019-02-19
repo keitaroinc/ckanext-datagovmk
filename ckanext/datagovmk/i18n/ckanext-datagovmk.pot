@@ -296,7 +296,7 @@ msgid "Address"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:21
-msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
+msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of North Macedonia"
 msgstr ""
 
 #: ckanext/datagovmk/templates/footer.html:23
