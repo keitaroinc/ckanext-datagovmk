@@ -13,12 +13,13 @@
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-5">
                 <ul class="list-inline list-logos">
-                  <li><a class="mioa-logo" href="http://www.mio.gov.mk"><img class="img-responsive" src="{{ h.url_for_static('/base/images/mioa-logo-mk.png') }}" alt="logo"></a></li>
+                  {% set mioa_logo = h.url_for_static('/base/images/mioa-logo-' + h.lang() + '.png') %}
+                  <li><a class="mioa-logo" href="http://www.mio.gov.mk"><img class="img-responsive" src="{{ mioa_logo }}" alt="logo"></a></li>
                 </ul>
                 <dl>
                   <dt>{{ _('Address') }}</dt>
                   <dd>
-                      <address>{{ _('Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia') }}</address>
+                      <address>{{ _('Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of North Macedonia') }}</address>
                   </dd>
                   <dt>{{ _('E-mail') }}</dt>
                   <dd><a href="mailto:info@otvorenipodatoci.gov.mk">{{ _('info@otvorenipodatoci.gov.mk') }}</a></dd>

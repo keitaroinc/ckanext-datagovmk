@@ -321,8 +321,8 @@ msgid "Address"
 msgstr "Adresa"
 
 #: ckanext/datagovmk/templates/footer.html:21
-msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of Macedonia"
-msgstr "Bulevardi. Shën Kirili dhe Metodi nr.54 1000 Shkup, Republika e Maqedonisë"
+msgid "Blvd. St. Cyril and Methodius No.54 1000 Skopje, Republic of North Macedonia"
+msgstr "Bulevardi. Shën Kirili dhe Metodi nr.54 1000 Shkup, Republika e Maqedonisë së Veriut"
 
 #: ckanext/datagovmk/templates/footer.html:23
 #: ckanext/datagovmk/templates/footer.html:65
