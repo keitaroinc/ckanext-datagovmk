@@ -83,46 +83,6 @@ class DownloadController(PackageController):
     """Overrides CKAN's PackageController to add count for the resource downloads.
     """
 
-    def resource_download(self, id, resource_id, filename=None):
-        """Overrides CKAN's ``resource_download`` action. Adds counting of the
-        number of downloads per resource and provides a direct download by downloading
-        an uploaded file directly
-
-        :param id: dataset id
-        :type id: string
-
-        :param resource_id: resource id
-        :type resource_id: string
-        """
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj}
-
-        try:
-            rsc = get_action('resource_show')(context, {'id': resource_id})
-            get_action('package_show')(context, {'id': id})
-        except (NotFound, NotAuthorized):
-            abort(404, toolkit._('Resource not found'))
-
-        if rsc.get('url_type') == 'upload':
-            upload = uploader.get_resource_uploader(rsc)
-            filepath = upload.get_path(rsc['id'])
-            fileapp = paste.fileapp.FileApp(filepath)
-            try:
-                status, headers, app_iter = request.call_application(fileapp)
-            except OSError:
-                abort(404, toolkit._('Resource data not found'))
-            response.headers.update(dict(headers))
-            content_type, content_enc = mimetypes.guess_type(
-                rsc.get('url', ''))
-            if content_type:
-                response.headers['Content-Type'] = content_type
-            response.content_disposition = 'attachment; filename="%s"' % filename
-            response.status = status
-            return app_iter
-        elif 'url' not in rsc:
-            abort(404, toolkit._('No download is available'))
-        h.redirect_to(rsc['url'])
-
     def download_zip(self, zip_id):
         if not zip_id:
             abort(404, toolkit._('Resource data not found'))
@@ -142,12 +102,12 @@ class DownloadController(PackageController):
         response.headers['Content-Type'] = 'application/octet-stream'
         response.content_disposition = 'attachment; filename=' + package_name
         os.remove(file_path)
-    
+
     def search(self):
         from ckan.lib.search import SearchError, SearchQueryError
 
         package_type = self._guess_package_type()
-        
+
         extra_vars={'dataset_type': package_type}
 
         try:
@@ -295,12 +255,12 @@ class DownloadController(PackageController):
                 start_date = extract_date(request.params.get('_start_date'))
                 if start_date:
                     extra_vars['start_date'] = request.params.get('_start_date')
-            
+
             if request.params.get('_end_date'):
                 end_date = extract_date(request.params.get('_end_date'))
                 if end_date:
                     extra_vars['end_date'] = request.params.get('_end_date')
-            
+
             if start_date or end_date:
                 if not start_date:
                     start_date = datetime(year=1900, month=1, day=1)
@@ -309,10 +269,10 @@ class DownloadController(PackageController):
                 else:
                     end_date = datetime_to_utc(end_date)
                     end_date = end_date.replace(hour=23, minute=59,second=59, microsecond=999999)
-                
+
                 fq = fq + ' +metadata_modified:[%s TO %s]' % (datetime_to_utc(start_date).strftime('%Y-%m-%dT%H:%M:%SZ'),
                                                               datetime_to_utc(end_date).strftime('%Y-%m-%dT%H:%M:%SZ'))
-            
+
             data_dict = {
                 'q': q,
                 'fq': fq.strip(),
@@ -1032,12 +992,12 @@ def extract_date(datestr):
             return _strptime('%m/%d/%Y' if m.group('sep') == '/' else '%m-%d-%Y', datestr)
         else:
             return _strptime('%d/%m/%Y' if m.group('sep') == '/' else '%d-%m-%Y', datestr)
-    
+
     if re.match(r'\d{4}-\d{2}-\d{2}', datestr):
         return _strptime('%Y-%m-%d', datestr)
-    
+
     return None
-    
+
 def _strptime(format_, datestr):
     try:
         return datetime.strptime(datestr, format_)
