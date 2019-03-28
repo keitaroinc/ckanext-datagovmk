@@ -167,6 +167,7 @@ def get_related_datasets(context, data_dict):
             'id': tag.get('id'),
             'include_datasets': True
         }
+
         tag_dict = get_action('tag_show')(data_dict=data_dict)
 
         tag_datasets = tag_dict.get('packages')
@@ -176,10 +177,15 @@ def get_related_datasets(context, data_dict):
             if tag_dataset_id != dataset.get('id') and \
                tag_dataset_id not in related_datasets_ids and \
                tag_dataset['type'] == 'dataset':
-                related_datasets.append(tag_dataset)
+                related_datasets.append(get_action('package_show')({'ignore_auth': True}, data_dict={'id': tag_dataset_id}))
                 related_datasets_ids.append(tag_dataset_id)
 
-    return related_datasets[:limit]
+    related_datasets = related_datasets[:limit]
+
+    for dataset in related_datasets:
+        dataset['title'] = h.translate_field(dataset, 'title')
+
+    return related_datasets
 
 
 @toolkit.side_effect_free
