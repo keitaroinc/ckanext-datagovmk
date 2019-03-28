@@ -184,6 +184,7 @@ def get_related_datasets(context, data_dict):
 
     for dataset in related_datasets:
         dataset['title'] = h.translate_field(dataset, 'title')
+        dataset['notes'] = h.translate_field(dataset, 'notes')
 
     return related_datasets
 
