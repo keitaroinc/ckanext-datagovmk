@@ -263,7 +263,8 @@ def safe_override(action):
     When overriding CKAN actions you must be aware of the extensions
     order and whether some other extension have already registered the action.
 
-    When decorated with this decorator, you can provide a chained implementation
+    When decorated with this decorator, you can provide a
+    ed implementation
     for the given action withour checking if there are prior extensions or just
     the CKAN core action.
 
