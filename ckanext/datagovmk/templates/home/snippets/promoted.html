@@ -7,8 +7,9 @@
     {% else %}
       <h1 class="page-heading">{{ _("Welcome to CKAN") }}</h1>
       <p>
-        {% set intro_text = h.get_config_option_show("intro", h.lang()) %}
-        {{ intro_text}}
+        {% trans %}This is a nice introductory paragraph about CKAN or the site
+        in general. We don't have any copy to go here yet but soon we will
+        {% endtrans %}
       </p>
     {% endif %}
   </header>
