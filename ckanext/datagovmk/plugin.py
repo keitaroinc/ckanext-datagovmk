@@ -121,9 +121,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'datagovmk_get_translated':
                 helpers.get_translated,
             'datagovmk_get_site_statistics':
-                helpers.get_site_statistics,
-            'get_config_option_show':
-                helpers.get_config_option_show
+                helpers.get_site_statistics
         }
 
     # IActions
@@ -169,12 +167,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         schema.update({
             'footer_links': validators,
-            'ckan.site_about_en': validators,
-            'ckan.site_about_mk': validators,
-            'ckan.site_about_sq': validators,
-            'ckan.site_intro_text_en': validators,
-            'ckan.site_intro_text_mk': validators,
-            'ckan.site_intro_text_sq': validators
         })
 
         return schema
