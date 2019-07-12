@@ -1,0 +1,4 @@
+{% block additional %}
+{% set about_text = h.get_config_option_show("about", h.lang()) %}
+{{ about_text }}
+{% endblock %}
