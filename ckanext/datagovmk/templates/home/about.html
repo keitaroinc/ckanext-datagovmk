@@ -1,0 +1,14 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% block primary %}
+  <article class="module">
+    <div class="module-content">
+      {% block about %}
+          <h1 class="page-heading">{{ _('About') }}</h1>
+          {% snippet 'home/snippets/about_text.html' %}
+      {% endblock %}
+    </div>
+  </article>
+{% endblock %}
