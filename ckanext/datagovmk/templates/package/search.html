@@ -17,8 +17,8 @@
     %}
     {% set sorting = [
         (_('Relevance'), 'score desc, metadata_modified desc'),
-        (_('Name Ascending'), 'title_string asc'),
-        (_('Name Descending'), 'title_string desc'),
+        (_('Name Ascending'), 'title_' + h.lang() + ' asc'),
+        (_('Name Descending'), 'title_' + h.lang() + ' desc'),
         (_('Last Modified'), 'metadata_modified desc'),
         (_('Organization Ascending'), 'organization asc'),
         (_('Organization Descending'), 'organization desc'),
