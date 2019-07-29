@@ -230,7 +230,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IPackageController
     def before_index(self, pkg_dict):
-        if pkg_dict['title_translated']:
+        if 'title_translated' in pkg_dict:
             titles = pkg_dict['title_translated']
             titles_json = json.loads(titles)
             pkg_dict['title_en'] = titles_json["en"].lower()
