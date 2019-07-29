@@ -230,11 +230,12 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IPackageController
     def before_index(self, pkg_dict):
-        titles = pkg_dict['title_translated']
-        titles_json = json.loads(titles)
-        pkg_dict['title_en'] = titles_json["en"].lower()
-        pkg_dict['title_mk'] = titles_json["mk"].lower()
-        pkg_dict['title_sq'] = titles_json["sq"].lower()
+        if pkg_dict['title_translated']:
+            titles = pkg_dict['title_translated']
+            titles_json = json.loads(titles)
+            pkg_dict['title_en'] = titles_json["en"].lower()
+            pkg_dict['title_mk'] = titles_json["mk"].lower()
+            pkg_dict['title_sq'] = titles_json["sq"].lower()
         stats = actions.get_package_stats(pkg_dict['id'])
         if stats:
             pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
