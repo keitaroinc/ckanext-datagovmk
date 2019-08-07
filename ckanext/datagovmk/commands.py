@@ -28,6 +28,9 @@ from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganiza
 from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
 from ckanext.datagovmk.helpers import get_most_active_organizations
 from ckan.model.meta import Session
+from ckan.controllers.admin import get_sysadmins
+from ckan.logic.action.get import organization_list as ckan_organization_list
+
 
 log = getLogger('ckanext.datagovmk')
 ValidationError = toolkit.ValidationError
@@ -246,7 +249,12 @@ class SortOrganizations(CkanCommand):
 
 def create_sort_organizations():
     
-    orgs = toolkit.get_action('organization_list')({}, {})
+    sysadmin = get_sysadmins()[0].name
+    context = {
+            'user': sysadmin,
+            'ignore_auth': True
+    }
+    orgs = ckan_organization_list(context, {})
     sort_org = []
 
     for org_name in orgs:
@@ -258,18 +266,20 @@ def create_sort_organizations():
             'include_users': False,
             'include_groups': False,
             'include_tags': False,
-            'include_followers': False,
+            'include_followers': False
         })
-    sort_org = {
-        'org_id': org['id'],
-        'title_mk': org['title_translated']['mk'],
-        'title_en': org['title_translated']['en'],
-        'title_sq': org['title_translated']['sq']
-    }
-    so = SortOrganizationsModel(**sort_org)
-    print(so)
-    so.save()
-    return so.as_dict()
+        if org.get('state') == 'active':
+            sort_org = {
+                'org_id': org.get('id', ''),
+                'title_mk': org.get('title_translated', {}).get('mk', ''),
+                'title_en': org.get('title_translated', {}).get('en', ''),
+                'title_sq': org.get('title_translated', {}).get('sq', '')
+            }
+        
+            so = SortOrganizationsModel(**sort_org)
+            so.save()
+
+    return
 
 class FetchMostActiveOrganizations(CkanCommand):
     ''' Fetches most active organizations. '''

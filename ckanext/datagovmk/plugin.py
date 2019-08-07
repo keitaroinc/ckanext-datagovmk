@@ -152,7 +152,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'resource_show': actions.resource_show,
             'organization_show': actions.organization_show,
             'group_show': actions.group_show,
-            'resource_delete': actions.resource_delete
+            'resource_delete': actions.resource_delete,
+            'organization_list': actions.organization_list,
+            'organization_delete': actions.organization_delete,
+            'organization_create': actions.organization_create,
+            'organization_update': actions.organization_update
         }
 
     # IAuthFunctions
