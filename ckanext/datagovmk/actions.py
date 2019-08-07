@@ -5,7 +5,7 @@ import zipfile
 import hashlib
 import subprocess
 import cgi
-
+import json
 from ckan.plugins import toolkit
 from ckan.controllers.admin import get_sysadmins
 from ckanext.datagovmk import helpers as h
@@ -16,6 +16,7 @@ from ckan.common import config
 from ckan.model import State as model_state
 from socket import error as socket_error
 import ckan.lib.mailer as mailer
+import ckan.authz as authz
 
 import ckan.logic as logic
 import ckan.plugins as plugins
@@ -29,6 +30,7 @@ from ckan.logic.action.create import package_create as _package_create
 from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
+from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
 from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
 from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
@@ -41,6 +43,8 @@ from ckan.logic.action.get import package_search as _package_search
 from ckan.logic.action.get import resource_show as _resource_show
 from ckan.logic.action.get import organization_show as _organization_show
 from ckan.logic.action.get import group_show as _group_show
+from ckan.logic.action.create import organization_create as ckan_organization_create
+from ckan.logic.action.update import organization_update as ckan_organization_update
 from ckan.logic import chained_action
 from ckanext.datagovmk.model.stats import increment_downloads
 
@@ -959,6 +963,7 @@ def resource_show(context, data_dict):
 @toolkit.side_effect_free
 def organization_show(context, data_dict):
     """ Override to translate title and description of the organization. """
+
     data = _organization_show(context, data_dict)
 
     data['display_name'] = h.translate_field(data, 'title')
@@ -1038,3 +1043,154 @@ def increment_downloads_for_resource(context, data_dict):
         traceback.print_exc()
 
     return 'success'
+
+def organization_list(context, data_dict):
+
+    q = data_dict.get('q', '')
+    page_size = int(data_dict.get('limit', 10000))
+    page = int(data_dict.get('page', 1))
+    sort = data_dict.get('sort', None)
+    if not sort:
+        sort = 'title_' + core_helpers.lang() + ' asc'
+
+    offset = (page - 1) * page_size
+
+    kwargs = {}
+
+    kwargs['q'] = q
+    kwargs['limit'] = page_size
+    kwargs['offset'] = offset
+    kwargs['order_by'] = sort
+
+    groups = []
+
+    groups = SortOrganizationsModel.get(**kwargs).all()
+    action = 'organization_show'
+    group_list = []
+    for group in groups:
+        data_dict['id'] = group.org_id
+        for key in ('include_extras', 'include_tags', 'include_users',
+                    'include_groups', 'include_followers'):
+            if key not in data_dict:
+                data_dict[key] = False
+
+        group_list.append(get_action(action)(context, data_dict))
+
+    return group_list
+
+
+def organization_delete(context, data_dict):
+    '''Delete a group.
+
+    You must be authorized to delete the group.
+
+    :param id: the name or id of the group
+    :type id: string
+
+    '''
+    from sqlalchemy import or_
+    is_org = True
+    model = context['model']
+    user = context['user']
+    id = get_or_bust(data_dict, 'id')
+
+    group = model.Group.get(id)
+    context['group'] = group
+    if group is None:
+        raise NotFound('Group was not found.')
+
+    revisioned_details = 'Group: %s' % group.name
+
+    if is_org:
+        check_access('organization_delete', context, data_dict)
+    else:
+        check_access('group_delete', context, data_dict)
+
+    # organization delete will not occure whilke all datasets for that org are
+    # not deleted
+    if is_org:
+        datasets = model.Session.query(model.Package) \
+                        .filter_by(owner_org=group.id) \
+                        .filter(model.Package.state != 'deleted') \
+                        .count()
+        if datasets:
+            if not authz.check_config_permission('ckan.auth.create_unowned_dataset'):
+                raise ValidationError(_('Organization cannot be deleted while it '
+                                      'still has datasets'))
+
+            pkg_table = model.package_table
+            # using Core SQLA instead of the ORM should be faster
+            model.Session.execute(
+                pkg_table.update().where(
+                    sqla.and_(pkg_table.c.owner_org == group.id,
+                              pkg_table.c.state != 'deleted')
+                ).values(owner_org=None)
+            )
+
+    rev = model.repo.new_revision()
+    rev.author = user
+    rev.message = _(u'REST API: Delete %s') % revisioned_details
+
+    # The group's Member objects are deleted
+    # (including hierarchy connections to parent and children groups)
+    for member in model.Session.query(model.Member).\
+            filter(or_(model.Member.table_id == id,
+                       model.Member.group_id == id)).\
+            filter(model.Member.state == 'active').all():
+        member.delete()
+
+    group.delete()
+
+    if is_org:
+        plugin_type = plugins.IOrganizationController
+    else:
+        plugin_type = plugins.IGroupController
+
+    for item in plugins.PluginImplementations(plugin_type):
+        item.delete(group)
+
+    model.repo.commit()
+
+    try:
+        filter = {'org_id': id }
+        SortOrganizationsModel.delete(filter)
+    except NotFound:
+        raise NotFound(_(u'Org sort'))
+    
+    return 'OK'
+
+def organization_create(context, data_dict):
+
+    org = ckan_organization_create(context, data_dict)
+
+    sort_org = {
+        'org_id': org.get('id', ''),
+        'title_mk': org.get('title_translated', {}).get('mk', ''),
+        'title_en': org.get('title_translated', {}).get('en', ''),
+        'title_sq': org.get('title_translated', {}).get('sq', '')
+    }   
+    so = SortOrganizationsModel(**sort_org)
+    so.save()
+
+    return org
+
+def organization_update(context, data_dict):
+    
+    org = ckan_organization_update(context, data_dict)
+    
+    try:
+        for extra in org.get('extras',[]):
+            if extra.get('key') == 'title_translated':
+                value = json.loads(extra.get('value'))
+                sort_org = {
+                    'org_id': org.get('id', ''),
+                    'title_mk': value.get('mk', ''),
+                    'title_en': value.get('en', ''),
+                    'title_sq': value.get('sq', '')
+                }   
+        filter = { 'org_id': org.get('id') }
+        SortOrganizationsModel.update(filter, sort_org)
+    except NotFound:
+        raise NotFound(_(u'Org sort'))
+    
+    return org

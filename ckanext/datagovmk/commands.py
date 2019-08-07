@@ -22,11 +22,18 @@ from ckanext.datagovmk.model.user_authority_dataset \
     import setup as setup_user_authority_dataset_table
 from ckanext.datagovmk.model.most_active_organizations \
     import setup as setup_most_active_organizations_table
+from ckanext.datagovmk.model.sort_organizations \
+    import setup as setup_sort_organizations_table
 from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganizations
+from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
 from ckanext.datagovmk.helpers import get_most_active_organizations
 from ckan.model.meta import Session
+from ckan.controllers.admin import get_sysadmins
+from ckan.logic.action.get import organization_list as ckan_organization_list
+
 
 log = getLogger('ckanext.datagovmk')
+ValidationError = toolkit.ValidationError
 
 BULK_SIZE = 5
 
@@ -223,9 +230,56 @@ class InitDB(CkanCommand):
         setup_user_authority_table()
         setup_user_authority_dataset_table()
         setup_most_active_organizations_table()
+        setup_sort_organizations_table()
 
         log.info('datagovmk DB tables initialized')
 
+
+class SortOrganizations(CkanCommand):
+    ''' Sorts organizations. '''
+
+    summary = __doc__.split('\n')[0]
+    usage = __doc__
+    max_args = 0
+    min_args = 0
+    
+    def command(self):
+            self._load_config()
+            create_sort_organizations()
+
+def create_sort_organizations():
+    
+    sysadmin = get_sysadmins()[0].name
+    context = {
+            'user': sysadmin,
+            'ignore_auth': True
+    }
+    orgs = ckan_organization_list(context, {})
+    sort_org = []
+
+    for org_name in orgs:
+        org = toolkit.get_action('organization_show')({'user': None}, {
+            'id': org_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': True,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False
+        })
+        if org.get('state') == 'active':
+            sort_org = {
+                'org_id': org.get('id', ''),
+                'title_mk': org.get('title_translated', {}).get('mk', ''),
+                'title_en': org.get('title_translated', {}).get('en', ''),
+                'title_sq': org.get('title_translated', {}).get('sq', '')
+            }
+        
+            so = SortOrganizationsModel(**sort_org)
+            so.save()
+
+    return
 
 class FetchMostActiveOrganizations(CkanCommand):
     ''' Fetches most active organizations. '''
@@ -312,3 +366,5 @@ def fetch_most_active_orgs():
         s.close()
 
     log.info('Successfully cached most active organizations.')
+
+
