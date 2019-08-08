@@ -164,6 +164,15 @@ To install ckanext-datagovmk:
 
     cp solr/schema.xml /opt/solr/server/solr/ckan/conf/schema.xml
 
+Create the database tables running:
+
+ paster --plugin=ckanext-datagovmk initdb -c ../path/to/ini/file
+
+Populate custom table using:
+
+ paster --plugin=ckanext-datagovmk sort_organizations -c ../path/to/ini/file
+
+Note: This command should be executed once.
 
 ---------------
 Config Settings
