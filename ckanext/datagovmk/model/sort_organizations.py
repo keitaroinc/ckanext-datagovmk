@@ -8,7 +8,7 @@ from ckan.model.meta import metadata, mapper, Session
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
 
-from sqlalchemy import types, ForeignKey, Column, Table, desc
+from sqlalchemy import types, ForeignKey, Column, Table, desc, or_
 
 
 __all__ = [
@@ -52,6 +52,7 @@ class SortOrganizations(DomainObject):
             )
 
         if q:
+            q = q.encode('utf-8')
             if current_lang == 'mk':
                 query = query.filter(
                     or_(cls.title_mk.contains(q), cls.title_mk.ilike(r"%{}%".format(q)))
