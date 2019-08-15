@@ -143,6 +143,11 @@ schema. In this case the version should be set to the next CKAN version number.
 
     <field name="indexed_ts" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
 
+	<!--extra package fields -->
+    <field name="title_en" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="title_mk" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="title_sq" type="string" indexed="true" stored="true" multiValued="false"/>
+
     <!-- Copy the title field into titleString, and treat as a string
          (rather than text type).  This allows us to sort on the titleString -->
     <field name="title_string" type="string" indexed="true" stored="false" />
@@ -191,5 +196,8 @@ schema. In this case the version should be set to the next CKAN version number.
 <copyField source="res_description" dest="text"/>
 <copyField source="maintainer" dest="text"/>
 <copyField source="author" dest="text"/>
+<copyField source="title_en" dest="text"/>
+<copyField source="title_mk" dest="text"/>
+<copyField source="title_sq" dest="text"/>
 
 </schema>
