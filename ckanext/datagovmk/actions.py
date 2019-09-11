@@ -1047,19 +1047,15 @@ def increment_downloads_for_resource(context, data_dict):
 def organization_list(context, data_dict):
 
     q = data_dict.get('q', '')
-    page_size = int(data_dict.get('limit', 10000))
-    page = int(data_dict.get('page', 1))
     sort = data_dict.get('sort', None)
     if not sort:
         sort = 'title_' + core_helpers.lang() + ' asc'
 
-    offset = (page - 1) * page_size
-
     kwargs = {}
 
     kwargs['q'] = q
-    kwargs['limit'] = page_size
-    kwargs['offset'] = offset
+    kwargs['limit'] = int(data_dict.get('limit', 1000))
+    kwargs['offset'] = int(data_dict.get('offset', 0))
     kwargs['order_by'] = sort
 
     groups = []
@@ -1156,7 +1152,7 @@ def organization_delete(context, data_dict):
         SortOrganizationsModel.delete(filter)
     except NotFound:
         raise NotFound(_(u'Org sort'))
-    
+
     return 'OK'
 
 def organization_create(context, data_dict):
@@ -1168,16 +1164,16 @@ def organization_create(context, data_dict):
         'title_mk': org.get('title_translated', {}).get('mk', ''),
         'title_en': org.get('title_translated', {}).get('en', ''),
         'title_sq': org.get('title_translated', {}).get('sq', '')
-    }   
+    }
     so = SortOrganizationsModel(**sort_org)
     so.save()
 
     return org
 
 def organization_update(context, data_dict):
-    
+
     org = ckan_organization_update(context, data_dict)
-    
+
     try:
         for extra in org.get('extras',[]):
             if extra.get('key') == 'title_translated':
@@ -1187,10 +1183,10 @@ def organization_update(context, data_dict):
                     'title_mk': value.get('mk', ''),
                     'title_en': value.get('en', ''),
                     'title_sq': value.get('sq', '')
-                }   
+                }
         filter = { 'org_id': org.get('id') }
         SortOrganizationsModel.update(filter, sort_org)
     except NotFound:
         raise NotFound(_(u'Org sort'))
-    
+
     return org
