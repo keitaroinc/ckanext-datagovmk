@@ -101,26 +101,30 @@ class CheckOutdatedDatasets(CkanCommand):
         frequency = dataset.get('frequency')
         if not frequency:
             return  # ignore, not scheduled for periodic updates
-
+        print("Frequency is: " + frequency)
         frequency = frequency.split('/')[-1]
-
+        print("Frequency formated is: "+ frequency)
         if frequency in IGNORE_PERIODICITY:
             return  # not scheduled by choice
 
         periodicity = PERIODICITY.get(frequency.upper())
+        print("Periodicity is: " + periodicity)
         if not periodicity:
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
             return  # we don't know how to handle this periodicity
 
 
         last_modified = self._get_last_modified(dataset)
+        print("Last modified is: " + last_modified)
         if not last_modified:
             return  # ignore this one
 
         now = datetime.now()
 
         diff = now - last_modified
+        print("Diff is: " + diff)
         if diff >= periodicity:
+            print("Mail should be sent! Diff >= periodicity")
             log.debug('Dataset %s needs to be updated.', dataset['id'])
             self.notify_dataset_outdated(dataset, last_modified)
             log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
