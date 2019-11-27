@@ -13,8 +13,8 @@ cd ckan
 echo "CKAN branch: ckan-2.8.1"
 git checkout ckan-2.8.1
 python setup.py develop
-pip install -r requirements.txt
-pip install -r dev-requirements.txt
+pip install -r requirements.txt --allow-all-external
+pip install -r dev-requirements.txt --allow-all-external
 cd -
 
 echo "Creating the PostgreSQL user and database..."
