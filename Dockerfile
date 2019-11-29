@@ -4,11 +4,12 @@ MAINTAINER Keitaro <info@keitaro.com>
 
 USER root
 
-RUN apk add --update-cache \
-  --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+RUN apk add --no-cache \
+  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
   --allow-untrusted \
   geos \
   geos-dev
+
 RUN apk add bash \
   g++ \
   gcc \
@@ -24,13 +25,17 @@ RUN apk add bash \
   python2-dev \
   openssl-dev \
   py-lxml
+ 
 
+RUN pip install --upgrade pip
 
 # Install our extension
 RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git#egg=ckanext-datagovmk" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
   # Install extensions
   # ckanext-spatial and related
+  # specified Shapely's version to fix bug for geos path & libraries
+  pip install --no-cache-dir Shapely==1.5.9 && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@dgm-stable#egg=ckanext-spatial" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@dgm-stable#egg=ckanext-report" && \
