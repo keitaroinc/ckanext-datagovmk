@@ -1,4 +1,5 @@
-FROM keitaro/ckan:2.8.1-v1
+# FROM keitaro/ckan:2.8.1-v1
+FROM keitaro/ckan:2.8.1-v2
 
 MAINTAINER Keitaro <info@keitaro.com>
 
@@ -11,6 +12,7 @@ RUN apk add --no-cache \
   geos-dev
 
 RUN apk add bash \
+  git \
   g++ \
   gcc \
   libffi-dev \
@@ -24,7 +26,8 @@ RUN apk add bash \
   pcre \
   python2-dev \
   openssl-dev \
-  py-lxml
+  py-lxml \
+  libmagic
  
 
 RUN pip install --upgrade pip
