@@ -1,33 +1,29 @@
-# FROM keitaro/ckan:2.8.1-v1
-FROM keitaro/ckan:2.8.1-v2
+FROM keitaro/ckan:2.8.2-bionic
 
 MAINTAINER Keitaro <info@keitaro.com>
 
 USER root
 
-RUN apk add --no-cache \
-  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
-  --allow-untrusted \
-  geos \
-  geos-dev
-
-RUN apk add bash \
+RUN apt-get update && apt-get install -y \
   git \
   g++ \
   gcc \
   libffi-dev \
-  libstdc++ \
+  libstdc++6 \
   libxml2 \
   libxml2-dev \
-  libxslt \
-  libxslt-dev \
+  libxslt1.1 \
+  libxslt1-dev \
   make \
   musl-dev \
-  pcre \
-  python2-dev \
-  openssl-dev \
-  py-lxml \
-  libmagic
+  libpcre3 \
+  python-dev \
+  # openssl-dev \
+  python-lxml \
+  libmagic1 \
+  libgeos-3.6.2 \
+  libgeos-dev \
+  python-shapely
  
 
 RUN pip install --upgrade pip
@@ -38,7 +34,7 @@ RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-dat
   # Install extensions
   # ckanext-spatial and related
   # specified Shapely's version to fix bug for geos path & libraries
-  pip install --no-cache-dir Shapely==1.5.9 && \
+  # pip install --no-cache-dir Shapely==1.5.4 && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@dgm-stable#egg=ckanext-spatial" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@dgm-stable#egg=ckanext-report" && \
