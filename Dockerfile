@@ -23,8 +23,10 @@ RUN apt-get update && apt-get install -y \
   libmagic1 \
   libgeos-3.6.2 \
   libgeos-dev \
-  python-shapely
- 
+  python-shapely 
+
+# Install the tzdata package with disable the prompt for enter the time zone
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata 
 
 RUN pip install --upgrade pip
 
@@ -142,6 +144,8 @@ ENV CKAN__PLUGINS envvars \
   issues \
   fluent \
   datarequests
+# Setting timezone to UTC
+ENV TZ=UTC
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
