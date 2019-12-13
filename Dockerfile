@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
   musl-dev \
   libpcre3 \
   python-dev \
-  # openssl-dev \
+  libssl-dev \
   python-lxml \
   libmagic1 \
   libgeos-3.6.2 \
@@ -31,7 +31,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN pip install --upgrade pip
 
 # Install our extension
-RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git#egg=ckanext-datagovmk" && \
+RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git@2.8.2-bionic#egg=ckanext-datagovmk" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
   # Install extensions
   # ckanext-spatial and related
