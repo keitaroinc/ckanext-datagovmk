@@ -111,7 +111,7 @@ class CheckOutdatedDatasets(CkanCommand):
         periodicity = PERIODICITY.get(frequency.upper())
         print("Periodicity is: " + periodicity)
         if not periodicity:
-            print("2")
+            print("Not periodicity")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
             return  # we don't know how to handle this periodicity
 
