@@ -90,6 +90,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 dataset = toolkit.get_action('package_show')(context, {'id': result['id']})
                 try:
                     process_dataset(dataset)
+                    break
                 except Exception as e:
                     log.debug('An error has occured while processing dataset. Error: %s', e)
             page += 1
@@ -100,14 +101,15 @@ class CheckOutdatedDatasets(CkanCommand):
     def _check_dataset_if_outdated(self, dataset):
         frequency = dataset.get('frequency')
         if not frequency:
+            print("Nema frequency!!!")
             return  # ignore, not scheduled for periodic updates
         print("Frequency is: " + frequency)
         frequency = frequency.split('/')[-1]
         print("Frequency formated is: "+ frequency)
         if frequency in IGNORE_PERIODICITY:
-            print("1")
+            print("frequency in ignore_periodicity")
             return  # not scheduled by choice
-
+        print("Pred periodicity calculation!!!")
         periodicity = PERIODICITY.get(frequency.upper())
         print("Periodicity is: " + periodicity)
         if not periodicity:
@@ -119,7 +121,7 @@ class CheckOutdatedDatasets(CkanCommand):
         last_modified = self._get_last_modified(dataset)
         print("Last modified is: " + last_modified)
         if not last_modified:
-            print("3")
+            print("Not in last modified")
             return  # ignore this one
 
         now = datetime.now()
