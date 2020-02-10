@@ -90,8 +90,10 @@ class CheckOutdatedDatasets(CkanCommand):
                 dataset = toolkit.get_action('package_show')(context, {'id': result['id']})
                 try:
                     process_dataset(dataset)
+                    print("Finished process_dataset !!!")
                     break
                 except Exception as e:
+                    print("Vo exception!!!")
                     print('An error has occured while processing dataset. Error: ' + e)
             page += 1
             if page*BULK_SIZE >= datasets['count']:
@@ -184,8 +186,10 @@ class CheckOutdatedDatasets(CkanCommand):
         for user in dataset_users:
             try:
                 self._send_notification(dataset_url, dataset_update_url, dataset_title, user)
+                print("Notification sent!!!")
             except Exception as e:
                 log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
+                print("In exception, cannot send email notif")
 
     def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
         subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
