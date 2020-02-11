@@ -112,6 +112,7 @@ class CheckOutdatedDatasets(CkanCommand):
             print("frequency in ignore_periodicity")
             return  # not scheduled by choice
         print("Pred periodicity calculation!!!")
+        print("Additional print for the code validity !")
         periodicity = PERIODICITY.get(frequency.upper())
         print("Periodicity is: " + periodicity)
         if not periodicity:
