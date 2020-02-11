@@ -4,7 +4,7 @@ import os
 import io
 import inspect
 import json
-
+import traceback
 from logging import getLogger
 from datetime import timedelta, datetime
 from dateutil import parser
@@ -94,7 +94,7 @@ class CheckOutdatedDatasets(CkanCommand):
                     break
                 except Exception as e:
                     print("Vo exception!!!")
-                    print(e)
+                    traceback.print_exc()
                     # print('An error has occured while processing dataset. Error: ' + e)
             page += 1
             if page*BULK_SIZE >= datasets['count']:
