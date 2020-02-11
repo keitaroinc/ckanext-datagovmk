@@ -94,7 +94,8 @@ class CheckOutdatedDatasets(CkanCommand):
                     break
                 except Exception as e:
                     print("Vo exception!!!")
-                    print('An error has occured while processing dataset. Error: ' + e)
+                    print(str(e))
+                    # print('An error has occured while processing dataset. Error: ' + e)
             page += 1
             if page*BULK_SIZE >= datasets['count']:
                 break
