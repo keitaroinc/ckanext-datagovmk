@@ -115,7 +115,8 @@ class CheckOutdatedDatasets(CkanCommand):
         print("Pred periodicity calculation!!!")
         print("Additional print for the code validity !")
         periodicity = PERIODICITY.get(frequency.upper())
-        print("Periodicity is: " + periodicity)
+        print("Periodicity is: ")
+        print(periodicity)
         if not periodicity:
             print("Not periodicity")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
@@ -123,7 +124,8 @@ class CheckOutdatedDatasets(CkanCommand):
 
 
         last_modified = self._get_last_modified(dataset)
-        print("Last modified is: " + last_modified)
+        print("Last modified is: ")
+        print(last_modified)
         if not last_modified:
             print("Not in last modified")
             return  # ignore this one
@@ -131,7 +133,8 @@ class CheckOutdatedDatasets(CkanCommand):
         now = datetime.now()
 
         diff = now - last_modified
-        print("Diff is: " + diff)
+        print("Diff is: ")
+        print(diff)
         if diff >= periodicity:
             print("Mail should be sent! Diff >= periodicity")
             log.debug('Dataset %s needs to be updated.', dataset['id'])
