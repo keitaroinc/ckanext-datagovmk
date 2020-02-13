@@ -90,10 +90,8 @@ class CheckOutdatedDatasets(CkanCommand):
                 dataset = toolkit.get_action('package_show')(context, {'id': result['id']})
                 try:
                     process_dataset(dataset)
-                    print("Finished process_dataset !!!")
                     break
                 except Exception as e:
-                    print("Vo exception!!!")
                     traceback.print_exc()
                     # print('An error has occured while processing dataset. Error: ' + e)
             page += 1
@@ -105,15 +103,11 @@ class CheckOutdatedDatasets(CkanCommand):
         frequency = dataset.get('frequency')
         if not frequency:
             return  # ignore, not scheduled for periodic updates
-        print("Frequency is: " + frequency)
         frequency = frequency.split('/')[-1]
         if frequency in IGNORE_PERIODICITY:
             return  # not scheduled by choice
         periodicity = PERIODICITY.get(frequency.upper())
-        print("Periodicity is: ")
-        print(periodicity)
         if not periodicity:
-            print("Not periodicity")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
             return  # we don't know how to handle this periodicity
 
@@ -127,11 +121,7 @@ class CheckOutdatedDatasets(CkanCommand):
         now = datetime.now()
 
         diff = now - last_modified
-        print("Diff is: ")
-        print(diff)
         if diff >= periodicity:
-            print("Mail should be sent! Diff >= periodicity")
-            print(dataset['id'])
             log.debug('Dataset %s needs to be updated.', dataset['id'])
             self.notify_dataset_outdated(dataset, last_modified)
             log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
@@ -145,7 +135,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 lm = resource.get('last_modified') or resource.get('created')
                 if lm:
                     last_modified.append(parser.parse(lm))
-
+            print(last_modified)
             return min(last_modified)
         return None
 
@@ -186,10 +176,8 @@ class CheckOutdatedDatasets(CkanCommand):
         for user in dataset_users:
             try:
                 self._send_notification(dataset_url, dataset_update_url, dataset_title, user)
-                print("Notification sent!!!")
             except Exception as e:
                 log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
-                print("In exception, cannot send email notif")
 
     def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
         subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
