@@ -136,7 +136,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 if lm:
                     last_modified.append(parser.parse(lm))
             print(last_modified)
-            return min(last_modified)
+            return max(last_modified)
         return None
 
     def _get_dataset_users(self, dataset):
