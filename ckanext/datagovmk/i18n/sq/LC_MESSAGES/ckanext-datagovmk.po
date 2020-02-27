@@ -976,15 +976,15 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:32
 msgid "Show More {facet_type}"
-msgstr ""
+msgstr "Shfaq më shumë {facet_type}"
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:36
 msgid "Show Only Popular {facet_type}"
-msgstr ""
+msgstr "Shfaq vetëm të popullarizuar {facet_type}"
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:40
 msgid "There are no {facet_type} that match this search"
-msgstr ""
+msgstr "Nuk u gjet kërkim {facet_type} që korrespondon me këtë kërkim"
 
 #: ckanext/datagovmk/templates/snippets/footer_links.html:2
 msgid "Links"

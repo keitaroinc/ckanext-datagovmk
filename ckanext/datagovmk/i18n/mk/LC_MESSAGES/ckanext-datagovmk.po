@@ -974,15 +974,15 @@ msgstr ""
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:32
 msgid "Show More {facet_type}"
-msgstr ""
+msgstr "Покажи повеќе {facet_type}"
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:36
 msgid "Show Only Popular {facet_type}"
-msgstr ""
+msgstr "Прикажи ги популарните {facet_type}"
 
 #: ckanext/datagovmk/templates/snippets/facet_list.html:40
 msgid "There are no {facet_type} that match this search"
-msgstr ""
+msgstr "Не се пронајдени {facet_type} кои се совпаѓаат со ова пребарување"
 
 #: ckanext/datagovmk/templates/snippets/footer_links.html:2
 msgid "Links"
