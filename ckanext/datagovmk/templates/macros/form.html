@@ -44,3 +44,29 @@ Example:
   </div>
 </div>
 {% endmacro %}
+
+{#
+Builds a list of errors for the current form.
+
+errors  - A dict of field/message pairs.
+type    - The alert-* class that should be applied (default: "error")
+classes - A list of classes to apply to the wrapper (default: [])
+
+Example:
+
+{% import 'macros/form.html' as form %}
+{{ form.errors_custom(error_summary, type="warning") }}
+
+#}
+{% macro errors_custom(errors={}, type="error", classes=[]) %}
+{% if errors %}
+<div class="error-explanation alert alert-{{ type }}{{ " " ~ classes | join(' ') }}">
+<p>{{ _('The form contains invalid entries:') }}</p>
+<ul>
+  {% for key, error in errors.items() %}
+  <li data-field-label="{{ key }}">{% if key and key != 'Password1' %}{{ key }}: {% endif %}{{ error }}</li>
+  {% endfor %}
+</ul>
+</div>
+{% endif %}
+{% endmacro %}
