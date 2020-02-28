@@ -1,42 +1,44 @@
-FROM keitaro/ckan:2.8.2-bionic
+# FROM keitaro/ckan:2.8.1-v1
+FROM keitaro/ckan:2.8.1-v2
 
 MAINTAINER Keitaro <info@keitaro.com>
 
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
+  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
+  --allow-untrusted \
+  geos \
+  geos-dev
+
+RUN apk add bash \
   git \
   g++ \
   gcc \
   libffi-dev \
-  libstdc++6 \
+  libstdc++ \
   libxml2 \
   libxml2-dev \
-  libxslt1.1 \
-  libxslt1-dev \
+  libxslt \
+  libxslt-dev \
   make \
   musl-dev \
-  libpcre3 \
-  python-dev \
-  libssl-dev \
-  python-lxml \
-  libmagic1 \
-  libgeos-3.6.2 \
-  libgeos-dev \
-  python-shapely 
-
-# Install the tzdata package with disable the prompt for enter the time zone
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata 
+  pcre \
+  python2-dev \
+  openssl-dev \
+  py-lxml \
+  libmagic
+ 
 
 RUN pip install --upgrade pip
 
 # Install our extension
-RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git@staging#egg=ckanext-datagovmk" && \
+RUN pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-datagovmk.git#egg=ckanext-datagovmk" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-datagovmk/requirements.txt" && \
   # Install extensions
   # ckanext-spatial and related
   # specified Shapely's version to fix bug for geos path & libraries
-  # pip install --no-cache-dir Shapely==1.5.4 && \
+  pip install --no-cache-dir Shapely==1.5.9 && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-spatial.git@dgm-stable#egg=ckanext-spatial" && \
   pip install --no-cache-dir -r "${APP_DIR}/src/ckanext-spatial/pip-requirements.txt" && \
   pip install --no-cache-dir -e "git+https://github.com/keitaroinc/ckanext-report.git@dgm-stable#egg=ckanext-report" && \
@@ -144,8 +146,6 @@ ENV CKAN__PLUGINS envvars \
   issues \
   fluent \
   datarequests
-# Setting timezone to UTC
-ENV TZ=UTC
 
 RUN mkdir -p /var/lib/ckan/default && chown -R ckan:ckan /var/lib/ckan/default
 VOLUME /var/lib/ckan/default
