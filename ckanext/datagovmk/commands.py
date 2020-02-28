@@ -100,14 +100,19 @@ class CheckOutdatedDatasets(CkanCommand):
 
 
     def _check_dataset_if_outdated(self, dataset):
+
         frequency = dataset.get('frequency')
         if not frequency:
             return  # ignore, not scheduled for periodic updates
+        print("Frequency is: " + frequency)
+
         frequency = frequency.split('/')[-1]
         if frequency in IGNORE_PERIODICITY:
+            print("Does it return here?! Frequency in ignore_periodicity")
             return  # not scheduled by choice
         periodicity = PERIODICITY.get(frequency.upper())
         if not periodicity:
+            print("Not periodicity return!")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
             return  # we don't know how to handle this periodicity
 
@@ -116,6 +121,7 @@ class CheckOutdatedDatasets(CkanCommand):
         print("Last modified is: ")
         print(last_modified)
         if not last_modified:
+            print("not last modified, return!")
             return  # ignore this one
 
         now = datetime.now()
