@@ -105,13 +105,10 @@ class CheckOutdatedDatasets(CkanCommand):
         print("Frequency is: " + frequency)
 
         frequency = frequency.split('/')[-1]
-        print("Frequency formated is: "+ frequency)
         if frequency in IGNORE_PERIODICITY:
             print("Does it return here?! Frequency in ignore_periodicity")
             return  # not scheduled by choice
-
         periodicity = PERIODICITY.get(frequency.upper())
-        print("Periodicity is: " + periodicity)
         if not periodicity:
             print("Not periodicity return!")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
@@ -119,7 +116,6 @@ class CheckOutdatedDatasets(CkanCommand):
 
 
         last_modified = self._get_last_modified(dataset)
-        print("Last modified is: " + last_modified)
         if not last_modified:
             print("not last modified, return!")
             return  # ignore this one
@@ -127,9 +123,7 @@ class CheckOutdatedDatasets(CkanCommand):
         now = datetime.now()
 
         diff = now - last_modified
-        print("Diff is: " + diff)
         if diff >= periodicity:
-            print("Mail should be sent! Diff >= periodicity")
             log.debug('Dataset %s needs to be updated.', dataset['id'])
             self.notify_dataset_outdated(dataset, last_modified)
             log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
@@ -144,7 +138,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 if lm:
                     last_modified.append(parser.parse(lm))
 
-            return min(last_modified)
+            return max(last_modified)
         return None
 
     def _get_dataset_users(self, dataset):
