@@ -16,6 +16,7 @@ import pytz
 from io import StringIO
 
 
+from ckan.common import config
 from paste.deploy.converters import asbool
 
 from ckan.controllers.package import PackageController, search_url, _encode_params
@@ -348,11 +349,8 @@ class ApiController(BaseController):
 
         '''
 
-        ckan_path = os.path.join(
-            os.path.dirname(__file__), '..', '..', '..', 'ckan', 'ckan'
-        )
-        source = os.path.abspath(os.path.join(ckan_path, 'public',
-                                 'base', 'i18n', '%s.js' % lang))
+        source = os.path.join(config.get('ckan.path'), 'ckan', 'public',
+                                 'base', 'i18n', '%s.js' % lang)
         toolkit.response.headers['Content-Type'] =\
             'application/json;charset=utf-8'
         if not os.path.exists(source):
