@@ -4,7 +4,7 @@ import os
 import io
 import inspect
 import json
-import traceback
+
 from logging import getLogger
 from datetime import timedelta, datetime
 from dateutil import parser
@@ -90,32 +90,34 @@ class CheckOutdatedDatasets(CkanCommand):
                 dataset = toolkit.get_action('package_show')(context, {'id': result['id']})
                 try:
                     process_dataset(dataset)
-                    break
                 except Exception as e:
-                    traceback.print_exc()
-                    # print('An error has occured while processing dataset. Error: ' + e)
+                    log.debug('An error has occured while processing dataset. Error: %s', e)
             page += 1
             if page*BULK_SIZE >= datasets['count']:
                 break
 
 
     def _check_dataset_if_outdated(self, dataset):
+
         frequency = dataset.get('frequency')
         if not frequency:
             return  # ignore, not scheduled for periodic updates
+        print("Frequency is: " + frequency)
+
         frequency = frequency.split('/')[-1]
         if frequency in IGNORE_PERIODICITY:
+            print("Does it return here?! Frequency in ignore_periodicity")
             return  # not scheduled by choice
         periodicity = PERIODICITY.get(frequency.upper())
         if not periodicity:
+            print("Not periodicity return!")
             log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
             return  # we don't know how to handle this periodicity
 
 
         last_modified = self._get_last_modified(dataset)
-        print("Last modified is: ")
-        print(last_modified)
         if not last_modified:
+            print("not last modified, return!")
             return  # ignore this one
 
         now = datetime.now()
@@ -135,7 +137,7 @@ class CheckOutdatedDatasets(CkanCommand):
                 lm = resource.get('last_modified') or resource.get('created')
                 if lm:
                     last_modified.append(parser.parse(lm))
-            print(last_modified)
+
             return max(last_modified)
         return None
 
