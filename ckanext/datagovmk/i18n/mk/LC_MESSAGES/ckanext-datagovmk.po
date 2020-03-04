@@ -1017,6 +1017,12 @@ msgstr "Барања за податочни сетови"
 msgid "About"
 msgstr "За Порталот"
 
+msgid "About the organization"
+msgstr "За организацијата"
+
+msgid "About the group"
+msgstr "За групата"
+
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
 msgstr "Од"

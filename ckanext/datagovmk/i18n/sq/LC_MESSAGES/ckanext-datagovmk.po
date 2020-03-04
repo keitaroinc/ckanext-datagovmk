@@ -1019,6 +1019,12 @@ msgstr "Kërkesat e të dhënave"
 msgid "About"
 msgstr "Për portalin"
 
+msgid "About the organization"
+msgstr "Rreth Organizatat"
+
+msgid "About the group"
+msgstr "Rreth grupet"
+
 #: ckanext/datagovmk/templates/snippets/search_form.html:14
 msgid "From"
 msgstr "Nga"
