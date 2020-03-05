@@ -349,8 +349,16 @@ class ApiController(BaseController):
 
         '''
 
-        source = os.path.join(config.get('ckan.path'), 'ckan', 'public',
-                                 'base', 'i18n', '%s.js' % lang)
+        ckan_path = config.get('ckan.path')
+        if ckan_path is None:
+            ckan_path = os.path.join(
+                os.path.dirname(__file__), '..', '..', '..', 'ckan', 'ckan'
+            )
+            source = os.path.abspath(os.path.join(ckan_path, 'public',
+                                    'base', 'i18n', '%s.js' % lang))
+        else:
+            source = os.path.join(config.get('ckan.path'), 'ckan', 'public',
+                                    'base', 'i18n', '%s.js' % lang)
         toolkit.response.headers['Content-Type'] =\
             'application/json;charset=utf-8'
         if not os.path.exists(source):
