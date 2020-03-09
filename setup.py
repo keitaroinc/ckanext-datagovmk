@@ -90,6 +90,7 @@ setup(
         initdb=ckanext.datagovmk.commands:InitDB
         fetch_most_active_orgs=ckanext.datagovmk.commands:FetchMostActiveOrganizations
         sort_organizations=ckanext.datagovmk.commands:SortOrganizations
+        sort_groups=ckanext.datagovmk.commands:SortGroups
     ''',
 
     # If you are changing from the default layout of your extension, you may
