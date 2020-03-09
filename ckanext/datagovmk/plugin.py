@@ -156,7 +156,11 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'organization_list': actions.organization_list,
             'organization_delete': actions.organization_delete,
             'organization_create': actions.organization_create,
-            'organization_update': actions.organization_update
+            'organization_update': actions.organization_update,
+            'group_list': actions.group_list,
+            'group_delete': actions.group_delete,
+            'group_create': actions.group_create,
+            'group_update': actions.group_update
         }
 
     # IAuthFunctions

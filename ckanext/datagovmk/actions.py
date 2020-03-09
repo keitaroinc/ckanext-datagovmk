@@ -17,6 +17,7 @@ from ckan.model import State as model_state
 from socket import error as socket_error
 import ckan.lib.mailer as mailer
 import ckan.authz as authz
+import sqlalchemy
 
 import ckan.logic as logic
 import ckan.plugins as plugins
@@ -31,6 +32,7 @@ from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
 from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
+from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
 from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
 from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
@@ -44,7 +46,10 @@ from ckan.logic.action.get import resource_show as _resource_show
 from ckan.logic.action.get import organization_show as _organization_show
 from ckan.logic.action.get import group_show as _group_show
 from ckan.logic.action.create import organization_create as ckan_organization_create
+from ckan.logic.action.create import group_create as _group_create
 from ckan.logic.action.update import organization_update as ckan_organization_update
+from ckan.logic.action.update import group_update as _group_update
+from ckan.logic.action.delete import group_delete as _group_delete
 from ckan.logic import chained_action
 from ckanext.datagovmk.model.stats import increment_downloads
 
@@ -1190,3 +1195,100 @@ def organization_update(context, data_dict):
         raise NotFound(_(u'Org sort'))
 
     return org
+
+def group_list(context, data_dict):
+
+    model = context['model']
+
+    q = data_dict.get('q', '')
+    limit = int(data_dict.get('limit', 1000))
+    offset = int(data_dict.get('offset', 0))
+    sort = data_dict.get('sort') or 'title_{0} asc'.format(core_helpers.lang())
+
+    sort_info = sort.split()
+
+    if sort_info[0] == 'package_count':
+
+        sort_model_field = sqlalchemy.func.count(SortGroupsModel.group_id)
+
+        query = model.Session.query(SortGroupsModel.group_id, sqlalchemy.func.count(SortGroupsModel.group_id)) \
+            .filter(model.Member.group_id == SortGroupsModel.group_id) \
+            .filter(model.Member.table_id == model.Package.id) \
+            .filter(model.Member.table_name == 'package') \
+            .filter(model.Package.state == 'active') \
+            .group_by(SortGroupsModel.group_id) \
+            .order_by(sqlalchemy.desc(sort_model_field)) \
+            .limit(limit) \
+            .offset(offset)
+
+        groups = query.all()
+    else:
+        kwargs = {}
+
+        kwargs['q'] = q
+        kwargs['limit'] = limit
+        kwargs['offset'] = offset
+        kwargs['order_by'] = sort
+
+        groups = SortGroupsModel.get(**kwargs).all()
+
+    group_list = []
+    for group in groups:
+        data_dict['id'] = group.group_id
+        for key in ('include_extras', 'include_tags', 'include_users',
+                    'include_groups', 'include_followers'):
+            if key not in data_dict:
+                data_dict[key] = False
+
+        group_list.append(get_action('group_show')(context, data_dict))
+
+    return group_list
+
+
+def group_delete(context, data_dict):
+
+    group = _group_delete(context, data_dict)
+
+    try:
+        filter = {'group_id': data_dict['id'] }
+        SortGroupsModel.delete(filter)
+    except NotFound:
+        raise NotFound(_(u'Group sort'))
+
+    return 'OK'
+
+def group_create(context, data_dict):
+
+    gr = _group_create(context, data_dict)
+
+    sort_gr = {
+        'group_id': gr.get('id', ''),
+        'title_mk': gr.get('title_translated', {}).get('mk', ''),
+        'title_en': gr.get('title_translated', {}).get('en', ''),
+        'title_sq': gr.get('title_translated', {}).get('sq', '')
+    }
+    sg = SortGroupsModel(**sort_gr)
+    sg.save()
+
+    return gr
+
+def group_update(context, data_dict):
+
+    gr = _group_update(context, data_dict)
+
+    try:
+        for extra in gr.get('extras',[]):
+            if extra.get('key') == 'title_translated':
+                value = json.loads(extra.get('value'))
+                sort_gr = {
+                    'group_id': gr.get('id', ''),
+                    'title_mk': value.get('mk', ''),
+                    'title_en': value.get('en', ''),
+                    'title_sq': value.get('sq', '')
+                }
+        filter = { 'group_id': gr.get('id') }
+        SortGroupsModel.update(filter, sort_gr)
+    except NotFound:
+        raise NotFound(_(u'Group sort'))
+
+    return gr

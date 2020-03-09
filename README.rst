@@ -168,11 +168,12 @@ Create the database tables running:
 
  paster --plugin=ckanext-datagovmk initdb -c ../path/to/ini/file
 
-Populate custom table using:
+Populate custom tables using:
 
  paster --plugin=ckanext-datagovmk sort_organizations -c ../path/to/ini/file
+ paster --plugin=ckanext-datagovmk sort_groups -c ../path/to/ini/file
 
-Note: This command should be executed once.
+Note: This commands should be executed once.
 
 ---------------
 Config Settings

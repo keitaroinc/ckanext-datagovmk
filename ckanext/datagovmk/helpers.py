@@ -101,10 +101,11 @@ def get_groups():
     '''
     data_dict = {
         'sort': 'package_count',
-        'all_fields': True
+        'all_fields': True,
+        'include_extras': True
     }
     groups = _get_action('group_list', {}, data_dict)
-    groups = [group for group in groups if group.get('package_count') > 0]
+    # groups = [group for group in groups if group.get('package_count') > 0]
 
     return groups
 

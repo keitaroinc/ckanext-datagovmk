@@ -24,12 +24,16 @@ from ckanext.datagovmk.model.most_active_organizations \
     import setup as setup_most_active_organizations_table
 from ckanext.datagovmk.model.sort_organizations \
     import setup as setup_sort_organizations_table
+from ckanext.datagovmk.model.sort_groups \
+    import setup as setup_sort_groups_table
 from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganizations
 from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
+from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
 from ckanext.datagovmk.helpers import get_most_active_organizations
 from ckan.model.meta import Session
 from ckan.controllers.admin import get_sysadmins
 from ckan.logic.action.get import organization_list as ckan_organization_list
+from ckan.logic.action.get import group_list as _group_list
 
 
 log = getLogger('ckanext.datagovmk')
@@ -234,6 +238,7 @@ class InitDB(CkanCommand):
         setup_user_authority_dataset_table()
         setup_most_active_organizations_table()
         setup_sort_organizations_table()
+        setup_sort_groups_table()
 
         log.info('datagovmk DB tables initialized')
 
@@ -281,6 +286,51 @@ def create_sort_organizations():
         
             so = SortOrganizationsModel(**sort_org)
             so.save()
+
+    return
+
+class SortGroups(CkanCommand):
+    ''' Sorts groups. '''
+
+    summary = __doc__.split('\n')[0]
+    usage = __doc__
+    max_args = 0
+    min_args = 0
+    
+    def command(self):
+            self._load_config()
+            create_sort_groups()
+
+def create_sort_groups():
+    
+    sysadmin = get_sysadmins()[0].name
+    context = {
+            'user': sysadmin,
+            'ignore_auth': True
+    }
+    groups = _group_list(context, {})
+
+    for group_name in groups:
+        gr = toolkit.get_action('group_show')({'user': None}, {
+            'id': group_name,
+            'include_datasets': True,
+            'include_dataset_count': False,
+            'include_extras': True,
+            'include_users': False,
+            'include_groups': False,
+            'include_tags': False,
+            'include_followers': False
+        })
+        if gr.get('state') == 'active':
+            sort_gr = {
+                'group_id': gr.get('id', ''),
+                'title_mk': gr.get('title_translated', {}).get('mk', ''),
+                'title_en': gr.get('title_translated', {}).get('en', ''),
+                'title_sq': gr.get('title_translated', {}).get('sq', '')
+            }
+        
+            sg = SortGroupsModel(**sort_gr)
+            sg.save()
 
     return
 
