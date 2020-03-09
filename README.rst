@@ -171,6 +171,7 @@ Create the database tables running:
 Populate custom tables using:
 
  paster --plugin=ckanext-datagovmk sort_organizations -c ../path/to/ini/file
+
  paster --plugin=ckanext-datagovmk sort_groups -c ../path/to/ini/file
 
 Note: This commands should be executed once.
