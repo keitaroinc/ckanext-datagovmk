@@ -337,10 +337,17 @@ def add_spatial_data(package_action, context, data_dict):
         log.warning(e)
 
     dataset_type = data_dict.get('type')
-
     if package_action.func_name == 'package_create' and \
        dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
+
+    if package_action.func_name == 'package_create' and \
+        data_dict.get('add_dataset_agreement') is not None and \
+        dataset_type == 'dataset' and \
+        data_dict.get('authority_file_url') == '':
+        raise ValidationError({
+            _('Add dataset agreement file'): [_('Missing file')]
+        })
 
     if package_action.func_name == 'package_create' and \
        data_dict.get('add_dataset_agreement') is None and \

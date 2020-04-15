@@ -27,12 +27,18 @@ msgstr "Недостасува ИД на податочен сет"
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:51
 #: ckanext/datagovmk/templates/package/snippets/package_form.html:59
 msgid "Add dataset agreement"
-msgstr "Согланост за додавање на податочен сет"
+msgstr "Согласност за додавање на податочен сет"
+
+msgid "Add dataset agreement file"
+msgstr "Согласност за додавање на датотека за овластување на податочен сет"
 
 #: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:704
 #: ckanext/datagovmk/actions.py:735 ckanext/datagovmk/actions.py:780
 msgid "Missing value"
 msgstr "Недостасува вредност"
+
+msgid "Missing file"
+msgstr "Недостасува датотека"
 
 #: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
 #: ckanext/datagovmk/actions.py:563 ckanext/datagovmk/actions.py:572

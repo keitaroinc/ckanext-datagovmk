@@ -28,9 +28,16 @@ msgstr ""
 msgid "Add dataset agreement"
 msgstr ""
 
+msgid "Add dataset agreement file"
+msgstr ""
+
+
 #: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:704
 #: ckanext/datagovmk/actions.py:735 ckanext/datagovmk/actions.py:780
 msgid "Missing value"
+msgstr ""
+
+msgid "Missing file"
 msgstr ""
 
 #: ckanext/datagovmk/actions.py:430 ckanext/datagovmk/actions.py:436
