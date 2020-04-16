@@ -29,6 +29,13 @@ msgstr "ID e setit të të dhënave mungon"
 msgid "Add dataset agreement"
 msgstr "Shto marrëveshjen e setit të të dhënave"
 
+msgid "Add dataset agreement file"
+msgstr "Dakordim për të shtuar një fajl për të autorizuar setin e të dhënave"
+
+msgid "Missing file"
+msgstr "Mungon fajli"
+
+
 #: ckanext/datagovmk/actions.py:333 ckanext/datagovmk/actions.py:704
 #: ckanext/datagovmk/actions.py:735 ckanext/datagovmk/actions.py:780
 msgid "Missing value"
