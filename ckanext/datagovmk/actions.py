@@ -421,7 +421,9 @@ def resource_create(context, data_dict):
     '''Overrides CKAN's ``resource_create`` action. Calculates checksum of
     the file and if file exists it will notify the user.
     '''
-
+    print("Resource create start! ")
+    print(context)
+    print(data_dict)
     model = context['model']
 
     package_id = get_or_bust(data_dict, 'package_id')
@@ -533,6 +535,8 @@ def resource_update(context, data_dict):
     :rtype: string
 
     '''
+    print("Dict on start on resource_update!!!")
+    print(data_dict)
     model = context['model']
     user = context['user']
     id = get_or_bust(data_dict, "id")
@@ -619,6 +623,8 @@ def resource_update(context, data_dict):
     model.repo.commit()
 
     resource = get_action('resource_show')(context, {'id': id})
+    resource['archived'] = True
+
 
     if old_resource_format != resource['format']:
         get_action('resource_create_default_resource_views')(
@@ -636,6 +642,11 @@ def resource_update(context, data_dict):
         log.error(e)
         log.exception(e)
 
+    # TODO: create the dict, extract info from existing !!! 
+    #       so it doesn't give error 
+    new_res = resource_create(context, data_dict)
+    print new_res
+    print resource
     return resource
 
 

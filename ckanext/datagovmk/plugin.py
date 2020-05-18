@@ -132,7 +132,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         package_create = get_action('package_create')
         package_update = get_action('package_update')
-        #resource_delete = get_action('resource_delete')
+        resource_delete = get_action('resource_delete')
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
@@ -250,6 +250,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             pkg_dict['extras_total_downloads'] = str(stats.get('total_downloads') or '0').rjust(24, '0')
 
         populate_location_name_from_spatial_uri(pkg_dict)
+
         return pkg_dict
 
     def before_view(self, pkg_dict):
