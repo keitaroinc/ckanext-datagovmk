@@ -4128,7 +4128,7 @@ msgstr "Електронска пошта на одржувач"
 
 #: ckan/templates/package/snippets/resource_edit_form.html:12
 msgid "Update Resource"
-msgstr "Ажурирајње на ресурс"
+msgstr "Ажурирање на ресурс"
 
 #: ckan/templates/package/snippets/resource_form.html:26
 msgid "Data"
