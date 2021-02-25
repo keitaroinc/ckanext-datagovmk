@@ -337,14 +337,24 @@ def add_spatial_data(package_action, context, data_dict):
         log.warning(e)
 
     dataset_type = data_dict.get('type')
+
+    # Get user authority to later on check if there is one,
+    # do not ask the user to upload new authority
+    # each time when creating dataset
+    user_authority = \
+        UserAuthority.get_last_authority_for_user(authority_type='general',
+                                                  user_id=context['auth_user_obj'].id)
+
     if package_action.func_name == 'package_create' and \
        dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
 
+    # If user has uploaded general authority file do not ask for
+    # additional authority file on each dataset create for the current user
     if package_action.func_name == 'package_create' and \
         data_dict.get('add_dataset_agreement') is not None and \
         dataset_type == 'dataset' and \
-        data_dict.get('authority_file_url') == '':
+        data_dict.get('authority_file_url') == '' and user_authority is None:
         raise ValidationError({
             _('Add dataset agreement file'): [_('Missing file')]
         })
@@ -637,7 +647,6 @@ def resource_update(context, data_dict):
         log.exception(e)
 
     return resource
-
 
 @chained_action
 def resource_delete(action, context, data_dict):
