@@ -37,7 +37,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   {% snippet 'snippets/upload_authority.html', data=data, errors=errors, is_upload_enabled=is_upload_enabled, upload_label=_('Upload authorization/nomination'), field_url='authority_file_url', field_upload='authority_file_upload', is_url=is_url, is_upload=is_upload, url_label= _('Uploaded authorization/nomination'), is_required=true %}
 
   {% if g.recaptcha_publickey %}
-    {% snippet "user/snippets/recaptcha.html", public_key=g.recaptcha_publickey %}
+    {% snippet "snippets/datagovmk_captcha.html", public_key=g.recaptcha_publickey %}
   {% endif %}
 
   {{ form.required_message() }}
