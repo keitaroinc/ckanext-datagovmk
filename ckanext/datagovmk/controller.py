@@ -29,11 +29,10 @@ import json
 import csv
 import re
 from urllib import urlencode
+from urllib2 import urlopen
 import pytz
 from io import StringIO
 
-
-from ckan.common import config
 from paste.deploy.converters import asbool
 
 from ckan.controllers.package import PackageController, search_url, _encode_params
@@ -62,7 +61,6 @@ import ckan.lib.helpers as h
 from ckan.controllers.admin import get_sysadmins
 import bleach
 from datetime import datetime
-import ckan.lib.captcha as captcha
 
 from ckanext.datastore.controller import (DatastoreController,
                                           int_validator,
@@ -95,6 +93,36 @@ log = getLogger(__name__)
 
 
 SPECIAL_CHARS = u'#$%&!?\/@}{[]'
+
+def _check_recaptcha(remote_ip, recaptcha_response):
+    '''Check a user\'s recaptcha submission is valid, and raise CaptchaError
+    on failure.'''
+
+    recaptcha_private_key = config.get('ckan.recaptcha.privatekey', '')
+    if not recaptcha_private_key:
+        # Recaptcha not enabled
+        return
+
+    recaptcha_server_name = 'https://www.google.com/recaptcha/api/siteverify'
+
+    # recaptcha_response_field will be unicode if there are foreign chars in
+    # the user input. So we need to encode it as utf8 before urlencoding or
+    # we get an exception (#1431).
+    params = urlencode(dict(secret=recaptcha_private_key,
+                                   remoteip=remote_ip,
+                                   response=recaptcha_response))
+    f = urlopen(recaptcha_server_name, params)
+    data = json.load(f)
+    f.close()
+
+    try:
+        if not data['success']:
+            return False
+        else:
+            return True
+    except IndexError:
+        # Something weird with recaptcha response
+        return False
 
 
 class DownloadController(PackageController):
@@ -524,24 +552,30 @@ class DatagovmkUserController(UserController):
         c.user_dict = user_dict
         h.redirect_to(controller='user', action='login')
 
+
     def _save_new(self, context):
         came_from = request.params.get('came_from')
         try:
             data_dict = logic.clean_dict(unflatten(
                 logic.tuplize_dict(logic.parse_params(request.params))))
             context['message'] = data_dict.get('log_message', '')
-            captcha.check_recaptcha(request)
-            user = get_action('user_create')(context, data_dict)
+
+            recaptcha_response = data_dict['g-recaptcha-response']
+            remote_ip = request.environ.get('REMOTE_ADDR', 'Unknown IP Address')
+
+            if ( _check_recaptcha(remote_ip, recaptcha_response) ):
+                user = get_action('user_create')(context, data_dict)
+            else:
+                error_msg = _(u'Bad Captcha. Please try again.')
+                h.flash_error(error_msg)
+                return self.new(data_dict)
+
         except NotAuthorized:
             abort(403, _('Unauthorized to create user %s') % '')
         except NotFound, e:
             abort(404, _('User not found'))
         except DataError:
             abort(400, _(u'Integrity Error'))
-        except captcha.CaptchaError:
-            error_msg = _(u'Bad Captcha. Please try again.')
-            h.flash_error(error_msg)
-            return self.new(data_dict)
         except ValidationError, e:
             errors = e.error_dict
             error_summary = e.error_summary
