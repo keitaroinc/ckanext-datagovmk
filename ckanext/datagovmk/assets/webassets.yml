@@ -1,0 +1,54 @@
+main:
+  output: datagovmk/%(version)s_main.css
+  contents:
+    - css/main.css
+
+authority_representative:
+  output: datagovmk/%(version)s_authority_representative.js
+  contents:
+    - js/authority_representative.js
+
+download-resources:
+  output: datagovmk/%(version)s_download-resources.js
+  contents:
+    - js/download-resources.js
+
+mark-all-resources:
+  output: datagovmk/%(version)s_mark-all-resources.js
+  contents:
+    - js/mark-all-resources.js
+
+setup_increment_downloads:
+  output: datagovmk/%(version)s_setup_increment_downloads.js
+  contents:
+    - js/setup_increment_downloads.js
+
+dataset-form-upload-attr:
+  output: datagovmk/%(version)s_dataset-form-upload-attr.js
+  contents:
+    - js/modules/dataset-form-upload-attr.js
+
+increment-downloads:
+  output: datagovmk/%(version)s_increment-downloads.js
+  contents:
+    - js/modules/increment-downloads.js
+
+resource-reorder:
+  output: datagovmk/%(version)s_resource-reorder.js
+  contents:
+    - js/modules/resource-reorder.js
+
+resource-view-reorder:
+  output: datagovmk/%(version)s_resource-view-reorder.js
+  contents:
+    - js/modules/resource-view-reorder.js
+
+store-selected-language:
+  output: datagovmk/%(version)s_store-selected-language.js
+  contents:
+    - js/modules/store-selected-language.js
+
+upload-authority:
+  output: datagovmk/%(version)s_upload-authority.js
+  contents:
+    - js/modules/upload-authority.js

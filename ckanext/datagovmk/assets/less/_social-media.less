@@ -1,0 +1,35 @@
+/* Styles related to social media sharing buttons */
+
+.list-social-media {
+  color: @text-color;
+  border: 1px solid @hr-border;
+  border-radius: @border-radius-large*2;
+  .title {
+    .text-uppercase;
+    padding: @padding-small-vertical @padding-small-horizontal @padding-small-vertical @padding-large-horizontal;
+    vertical-align: middle;
+    color: @gray-light;
+  }
+  li {
+    padding: 0;
+  }
+  .btn {
+    padding: @padding-xs-vertical @padding-base-vertical;
+  }
+}
+
+.btn-social-icon {
+  font-size: @font-size-large;
+  &:hover {
+    color: inherit;
+  }
+  &.btn-facebook {
+    color: @facebook-color;
+  }
+  &.btn-twitter {
+    color: @twitter-color;
+  }
+  &.btn-google {
+    color: @google-color;
+  }
+}

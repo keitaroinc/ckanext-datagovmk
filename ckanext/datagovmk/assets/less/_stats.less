@@ -1,0 +1,36 @@
+.dataset-stats {
+  .flex;
+  .flex-wrap;
+  .justify-content-center;
+  margin: @grid-gutter-width auto;
+  flex: 1 1 25%;
+  .item {
+    .flex;
+    .flex-column;
+    .align-items-center;
+    color: @gray-light;
+    margin: @grid-gutter-width/3 @grid-gutter-width/2;
+  }
+  .heading {
+    .flex;
+    .flex-column;
+    .align-items-center;
+    border-bottom: 1px solid @hr-border;
+    padding-bottom: @grid-gutter-width/3;
+  }
+  .fa {
+    font-size: @font-size-h2;
+    color: darken(@brand-secondary, 15%);
+  }
+  .title {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: @font-size-base;
+    margin: @grid-gutter-width/6 0 0;
+  }
+  .value {
+    font-size: @font-size-h2;
+    font-weight: @headings-font-weight;
+    margin: 0 @grid-gutter-width/2;
+  }
+}

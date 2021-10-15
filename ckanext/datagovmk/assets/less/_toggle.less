@@ -1,0 +1,62 @@
+.toggle {
+  label {
+    .flex;
+    .align-items-center;
+    .justify-content-start;
+    margin-bottom: 0;
+    &:after {
+      content: '';
+    }
+  }
+  .switch {
+    display: inline-block;
+    height: @input-height-small*0.75;
+    position: relative;
+    width: @input-height-small*1.275;
+    margin: @grid-gutter-width/4;
+    input {
+      display: none;
+    }
+  }
+  .slider {
+    background-color: @btn-default-border;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    &:before {
+      background-color: @white;
+      bottom: 4px;
+      content: "";
+      height: @input-height-small/2;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: @input-height-small/2;
+    }
+  }
+  input {
+    &:checked {
+      &+.slider {
+        background-color: @brand-primary;
+        &:before {
+          transform: translateX(@input-height-small/2);
+        }
+      }
+      & ~ .description {
+        display: block;
+      }
+    }
+  }
+  .slider {
+    &.round {
+      border-radius: @input-height-small/2;
+      &:before {
+        border-radius: 50%;
+      }
+    }
+  }
+}
