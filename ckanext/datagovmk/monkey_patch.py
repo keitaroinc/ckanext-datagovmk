@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from ckan.lib import activity_streams as core_activity_streams
+# from ckan.lib import activity_streams as core_activity_streams
 from ckan.logic import validators as core_validators
 from ckan.plugins import toolkit
 

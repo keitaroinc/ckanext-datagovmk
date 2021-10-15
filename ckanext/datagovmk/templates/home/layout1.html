@@ -38,7 +38,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               {% if recent_datasets %}
               <ul class="list-unstyled">
                 {% for dataset in recent_datasets %}
-                  <li><i class="fa fa-database"></i> <a href="{{ h.url_for(controller='package', action='read', id=dataset.name) }}">{{ dataset.title }}</a></li>
+                  <li><i class="fa fa-database"></i> <a href="{{ h.url_for('dataset.read', id=dataset.name) }}">{{ dataset.title }}</a></li>
                 {% endfor %}
               </ul>
               {% else %}

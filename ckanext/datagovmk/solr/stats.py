@@ -38,11 +38,11 @@ def update_package_stats(package_id, stats):
             if '_version_' in pkg_dict:
                 del pkg_dict['_version_']
             conn.add(docs=[pkg_dict], commit=True)
-    except pysolr.SolrError, e:
+    except pysolr.SolrError as e:
         log.error("Solr returned error: %s", e)
         log.exception(e)
         return
-    except socket.error, e:
+    except socket.error as e:
         log.error("Failed to connect to Solr server: %s", e)
         log.exception(e)
         return
@@ -61,11 +61,11 @@ def increment_total_downloads(package_id):
             if '_version_' in pkg_dict:
                 del pkg_dict['_version_']
             conn.add(docs=[pkg_dict], commit=True)
-    except pysolr.SolrError, e:
+    except pysolr.SolrError as e:
         log.error("Solr returned error: %s", e)
         log.exception(e)
         return
-    except socket.error, e:
+    except socket.error as e:
         log.error("Failed to connect to Solr server: %s", e)
         log.exception(e)
         return

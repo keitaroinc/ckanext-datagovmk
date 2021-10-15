@@ -15,8 +15,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-{% resource 'datagovmk/js/setup_increment_downloads.js' %}
-{% resource 'datagovmk/js/modules/increment-downloads.js' %}
+{% asset 'datagovmk/setup_increment_downloads' %}
+{% asset 'datagovmk/increment-downloads' %}
 
 {% ckan_extends %}
 
@@ -25,21 +25,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <div class="module-content" data-resource-id="{{ res.id }}">
       {%- block resource_metadata_download -%}
       <div class="btn-group pull-right download-metadata-control">
-          <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}"
+          <a href="{{ h.url_for('bulk_download.download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}"
              class="btn btn-success download-metadata-btn"><i class="fa fa-download"></i> {{ _('Download Metadata') }} </a>
             <button href="#" class="btn btn-success dropdown-toggle download-metadata-btn" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
               <li>
-                <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                              action='download_resources_metadata', format='json', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">JSON</a>
-                <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                                action='download_resources_metadata', format='xml', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">XML</a>
-                <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                                action='download_resources_metadata', format='rdf', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">RDF</a>
-                <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                                action='download_resources_metadata', format='csv', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">CSV</a>
+                <a href="{{ h.url_for('bulk_download.download_resources_metadata',
+                            format='json', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">JSON</a>
+                <a href="{{ h.url_for('bulk_download.download_resources_metadata',
+                            format='xml', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">XML</a>
+                <a href="{{ h.url_for('bulk_download.download_resources_metadata',
+                            format='rdf', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">RDF</a>
+                <a href="{{ h.url_for('bulk_download.download_resources_metadata',
+                            format='csv', package_id=c.pkg_dict['id'], resources=res.id) }}" class="download-metadata">CSV</a>
               </li>
             </ul>
         </div>

@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+from click.decorators import command
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
@@ -31,10 +32,12 @@ from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
-from ckan.common import config
+from ckan.plugins.toolkit import config
+
+from ckanext.datagovmk.views import bulk_download
 
 
-monkey_patch.activity_streams()
+# monkey_patch.activity_streams()
 monkey_patch.validators()
 
 
@@ -95,6 +98,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IBlueprint)
 
     # IConfigurer
 
@@ -102,8 +107,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'datagovmk')
-
-        config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
+        toolkit.add_resource('assets', 'datagovmk')
+        
+        # config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
+        # print(config)
 
     # ITemplateHelpers
     def get_helpers(self):
@@ -162,9 +169,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_create': actions.user_create,
             'user_update': actions.user_update,
             'user_activity_list': actions.user_activity_list,
-            'user_activity_list_html': actions.user_activity_list_html,
+            # 'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
-            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
+            # 'dashboard_activity_list_html': actions.dashboard_activity_list_html,
             'package_search': actions.package_search,
             'resource_show': actions.resource_show,
             'organization_show': actions.organization_show,
@@ -191,7 +198,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def update_config_schema(self, schema):
         ignore_missing = toolkit.get_validator('ignore_missing')
-        validators = [ignore_missing, unicode]
+        validators = [ignore_missing]
 
         schema.update({
             'footer_links': validators,
@@ -205,6 +212,10 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         return schema
 
+    # IBlueprint
+    def get_blueprint(self):
+        return [bulk_download]
+
     # IRoutes
     def before_map(self, map):
         map.connect(
@@ -212,12 +223,12 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             controller='ckanext.datagovmk.controller:ApiController',
             action='i18n_js_translations'
         )
-        map.connect('/api/download/{package_id}/resources',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_resources_metadata')
-        map.connect('/api/download/{package_id}/metadata',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_package_metadata')
+        # map.connect('/api/download/{package_id}/resources',
+        #             controller='ckanext.datagovmk.controller:BulkDownloadController',
+        #             action='download_resources_metadata')
+        # map.connect('/api/download/{package_id}/metadata',
+        #             controller='ckanext.datagovmk.controller:BulkDownloadController',
+        #             action='download_package_metadata')
 
         # Override the resource download links, so we can count the number of downloads.
         with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
@@ -243,9 +254,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.datagovmk.controller:ReportIssueController',
                     action='report_issue_form')
 
-        map.connect('/datastore/dump/{resource_id}',
-                    controller='ckanext.datagovmk.controller:OverrideDatastoreController',
-                    action='dump')
+        # map.connect('/datastore/dump/{resource_id}',
+        #             controller='ckanext.datagovmk.controller:OverrideDatastoreController',
+        #             action='dump')
 
         map.connect('/stats',
                     controller="ckanext.datagovmk.controller:StatsController",
@@ -284,3 +295,14 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             search_params.update({'fq': fq + ' -extras_org_catalog_enabled:true'})
 
         return search_params
+
+     # IClick
+    def get_commands(self):
+        import click
+
+        @click.command()
+        def init_tables():
+            from ckanext.datagovmk.commands import tables_init
+            tables_init()            
+
+        return[init_tables]

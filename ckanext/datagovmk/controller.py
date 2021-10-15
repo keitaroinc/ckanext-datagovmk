@@ -28,15 +28,15 @@ from logging import getLogger
 import json
 import csv
 import re
-from urllib import urlencode
-from urllib2 import urlopen
+from urllib.parse import urlencode
+from urllib.request import urlopen
 import pytz
 from io import StringIO
 
 from paste.deploy.converters import asbool
 
-from ckan.controllers.package import PackageController, search_url, _encode_params
-from ckan.controllers.user import UserController
+# from ckan.controllers.package import PackageController, search_url, _encode_params
+# from ckan.controllers.user import UserController
 from ckanext.datagovmk.helpers import get_storage_path_for
 from ckanext.datagovmk.utils import (export_resource_to_rdf,
                                      export_resource_to_xml,
@@ -51,22 +51,24 @@ from ckanext.datagovmk.actions import update_package_stats
 from ckan.lib.base import BaseController, abort, render
 from ckan.plugins import toolkit
 import ckan.plugins as p
-from ckan.common import _, c, request, response, config, OrderedDict
+from ckan.plugins.toolkit import _, c, request, config
 from ckan.lib.navl import dictization_functions
 
 import ckan.model as model
 import ckan.logic as logic
-import ckan.lib.uploader as uploader
+
 import ckan.lib.helpers as h
-from ckan.controllers.admin import get_sysadmins
-import bleach
+from ckan.views.admin import _get_sysadmins
+
 from datetime import datetime
 
-from ckanext.datastore.controller import (DatastoreController,
-                                          int_validator,
-                                          boolean_validator,
-                                          DUMP_FORMATS,
-                                          PAGINATE_BY)
+from ckanext.datastore.blueprint import PAGINATE_BY, DUMP_FORMATS
+
+# from ckanext.datastore.controller import (DatastoreController,
+#                                           int_validator,
+#                                           boolean_validator,
+#                                           DUMP_FORMATS,
+#                                           PAGINATE_BY)
 from ckanext.datastore.writer import (
     csv_writer,
     tsv_writer,
@@ -412,90 +414,90 @@ class ApiController(BaseController):
         return(f)
 
 
-class BulkDownloadController(BaseController):
-    """Download metadata as ZIP file.
-    """
+# class BulkDownloadController(BaseController):
+#     """Download metadata as ZIP file.
+#     """
 
-    def download_resources_metadata(self, package_id):
-        """Download resources metadata in different formats as ZIP file.
+#     def download_resources_metadata(self, package_id):
+#         """Download resources metadata in different formats as ZIP file.
 
-        :param str package_id: the id of the package containing the resources.
+#         :param str package_id: the id of the package containing the resources.
 
-        """
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj}
+#         """
+#         context = {'model': model, 'session': model.Session,
+#                    'user': c.user, 'auth_user_obj': c.userobj}
 
 
-        pkg_dict = get_action('package_show')(context, {'id': package_id})
+#         pkg_dict = get_action('package_show')(context, {'id': package_id})
 
-        resources = request.params.get('resources')
-        if resources and resources.lower() != 'all':
-            resources = [r.strip() for r in resources.split(',')]
-        else:
-            resources = None
+#         resources = request.params.get('resources')
+#         if resources and resources.lower() != 'all':
+#             resources = [r.strip() for r in resources.split(',')]
+#         else:
+#             resources = None
 
-        tmp_file_path = None
-        try:
-            with _open_temp_zipfile() as zipf:
-                tmp_file_path = zipf.filename
-                self._export_resources(zipf, pkg_dict, resources)
-        except Exception as exc:
-            log.error('Error while preparing zip archive: %s', exc)
-            log.exception(exc)
-            raise exc
+#         tmp_file_path = None
+#         try:
+#             with _open_temp_zipfile() as zipf:
+#                 tmp_file_path = zipf.filename
+#                 self._export_resources(zipf, pkg_dict, resources)
+#         except Exception as exc:
+#             log.error('Error while preparing zip archive: %s', exc)
+#             log.exception(exc)
+#             raise exc
 
-        try:
-            response.headers['Content-Type'] = 'application/octet-stream'
-            zip_file_name = '%s_resources.zip' % pkg_dict['name']
-            response.content_disposition = 'attachment; filename=' + zip_file_name
-            with open(tmp_file_path, 'r') as zipf:
-                response.write(zipf.read())
-        finally:
-            os.remove(tmp_file_path)
+#         try:
+#             response.headers['Content-Type'] = 'application/octet-stream'
+#             zip_file_name = '%s_resources.zip' % pkg_dict['name']
+#             response.content_disposition = 'attachment; filename=' + zip_file_name
+#             with open(tmp_file_path, 'r') as zipf:
+#                 response.write(zipf.read())
+#         finally:
+#             os.remove(tmp_file_path)
 
-    def _export_resources(self, zip_file, pkg_dict, resources):
-        format = request.params.get('format', 'json')
-        exporter = _SUPPORTED_EXPORTS.get(format)
-        if not exporter:
-            raise Exception('Unsupported export format: %s' % format)
-        # filter out resources first
-        if resources:
-            filtered_resources = []
-            for resource in pkg_dict.get('resources', []):
-                if resource['id'] in resources:
-                    filtered_resources.append(resource)
+#     def _export_resources(self, zip_file, pkg_dict, resources):
+#         format = request.params.get('format', 'json')
+#         exporter = _SUPPORTED_EXPORTS.get(format)
+#         if not exporter:
+#             raise Exception('Unsupported export format: %s' % format)
+#         # filter out resources first
+#         if resources:
+#             filtered_resources = []
+#             for resource in pkg_dict.get('resources', []):
+#                 if resource['id'] in resources:
+#                     filtered_resources.append(resource)
 
-            pkg_dict['resources'] = filtered_resources
+#             pkg_dict['resources'] = filtered_resources
 
-        exporter(zip_file, pkg_dict, request, response)
+#         exporter(zip_file, pkg_dict, request, response)
 
-    def download_package_metadata(self, package_id):
-        """Download package metadata in one of the supported formats.
+#     def download_package_metadata(self, package_id):
+#         """Download package metadata in one of the supported formats.
 
-        :param string package_id: the id of the package
+#         :param string package_id: the id of the package
 
-        """
+#         """
 
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj}
+#         context = {'model': model, 'session': model.Session,
+#                    'user': c.user, 'auth_user_obj': c.userobj}
 
-        package_dict = get_action('package_show')(context, {'id': package_id})
-        _format = request.params.get('format', 'json')
-        export_def = _SUPPORTED_PACKAGE_EXPORTS.get(_format)
-        if not export_def:
-            raise Exception('Unsupported export format: %s' % _format)
+#         package_dict = get_action('package_show')(context, {'id': package_id})
+#         _format = request.params.get('format', 'json')
+#         export_def = _SUPPORTED_PACKAGE_EXPORTS.get(_format)
+#         if not export_def:
+#             raise Exception('Unsupported export format: %s' % _format)
 
-        content_type = export_def['content-type']
-        response.headers['Content-Type'] = content_type
+#         content_type = export_def['content-type']
+#         response.headers['Content-Type'] = content_type
 
-        exporter = export_def['exporter']
+#         exporter = export_def['exporter']
 
-        file_name = '%s.%s' % (package_dict.get('name') or package_dict['id'], _format)
+#         file_name = '%s.%s' % (package_dict.get('name') or package_dict['id'], _format)
 
-        response.content_disposition = 'attachment; filename=' + file_name
-        response.charset = 'UTF-8'
+#         response.content_disposition = 'attachment; filename=' + file_name
+#         response.charset = 'UTF-8'
 
-        exporter(package_dict, request, response)
+#         exporter(package_dict, request, response)
 
 
 class DatagovmkUserController(UserController):
@@ -522,7 +524,7 @@ class DatagovmkUserController(UserController):
             user_dict = get_action('user_show')(context, data_dict)
 
             user_obj = context['user_obj']
-        except NotFound, e:
+        except NotFound as e:
             abort(404, _('User not found'))
 
         c.activation_key = request.params.get('key')
@@ -540,14 +542,14 @@ class DatagovmkUserController(UserController):
             h.redirect_to(controller='user', action='login')
         except NotAuthorized:
             h.flash_error(_('Unauthorized to edit user %s') % id)
-        except NotFound, e:
+        except NotFound as e:
             h.flash_error(_('User not found'))
         except DataError:
             h.flash_error(_(u'Integrity Error'))
-        except ValidationError, e:
+        except ValidationError as e:
             h.flash_error(u'%r' % e.error_dict)
-        except ValueError, ve:
-            h.flash_error(unicode(ve))
+        except ValueError as ve:
+            h.flash_error(str(ve))
 
         c.user_dict = user_dict
         h.redirect_to(controller='user', action='login')
@@ -572,11 +574,11 @@ class DatagovmkUserController(UserController):
 
         except NotAuthorized:
             abort(403, _('Unauthorized to create user %s') % '')
-        except NotFound, e:
+        except NotFound as e:
             abort(404, _('User not found'))
         except DataError:
             abort(400, _(u'Integrity Error'))
-        except ValidationError, e:
+        except ValidationError as e:
             errors = e.error_dict
             error_summary = e.error_summary
             return self.new(data_dict, errors, error_summary)
@@ -867,34 +869,34 @@ class StatsController(BaseController):
         return p.toolkit.render('ckanext/stats/index.html')
 
 
-class OverrideDatastoreController(DatastoreController):
+# class OverrideDatastoreController(DatastoreController):
 
-    def dump(self, resource_id):
-        try:
-            offset = int_validator(request.GET.get('offset', 0), {})
-        except toolkit.Invalid as e:
-            toolkit.abort(400, u'offset: ' + e.error)
-        try:
-            limit = int_validator(request.GET.get('limit'), {})
-        except toolkit.Invalid as e:
-            toolkit.abort(400, u'limit: ' + e.error)
-        bom = boolean_validator(request.GET.get('bom'), {})
-        fmt = request.GET.get('format', 'csv')
+#     def dump(self, resource_id):
+#         try:
+#             offset = int_validator(request.GET.get('offset', 0), {})
+#         except toolkit.Invalid as e:
+#             toolkit.abort(400, u'offset: ' + e.error)
+#         try:
+#             limit = int_validator(request.GET.get('limit'), {})
+#         except toolkit.Invalid as e:
+#             toolkit.abort(400, u'limit: ' + e.error)
+#         bom = boolean_validator(request.GET.get('bom'), {})
+#         fmt = request.GET.get('format', 'csv')
 
-        if fmt not in DUMP_FORMATS:
-            toolkit.abort(400, _(
-                u'format: must be one of %s') % u', '.join(DUMP_FORMATS))
+#         if fmt not in DUMP_FORMATS:
+#             toolkit.abort(400, _(
+#                 u'format: must be one of %s') % u', '.join(DUMP_FORMATS))
 
-        try:
-            dump_to(
-                resource_id,
-                response,
-                fmt=fmt,
-                offset=offset,
-                limit=limit,
-                options={u'bom': bom})
-        except toolkit.ObjectNotFound:
-            toolkit.abort(404, _('DataStore resource not found'))
+#         try:
+#             dump_to(
+#                 resource_id,
+#                 response,
+#                 fmt=fmt,
+#                 offset=offset,
+#                 limit=limit,
+#                 options={u'bom': bom})
+#         except toolkit.ObjectNotFound:
+#             toolkit.abort(404, _('DataStore resource not found'))
 
 def get_xml_element(element_name):
     '''Return element name according XML naming standards

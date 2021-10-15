@@ -57,7 +57,7 @@ def get_recently_updated_datasets(limit=5):
             'rows': limit,
         })['results']
 
-    except toolkit.ValidationError, search.SearchError:
+    except (toolkit.ValidationError, search.SearchError):
         return []
     else:
         pkgs = []
@@ -194,10 +194,14 @@ def get_storage_path_for(dirname):
     """
     storage_path = config.get('ckan.storage_path')
     target_path = os.path.join(storage_path, 'storage', dirname)
+    print('::::: does it exist', target_path)
+    print(os.path.exists(target_path))
     if not os.path.exists(target_path):
+        print(":::::: target_path ---->", target_path)
         try:
             os.makedirs(target_path)
-        except OSError, exc:
+            print('OK _____+++++')
+        except OSError as exc:
             log.error('Storage directory creation failed. Error: %s' % exc)
             target_path = os.path.join(storage_path, 'storage')
             if not os.path.exists(target_path):
@@ -259,6 +263,7 @@ def get_org_title(id):
     returns: the translated title of the organization
     :rtype: str
     """
+
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
     return translate_field(org, 'title')

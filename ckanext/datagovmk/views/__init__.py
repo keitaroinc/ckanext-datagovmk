@@ -1,0 +1,1 @@
+from ckanext.datagovmk.views.bulk_download import bulk_download

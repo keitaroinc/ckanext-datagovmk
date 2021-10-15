@@ -26,12 +26,12 @@ from logging import getLogger
 from datetime import timedelta, datetime
 from dateutil import parser
 
-from ckan.lib.cli import CkanCommand
+from ckan.cli.cli import CkanCommand
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckan.lib.mailer as ckan_mailer
 from ckan.lib import base
-from ckan.common import config
+from ckan.plugins.toolkit import config
 
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
@@ -48,7 +48,7 @@ from ckanext.datagovmk.model.sort_organizations import SortOrganizations as Sort
 from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
 from ckanext.datagovmk.helpers import get_most_active_organizations
 from ckan.model.meta import Session
-from ckan.controllers.admin import get_sysadmins
+from ckan.views.admin import _get_sysadmins
 from ckan.logic.action.get import organization_list as ckan_organization_list
 from ckan.logic.action.get import group_list as _group_list
 
@@ -239,6 +239,15 @@ def _load_resource_from_path(url):
     with io.open(p, mode='r', encoding='utf-8') as resource_file:
         return resource_file.read()
 
+def tables_init():
+    setup_user_authority_table()
+    setup_user_authority_dataset_table()
+    setup_most_active_organizations_table()
+    setup_sort_organizations_table()
+    setup_sort_groups_table()
+
+    log.info('datagovmk DB tables initialized')
+
 
 class InitDB(CkanCommand):
     ''' Initialize datagovmk DB tables. '''
@@ -274,7 +283,7 @@ class SortOrganizations(CkanCommand):
 
 def create_sort_organizations():
     
-    sysadmin = get_sysadmins()[0].name
+    sysadmin = _get_sysadmins()[0].name
     context = {
             'user': sysadmin,
             'ignore_auth': True
@@ -320,7 +329,7 @@ class SortGroups(CkanCommand):
 
 def create_sort_groups():
     
-    sysadmin = get_sysadmins()[0].name
+    sysadmin = _get_sysadmins()[0].name
     context = {
             'user': sysadmin,
             'ignore_auth': True

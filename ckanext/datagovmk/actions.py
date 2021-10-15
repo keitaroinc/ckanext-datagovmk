@@ -24,12 +24,12 @@ import subprocess
 import cgi
 import json
 from ckan.plugins import toolkit
-from ckan.controllers.admin import get_sysadmins
+from ckan.views.admin import _get_sysadmins
 from ckanext.datagovmk import helpers as h
 from ckanext.datagovmk import logic as l
 from logging import getLogger
 from ckanext.dcat.processors import RDFSerializer
-from ckan.common import config
+from ckan.plugins.toolkit import config, request
 from ckan.model import State as model_state
 from socket import error as socket_error
 import ckan.lib.mailer as mailer
@@ -39,13 +39,13 @@ import sqlalchemy
 import ckan.logic as logic
 import ckan.plugins as plugins
 import ckan.lib.uploader as uploader
+from ckan.common import is_flask_request
 from ckan.logic.action.create import user_create as _user_create
 from ckan.logic.action.update import user_update as _user_update
 from ckan.logic.action.get import user_activity_list as _user_activity_list
 from ckan.logic.action.get import dashboard_activity_list as _dashboard_activity_list
 from ckan.logic.action.create import package_create as _package_create
 
-from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
 from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
@@ -56,7 +56,7 @@ from ckanext.datagovmk.solr.stats import (update_package_stats as update_package
                                           increment_total_downloads as increment_total_downloads_solr)
 from ckan.logic.schema import default_user_schema
 from ckan.lib.navl.dictization_functions import validate
-import ckan.lib.activity_streams as activity_streams
+# import ckan.lib.activity_streams as activity_streams
 from ckan.lib import helpers as core_helpers
 from ckan.logic.action.get import package_search as _package_search
 from ckan.logic.action.get import resource_show as _resource_show
@@ -250,7 +250,7 @@ def prepare_zip_resources(context, data_dict):
                 if package_id is None:
                     package_id = resource['package_id']
 
-                headers = {'Authorization': get_sysadmins()[0].apikey}
+                headers = {'Authorization': _get_sysadmins()[0].apikey}
                 try:
                     r = requests.get(url, headers=headers)
                 except Exception:
@@ -261,7 +261,7 @@ def prepare_zip_resources(context, data_dict):
                 if content_type in SUPPORTED_RESOURCE_MIMETYPES:
                     resourceArchived = True
                     zip.writestr(name, r.content)
-    except Exception, ex:
+    except Exception as ex:
         log.error('An error occured while preparing zip archive. Error: %s' % ex)
         raise
 
@@ -890,40 +890,40 @@ def user_activity_list(context, data_dict):
     return filtered_activities
 
 
-@toolkit.side_effect_free
-def user_activity_list_html(context, data_dict):
-    '''Return a user's public activity stream as HTML.
+# @toolkit.side_effect_free
+# def user_activity_list_html(context, data_dict):
+#     '''Return a user's public activity stream as HTML.
 
-    Override this action to filter out activities related to uploaded
-    authorities and dataset agreement that are only shown for sysadmins and
-    users that have updated their general activites.
+#     Override this action to filter out activities related to uploaded
+#     authorities and dataset agreement that are only shown for sysadmins and
+#     users that have updated their general activites.
 
-    The activity stream is rendered as a snippet of HTML meant to be included
-    in an HTML page, i.e. it doesn't have any HTML header or footer.
+#     The activity stream is rendered as a snippet of HTML meant to be included
+#     in an HTML page, i.e. it doesn't have any HTML header or footer.
 
-    :param id: The id or name of the user.
-    :type id: string
-    :param offset: where to start getting activity items from
-        (optional, default: ``0``)
-    :type offset: int
-    :param limit: the maximum number of activities to return
-        (optional, default: ``31``, the default value is configurable via the
-        ckan.activity_list_limit setting)
-    :type limit: int
+#     :param id: The id or name of the user.
+#     :type id: string
+#     :param offset: where to start getting activity items from
+#         (optional, default: ``0``)
+#     :type offset: int
+#     :param limit: the maximum number of activities to return
+#         (optional, default: ``31``, the default value is configurable via the
+#         ckan.activity_list_limit setting)
+#     :type limit: int
 
-    :rtype: string
+#     :rtype: string
 
-    '''
-    activity_stream = toolkit.get_action('user_activity_list')(context, data_dict)
-    offset = int(data_dict.get('offset', 0))
-    extra_vars = {
-        'controller': 'user',
-        'action': 'activity',
-        'id': data_dict['id'],
-        'offset': offset,
-    }
-    return activity_streams.activity_list_to_html(
-        context, activity_stream, extra_vars)
+#     '''
+#     activity_stream = toolkit.get_action('user_activity_list')(context, data_dict)
+#     offset = int(data_dict.get('offset', 0))
+#     extra_vars = {
+#         'controller': 'user',
+#         'action': 'activity',
+#         'id': data_dict['id'],
+#         'offset': offset,
+#     }
+#     return activity_streams.activity_list_to_html(
+#         context, activity_stream, extra_vars)
 
 
 @toolkit.side_effect_free
@@ -950,29 +950,29 @@ def dashboard_activity_list(context, data_dict):
     return filtered_activities
 
 
-@toolkit.side_effect_free
-def dashboard_activity_list_html(context, data_dict):
-    '''Return the authorized (via login or API key) user's dashboard activity
-       stream as HTML.
+# @toolkit.side_effect_free
+# def dashboard_activity_list_html(context, data_dict):
+#     '''Return the authorized (via login or API key) user's dashboard activity
+#        stream as HTML.
 
-    Override this action to filter out activities related to uploaded
-    authorities and dataset agreement that are only shown for sysadmins and
-    users that have updated their general activites.
+#     Override this action to filter out activities related to uploaded
+#     authorities and dataset agreement that are only shown for sysadmins and
+#     users that have updated their general activites.
 
-    '''
+#     '''
 
-    activity_stream = toolkit.get_action('dashboard_activity_list')(context, data_dict)
-    model = context['model']
-    user_id = context['user']
-    offset = data_dict.get('offset', 0)
-    extra_vars = {
-        'controller': 'user',
-        'action': 'dashboard',
-        'offset': offset,
-        'id': user_id
-    }
-    return activity_streams.activity_list_to_html(context, activity_stream,
-                                                  extra_vars)
+#     activity_stream = toolkit.get_action('dashboard_activity_list')(context, data_dict)
+#     model = context['model']
+#     user_id = context['user']
+#     offset = data_dict.get('offset', 0)
+#     extra_vars = {
+#         'controller': 'user',
+#         'action': 'dashboard',
+#         'offset': offset,
+#         'id': user_id
+#     }
+#     return activity_streams.activity_list_to_html(context, activity_stream,
+#                                                   extra_vars)
 
 
 @toolkit.side_effect_free
