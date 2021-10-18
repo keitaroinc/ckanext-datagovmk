@@ -1,3 +1,7 @@
+from flask import Blueprint
+from logging import getLogger
+
+from ckan.plugins import toolkit
 from ckanext.datastore.blueprint import datastore, PAGINATE_BY, DUMP_FORMATS, int_validator, boolean_validator
 
 
@@ -31,4 +35,4 @@ def dump(resource_id):
 
 
 
-datastore.add_url_rule('datastore/dump/<resource_id>', view_func=dump, methods=['GET'])
+datastore.add_url_rule('/datastore/dump/<resource_id>', view_func=dump, methods=['GET'])
