@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
 {% ckan_extends %}
-
+{#
 {% block facet_list_items %}
     {% with items = items or h.get_facet_items_dict(name) %}
     {% if items %}
@@ -58,3 +58,4 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     {% endif %}
     {% endwith %}
 {% endblock %}
+#}

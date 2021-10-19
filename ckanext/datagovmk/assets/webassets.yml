@@ -1,7 +1,7 @@
 main:
-  output: datagovmk/%(version)s_main.css
+  output: datagovmk/%(version)s_main-datagovmk.css
   contents:
-    - css/main.css
+    - css/main-datagovmk.css
 
 authority_representative:
   output: datagovmk/%(version)s_authority_representative.js

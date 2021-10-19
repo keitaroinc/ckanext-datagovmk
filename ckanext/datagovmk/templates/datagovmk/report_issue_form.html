@@ -19,8 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% extends "page.html" %}
 
-{% set form_url = h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') %}
-{% set login_url = h.url_for(controller='user', action='login') %}
+{% set form_url = h.url_for('report_issue.report_issue_form') %}
+{% set login_url = h.url_for('user.login') %}
 {% set successfuly_reported = successfuly_reported if successfuly_reported is defined else False %}
 
 {% block page_header %}

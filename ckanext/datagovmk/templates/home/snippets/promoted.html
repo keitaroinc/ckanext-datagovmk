@@ -24,8 +24,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     {% else %}
       <h1 class="page-heading">{{ _("Welcome to CKAN") }}</h1>
       <p>
-        {% set intro_text = h.get_config_option_show("intro", h.lang()) %}
-        {{ intro_text}}
+        {# {% set intro_text = h.get_config_option_show("intro", h.lang()) %}
+        {{ intro_text}} #}
       </p>
     {% endif %}
   </header>

@@ -59,9 +59,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                     {% block footer_links %}
                       {% snippet 'snippets/main_navigation.html' %}
                     {% endblock %}
-                    {# <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:ReportIssueController', action='report_issue_form') }}">{{ _('Report site issue')}}</a></li>
-                    {{ h.build_nav('stats', _('Statistics')) }}
-                    #}
+                    <li><a href="{{ h.url_for('report_issue.report_issue_form') }}">{{ _('Report site issue')}}</a></li>
+                    {#{{ h.build_nav('stats', _('Statistics')) }}#}
                   </ul>
                   {% endblock %}
                 </div>
