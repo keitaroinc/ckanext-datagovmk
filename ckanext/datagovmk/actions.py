@@ -1161,9 +1161,9 @@ def organization_delete(context, data_dict):
                 ).values(owner_org=None)
             )
 
-    rev = model.repo.new_revision()
-    rev.author = user
-    rev.message = _(u'REST API: Delete %s') % revisioned_details
+    # rev = model.repo.new_revision()
+    # rev.author = user
+    # rev.message = _(u'REST API: Delete %s') % revisioned_details
 
     # The group's Member objects are deleted
     # (including hierarchy connections to parent and children groups)
