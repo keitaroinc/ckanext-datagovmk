@@ -19,10 +19,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% asset 'datagovmk/upload-authority' %}
 
-{# {% if is_upload_enabled %}
+{% if is_upload_enabled %}
 <div class="image-upload upload-authority off" data-module="upload-authority" data-module-is_url="{{ 'true' if is_url else 'false' }}" data-module-is_upload="{{ 'true' if is_upload else 'false' }}"
      data-module-field_url="{{ field_url }}" data-module-field_upload="{{ field_upload }}" data-module-field_clear="clear_upload" data-module-upload_label="{{ upload_label }}" data-module-field_name="image_url">
-{% endif %} #}
+{% endif %}
     {{ form.input(field_url, label=url_label, id='field-image-url', type='url', placeholder=placeholder, value=data.get(field_url), error=errors.get(_('authority')), classes=['control-full'], is_required=is_required) }}
 
   {% if is_upload_enabled %}

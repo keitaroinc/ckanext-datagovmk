@@ -47,7 +47,7 @@ def download_resources_metadata(package_id):
     tmp_file_path = None
 
     try:
-        with ZipFile(_open_temp_zipfile(), 'w') as zipf:
+        with _open_temp_zipfile() as zipf:
             tmp_file_path = zipf.filename
             _export_resources(zipf, pkg_dict, resources)
     except Exception as exc:
@@ -120,7 +120,7 @@ def download_package_metadata(package_id):
 def _open_temp_zipfile():
     file_name = uuid.uuid4().hex + '.{ext}'.format(ext='zip')
     file_path = get_storage_path_for('temp-datagovmk') + '/' + file_name
-    return file_path
+    return ZipFile(file_path, 'w')
 
 
 def _export_resources_json(zip_file, pkg_dict):

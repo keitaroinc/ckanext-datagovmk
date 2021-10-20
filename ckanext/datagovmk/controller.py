@@ -897,143 +897,143 @@ class StatsController(BaseController):
 #         except toolkit.ObjectNotFound:
 #             toolkit.abort(404, _('DataStore resource not found'))
 
-def get_xml_element(element_name):
-    '''Return element name according XML naming standards
-    Capitalize every word and remove special characters
-    :param element_name: xml element
-    :type element_name: str
-    :returns: Element name according XML standards
-    :rtype: str
-    '''
-    clean_word = u''.join(c.strip(SPECIAL_CHARS) for c in element_name)
-    if unicode(clean_word).isnumeric():
-        return u'_' + unicode(element_name)
-    first, rest = clean_word.split(u' ')[0], clean_word.split(u' ')[1:]
-    return first + u''.join(w.capitalize()for w in rest)
+# def get_xml_element(element_name):
+#     '''Return element name according XML naming standards
+#     Capitalize every word and remove special characters
+#     :param element_name: xml element
+#     :type element_name: str
+#     :returns: Element name according XML standards
+#     :rtype: str
+#     '''
+#     clean_word = u''.join(c.strip(SPECIAL_CHARS) for c in element_name)
+#     if str(clean_word).isnumeric():
+#         return u'_' + str(element_name)
+#     first, rest = clean_word.split(u' ')[0], clean_word.split(u' ')[1:]
+#     return first + u''.join(w.capitalize()for w in rest)
 
 
-def dump_to(resource_id, output, fmt, offset, limit, options):
-    """ Overriden method """
-    if fmt == 'csv':
-        writer_factory = csv_writer
-        records_format = 'csv'
-    elif fmt == 'tsv':
-        writer_factory = tsv_writer
-        records_format = 'tsv'
-    elif fmt == 'json':
-        writer_factory = json_writer
-        records_format = 'lists'
-    elif fmt == 'xml':
-        writer_factory = xml_writer
-        records_format = 'objects'
+# def dump_to(resource_id, output, fmt, offset, limit, options):
+#     """ Overriden method """
+#     if fmt == 'csv':
+#         writer_factory = csv_writer
+#         records_format = 'csv'
+#     elif fmt == 'tsv':
+#         writer_factory = tsv_writer
+#         records_format = 'tsv'
+#     elif fmt == 'json':
+#         writer_factory = json_writer
+#         records_format = 'lists'
+#     elif fmt == 'xml':
+#         writer_factory = xml_writer
+#         records_format = 'objects'
 
-    def start_writer(fields):
-        bom = options.get(u'bom', False)
-        return writer_factory(output, fields, resource_id, bom)
+#     def start_writer(fields):
+#         bom = options.get(u'bom', False)
+#         return writer_factory(output, fields, resource_id, bom)
 
-    def result_page(offs, lim):
-        return toolkit.get_action('datastore_search')(None, {
-            'resource_id': resource_id,
-            'limit':
-                PAGINATE_BY if limit is None
-                else min(PAGINATE_BY, lim),
-            'offset': offs,
-            'sort': '_id',
-            'records_format': records_format,
-            'include_total': 'false',  # XXX: default() is broken
-        })
+#     def result_page(offs, lim):
+#         return toolkit.get_action('datastore_search')(None, {
+#             'resource_id': resource_id,
+#             'limit':
+#                 PAGINATE_BY if limit is None
+#                 else min(PAGINATE_BY, lim),
+#             'offset': offs,
+#             'sort': '_id',
+#             'records_format': records_format,
+#             'include_total': 'false',  # XXX: default() is broken
+#         })
 
-    result = result_page(offset, limit)
+#     result = result_page(offset, limit)
 
-    with start_writer(result['fields']) as wr:
-        while True:
-            if limit is not None and limit <= 0:
-                break
+#     with start_writer(result['fields']) as wr:
+#         while True:
+#             if limit is not None and limit <= 0:
+#                 break
 
-            records = result['records']
+#             records = result['records']
 
-            wr.write_records(records)
+#             wr.write_records(records)
 
-            if records_format == 'objects' or records_format == 'lists':
-                if len(records) < PAGINATE_BY:
-                    break
-            elif not records:
-                break
+#             if records_format == 'objects' or records_format == 'lists':
+#                 if len(records) < PAGINATE_BY:
+#                     break
+#             elif not records:
+#                 break
 
-            offset += PAGINATE_BY
-            if limit is not None:
-                limit -= PAGINATE_BY
-                if limit <= 0:
-                    break
+#             offset += PAGINATE_BY
+#             if limit is not None:
+#                 limit -= PAGINATE_BY
+#                 if limit <= 0:
+#                     break
 
-            result = result_page(offset, limit)
-
-
-class XMLWriter(object):
-    """ Overriden class """
-    _key_attr = u'key'
-    _value_tag = u'value'
-
-    def __init__(self, response, columns):
-        self.response = response
-        self.id_col = columns[0] == u'_id'
-        if self.id_col:
-            columns = columns[1:]
-        self.columns = columns
-
-    def _insert_node(self, root, k, v, key_attr=None):
-        element = SubElement(root, k)
-        if v is None:
-            element.attrib[u'xsi:nil'] = u'true'
-        elif not isinstance(v, (list, dict)):
-            element.text = text_type(v)
-        else:
-            if isinstance(v, list):
-                it = enumerate(v)
-            else:
-                it = v.items()
-            for key, value in it:
-                self._insert_node(element, self._value_tag, value, key)
-
-        if key_attr is not None:
-            element.attrib[self._key_attr] = text_type(key_attr)
-
-    def write_records(self, records):
-        """ Overriden """
-        for r in records:
-            root = Element(u'row')
-            if self.id_col:
-                root.attrib[u'_id'] = text_type(r[u'_id'])
-            for c in self.columns:
-                node_name = get_xml_element(c)
-                self._insert_node(root, node_name, r[c])
-            ElementTree(root).write(self.response, encoding=u'utf-8')
-            self.response.write(b'\n')
+#             result = result_page(offset, limit)
 
 
-@contextmanager
-def xml_writer(response, fields, name=None, bom=False):
-    u'''Context manager for writing UTF-8 XML data to response
+# class XMLWriter(object):
+#     """ Overriden class """
+#     _key_attr = u'key'
+#     _value_tag = u'value'
 
-    :param response: file-like or response-like object for writing
-        data and headers (response-like objects only)
-    :param fields: list of datastore fields
-    :param name: file name (for headers, response-like objects only)
-    :param bom: True to include a UTF-8 BOM at the start of the file
-    '''
+#     def __init__(self, response, columns):
+#         self.response = response
+#         self.id_col = columns[0] == u'_id'
+#         if self.id_col:
+#             columns = columns[1:]
+#         self.columns = columns
 
-    if hasattr(response, u'headers'):
-        response.headers['Content-Type'] = (
-            b'text/xml; charset=utf-8')
-        if name:
-            response.headers['Content-disposition'] = (
-                b'attachment; filename="{name}.xml"'.format(
-                    name=encode_rfc2231(name)))
-    if bom:
-        response.write(BOM_UTF8)
-    response.write(b'<data>\n')
-    yield XMLWriter(response, [f['id'] for f in fields])
-    response.write(b'</data>\n')
+#     def _insert_node(self, root, k, v, key_attr=None):
+#         element = SubElement(root, k)
+#         if v is None:
+#             element.attrib[u'xsi:nil'] = u'true'
+#         elif not isinstance(v, (list, dict)):
+#             element.text = text_type(v)
+#         else:
+#             if isinstance(v, list):
+#                 it = enumerate(v)
+#             else:
+#                 it = v.items()
+#             for key, value in it:
+#                 self._insert_node(element, self._value_tag, value, key)
+
+#         if key_attr is not None:
+#             element.attrib[self._key_attr] = text_type(key_attr)
+
+#     def write_records(self, records):
+#         """ Overriden """
+#         for r in records:
+#             root = Element(u'row')
+#             if self.id_col:
+#                 root.attrib[u'_id'] = text_type(r[u'_id'])
+#             for c in self.columns:
+#                 node_name = get_xml_element(c)
+#                 self._insert_node(root, node_name, r[c])
+#             ElementTree(root).write(self.response, encoding=u'utf-8')
+#             self.response.write(b'\n')
+
+
+# @contextmanager
+# def xml_writer(response, fields, name=None, bom=False):
+#     u'''Context manager for writing UTF-8 XML data to response
+
+#     :param response: file-like or response-like object for writing
+#         data and headers (response-like objects only)
+#     :param fields: list of datastore fields
+#     :param name: file name (for headers, response-like objects only)
+#     :param bom: True to include a UTF-8 BOM at the start of the file
+#     '''
+
+#     if hasattr(response, u'headers'):
+#         response.headers['Content-Type'] = (
+#             b'text/xml; charset=utf-8')
+#         if name:
+#             response.headers['Content-disposition'] = (
+#                 b'attachment; filename="{name}.xml"'.format(
+#                     name=encode_rfc2231(name)))
+#     if bom:
+#         response.write(BOM_UTF8)
+#     response.write(b'<data>\n')
+#     yield XMLWriter(response, [f['id'] for f in fields])
+#     response.write(b'</data>\n')
 
 
 def extract_date(datestr):

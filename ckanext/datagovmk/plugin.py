@@ -34,7 +34,7 @@ from ckan.lib import email_notifications
 from ckan.lib import base
 from ckan.plugins.toolkit import config
 
-from ckanext.datagovmk.views import bulk_download, report_issue
+from ckanext.datagovmk.views import bulk_download, report_issue, override_datastore
 
 
 # monkey_patch.activity_streams()
@@ -94,7 +94,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IRoutes, inherit=True)
+    # plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IPackageController, inherit=True)
@@ -213,7 +213,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download, report_issue]
+        return [bulk_download, report_issue, override_datastore]
 
     # IRoutes
     def before_map(self, map):

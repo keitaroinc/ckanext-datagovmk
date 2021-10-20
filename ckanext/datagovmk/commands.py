@@ -190,8 +190,8 @@ class CheckOutdatedDatasets(CkanCommand):
         :param last_modified: date of the last time the dataset was modified
         :type last_modified: str
         """
-        dataset_url = h.url_for(controller='package', action='read', id=dataset['name'], qualified=True)
-        dataset_update_url = h.url_for(controller='package', action='edit', id=dataset['name'], qualified=True)
+        dataset_url = h.url_for('dataset.read', id=dataset['name'], qualified=True)
+        dataset_update_url = h.url_for('dataset.edit', id=dataset['name'], qualified=True)
         dataset_title = dataset.get('title') or dataset.get('name')
 
         dataset_users = self._get_dataset_users(dataset)

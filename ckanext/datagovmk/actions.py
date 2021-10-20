@@ -423,7 +423,7 @@ def add_spatial_data(package_action, context, data_dict):
         )
 
         dataset_url = core_helpers.url_for(
-            controller='package',
+            controller='dataset',
             action='read',
             id=dataset.get('id')
         )
