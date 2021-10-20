@@ -34,7 +34,7 @@ from ckan.lib import email_notifications
 from ckan.lib import base
 from ckan.plugins.toolkit import config
 
-from ckanext.datagovmk.views import bulk_download
+from ckanext.datagovmk.views import bulk_download, report_issue
 
 
 # monkey_patch.activity_streams()
@@ -106,7 +106,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'datagovmk')
         toolkit.add_resource('assets', 'datagovmk')
         
         # config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
@@ -214,7 +213,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download]
+        return [bulk_download, report_issue]
 
     # IRoutes
     def before_map(self, map):
@@ -250,9 +249,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             m.connect('register', '/user/register', action='datagovmk_register')
             m.connect('/user/activate/{id:.*}', action='perform_activation')
 
-        map.connect('/issues/report_site_issue',
-                    controller='ckanext.datagovmk.controller:ReportIssueController',
-                    action='report_issue_form')
+        # map.connect('/issues/report_site_issue',
+        #             controller='ckanext.datagovmk.controller:ReportIssueController',
+        #             action='report_issue_form')
 
         # map.connect('/datastore/dump/{resource_id}',
         #             controller='ckanext.datagovmk.controller:OverrideDatastoreController',

@@ -362,13 +362,13 @@ def add_spatial_data(package_action, context, data_dict):
         UserAuthority.get_last_authority_for_user(authority_type='general',
                                                   user_id=context['auth_user_obj'].id)
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
 
     # If user has uploaded general authority file do not ask for
     # additional authority file on each dataset create for the current user
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
         data_dict.get('add_dataset_agreement') is not None and \
         dataset_type == 'dataset' and \
         data_dict.get('authority_file_url') == '' and user_authority is None:
@@ -376,7 +376,7 @@ def add_spatial_data(package_action, context, data_dict):
             _('Add dataset agreement file'): [_('Missing file')]
         })
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        data_dict.get('add_dataset_agreement') is None and \
        dataset_type == 'dataset':
         raise ValidationError({
@@ -385,7 +385,7 @@ def add_spatial_data(package_action, context, data_dict):
 
     dataset = package_action(context, data_dict)
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        dataset_type == 'dataset':
         if data_dict.get('authority_file_url'):
             data = {
@@ -1001,7 +1001,7 @@ def resource_show(context, data_dict):
 @toolkit.side_effect_free
 def organization_show(context, data_dict):
     """ Override to translate title and description of the organization. """
-
+    
     data = _organization_show(context, data_dict)
 
     data['display_name'] = h.translate_field(data, 'title')

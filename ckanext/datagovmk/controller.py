@@ -731,106 +731,105 @@ def _open_temp_zipfile():
     file_name = uuid.uuid4().hex + '.{ext}'.format(ext='zip')
     file_path = get_storage_path_for('temp-datagovmk') + '/' + file_name
 
-
     return zipfile.ZipFile(file_path, 'w')
 
 
-class ReportIssueController(BaseController):
-    """Controller for the issue reporting (site wide) form.
-    """
-    def report_issue_form(self):
-        """Renders the issue reporting form and reports the issue by sending
-        an email to the system admin with the issue.
-        """
-        login_required = False
-        if not c.user:
-            login_required = True
+# class ReportIssueController(BaseController):
+#     """Controller for the issue reporting (site wide) form.
+#     """
+#     def report_issue_form(self):
+#         """Renders the issue reporting form and reports the issue by sending
+#         an email to the system admin with the issue.
+#         """
+#         login_required = False
+#         if not c.user:
+#             login_required = True
 
-        data_dict = {}
-        errors = {
-            'issue_title': [],
-            'issue_description': []
-        }
-        extra_vars = {
-            'data': data_dict,
-            'errors': errors,
-            'login_required': login_required
-        }
-        if request.method == 'POST':
-            data_dict['issue_title'] = request.params.get('issue_title')
-            data_dict['issue_description'] = request.params.get('issue_description')
+#         data_dict = {}
+#         errors = {
+#             'issue_title': [],
+#             'issue_description': []
+#         }
+#         extra_vars = {
+#             'data': data_dict,
+#             'errors': errors,
+#             'login_required': login_required
+#         }
+#         if request.method == 'POST':
+#             data_dict['issue_title'] = request.params.get('issue_title')
+#             data_dict['issue_description'] = request.params.get('issue_description')
 
-        if login_required:
-            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
-
-
-        if request.method != 'POST':
-            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+#         if login_required:
+#             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
 
-
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj}
-
-        to_user = get_admin_email()
-
-        if not to_user:
-            h.flash_error(_('Unable to send the issue report to the system admin.'))
-            return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
-
-        issue_title = data_dict['issue_title'].strip()
-
-        issue_description = h.render_markdown(data_dict['issue_description'])
-
-        email_content = render('datagovmk/issue_email_template.html', extra_vars={
-            'title': issue_title,
-            'site_title': config.get('ckan.site_title', 'CKAN'),
-            'description': issue_description,
-            'date': datetime.now(),
-            'username': c.userobj.fullname or c.userobj.name,
-            'user': c.userobj,
-            'user_url': h.url_for(controller='user', action='read', id=c.user, qualified=True)
-        })
-
-        subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
-
-        result = send_email(to_user['name'], to_user['email'], subject, email_content)
-
-        if not result['success']:
-            h.flash_error(result['message'])
-        else:
-            h.flash_success(toolkit._('The issue has been reported.'))
-            extra_vars['successfuly_reported'] = True
-        return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+#         if request.method != 'POST':
+#             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
 
-def get_admin_email():
-    """Loads the admin email.
 
-    If a system configuration is present, it is preffered to the CKAN sysadmins.
-    The configuration property is ``ckanext.datagovmk.site_admin_email``.
+#         context = {'model': model, 'session': model.Session,
+#                    'user': c.user, 'auth_user_obj': c.userobj}
 
-    If no email is configured explicitly, then the email of the first CKAN
-    sysadmin is used.
+#         to_user = get_admin_email()
 
-    :returns: ``str`` the email of the sysadmin to which to send emails with
-        issues.
+#         if not to_user:
+#             h.flash_error(_('Unable to send the issue report to the system admin.'))
+#             return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
 
-    """
-    sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
-    if sysadmin_email:
-        name = sysadmin_email.split('@')[0]
-        return {
-            'email': sysadmin_email,
-            'name': name
-        }
-    sysadmins = get_sysadmins()
-    if sysadmins:
-        return {
-            'email': sysadmins[0].email,
-            'name': sysadmins[0].fullname or sysadmins[0].name
-        }
-    return None
+#         issue_title = data_dict['issue_title'].strip()
+
+#         issue_description = h.render_markdown(data_dict['issue_description'])
+
+#         email_content = render('datagovmk/issue_email_template.html', extra_vars={
+#             'title': issue_title,
+#             'site_title': config.get('ckan.site_title', 'CKAN'),
+#             'description': issue_description,
+#             'date': datetime.now(),
+#             'username': c.userobj.fullname or c.userobj.name,
+#             'user': c.userobj,
+#             'user_url': h.url_for(controller='user', action='read', id=c.user, qualified=True)
+#         })
+
+#         subject = u'CKAN: Проблем | Problem | Issue: {title}'.format(title=issue_title)
+
+#         result = send_email(to_user['name'], to_user['email'], subject, email_content)
+
+#         if not result['success']:
+#             h.flash_error(result['message'])
+#         else:
+#             h.flash_success(toolkit._('The issue has been reported.'))
+#             extra_vars['successfuly_reported'] = True
+#         return render('datagovmk/report_issue_form.html', extra_vars=extra_vars)
+
+
+# def get_admin_email():
+#     """Loads the admin email.
+
+#     If a system configuration is present, it is preffered to the CKAN sysadmins.
+#     The configuration property is ``ckanext.datagovmk.site_admin_email``.
+
+#     If no email is configured explicitly, then the email of the first CKAN
+#     sysadmin is used.
+
+#     :returns: ``str`` the email of the sysadmin to which to send emails with
+#         issues.
+
+#     """
+#     sysadmin_email = config.get('ckanext.datagovmk.site_admin_email', False)
+#     if sysadmin_email:
+#         name = sysadmin_email.split('@')[0]
+#         return {
+#             'email': sysadmin_email,
+#             'name': name
+#         }
+#     sysadmins = get_sysadmins()
+#     if sysadmins:
+#         return {
+#             'email': sysadmins[0].email,
+#             'name': sysadmins[0].fullname or sysadmins[0].name
+#         }
+#     return None
 
 
 class StatsController(BaseController):

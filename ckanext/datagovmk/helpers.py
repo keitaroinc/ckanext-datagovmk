@@ -194,13 +194,9 @@ def get_storage_path_for(dirname):
     """
     storage_path = config.get('ckan.storage_path')
     target_path = os.path.join(storage_path, 'storage', dirname)
-    print('::::: does it exist', target_path)
-    print(os.path.exists(target_path))
     if not os.path.exists(target_path):
-        print(":::::: target_path ---->", target_path)
         try:
             os.makedirs(target_path)
-            print('OK _____+++++')
         except OSError as exc:
             log.error('Storage directory creation failed. Error: %s' % exc)
             target_path = os.path.join(storage_path, 'storage')
