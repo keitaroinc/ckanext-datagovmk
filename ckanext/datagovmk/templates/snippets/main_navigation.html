@@ -16,19 +16,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
 {{ h.build_nav_main(
-  ('search', _('Datasets')),
-  ('organizations_index', _('Organizations')),
-  ('group_index', _('Groups')),
+  ('dataset.search', _('Datasets')),
+  ('organization.index', _('Organizations')),
+  ('group.index', _('Groups')),
   
   
   
   
-  
+  ('report.index', _('Reports')),
+  ('datarequests.index', _('Data Requests') + h.get_open_datarequests_badge()),
   ('home.about', _('About')),
 ) }}
 
 {# ('organogram_index', _('Organogram')),
    ('ckanext_showcase_index', _('Showcases')),
    ('ckanext_experience_index', _('Experiences')),
-  ('reports', _('Reports')),
-  ('datarequests_index', _('Data Requests') + h.get_open_datarequests_badge()), #}
+#}

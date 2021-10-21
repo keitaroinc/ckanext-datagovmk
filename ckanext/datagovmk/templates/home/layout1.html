@@ -31,7 +31,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             {% snippet 'home/snippets/search.html' %}
           {% endblock %}
           <div class="lists">
-            {# {% set recent_datasets = h.datagovmk_get_recently_updated_datasets() %} #}
+            {% set recent_datasets = h.datagovmk_get_recently_updated_datasets() %} 
             {% set popular_organizations = h.datagovmk_get_most_active_organizations() %}
             <div class="col-md-6">
               <h4 class="title"><i class="fa fa-clock-o"></i> {{_('Recent datasets')}}</h4>
