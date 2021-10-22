@@ -37,7 +37,8 @@ from ckan.plugins.toolkit import config
 from ckanext.datagovmk.views import (bulk_download,
                                      report_issue,
                                      override_datastore,
-                                     override_user)
+                                     override_user,
+                                     override_dataset)
 
 
 # monkey_patch.activity_streams()
@@ -216,7 +217,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download, report_issue, override_datastore, override_user]
+        return [bulk_download, report_issue, override_datastore, override_user, override_dataset]
 
     # IRoutes
     def before_map(self, map):

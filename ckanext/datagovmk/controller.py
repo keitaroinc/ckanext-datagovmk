@@ -500,111 +500,111 @@ class ApiController(BaseController):
 #         exporter(package_dict, request, response)
 
 
-class DatagovmkUserController(UserController):
-    """Overrides CKAN's UserController to send activation email to the user."""
+# class DatagovmkUserController(UserController):
+#     """Overrides CKAN's UserController to send activation email to the user."""
 
-    def datagovmk_register(self, data=None, errors=None, error_summary=None):
-        """ Wrapper around UserController's register method"""
+#     def datagovmk_register(self, data=None, errors=None, error_summary=None):
+#         """ Wrapper around UserController's register method"""
 
-        return self.register(data, errors, error_summary)
+#         return self.register(data, errors, error_summary)
 
-    def perform_activation(self, id):
-        """ Activates user account
+#     def perform_activation(self, id):
+#         """ Activates user account
 
-        :param id: user ID
-        :type id: string
+#         :param id: user ID
+#         :type id: string
 
-        """
+#         """
 
-        context = {'model': model, 'session': model.Session,
-                   'user': id, 'keep_email': True}
+#         context = {'model': model, 'session': model.Session,
+#                    'user': id, 'keep_email': True}
 
-        try:
-            data_dict = {'id': id}
-            user_dict = get_action('user_show')(context, data_dict)
+#         try:
+#             data_dict = {'id': id}
+#             user_dict = get_action('user_show')(context, data_dict)
 
-            user_obj = context['user_obj']
-        except NotFound as e:
-            abort(404, _('User not found'))
+#             user_obj = context['user_obj']
+#         except NotFound as e:
+#             abort(404, _('User not found'))
 
-        c.activation_key = request.params.get('key')
-        if not verify_activation_link(user_obj, c.activation_key):
-            h.flash_error(_('Invalid activation key. Please try again.'))
-            abort(403)
+#         c.activation_key = request.params.get('key')
+#         if not verify_activation_link(user_obj, c.activation_key):
+#             h.flash_error(_('Invalid activation key. Please try again.'))
+#             abort(403)
 
-        try:
-            user_dict['reset_key'] = c.activation_key
-            user_dict['state'] = model.State.ACTIVE
-            user = get_action('user_update')(context, user_dict)
-            create_activation_key(user_obj)
+#         try:
+#             user_dict['reset_key'] = c.activation_key
+#             user_dict['state'] = model.State.ACTIVE
+#             user = get_action('user_update')(context, user_dict)
+#             create_activation_key(user_obj)
 
-            h.flash_success(_('Your account has been activated.'))
-            h.redirect_to(controller='user', action='login')
-        except NotAuthorized:
-            h.flash_error(_('Unauthorized to edit user %s') % id)
-        except NotFound as e:
-            h.flash_error(_('User not found'))
-        except DataError:
-            h.flash_error(_(u'Integrity Error'))
-        except ValidationError as e:
-            h.flash_error(u'%r' % e.error_dict)
-        except ValueError as ve:
-            h.flash_error(str(ve))
+#             h.flash_success(_('Your account has been activated.'))
+#             h.redirect_to(controller='user', action='login')
+#         except NotAuthorized:
+#             h.flash_error(_('Unauthorized to edit user %s') % id)
+#         except NotFound as e:
+#             h.flash_error(_('User not found'))
+#         except DataError:
+#             h.flash_error(_(u'Integrity Error'))
+#         except ValidationError as e:
+#             h.flash_error(u'%r' % e.error_dict)
+#         except ValueError as ve:
+#             h.flash_error(str(ve))
 
-        c.user_dict = user_dict
-        h.redirect_to(controller='user', action='login')
+#         c.user_dict = user_dict
+#         h.redirect_to(controller='user', action='login')
 
 
-    def _save_new(self, context):
-        came_from = request.params.get('came_from')
-        try:
-            data_dict = logic.clean_dict(unflatten(
-                logic.tuplize_dict(logic.parse_params(request.params))))
-            context['message'] = data_dict.get('log_message', '')
+#     def _save_new(self, context):
+#         came_from = request.params.get('came_from')
+#         try:
+#             data_dict = logic.clean_dict(unflatten(
+#                 logic.tuplize_dict(logic.parse_params(request.params))))
+#             context['message'] = data_dict.get('log_message', '')
 
-            recaptcha_response = data_dict['g-recaptcha-response']
-            remote_ip = request.environ.get('REMOTE_ADDR', 'Unknown IP Address')
+#             recaptcha_response = data_dict['g-recaptcha-response']
+#             remote_ip = request.environ.get('REMOTE_ADDR', 'Unknown IP Address')
 
-            if ( _check_recaptcha(remote_ip, recaptcha_response) ):
-                user = get_action('user_create')(context, data_dict)
-            else:
-                error_msg = _(u'Bad Captcha. Please try again.')
-                h.flash_error(error_msg)
-                return self.new(data_dict)
+#             if ( _check_recaptcha(remote_ip, recaptcha_response) ):
+#                 user = get_action('user_create')(context, data_dict)
+#             else:
+#                 error_msg = _(u'Bad Captcha. Please try again.')
+#                 h.flash_error(error_msg)
+#                 return self.new(data_dict)
 
-        except NotAuthorized:
-            abort(403, _('Unauthorized to create user %s') % '')
-        except NotFound as e:
-            abort(404, _('User not found'))
-        except DataError:
-            abort(400, _(u'Integrity Error'))
-        except ValidationError as e:
-            errors = e.error_dict
-            error_summary = e.error_summary
-            return self.new(data_dict, errors, error_summary)
+#         except NotAuthorized:
+#             abort(403, _('Unauthorized to create user %s') % '')
+#         except NotFound as e:
+#             abort(404, _('User not found'))
+#         except DataError:
+#             abort(400, _(u'Integrity Error'))
+#         except ValidationError as e:
+#             errors = e.error_dict
+#             error_summary = e.error_summary
+#             return self.new(data_dict, errors, error_summary)
 
-        h.flash_success(_('A confirmation email has been sent to %s. '
-                          'Please use the link in the email to continue.') %
-                          data_dict['email'])
-        if not c.user:
-            # Do not log in the user programatically
-            # set_repoze_user(data_dict['name'])
-            if came_from:
-                h.redirect_to(came_from)
-            else:
-                # redirect user to login page
-                # h.redirect_to(controller='user', action='me')
-                h.redirect_to(controller='user', action='login')
-        else:
-            h.flash_success(_('User %s is now registered but you are still '
-                            'logged in as %s from before') %
-                            (data_dict['name'], c.user))
-            if authz.is_sysadmin(c.user):
-                h.redirect_to(controller='user',
-                                action='activity',
-                                id=data_dict['name'])
-            else:
-                return render('user/logout_first.html')
+#         h.flash_success(_('A confirmation email has been sent to %s. '
+#                           'Please use the link in the email to continue.') %
+#                           data_dict['email'])
+#         if not c.user:
+#             # Do not log in the user programatically
+#             # set_repoze_user(data_dict['name'])
+#             if came_from:
+#                 h.redirect_to(came_from)
+#             else:
+#                 # redirect user to login page
+#                 # h.redirect_to(controller='user', action='me')
+#                 h.redirect_to(controller='user', action='login')
+#         else:
+#             h.flash_success(_('User %s is now registered but you are still '
+#                             'logged in as %s from before') %
+#                             (data_dict['name'], c.user))
+#             if authz.is_sysadmin(c.user):
+#                 h.redirect_to(controller='user',
+#                                 action='activity',
+#                                 id=data_dict['name'])
+#             else:
+#                 return render('user/logout_first.html')
 
 
 def _export_resources_json(zip_file, pkg_dict, request, response):
