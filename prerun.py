@@ -31,7 +31,7 @@ def check_db_connection(retry=None):
     if retry is None:
         retry = RETRY
     elif retry == 0:
-        print '[prerun] Giving up after 5 tries...'
+        print ('[prerun] Giving up after 5 tries...')
         sys.exit(1)
 
     conn_str = os.environ.get('CKAN_SQLALCHEMY_URL', '')
@@ -39,8 +39,8 @@ def check_db_connection(retry=None):
         connection = psycopg2.connect(conn_str)
 
     except psycopg2.Error as e:
-        print str(e)
-        print '[prerun] Unable to connect to the database...try again in a while.'
+        print (str(e))
+        print ('[prerun] Unable to connect to the database...try again in a while.')
         import time
         time.sleep(10)
         check_db_connection(retry = retry - 1)
@@ -52,7 +52,7 @@ def check_solr_connection(retry=None):
     if retry is None:
         retry = RETRY
     elif retry == 0:
-        print '[prerun] Giving up after 5 tries...'
+        print ('[prerun] Giving up after 5 tries...')
         sys.exit(1)
 
     url = os.environ.get('CKAN_SOLR_URL', '')
@@ -61,8 +61,8 @@ def check_solr_connection(retry=None):
     try:
         connection = urllib2.urlopen(search_url)
     except urllib2.URLError as e:
-        print str(e)
-        print '[prerun] Unable to connect to solr...try again in a while.'
+        print (str(e))
+        print ('[prerun] Unable to connect to solr...try again in a while.')
         import time
         time.sleep(10)
         check_solr_connection(retry = retry - 1)
@@ -85,7 +85,7 @@ def init_db():
     issues_command = ['paster', '--plugin=ckanext-issues', 'issues', 'init_db', '-c', ckan_ini]
     datagovmk_command = ['paster', '--plugin=ckanext-datagovmk', 'initdb', '-c', ckan_ini]
 
-    print '[prerun] Initializing or upgrading db - start'
+    print ('[prerun] Initializing or upgrading db - start')
     try:
         # run init scripts
         subprocess.check_output(db_command, stderr=subprocess.STDOUT)
@@ -99,18 +99,18 @@ def init_db():
         subprocess.check_output(issues_command, stderr=subprocess.STDOUT)
         subprocess.check_output(datagovmk_command, stderr=subprocess.STDOUT)
 
-        print '[prerun] Initializing or upgrading db - end'
+        print ('[prerun] Initializing or upgrading db - end')
     except subprocess.CalledProcessError, e:
         if 'OperationalError' in e.output:
             print e.output
-            print '[prerun] Database not ready, waiting a bit before exit...'
+            print ('[prerun] Database not ready, waiting a bit before exit...')
             import time
             time.sleep(5)
             sys.exit(1)
         else:
             print e.output
             raise e
-    print '[prerun] Initializing or upgrading db - finish'
+    print ('[prerun] Initializing or upgrading db - finish')
 
 def create_sysadmin():
 
@@ -125,7 +125,7 @@ def create_sysadmin():
 
         out = subprocess.check_output(command)
         if 'User: \nNone\n' not in out:
-            print '[prerun] Sysadmin user exists, skipping creation'
+            print ('[prerun] Sysadmin user exists, skipping creation')
             return
 
         # Create user
@@ -147,7 +147,7 @@ def create_sysadmin():
         print '[prerun] Made user {0} a sysadmin'.format(name)
 
 def run_background_jobs():
-    print '[prerun] Starting background jobs - start'
+    print ('[prerun] Starting background jobs - start')
     archiver_bulk_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'bulk', '-c', ckan_ini]
     archiver_priority_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'priority', '-c', ckan_ini]
     validator_default_command = ['paster', '--plugin=ckan', 'jobs', 'worker', 'default', '-c', ckan_ini]
@@ -156,14 +156,14 @@ def run_background_jobs():
     subprocess.Popen(archiver_bulk_command)
     subprocess.Popen(archiver_priority_command)
     subprocess.Popen(validator_default_command)
-    print '[prerun] Starting background jobs - finish'
+    print ('[prerun] Starting background jobs - finish')
 
 if __name__ == '__main__':
 
     maintenance = os.environ.get('MAINTENANCE_MODE', '').lower() == 'true'
 
     if maintenance:
-        print '[prerun] Maintenance mode, skipping setup...'
+        print ('[prerun] Maintenance mode, skipping setup...')
     else:
         check_db_connection()
         check_solr_connection()

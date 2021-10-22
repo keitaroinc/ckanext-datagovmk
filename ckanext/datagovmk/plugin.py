@@ -34,7 +34,10 @@ from ckan.lib import email_notifications
 from ckan.lib import base
 from ckan.plugins.toolkit import config
 
-from ckanext.datagovmk.views import bulk_download, report_issue, override_datastore
+from ckanext.datagovmk.views import (bulk_download,
+                                     report_issue,
+                                     override_datastore,
+                                     override_user)
 
 
 # monkey_patch.activity_streams()
@@ -213,7 +216,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download, report_issue, override_datastore]
+        return [bulk_download, report_issue, override_datastore, override_user]
 
     # IRoutes
     def before_map(self, map):
@@ -245,9 +248,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
                       action='search')
 
         # map user routes
-        with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
-            m.connect('register', '/user/register', action='datagovmk_register')
-            m.connect('/user/activate/{id:.*}', action='perform_activation')
+        # with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
+        #     m.connect('register', '/user/register', action='datagovmk_register')
+        #     m.connect('/user/activate/{id:.*}', action='perform_activation')
 
         # map.connect('/issues/report_site_issue',
         #             controller='ckanext.datagovmk.controller:ReportIssueController',

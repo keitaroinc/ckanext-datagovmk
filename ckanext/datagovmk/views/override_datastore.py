@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, make_response
+from flask import Blueprint, make_response
 from logging import getLogger
 from contextlib import contextmanager
 from six import text_type
@@ -198,26 +198,26 @@ def xml_writer(response, fields, name=None, bom=False):
 # For OVERRIDING the Ckan datastore blueprint
 # # map of views which we won't register in Flask app
 # # you can store this somewhere in settings
-SKIP_VIEWS = (
-    # route, view function
-    ('/datastore/dump/<resource_id>', dump, ),
-)
+# SKIP_VIEWS = (
+#     # route, view function
+#     ('/datastore/dump/<resource_id>', dump, ),
+# )
 
 
-class CustomFlask(Flask):
+# class CustomFlask(Flask):
 
-    def add_url_rule(self, rule, endpoint=None, view_func=None, **options):
-        # Flask registers views when an application starts
-        # do not add view from SKIP_VIEWS
-        for rule_, view_func_ in SKIP_VIEWS:  # type: str, func
-            if rule_ == rule and view_func == view_func_:
-                return
-        return super(CustomFlask, self).\
-            add_url_rule(rule, endpoint, view_func, **options)
+#     def add_url_rule(self, rule, endpoint=None, view_func=None, **options):
+#         # Flask registers views when an application starts
+#         # do not add view from SKIP_VIEWS
+#         for rule_, view_func_ in SKIP_VIEWS:  # type: str, func
+#             if rule_ == rule and view_func == view_func_:
+#                 return
+#         return super(CustomFlask, self).\
+#             add_url_rule(rule, endpoint, view_func, **options)
 
 
-app = CustomFlask(__name__)
-app.register_blueprint(override_datastore)
+# app = CustomFlask(__name__)
+# app.register_blueprint(override_datastore)
 
 override_datastore.add_url_rule("/datastore/dump/<resource_id>",
                                 view_func=dump_override)
