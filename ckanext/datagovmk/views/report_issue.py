@@ -5,6 +5,7 @@ from datetime import datetime
 
 import ckan.model as model
 import ckan.lib.helpers as h
+import ckan.plugins.toolkit as toolkit
 from ckan.views.admin import _get_sysadmins
 from ckan.plugins.toolkit import _, c, request, config, render
 
