@@ -69,21 +69,21 @@ class SortGroups(DomainObject):
             )
 
         if q:
-            q = q.encode('utf-8')
+            q = q
             if current_lang == 'mk':
                 query = query.filter(
                     or_(cls.title_mk.contains(q),
-                        cls.title_mk.ilike(r"%{}%".format(q)))
+                        cls.title_mk.ilike("%{}%".format(q)))
                 )
             elif current_lang == 'en':
                 query = query.filter(
                     or_(cls.title_en.contains(q),
-                        cls.title_en.ilike(r"%{}%".format(q)))
+                        cls.title_en.ilike("%{}%".format(q)))
                 )
             else:
                 query = query.filter(
                     or_(cls.title_sq.contains(q),
-                        cls.title_sq.ilike(r"%{}%".format(q)))
+                        cls.title_sq.ilike("%{}%".format(q)))
                 )
 
         if order_by:
