@@ -38,7 +38,8 @@ from ckanext.datagovmk.views import (bulk_download,
                                      report_issue,
                                      override_datastore,
                                      override_user,
-                                     override_dataset)
+                                     override_dataset,
+                                     override_stats)
 
 
 # monkey_patch.activity_streams()
@@ -217,7 +218,8 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download, report_issue, override_datastore, override_user, override_dataset]
+        return [bulk_download, report_issue, override_datastore, override_user,
+                override_dataset, override_stats]
 
     # IRoutes
     def before_map(self, map):

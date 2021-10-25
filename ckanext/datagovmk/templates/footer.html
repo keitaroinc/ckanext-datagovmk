@@ -47,8 +47,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </dl>
                 <ul class="list-inline">
                   <li><a href="#">{{ _('Terms of use') }}</a></li>
-                  {# <li><a href="{{ h.url_for('pages_show', page='/ttojintnka-3a-npnbathoct-n-3awtnta-ha-jinhhnte-nodatoun') }}">{{ _('Privacy Policy') }}</a></li>
-                  #}
+                  <li><a href="{{ h.url_for('pages.show', page='/ttojintnka-3a-npnbathoct-n-3awtnta-ha-jinhhnte-nodatoun') }}">{{ _('Privacy Policy') }}</a></li>
+                  
                 </ul>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-3">
@@ -60,7 +60,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                       {% snippet 'snippets/main_navigation.html' %}
                     {% endblock %}
                     <li><a href="{{ h.url_for('report_issue.report_issue_form') }}">{{ _('Report site issue')}}</a></li>
-                    {#{{ h.build_nav('stats', _('Statistics')) }}#}
+                    {{ h.build_nav('override_stats.index', _('Statistics')) }}
                   </ul>
                   {% endblock %}
                 </div>
