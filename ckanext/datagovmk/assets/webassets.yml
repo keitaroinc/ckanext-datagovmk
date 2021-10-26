@@ -10,11 +10,19 @@ authority_representative:
 
 download-resources:
   output: datagovmk/%(version)s_download-resources.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
   contents:
     - js/download-resources.js
 
 mark-all-resources:
   output: datagovmk/%(version)s_mark-all-resources.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
   contents:
     - js/mark-all-resources.js
 
@@ -30,6 +38,10 @@ dataset-form-upload-attr:
 
 increment-downloads:
   output: datagovmk/%(version)s_increment-downloads.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
   contents:
     - js/modules/increment-downloads.js
 
@@ -45,6 +57,10 @@ resource-view-reorder:
 
 store-selected-language:
   output: datagovmk/%(version)s_store-selected-language.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
   contents:
     - js/modules/store-selected-language.js
 
