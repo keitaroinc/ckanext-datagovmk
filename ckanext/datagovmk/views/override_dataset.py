@@ -1,4 +1,5 @@
 # encoding: utf-8
+import os
 import re
 import pytz
 import logging
@@ -8,7 +9,7 @@ from functools import partial
 from six.moves.urllib.parse import urlencode
 from datetime import datetime
 
-from flask import Blueprint
+from flask import Blueprint, make_response
 
 from ckan.common import asbool
 import ckan.lib.base as base
@@ -16,10 +17,9 @@ import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as plugins
-from ckan.common import _, config, g, request
+from ckan.plugins.toolkit import _, config, g, request, abort
+from ckan.plugins import toolkit
 from ckan.lib.search import SearchError, SearchQueryError
-
-
 from ckan.views.dataset import (drill_down_url,
                                 remove_field,
                                 _sort_by,
@@ -29,6 +29,7 @@ from ckan.views.dataset import (drill_down_url,
                                 _setup_template_variables,
                                 _get_pkg_template)
 
+from ckanext.datagovmk.helpers import get_storage_path_for
 
 NotFound = logic.NotFound
 NotAuthorized = logic.NotAuthorized
@@ -301,4 +302,31 @@ def datetime_to_utc(dt):
     return dt.replace(tzinfo=pytz.UTC)
 
 
+def download_zip(zip_id):
+    response = make_response()
+
+    if not zip_id:
+        abort(404, toolkit._('Resource data not found'))
+    file_name, package_name = zip_id.split('::')
+    file_path = get_storage_path_for('temp-datagovmk/' + file_name)
+
+    if not os.path.isfile(file_path):
+        abort(404, toolkit._('Resource data not found'))
+
+    if not package_name:
+        package_name = 'resources'
+    package_name += '.zip'
+
+    with open(file_path, 'r') as f:
+        response.stream.write(f.read())
+
+    response.headers['Content-Type'] = 'application/octet-stream'
+    response.headers['Content-disposition'] =\
+        'attachment; filename=' + package_name
+    os.remove(file_path)
+
+
 override_dataset.add_url_rule('/', view_func=override_search, methods=["GET"])
+override_dataset.add_url_rule('/download/zip/<zip_id>',
+                              view_func=download_zip,
+                              methods=["GET", "POST"])

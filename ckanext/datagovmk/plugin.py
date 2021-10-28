@@ -16,8 +16,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import click
 
-from click.decorators import command
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
@@ -27,6 +27,7 @@ from ckan.logic import get_action
 from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
+import ckanext.datagovmk.commands as commands
 from ckanext.datagovmk.logic import import_spatial_data
 from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
@@ -160,7 +161,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         package_create = get_action('package_create')
         package_update = get_action('package_update')
-        #resource_delete = get_action('resource_delete')
+
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
@@ -221,53 +222,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return [bulk_download, report_issue, override_datastore, override_user,
                 override_dataset, override_stats]
 
-    # IRoutes
-    def before_map(self, map):
-        map.connect(
-            '/api/i18n/{lang}',
-            controller='ckanext.datagovmk.controller:ApiController',
-            action='i18n_js_translations'
-        )
-        # map.connect('/api/download/{package_id}/resources',
-        #             controller='ckanext.datagovmk.controller:BulkDownloadController',
-        #             action='download_resources_metadata')
-        # map.connect('/api/download/{package_id}/metadata',
-        #             controller='ckanext.datagovmk.controller:BulkDownloadController',
-        #             action='download_package_metadata')
-
-        # Override the resource download links, so we can count the number of downloads.
-        with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
-            m.connect('resource_download',
-                      '/dataset/{id}/resource/{resource_id}/download',
-                      action='resource_download')
-            m.connect('resource_download',
-                      '/dataset/{id}/resource/{resource_id}/download/{filename}',
-                      action='resource_download')
-            m.connect('download_zip',
-                      '/download/zip/{zip_id}',
-                      action='download_zip')
-            m.connect('search',
-                      '/dataset',
-                      action='search')
-
-        # map user routes
-        # with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
-        #     m.connect('register', '/user/register', action='datagovmk_register')
-        #     m.connect('/user/activate/{id:.*}', action='perform_activation')
-
-        # map.connect('/issues/report_site_issue',
-        #             controller='ckanext.datagovmk.controller:ReportIssueController',
-        #             action='report_issue_form')
-
-        # map.connect('/datastore/dump/{resource_id}',
-        #             controller='ckanext.datagovmk.controller:OverrideDatastoreController',
-        #             action='dump')
-
-        map.connect('/stats',
-                    controller="ckanext.datagovmk.controller:StatsController",
-                    action="index")
-
-        return map
 
     # IPackageController
     def before_index(self, pkg_dict):
@@ -303,11 +257,22 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
      # IClick
     def get_commands(self):
-        import click
+        
+    
+        @click.group()
+        def datagovmk():
+            """Generates datagovmk command"""
+            pass
 
-        @click.command()
-        def init_tables():
-            from ckanext.datagovmk.commands import tables_init
-            tables_init()            
 
-        return[init_tables]
+        @datagovmk.command()
+        def initdb():
+            commands.tables_init()
+            click.secho(u'Datagovmk tablea are setup', fg=u"green")
+
+        @datagovmk.command()
+        def setup_stats_tables():
+            from ckanext.datagovmk.model.stats import _setup_stats_tables
+            _setup_stats_tables()
+
+        return [datagovmk]
