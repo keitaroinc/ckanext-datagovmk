@@ -379,7 +379,7 @@ def fetch_most_active_orgs():
 
     for org_name in orgs:
         org = toolkit.get_action('organization_show')({'user': None}, {
-            'id': org_name,
+            'id': org_name['id'],
             'include_datasets': True,
             'include_dataset_count': False,
             'include_extras': True,
@@ -445,5 +445,3 @@ def fetch_most_active_orgs():
         s.close()
 
     log.info('Successfully cached most active organizations.')
-
-

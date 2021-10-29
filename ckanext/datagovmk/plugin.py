@@ -24,7 +24,6 @@ import ckanext.datagovmk.helpers as helpers
 import json
 from ckan.lib.plugins import DefaultTranslation
 from ckan.logic import get_action
-from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
 import ckanext.datagovmk.commands as commands
@@ -100,7 +99,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
-    # plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IPackageController, inherit=True)
@@ -225,12 +223,13 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IPackageController
     def before_index(self, pkg_dict):
+
         if 'title_translated' in pkg_dict:
             titles = pkg_dict['title_translated']
             titles_json = json.loads(titles)
-            pkg_dict['title_en'] = titles_json.get('en','').lower()
-            pkg_dict['title_mk'] = titles_json.get('mk','').lower()
-            pkg_dict['title_sq'] = titles_json.get('sq','').lower()
+            pkg_dict['title_en'] = titles_json.get('en', '').lower()
+            pkg_dict['title_mk'] = titles_json.get('mk', '').lower()
+            pkg_dict['title_sq'] = titles_json.get('sq', '').lower()
         stats = actions.get_package_stats(pkg_dict['id'])
         if stats:
             pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
@@ -255,15 +254,13 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         return search_params
 
-     # IClick
+    # IClick
     def get_commands(self):
-        
-    
+
         @click.group()
         def datagovmk():
             """Generates datagovmk command"""
             pass
-
 
         @datagovmk.command()
         def initdb():
@@ -274,5 +271,13 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         def setup_stats_tables():
             from ckanext.datagovmk.model.stats import _setup_stats_tables
             _setup_stats_tables()
+
+        @datagovmk.command()
+        def fetch_most_active_orgs():
+            from flask import Flask
+            from ckanext.datagovmk.commands import fetch_most_active_orgs
+            app = Flask(__name__)
+            with app.test_request_context():
+                fetch_most_active_orgs()
 
         return [datagovmk]

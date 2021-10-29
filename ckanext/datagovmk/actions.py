@@ -23,6 +23,8 @@ import hashlib
 import subprocess
 import cgi
 import json
+
+from werkzeug.wrappers import response
 from ckan.plugins import toolkit
 from ckan.views.admin import _get_sysadmins
 from ckanext.datagovmk import helpers as h
@@ -252,7 +254,7 @@ def prepare_zip_resources(context, data_dict):
 
                 headers = {'Authorization': _get_sysadmins()[0].apikey}
                 try:
-                    r = requests.get(url, headers=headers)
+                    r = requests.get(url, headers=headers, timeout=5, verify=False)
                 except Exception:
                     continue
 
@@ -1001,7 +1003,7 @@ def resource_show(context, data_dict):
 @toolkit.side_effect_free
 def organization_show(context, data_dict):
     """ Override to translate title and description of the organization. """
-    
+
     data = _organization_show(context, data_dict)
 
     data['display_name'] = h.translate_field(data, 'title')
@@ -1086,8 +1088,11 @@ def organization_list(context, data_dict):
 
     q = data_dict.get('q', '')
     sort = data_dict.get('sort', None)
-    if not sort:
-        sort = 'title_' + core_helpers.lang() + ' asc'
+    try:
+        if not sort:
+            sort = 'title_' + core_helpers.lang() + ' asc'
+    except TypeError:
+        sort = 'title_mk asc'
 
     kwargs = {}
 
