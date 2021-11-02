@@ -30,7 +30,6 @@ from ckan.cli.cli import CkanCommand
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckan.lib.mailer as ckan_mailer
-from ckan.lib import base
 from ckan.plugins.toolkit import config
 
 from ckanext.datagovmk.model.user_authority \
@@ -43,10 +42,11 @@ from ckanext.datagovmk.model.sort_organizations \
     import setup as setup_sort_organizations_table
 from ckanext.datagovmk.model.sort_groups \
     import setup as setup_sort_groups_table
-from ckanext.datagovmk.model.most_active_organizations import MostActiveOrganizations
-from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
+from ckanext.datagovmk.model.most_active_organizations \
+    import MostActiveOrganizations
+from ckanext.datagovmk.model.sort_organizations import \
+    SortOrganizations as SortOrganizationsModel
 from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
-from ckanext.datagovmk.helpers import get_most_active_organizations
 from ckan.model.meta import Session
 from ckan.views.admin import _get_sysadmins
 from ckan.logic.action.get import organization_list as ckan_organization_list
@@ -83,19 +83,109 @@ PERIODICITY = {
 IGNORE_PERIODICITY = {'IRREG', 'OTHER', 'UNKNOWN', 'NEVER'}
 
 
-class CheckOutdatedDatasets(CkanCommand):
-    ''' Check update frequency for datasets. '''
+def _check_dataset_if_outdated(dataset):
 
-    summary = __doc__.split('\n')[0]
-    usage = __doc__
-    max_args = 0
-    min_args = 0
+    frequency = dataset.get('frequency')
+    if not frequency:
+        return  # ignore, not scheduled for periodic updates
+    print("Frequency is: " + frequency)
 
-    def command(self):
-        self._load_config()
-        self._processl_all_datasets(self._check_dataset_if_outdated)
+    frequency = frequency.split('/')[-1]
+    if frequency in IGNORE_PERIODICITY:
+        print("Does it return here?! Frequency in ignore_periodicity")
+        return  # not scheduled by choice
+    periodicity = PERIODICITY.get(frequency.upper())
+    if not periodicity:
+        print("Not periodicity return!")
+        log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
+        return  # we don't know how to handle this periodicity
+    last_modified = _get_last_modified(dataset)
+    if not last_modified:
+        print("not last modified, return!")
+        return  # ignore this one
 
-    def _processl_all_datasets(self, process_dataset):
+    now = datetime.now()
+
+    diff = now - last_modified
+    if diff >= periodicity:
+        log.debug('Dataset %s needs to be updated.', dataset['id'])
+        notify_dataset_outdated(dataset, last_modified)
+        log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
+
+
+def _get_last_modified(dataset):
+    resources = dataset.get('resources')
+    if resources:
+        last_modified = []
+        for resource in resources:
+            lm = resource.get('last_modified') or resource.get('created')
+            if lm:
+                last_modified.append(parser.parse(lm))
+
+        return max(last_modified)
+    return None
+
+def _get_dataset_users(dataset):
+    users = []
+    if dataset.get('maintainer_email'):
+        maintainer = {'email': dataset['maintainer_email']}
+        maintainer['username'] = dataset.get('maintainer') or dataset['maintainer_email'].split('@')[0]
+
+        users.append(maintainer)
+
+    if dataset.get('creator_user_id'):
+        try:
+            creator = toolkit.get_action('user_show')({'ignore_auth' :True}, {'id': dataset['creator_user_id']})
+            users.append({
+                'email': creator['email'],
+                'username': creator.get('fullname') or creator.get('name')
+            })
+
+        except toolkit.NotFound:
+            pass
+
+    return users
+
+def notify_dataset_outdated(dataset, last_modified):
+    """ This function will notify if a dataset is outdated
+    :param dataset: the dataset that needs to be checked if it is outdated
+    :type dataset: dict
+    :param last_modified: date of the last time the dataset was modified
+    :type last_modified: str
+    """
+    dataset_url = h.url_for('dataset.read', id=dataset['name'], qualified=True)
+    dataset_update_url = h.url_for('dataset.edit', id=dataset['name'], qualified=True)
+    dataset_title = dataset.get('title') or dataset.get('name')
+
+    dataset_users = _get_dataset_users(dataset)
+
+    for user in dataset_users:
+        try:
+            _send_notification(dataset_url, dataset_update_url, dataset_title, user)
+        except Exception as e:
+            log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
+
+def _send_notification(dataset_url, dataset_update_url, dataset_title, user):
+    subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
+                u'Kujtesë për përditësimin e të dhënave "{title}" | '\
+                u'Reminder to update dataset "{title}"'.format(title=dataset_title)
+    try:
+        body =_load_resource_from_path('ckanext.datagovmk:templates/datagovmk/outdated_dataset_email.html').format(**{
+            'username': user['username'],
+            'dataset_url': dataset_url,
+            'dataset_title': dataset_title,
+            'dataset_update_url': dataset_update_url,
+            'site_title': config.get('ckan.site_title', 'CKAN')
+        })
+
+        ckan_mailer.mail_recipient(user['email'], user['email'], subject,
+                                    body, headers={
+                                        'Content-Type': 'text/html; charset=UTF-8',
+                                    })
+    except ckan_mailer.MailerException as e:
+        log.error('Failed to send notification message for updating the obsolete dataset %s: %s', dataset_title, e)
+
+def _processl_all_datasets(process_dataset=_check_dataset_if_outdated):
         context = {'ignore_auth': True}
         page = 0
 
@@ -116,111 +206,6 @@ class CheckOutdatedDatasets(CkanCommand):
             page += 1
             if page*BULK_SIZE >= datasets['count']:
                 break
-
-
-    def _check_dataset_if_outdated(self, dataset):
-
-        frequency = dataset.get('frequency')
-        if not frequency:
-            return  # ignore, not scheduled for periodic updates
-        print("Frequency is: " + frequency)
-
-        frequency = frequency.split('/')[-1]
-        if frequency in IGNORE_PERIODICITY:
-            print("Does it return here?! Frequency in ignore_periodicity")
-            return  # not scheduled by choice
-        periodicity = PERIODICITY.get(frequency.upper())
-        if not periodicity:
-            print("Not periodicity return!")
-            log.warning('Dataset %s has periodicity %s which we do not handle', dataset['id'], frequency)
-            return  # we don't know how to handle this periodicity
-
-
-        last_modified = self._get_last_modified(dataset)
-        if not last_modified:
-            print("not last modified, return!")
-            return  # ignore this one
-
-        now = datetime.now()
-
-        diff = now - last_modified
-        if diff >= periodicity:
-            log.debug('Dataset %s needs to be updated.', dataset['id'])
-            self.notify_dataset_outdated(dataset, last_modified)
-            log.info('Notifications for dataset update has beed sent. Dataset: %s', dataset['id'])
-
-
-    def _get_last_modified(self, dataset):
-        resources = dataset.get('resources')
-        if resources:
-            last_modified = []
-            for resource in resources:
-                lm = resource.get('last_modified') or resource.get('created')
-                if lm:
-                    last_modified.append(parser.parse(lm))
-
-            return max(last_modified)
-        return None
-
-    def _get_dataset_users(self, dataset):
-        users = []
-        if dataset.get('maintainer_email'):
-            maintainer = {'email': dataset['maintainer_email']}
-            maintainer['username'] = dataset.get('maintainer') or dataset['maintainer_email'].split('@')[0]
-
-            users.append(maintainer)
-
-        if dataset.get('creator_user_id'):
-            try:
-                creator = toolkit.get_action('user_show')({'ignore_auth' :True}, {'id': dataset['creator_user_id']})
-                users.append({
-                    'email': creator['email'],
-                    'username': creator.get('fullname') or creator.get('name')
-                })
-
-            except toolkit.NotFound:
-                pass
-
-        return users
-
-    def notify_dataset_outdated(self, dataset, last_modified):
-        """ This function will notify if a dataset is outdated
-        :param dataset: the dataset that needs to be checked if it is outdated
-        :type dataset: dict
-        :param last_modified: date of the last time the dataset was modified
-        :type last_modified: str
-        """
-        dataset_url = h.url_for('dataset.read', id=dataset['name'], qualified=True)
-        dataset_update_url = h.url_for('dataset.edit', id=dataset['name'], qualified=True)
-        dataset_title = dataset.get('title') or dataset.get('name')
-
-        dataset_users = self._get_dataset_users(dataset)
-
-        for user in dataset_users:
-            try:
-                self._send_notification(dataset_url, dataset_update_url, dataset_title, user)
-            except Exception as e:
-                log.error('Failed to send email notification for dataset %s: %s', dataset['id'], e)
-
-    def _send_notification(self, dataset_url, dataset_update_url, dataset_title, user):
-        subject = u'CKAN: Потсетување за ажурирање на податочниот сет „{title}“ | '\
-                  u'Kujtesë për përditësimin e të dhënave "{title}" | '\
-                  u'Reminder to update dataset "{title}"'.format(title=dataset_title)
-        try:
-            body =_load_resource_from_path('ckanext.datagovmk:templates/datagovmk/outdated_dataset_email.html').format(**{
-                'username': user['username'],
-                'dataset_url': dataset_url,
-                'dataset_title': dataset_title,
-                'dataset_update_url': dataset_update_url,
-                'site_title': config.get('ckan.site_title', 'CKAN')
-            })
-
-            ckan_mailer.mail_recipient(user['email'], user['email'], subject,
-                                       body, headers={
-                                           'Content-Type': 'text/html; charset=UTF-8',
-                                       })
-        except ckan_mailer.MailerException as e:
-            log.error('Failed to send notification message for updating the obsolete dataset %s: %s', dataset_title, e)
 
 
 def _load_resource_from_path(url):

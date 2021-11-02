@@ -16,18 +16,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import click
-
+import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
-import json
 from ckan.lib.plugins import DefaultTranslation
 from ckan.logic import get_action
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
-import ckanext.datagovmk.commands as commands
-from ckanext.datagovmk.logic import import_spatial_data
+import ckanext.datagovmk.cli as cli
 from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
@@ -92,6 +89,7 @@ def _notifications_for_activities(activities, user_dict):
 
     return notifications
 
+
 email_notifications._notifications_for_activities = _notifications_for_activities
 
 
@@ -111,7 +109,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('assets', 'datagovmk')
-        
+
         # config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
         # print(config)
 
@@ -223,7 +221,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IPackageController
     def before_index(self, pkg_dict):
-
         if 'title_translated' in pkg_dict:
             titles = pkg_dict['title_translated']
             titles_json = json.loads(titles)
@@ -241,7 +238,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def before_view(self, pkg_dict):
         return pkg_dict
 
-
     def before_search(self, search_params):
         """ Before making a search with package_search, make sure to exclude
         datasets that are marked as catalogs. """
@@ -256,28 +252,4 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IClick
     def get_commands(self):
-
-        @click.group()
-        def datagovmk():
-            """Generates datagovmk command"""
-            pass
-
-        @datagovmk.command()
-        def initdb():
-            commands.tables_init()
-            click.secho(u'Datagovmk tablea are setup', fg=u"green")
-
-        @datagovmk.command()
-        def setup_stats_tables():
-            from ckanext.datagovmk.model.stats import _setup_stats_tables
-            _setup_stats_tables()
-
-        @datagovmk.command()
-        def fetch_most_active_orgs():
-            from flask import Flask
-            from ckanext.datagovmk.commands import fetch_most_active_orgs
-            app = Flask(__name__)
-            with app.test_request_context():
-                fetch_most_active_orgs()
-
-        return [datagovmk]
+        return cli.get_commands()
