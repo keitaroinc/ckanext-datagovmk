@@ -993,9 +993,11 @@ def package_search(context, data_dict):
 def resource_show(context, data_dict):
     """ Override to translate title and description of the resource. """
     data = _resource_show(context, data_dict)
-
-    data['name'] = h.translate_field(data, 'name')
-    data['description'] = h.translate_field(data, 'description')
+    try:
+        data['name'] = h.translate_field(data, 'name')
+        data['description'] = h.translate_field(data, 'description')
+    except RuntimeError:
+        pass
 
     return data
 
