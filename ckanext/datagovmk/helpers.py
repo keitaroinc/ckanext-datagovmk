@@ -363,28 +363,29 @@ def get_config_option_show(value_for, lang):
 
     if value_for == "about":
         if lang == "mk":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_mk'
             })
         elif lang == "en":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_en'
             })
         else:
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_sq'
             })
+
     elif value_for == "intro":
         if lang == "mk":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_mk'
             })
         elif lang == "en":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_en'
             })
         else:
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_sq'
             })
     return text 

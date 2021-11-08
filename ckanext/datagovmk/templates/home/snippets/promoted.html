@@ -22,11 +22,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     {% if intro %}
       {{ h.render_markdown(intro) }}
     {% else %}
-      <h1 class="page-heading">{{ _("Welcome to CKAN") }}</h1>
-      <p>
+
         {% set intro_text = h.get_config_option_show("intro", h.lang()) %}
-        {{ intro_text}}
-      </p>
+        {{ h.render_markdown(intro_text) }}
+
     {% endif %}
   </header>
 
