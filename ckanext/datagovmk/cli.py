@@ -13,7 +13,7 @@ def get_commands():
     @datagovmk.command()
     def initdb():
         commands.tables_init()
-        click.secho(u'Datagovmk tablea are setup', fg=u"green")
+        click.secho(u'Datagovmk tables are setup', fg=u"green")
 
     @datagovmk.command()
     def setup_stats_tables():

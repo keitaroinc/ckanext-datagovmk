@@ -59,7 +59,6 @@ def _check_recaptcha(remote_ip, recaptcha_response):
 class OverrideRegisterView(RegisterView):
 
     def post(self):
-        print("====== I AM HERE")
         context = self._prepare()
         came_from = request.params.get('came_from')
         try:
