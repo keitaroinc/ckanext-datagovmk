@@ -50,7 +50,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               {% if popular_organizations %}
               <ul class="list-unstyled">
                 {% for organization in popular_organizations %}
-                  <li><i class="fa fa-university"></i> <a href="{{ h.url_for(controller='organization', action='read', id=organization.org_name) }}">{{ h.datagovmk_get_translated(organization.org_display_name) }}</a></li>
+                  <li><i class="fa fa-university"></i> <a href="{{ h.url_for('organization.read', id=organization.org_name) }}">{{ h.datagovmk_get_translated(organization.org_display_name) }}</a></li>
                 {% endfor %}
               </ul>
               {% else %}
@@ -69,7 +69,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       <div class="col-md-10 col-md-offset-1">
         <ul class="featured-groups">
           {% for group in groups %}
-            {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
+            {% set group_url = h.url_for('group.read', id=group.name) %}
 
             {% if group.image_display_url %}
               {% set group_image = group.image_display_url %}
