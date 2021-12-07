@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 {% block resource_item_title %}
   <div class="checkbox checkbox-mark-for-download">
     <label for="mark-download-resource">
-      <input name="mark-download-resource" value="{{ res.id }}" type="checkbox">
+      <input id="mark-download-resource" name="mark-download-resource" value="{{ res.id }}" type="checkbox">
       <span class="hidden">{{ _('Mark for Download') }}</span>
     </label>
   </div>
