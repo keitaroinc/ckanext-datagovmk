@@ -30,6 +30,10 @@ setup_increment_downloads:
   output: datagovmk/%(version)s_setup_increment_downloads.js
   contents:
     - js/setup_increment_downloads.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
 
 dataset-form-upload-attr:
   output: datagovmk/%(version)s_dataset-form-upload-attr.js
