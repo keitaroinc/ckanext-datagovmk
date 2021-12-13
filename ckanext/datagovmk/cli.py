@@ -30,6 +30,6 @@ def get_commands():
     def check_outdated_datasets():
         app = Flask(__name__)
         with app.test_request_context():
-            commands. _processl_all_datasets()
+            commands._processl_all_datasets()
 
     return [datagovmk]

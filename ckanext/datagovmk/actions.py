@@ -352,11 +352,10 @@ def add_spatial_data(package_action, context, data_dict):
     # Get user authority to later on check if there is one,
     # do not ask the user to upload new authority
     # each time when creating dataset
-    print('=======================>', context)
     if context['auth_user_obj']:
         user_authority = \
             UserAuthority.get_last_authority_for_user(authority_type='general',
-                                                    user_id=context['auth_user_obj'].id)
+                                                      user_id=context['auth_user_obj'].id)
     else:
         user_authority = None
 

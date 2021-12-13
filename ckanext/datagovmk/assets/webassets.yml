@@ -53,11 +53,17 @@ resource-reorder:
   output: datagovmk/%(version)s_resource-reorder.js
   contents:
     - js/modules/resource-reorder.js
+  extra:
+    preload:
+      - base/main
 
 resource-view-reorder:
   output: datagovmk/%(version)s_resource-view-reorder.js
   contents:
     - js/modules/resource-view-reorder.js
+  extra:
+    preload:
+      - base/main
 
 store-selected-language:
   output: datagovmk/%(version)s_store-selected-language.js
