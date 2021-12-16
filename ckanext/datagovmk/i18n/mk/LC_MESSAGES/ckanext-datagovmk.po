@@ -943,9 +943,7 @@ msgstr "Што се извештаи?"
 
 #: ckanext/datagovmk/templates/report/snippets/helper.html:8
 msgid ""
-" Reports are used to check the validity of the links, as well as to "
-"identify unavailable links across a portal. This section also previews "
-"the quality of the open data across organizations, groups and data sets. "
+"Reports are used to check the validity of the links, as well as to identify unavailable links across a portal. This section also previews the quality of the open data across organizations, groups and data sets."
 msgstr ""
 "Извештаите се употребуваат за да се провери валидноста на линковите како "
 "и недостапните линкови низ порталот. Тука е достапен преглед на "
