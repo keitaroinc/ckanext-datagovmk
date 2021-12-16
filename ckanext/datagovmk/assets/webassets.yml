@@ -7,6 +7,9 @@ authority_representative:
   output: datagovmk/%(version)s_authority_representative.js
   contents:
     - js/authority_representative.js
+  extra:
+    preload:
+      - base/main
 
 download-resources:
   output: datagovmk/%(version)s_download-resources.js
@@ -78,3 +81,6 @@ upload-authority:
   output: datagovmk/%(version)s_upload-authority.js
   contents:
     - js/modules/upload-authority.js
+  extra:
+    preload:
+      - base/main
