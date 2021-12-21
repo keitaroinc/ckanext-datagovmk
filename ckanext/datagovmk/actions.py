@@ -984,7 +984,7 @@ def get_package_stats(package_id):
     except toolkit.NotFound:
         return None
 
-    sizes = [rc.get('size', 0) for rc in pkg_dict.get('resources', [])]
+    sizes = [rc.get('size', 0) if rc.get('size', 0) else 0 for rc in pkg_dict.get('resources', [])]
     max_file_size = 0
     if sizes:
         max_file_size = max(sizes)
