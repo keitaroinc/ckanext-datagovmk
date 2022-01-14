@@ -49,8 +49,7 @@ from ckanext.datagovmk.model.sort_organizations import SortOrganizations as Sort
 from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
 from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
-from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
-                                          increment_total_downloads as increment_total_downloads_solr)
+from ckanext.datagovmk.solr.stats import update_package_stats
 from ckan.lib import helpers as core_helpers
 from ckan.logic.action.get import package_search as _package_search
 from ckan.logic.action.get import resource_show as _resource_show
@@ -996,15 +995,6 @@ def get_package_stats(package_id):
     }
 
 
-def update_package_stats(package_id):
-    """ This function will update the statistics for the dataset
-    :param package_id: the id of the dataset (package)
-    :type package_id: str
-    """
-    stats = get_package_stats(package_id)
-    update_package_stats_solr(package_id, stats)
-
-
 @toolkit.side_effect_free
 def increment_downloads_for_resource(context, data_dict):
     """ This function will increment the total downloads for a resource
@@ -1019,7 +1009,7 @@ def increment_downloads_for_resource(context, data_dict):
     # Also, update the stats in dataset indexed metadata
     try:
         resource = get_action('resource_show')({'ignore_auth': True}, {'id': resource_id})
-        increment_total_downloads_solr(resource['package_id'])
+        update_package_stats(resource['package_id'])
     except Exception as e:
         log.debug(e)
         import traceback
