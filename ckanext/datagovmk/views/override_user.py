@@ -25,42 +25,10 @@ log = getLogger(__name__)
 override_user = Blueprint('override_user', __name__)
 
 
-def _check_recaptcha(remote_ip, recaptcha_response):
-    '''Check a user\'s recaptcha submission is valid, and raise CaptchaError
-    on failure.'''
-
-    recaptcha_private_key = config.get('ckan.recaptcha.privatekey', '')
-    if not recaptcha_private_key:
-        # Recaptcha not enabled
-        return
-
-    recaptcha_server_name = 'https://www.google.com/recaptcha/api/siteverify'
-
-    # recaptcha_response_field will be unicode if there are foreign chars in
-    # the user input. So we need to encode it as utf8 before urlencoding or
-    # we get an exception (#1431).
-    params = urlencode(dict(secret=recaptcha_private_key,
-                            emoteip=remote_ip,
-                            response=recaptcha_response))
-    f = urlopen(recaptcha_server_name, params)
-    data = json.load(f)
-    f.close()
-
-    try:
-        if not data['success']:
-            return False
-        else:
-            return True
-    except IndexError:
-        # Something weird with recaptcha response
-        return False
-
-
 class OverrideRegisterView(RegisterView):
 
     def post(self):
         context = self._prepare()
-        came_from = request.params.get('came_from')
         try:
             data_dict = logic.clean_dict(
                 dictization_functions.unflatten(
@@ -72,26 +40,16 @@ class OverrideRegisterView(RegisterView):
 
             context['message'] = data_dict.get('log_message', '')
 
-            # recaptcha_response = data_dict['g-recaptcha-response']
-            remote_ip = request.environ.get('REMOTE_ADDR',
-                                            'Unknown IP Address')
-
-            # if ( _check_recaptcha(remote_ip, recaptcha_response) ):
-            #     user = toolkit.get_action('user_create')(context, data_dict)
-            # else:
-            #     error_msg = _(u'Bad Captcha. Please try again.')
-            #     h.flash_error(error_msg)
-            #     return self.new(data_dict)
         except dictization_functions.DataError:
             base.abort(400, _(u'Integrity Error'))
 
         context[u'message'] = data_dict.get(u'log_message', u'')
-        # try:
-        #     captcha.check_recaptcha(request)
-        # except captcha.CaptchaError:
-        #     error_msg = _(u'Bad Captcha. Please try again.')
-        #     h.flash_error(error_msg)
-        #     return self.get(data_dict)
+        try:
+            captcha.check_recaptcha(request)
+        except captcha.CaptchaError:
+            error_msg = _(u'Bad Captcha. Please try again.')
+            h.flash_error(error_msg)
+            return self.get(data_dict)
 
         try:
             logic.get_action(u'user_create')(context, data_dict)
