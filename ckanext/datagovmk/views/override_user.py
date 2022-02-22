@@ -108,16 +108,7 @@ class OverrideRegisterView(RegisterView):
                           'Please use the link in the email to continue.') %
                         data_dict['email'])
 
-        if not g.user:
-            # Do not log in the user programatically
-            # set_repoze_user(data_dict['name'])
-            if came_from:
-                h.redirect_to(came_from)
-            else:
-                # redirect user to login page
-                # h.redirect_to(controller='user', action='me')
-                h.redirect_to('user.login')
-        else:
+        if g.user:
             # #1799 User has managed to register whilst logged in - warn user
             # they are not re-logged in as new user.
             h.flash_success(
@@ -131,10 +122,9 @@ class OverrideRegisterView(RegisterView):
             else:
                 return base.render(u'user/logout_first.html')
 
-        # log the user in programatically
-        resp = h.redirect_to(u'user.me')
-        set_repoze_user(data_dict[u'name'], resp)
-        return resp
+        # do not log in the user
+        # Just flash success message and make the user activate throug mail
+        return h.redirect_to(u'user.login')
 
     def perform_activation(self, id):
         """ Activates user account
