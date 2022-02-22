@@ -1,19 +1,15 @@
-from urllib.parse import urlencode
-from urllib.request import urlopen
-import json
-
 from logging import getLogger
 from flask import Blueprint
 
 from ckan.plugins import toolkit
 from ckan import authz
-from ckan.plugins.toolkit import _, c, g, request, abort, config
+from ckan.plugins.toolkit import _, c, g, request, abort
 from ckan.lib.navl import dictization_functions
 from ckan.lib import captcha
 import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.helpers as h
-from ckan.views.user import RegisterView, set_repoze_user
+from ckan.views.user import RegisterView
 import ckan.lib.base as base
 
 from ckanext.datagovmk.lib import (verify_activation_link,
