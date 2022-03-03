@@ -18,6 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import json
+import pytest
+
+from flask import request
 
 from ckan import plugins
 from ckan.tests import helpers as test_helpers
@@ -25,8 +28,7 @@ from ckanext.datagovmk import helpers
 from ckan.tests import factories
 from ckan.lib.search import rebuild
 from ckanext.googleanalytics.dbutil import init_tables as init_tables_ga
-from ckanext.datagovmk.model.stats import (get_stats_for_resource,
-                                           increment_downloads)
+from ckanext.datagovmk.model.stats import increment_downloads
 from ckanext.datagovmk.tests.helpers import create_dataset, set_lang
 from ckanext.datagovmk.model.user_authority \
     import setup as setup_user_authority_table
@@ -35,9 +37,11 @@ from ckanext.datagovmk.model.user_authority_dataset \
 from ckanext.datagovmk.model.most_active_organizations \
     import setup as setup_most_active_organizations_table
 from ckanext.datagovmk.model.user_authority import UserAuthority
-from ckanext.c3charts.model.featured_charts import setup as setup_featured_charts_table
+from ckanext.c3charts.model.featured_charts \
+    import setup as setup_featured_charts_table
 from ckanext.googleanalytics.dbutil import update_package_visits
 from ckanext.datagovmk.commands import fetch_most_active_orgs
+from ckanext.datagovmk.tests import factories as dgm_factories
 
 
 class HelpersBase(object):
@@ -96,26 +100,32 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         assert len(result) == 2
         assert result[0]['id'] == dataset['id']
 
+    @pytest.mark.usefixtures('with_request_context')
     @test_helpers.change_config('ckan.auth.create_unowned_dataset', False)
     def test_get_most_active_organizations(self):
+        user = dgm_factories.User()
         organization = factories.Organization()
-        dataset = factories.Dataset(owner_org=organization['id'])
+        dataset = dgm_factories.Dataset(
+            user=user, owner_org=organization['id'])
         resource = factories.Resource(package_id=dataset['id'], url='http://google.com', skip_update_package_stats=True)
 
         organization2 = factories.Organization()
-        dataset1 = factories.Dataset(owner_org=organization2['id'])
+        dataset1 = dgm_factories.Dataset(
+            user=user, owner_org=organization2['id'])
         resource1 = factories.Resource(package_id=dataset1['id'], url='http://google.com', skip_update_package_stats=True)
-        dataset2 = factories.Dataset(owner_org=organization2['id'])
+        dataset2 = dgm_factories.Dataset(
+            user=user, owner_org=organization2['id'])
         resource2 = factories.Resource(package_id=dataset2['id'], url='http://google.com', skip_update_package_stats=True)
         resource3 = factories.Resource(package_id=dataset2['id'], url='http://google.com', skip_update_package_stats=True)
 
         organization3 = factories.Organization()
-        dataset3 = factories.Dataset(owner_org=organization3['id'])
+        dataset3 = dgm_factories.Dataset(
+            user=user, owner_org=organization3['id'])
         resource4 = factories.Resource(package_id=dataset3['id'], url='http://google.com', skip_update_package_stats=True)
         resource5 = factories.Resource(package_id=dataset3['id'], url='http://google.com', skip_update_package_stats=True)
         resource6 = factories.Resource(package_id=dataset3['id'], url='http://google.com', skip_update_package_stats=True)
         resource7 = factories.Resource(package_id=dataset3['id'], url='http://google.com', skip_update_package_stats=True)
-        dataset4 = factories.Dataset(owner_org=organization3['id'])
+        dataset4 = dgm_factories.Dataset(user=user, owner_org=organization3['id'])
         resource7 = factories.Resource(package_id=dataset4['id'], url='http://google.com', skip_update_package_stats=True)
 
         fetch_most_active_orgs()
@@ -140,6 +150,7 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
 
         assert len(result) == 7
 
+    @pytest.mark.usefixtures('with_request_context')
     def test_get_related_datasets(self):
         dataset = create_dataset(tags=[{'name': 'cat'}])
         dataset2 = create_dataset(tags=[{'name': 'cat'}])
@@ -380,19 +391,24 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
 
     @test_helpers.change_config('ckan.auth.create_unowned_dataset', True)
     def test_get_org_catalog(self):
+        user = dgm_factories.User()
         org = factories.Organization()
         extras = [{'key': 'org_catalog_enabled', 'value': True}]
-        dataset = factories.Dataset(owner_org=org['id'], extras=extras)
+        dataset = dgm_factories.Dataset(
+            user=user, owner_org=org['id'], extras=extras)
         result = helpers.get_org_catalog(org['id'])
 
         assert type(result) is dict
         assert result.get('id') == dataset.get('id')
 
     def test_get_catalog_count(self):
+        user = dgm_factories.User()
         org = factories.Organization()
         extras = [{'key': 'org_catalog_enabled', 'value': True}]
-        dataset = factories.Dataset(owner_org=org['id'], extras=extras)
-        dataset1 = factories.Dataset(owner_org=org['id'], extras=extras)
+        dataset = dgm_factories.Dataset(
+            user=user, owner_org=org['id'], extras=extras)
+        dataset1 = dgm_factories.Dataset(
+            user=user, owner_org=org['id'], extras=extras)
 
         result = helpers.get_catalog_count('')
         assert result == 2
@@ -406,14 +422,17 @@ class TestHelpers(HelpersBase, test_helpers.FunctionalTestBase):
         assert result.get('visits_recently') == 10
         assert result.get('visits_ever') == 28
 
+    @pytest.mark.usefixtures('with_request_context')
     def test_get_site_statistics(self):
+        user = dgm_factories.User()
         group = factories.Group()
         org = factories.Organization()
-        dataset = factories.Dataset(owner_org=org['id'])
-        dataset1 = factories.Dataset(owner_org=org['id'])
+        dataset = dgm_factories.Dataset(user=user, owner_org=org['id'])
+        dataset1 = dgm_factories.Dataset(user=user, owner_org=org['id'])
 
-        stats = helpers.get_site_statistics('')
+        request.environ['CKAN_LANG'] = 'en'
+        stats = helpers.get_site_statistics(user['id'])
 
-        assert stats.get('dataset_count') == 2
-        assert stats.get('organization_count') == 1
+        assert stats['dataset_count'] == 2
+        assert stats['organization_count'] == 1
         assert stats.get('group_count') == 1
