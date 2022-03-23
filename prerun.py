@@ -19,7 +19,8 @@ import os
 import sys
 import subprocess
 import psycopg2
-import urllib2
+import urllib.request
+import urllib.error
 
 
 ckan_ini = os.environ.get('CKAN_INI', '/srv/app/production.ini')
@@ -59,8 +60,8 @@ def check_solr_connection(retry=None):
     search_url = '{url}/select/?q=*&wt=json'.format(url=url)
 
     try:
-        connection = urllib2.urlopen(search_url)
-    except urllib2.URLError as e:
+        connection = urllib.request.urlopen(search_url)
+    except urllib.error.URLError as e:
         print (str(e))
         print ('[prerun] Unable to connect to solr...try again in a while.')
         import time
@@ -100,15 +101,15 @@ def init_db():
         subprocess.check_output(datagovmk_command, stderr=subprocess.STDOUT)
 
         print ('[prerun] Initializing or upgrading db - end')
-    except subprocess.CalledProcessError, e:
+    except subprocess.CalledProcessError as e:
         if 'OperationalError' in e.output:
-            print e.output
+            print (e.output)
             print ('[prerun] Database not ready, waiting a bit before exit...')
             import time
             time.sleep(5)
             sys.exit(1)
         else:
-            print e.output
+            print (e.output)
             raise e
     print ('[prerun] Initializing or upgrading db - finish')
 
@@ -136,7 +137,7 @@ def create_sysadmin():
                    '-c', ckan_ini]
 
         subprocess.call(command)
-        print '[prerun] Created user {0}'.format(name)
+        print ('[prerun] Created user {0}'.format(name))
 
         # Make it sysadmin
         command = ['paster', '--plugin=ckan', 'sysadmin', 'add',
@@ -144,7 +145,7 @@ def create_sysadmin():
                    '-c', ckan_ini]
 
         subprocess.call(command)
-        print '[prerun] Made user {0} a sysadmin'.format(name)
+        print ('[prerun] Made user {0} a sysadmin'.format(name))
 
 def run_background_jobs():
     print ('[prerun] Starting background jobs - start')
