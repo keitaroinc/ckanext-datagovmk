@@ -39,6 +39,11 @@ echo "Installing ckanext-fluent"
 pip install -e git+https://github.com/keitaroinc/ckanext-fluent.git@dgm-ckan2.9#egg=ckanext-fluent
 pip install -r https://raw.githubusercontent.com/keitaroinc/ckanext-fluent/dgm-ckan2.9/requirements.txt
 
+
+echo "Installing ckanext-dcat"
+pip install -e git+https://github.com/keitaroinc/ckanext-dcat.git@dgm-ckan2.9#egg=ckanext-dcat
+pip install -r https://raw.githubusercontent.com/keitaroinc/ckanext-dcat/dgm-ckan2.9/requirements.txt
+
 echo "Installing ckanext-mk_dcatap"
 pip install -e git+https://github.com/keitaroinc/ckanext-mk_dcatap.git@dgm-ckan2.9#egg=ckanext-mk_dcatap
 
