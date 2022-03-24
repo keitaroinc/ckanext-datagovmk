@@ -56,7 +56,7 @@ pip install -e git+https://github.com/keitaroinc/ckanext-repeating.git@dgm-ckan2
 
 echo "Installing ckanext-datagovmk and its requirements..."
 python setup.py develop
-pip install -r dev-requirements.txt
+pip install -r requirements.txt
 
 echo "Moving test.ini into a subdir..."
 mkdir subdir
