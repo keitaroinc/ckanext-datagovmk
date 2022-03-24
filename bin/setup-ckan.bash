@@ -10,7 +10,7 @@ sudo apt-get install xmlsec1 libxmlsec1-dev
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
 cd ckan
-git checkout 2.9
+git checkout ckan-2.9.4
 pip install -r requirement-setuptools.txt
 python setup.py develop
 pip install -r requirements.txt
