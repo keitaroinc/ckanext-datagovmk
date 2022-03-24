@@ -33,7 +33,6 @@ from ckan.plugins.toolkit import config
 
 from ckanext.datagovmk.views import (bulk_download,
                                      report_issue,
-                                     override_datastore,
                                      override_user,
                                      override_dataset,
                                      override_stats)
@@ -215,7 +214,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IBlueprint
     def get_blueprint(self):
-        return [bulk_download, report_issue, override_datastore, override_user,
+        return [bulk_download, report_issue, override_user,
                 override_dataset, override_stats]
 
 
