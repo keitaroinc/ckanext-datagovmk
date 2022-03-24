@@ -59,6 +59,10 @@ pip install -r https://raw.githubusercontent.com/keitaroinc/ckanext-pages/dgm-ck
 echo "Installing ckanext-repeating"
 pip install -e git+https://github.com/keitaroinc/ckanext-repeating.git@dgm-ckan2.9#egg=ckanext-repeating
 
+echo "Installing ckanext-googleanalytics"
+pip install -e git+https://github.com/keitaroinc/ckanext-googleanalytics.git@master#egg=ckanext-googleanalytics
+pip install -r https://raw.githubusercontent.com/keitaroinc/ckanext-googleanalytics/master/requirements.txt
+
 echo "Installing ckanext-datagovmk and its requirements..."
 python setup.py develop
 pip install -r requirements.txt
