@@ -64,17 +64,17 @@ def activity_stream_string_dataset_agreement_additional_authority(context, activ
     return toolkit._('{actor} ' + message)
 
 
-def activity_streams():
-    _activity_stream_string_functions =\
-        core_activity_streams.activity_stream_string_functions
-    _activity_stream_string_functions['updated_user_general_authority'] =\
-        activity_stream_string_updated_user_general_authority
-    _activity_stream_string_functions['dataset_agreement_general_authority'] =\
-        activity_stream_string_dataset_agreement_general_authority
-    _activity_stream_string_functions['dataset_agreement_additional_authority'] =\
-        activity_stream_string_dataset_agreement_additional_authority
-    core_activity_streams.activity_stream_string_functions =\
-        _activity_stream_string_functions
+# def activity_streams():
+#     _activity_stream_string_functions =\
+#         core_activity_streams.activity_stream_string_functions
+#     _activity_stream_string_functions['updated_user_general_authority'] =\
+#         activity_stream_string_updated_user_general_authority
+#     _activity_stream_string_functions['dataset_agreement_general_authority'] =\
+#         activity_stream_string_dataset_agreement_general_authority
+#     _activity_stream_string_functions['dataset_agreement_additional_authority'] =\
+#         activity_stream_string_dataset_agreement_additional_authority
+#     core_activity_streams.activity_stream_string_functions =\
+#         _activity_stream_string_functions
 
 
 def validators():
