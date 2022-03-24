@@ -1094,7 +1094,7 @@ def organization_delete(context, data_dict):
             # using Core SQLA instead of the ORM should be faster
             model.Session.execute(
                 pkg_table.update().where(
-                    sqla.and_(pkg_table.c.owner_org == group.id,
+                    sqlalchemy.and_(pkg_table.c.owner_org == group.id,
                               pkg_table.c.state != 'deleted')
                 ).values(owner_org=None)
             )
