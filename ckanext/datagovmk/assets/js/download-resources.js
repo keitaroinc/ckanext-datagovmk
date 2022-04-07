@@ -97,7 +97,7 @@ $(document).ready(function () {
       } else {
         window.ckan.notify(_('Could not create a zip archive.'));
       }
-    }).error(function (response) {
+    }).fail(function (response) {
       downloadResourcesBtn.removeAttr('disabled');
       downloadResourcesBtn.text(_('Download'));
 

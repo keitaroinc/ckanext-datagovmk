@@ -17,7 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% import 'macros/form.html' as form %}
 
-{% resource 'ckanext-pages/main' %}
+{% asset 'pages/main-css' %}
+{% asset 'pages/main-js' %}
 
 {% call form.input(
     field.field_name,

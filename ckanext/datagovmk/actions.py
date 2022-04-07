@@ -23,40 +23,33 @@ import hashlib
 import subprocess
 import cgi
 import json
+
 from ckan.plugins import toolkit
-from ckan.controllers.admin import get_sysadmins
+from ckan.views.admin import _get_sysadmins
 from ckanext.datagovmk import helpers as h
 from ckanext.datagovmk import logic as l
 from logging import getLogger
-from ckanext.dcat.processors import RDFSerializer
-from ckan.common import config
+from ckan.plugins.toolkit import config, request
 from ckan.model import State as model_state
-from socket import error as socket_error
-import ckan.lib.mailer as mailer
 import ckan.authz as authz
 import sqlalchemy
 
 import ckan.logic as logic
 import ckan.plugins as plugins
 import ckan.lib.uploader as uploader
+from ckan.common import is_flask_request
 from ckan.logic.action.create import user_create as _user_create
 from ckan.logic.action.update import user_update as _user_update
 from ckan.logic.action.get import user_activity_list as _user_activity_list
 from ckan.logic.action.get import dashboard_activity_list as _dashboard_activity_list
-from ckan.logic.action.create import package_create as _package_create
 
-from ckan.common import request, config, is_flask_request
 from ckanext.datagovmk.model.user_authority import UserAuthority
 from ckanext.datagovmk.model.user_authority_dataset import UserAuthorityDataset
 from ckanext.datagovmk.model.sort_organizations import SortOrganizations as SortOrganizationsModel
 from ckanext.datagovmk.model.sort_groups import SortGroups as SortGroupsModel
 from ckanext.datagovmk.model.stats import get_total_package_downloads
 from ckanext.datagovmk.lib import request_activation
-from ckanext.datagovmk.solr.stats import (update_package_stats as update_package_stats_solr,
-                                          increment_total_downloads as increment_total_downloads_solr)
-from ckan.logic.schema import default_user_schema
-from ckan.lib.navl.dictization_functions import validate
-import ckan.lib.activity_streams as activity_streams
+from ckanext.datagovmk.solr.stats import update_package_stats
 from ckan.lib import helpers as core_helpers
 from ckan.logic.action.get import package_search as _package_search
 from ckan.logic.action.get import resource_show as _resource_show
@@ -250,9 +243,9 @@ def prepare_zip_resources(context, data_dict):
                 if package_id is None:
                     package_id = resource['package_id']
 
-                headers = {'Authorization': get_sysadmins()[0].apikey}
+                headers = {'Authorization': _get_sysadmins()[0].apikey}
                 try:
-                    r = requests.get(url, headers=headers)
+                    r = requests.get(url, headers=headers, timeout=5, verify=False)
                 except Exception:
                     continue
 
@@ -261,7 +254,7 @@ def prepare_zip_resources(context, data_dict):
                 if content_type in SUPPORTED_RESOURCE_MIMETYPES:
                     resourceArchived = True
                     zip.writestr(name, r.content)
-    except Exception, ex:
+    except Exception as ex:
         log.error('An error occured while preparing zip archive. Error: %s' % ex)
         raise
 
@@ -358,17 +351,20 @@ def add_spatial_data(package_action, context, data_dict):
     # Get user authority to later on check if there is one,
     # do not ask the user to upload new authority
     # each time when creating dataset
-    user_authority = \
-        UserAuthority.get_last_authority_for_user(authority_type='general',
-                                                  user_id=context['auth_user_obj'].id)
+    if context['auth_user_obj']:
+        user_authority = \
+            UserAuthority.get_last_authority_for_user(authority_type='general',
+                                                      user_id=context['auth_user_obj'].id)
+    else:
+        user_authority = None
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        dataset_type == 'dataset':
         authority_file = _upload_authority_file(data_dict, is_required=False)
 
     # If user has uploaded general authority file do not ask for
     # additional authority file on each dataset create for the current user
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
         data_dict.get('add_dataset_agreement') is not None and \
         dataset_type == 'dataset' and \
         data_dict.get('authority_file_url') == '' and user_authority is None:
@@ -376,7 +372,7 @@ def add_spatial_data(package_action, context, data_dict):
             _('Add dataset agreement file'): [_('Missing file')]
         })
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        data_dict.get('add_dataset_agreement') is None and \
        dataset_type == 'dataset':
         raise ValidationError({
@@ -385,7 +381,7 @@ def add_spatial_data(package_action, context, data_dict):
 
     dataset = package_action(context, data_dict)
 
-    if package_action.func_name == 'package_create' and \
+    if package_action.__name__ == 'package_create' and \
        dataset_type == 'dataset':
         if data_dict.get('authority_file_url'):
             data = {
@@ -423,7 +419,7 @@ def add_spatial_data(package_action, context, data_dict):
         )
 
         dataset_url = core_helpers.url_for(
-            controller='package',
+            controller='dataset',
             action='read',
             id=dataset.get('id')
         )
@@ -891,42 +887,6 @@ def user_activity_list(context, data_dict):
 
 
 @toolkit.side_effect_free
-def user_activity_list_html(context, data_dict):
-    '''Return a user's public activity stream as HTML.
-
-    Override this action to filter out activities related to uploaded
-    authorities and dataset agreement that are only shown for sysadmins and
-    users that have updated their general activites.
-
-    The activity stream is rendered as a snippet of HTML meant to be included
-    in an HTML page, i.e. it doesn't have any HTML header or footer.
-
-    :param id: The id or name of the user.
-    :type id: string
-    :param offset: where to start getting activity items from
-        (optional, default: ``0``)
-    :type offset: int
-    :param limit: the maximum number of activities to return
-        (optional, default: ``31``, the default value is configurable via the
-        ckan.activity_list_limit setting)
-    :type limit: int
-
-    :rtype: string
-
-    '''
-    activity_stream = toolkit.get_action('user_activity_list')(context, data_dict)
-    offset = int(data_dict.get('offset', 0))
-    extra_vars = {
-        'controller': 'user',
-        'action': 'activity',
-        'id': data_dict['id'],
-        'offset': offset,
-    }
-    return activity_streams.activity_list_to_html(
-        context, activity_stream, extra_vars)
-
-
-@toolkit.side_effect_free
 def dashboard_activity_list(context, data_dict):
     """ Override this action to filter out activities related to uploaded
     authorities and dataset agreement that are only shown for sysadmins and
@@ -951,38 +911,16 @@ def dashboard_activity_list(context, data_dict):
 
 
 @toolkit.side_effect_free
-def dashboard_activity_list_html(context, data_dict):
-    '''Return the authorized (via login or API key) user's dashboard activity
-       stream as HTML.
-
-    Override this action to filter out activities related to uploaded
-    authorities and dataset agreement that are only shown for sysadmins and
-    users that have updated their general activites.
-
-    '''
-
-    activity_stream = toolkit.get_action('dashboard_activity_list')(context, data_dict)
-    model = context['model']
-    user_id = context['user']
-    offset = data_dict.get('offset', 0)
-    extra_vars = {
-        'controller': 'user',
-        'action': 'dashboard',
-        'offset': offset,
-        'id': user_id
-    }
-    return activity_streams.activity_list_to_html(context, activity_stream,
-                                                  extra_vars)
-
-
-@toolkit.side_effect_free
 def package_search(context, data_dict):
     """ Override to translate title and description of the dataset. """
     data = _package_search(context, data_dict)
 
-    for result in data.get('results'):
-        result['title'] = h.translate_field(result, 'title')
-        result['notes'] = h.translate_field(result, 'notes')
+    try:
+        for result in data.get('results'):
+            result['title'] = h.translate_field(result, 'title')
+            result['notes'] = h.translate_field(result, 'notes')
+    except RuntimeError:
+        pass
 
     return data
 
@@ -991,9 +929,11 @@ def package_search(context, data_dict):
 def resource_show(context, data_dict):
     """ Override to translate title and description of the resource. """
     data = _resource_show(context, data_dict)
-
-    data['name'] = h.translate_field(data, 'name')
-    data['description'] = h.translate_field(data, 'description')
+    try:
+        data['name'] = h.translate_field(data, 'name')
+        data['description'] = h.translate_field(data, 'description')
+    except RuntimeError:
+        pass
 
     return data
 
@@ -1003,10 +943,12 @@ def organization_show(context, data_dict):
     """ Override to translate title and description of the organization. """
 
     data = _organization_show(context, data_dict)
-
-    data['display_name'] = h.translate_field(data, 'title')
-    data['title'] = h.translate_field(data, 'title')
-    data['description'] = h.translate_field(data, 'description')
+    try:
+        data['display_name'] = h.translate_field(data, 'title')
+        data['title'] = h.translate_field(data, 'title')
+        data['description'] = h.translate_field(data, 'description')
+    except RuntimeError:
+        pass
 
     return data
 
@@ -1015,10 +957,12 @@ def organization_show(context, data_dict):
 def group_show(context, data_dict):
     """ Override to translate title and description of the group. """
     data = _group_show(context, data_dict)
-
-    data['display_name'] = h.translate_field(data, 'title')
-    data['title'] = h.translate_field(data, 'title')
-    data['description'] = h.translate_field(data, 'description')
+    try:
+        data['display_name'] = h.translate_field(data, 'title')
+        data['title'] = h.translate_field(data, 'title')
+        data['description'] = h.translate_field(data, 'description')
+    except RuntimeError:
+        pass
 
     return data
 
@@ -1039,7 +983,7 @@ def get_package_stats(package_id):
     except toolkit.NotFound:
         return None
 
-    sizes = [rc.get('size', 0) for rc in pkg_dict.get('resources', [])]
+    sizes = [rc.get('size', 0) if rc.get('size', 0) else 0 for rc in pkg_dict.get('resources', [])]
     max_file_size = 0
     if sizes:
         max_file_size = max(sizes)
@@ -1049,15 +993,6 @@ def get_package_stats(package_id):
         'file_size': max_file_size,
         'total_downloads': total_downloads
     }
-
-
-def update_package_stats(package_id):
-    """ This function will update the statistics for the dataset
-    :param package_id: the id of the dataset (package)
-    :type package_id: str
-    """
-    stats = get_package_stats(package_id)
-    update_package_stats_solr(package_id, stats)
 
 
 @toolkit.side_effect_free
@@ -1074,7 +1009,7 @@ def increment_downloads_for_resource(context, data_dict):
     # Also, update the stats in dataset indexed metadata
     try:
         resource = get_action('resource_show')({'ignore_auth': True}, {'id': resource_id})
-        increment_total_downloads_solr(resource['package_id'])
+        update_package_stats(resource['package_id'])
     except Exception as e:
         log.debug(e)
         import traceback
@@ -1086,8 +1021,11 @@ def organization_list(context, data_dict):
 
     q = data_dict.get('q', '')
     sort = data_dict.get('sort', None)
-    if not sort:
-        sort = 'title_' + core_helpers.lang() + ' asc'
+    try:
+        if not sort:
+            sort = 'title_' + core_helpers.lang() + ' asc'
+    except TypeError:
+        sort = 'title_mk asc'
 
     kwargs = {}
 
@@ -1156,14 +1094,14 @@ def organization_delete(context, data_dict):
             # using Core SQLA instead of the ORM should be faster
             model.Session.execute(
                 pkg_table.update().where(
-                    sqla.and_(pkg_table.c.owner_org == group.id,
+                    sqlalchemy.and_(pkg_table.c.owner_org == group.id,
                               pkg_table.c.state != 'deleted')
                 ).values(owner_org=None)
             )
 
-    rev = model.repo.new_revision()
-    rev.author = user
-    rev.message = _(u'REST API: Delete %s') % revisioned_details
+    # rev = model.repo.new_revision()
+    # rev.author = user
+    # rev.message = _(u'REST API: Delete %s') % revisioned_details
 
     # The group's Member objects are deleted
     # (including hierarchy connections to parent and children groups)

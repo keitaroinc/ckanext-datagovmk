@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% import "macros/form.html" as form %}
 
-{% resource 'datagovmk/js/modules/upload-authority.js' %}
+{% asset 'datagovmk/upload-authority' %}
 
 {% if is_upload_enabled %}
 <div class="image-upload upload-authority off" data-module="upload-authority" data-module-is_url="{{ 'true' if is_url else 'false' }}" data-module-is_upload="{{ 'true' if is_upload else 'false' }}"
@@ -30,6 +30,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     {% if is_upload %}
         {{ form.checkbox('clear_upload', label=_('Clear Upload'), id='field-clear-upload', value='true', error='', classes=['control-full']) }}
     {% endif %}
-  {% endif %}
+  {% endif %} 
 
 {% if is_upload_enabled %}</div>{% endif %}

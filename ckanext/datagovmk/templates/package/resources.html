@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-{% resource 'datagovmk/js/modules/resource-reorder.js' %}
+{% asset 'datagovmk/resource-reorder' %}
 
 {% ckan_extends %}
 
@@ -28,7 +28,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       {% endfor %}
     </ul>
   {% else %}
-    {% trans url=h.url_for(controller='package', action='new_resource', id=pkg.name) %}
+    {% trans url=h.url_for(pkg.type ~ '_resource.new', id=pkg.name) %}
       <p class="empty">This dataset has no data, <a href="{{ url }}">why not add some?</a></p>
     {% endtrans %}
   {% endif %}

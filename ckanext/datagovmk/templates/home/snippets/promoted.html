@@ -22,15 +22,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     {% if intro %}
       {{ h.render_markdown(intro) }}
     {% else %}
-      <h1 class="page-heading">{{ _("Welcome to CKAN") }}</h1>
-      <p>
+
         {% set intro_text = h.get_config_option_show("intro", h.lang()) %}
-        {{ intro_text}}
-      </p>
+        {{ h.render_markdown(intro_text) }}
+
     {% endif %}
   </header>
 
-  <a class="btn btn-lg btn-primary btn-primary-outline" href="{{ h.url_for(controller='home', action='about') }}">{{ _('Learn more') }}</a>
+  <a class="btn btn-lg btn-primary btn-primary-outline" href="{{ h.url_for('home.about') }}">{{ _('Learn more') }}</a>
 
   {% block home_image %}
   {# No need for home image. #}

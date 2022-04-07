@@ -2,31 +2,18 @@
    these badges work. The necessary Travis and Coverage config files have been
    generated for you.
 
-.. image:: https://travis-ci.org//ckanext-datagovmk.svg?branch=master
-    :target: https://travis-ci.org//ckanext-datagovmk
+.. image:: https://github.com/keitaroinc/ckanext-datagovmk/workflows/CI/badge.svg
+    :target: https://github.com/keitaroinc/ckanext-datagovmk/actions
 
-.. image:: https://coveralls.io/repos//ckanext-datagovmk/badge.svg
-  :target: https://coveralls.io/r//ckanext-datagovmk
+.. image:: https://coveralls.io/repos/github/keitaroinc/ckanext-datagovmk/badge.svg?branch=master
+    :target: https://coveralls.io/github/keitaroinc/ckanext-datagovmk?branch=master
 
-.. image:: https://pypip.in/download/ckanext-datagovmk/badge.svg
-    :target: https://pypi.python.org/pypi//ckanext-datagovmk/
-    :alt: Downloads
+.. image:: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-blue
+    :target: https://www.python.org
 
-.. image:: https://pypip.in/version/ckanext-datagovmk/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-datagovmk/
-    :alt: Latest Version
+.. image:: https://img.shields.io/badge/ckan-2.9-red
+    :target: https://www.ckan.org
 
-.. image:: https://pypip.in/py_versions/ckanext-datagovmk/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-datagovmk/
-    :alt: Supported Python versions
-
-.. image:: https://pypip.in/status/ckanext-datagovmk/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-datagovmk/
-    :alt: Development Status
-
-.. image:: https://pypip.in/license/ckanext-datagovmk/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-datagovmk/
-    :alt: License
 
 =============
 ckanext-datagovmk
@@ -66,7 +53,7 @@ ckanext-scheming
 
 Install scheming and its dependencies with the patch for CKAN 2.8::
 
-    pip install -se "git+https://github.com/keitaroinc/ckanext-scheming.git@ckan-2.8#egg=ckanext-scheming"
+    pip install -e "git+https://github.com/keitaroinc/ckanext-scheming.git@dgm-ckan2.9#egg=ckanext-scheming"
     pip install -r /usr/lib/ckan/default/src/ckanext-scheming/requirements.txt
 
 
@@ -76,7 +63,7 @@ ckanext-repeating
 
 This plays with ckanext-scheming and adds support for repeatable fields::
 
-    pip install +e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating"
+    pip install -e "git+https://github.com/keitaroinc/ckanext-repeating.git#egg=ckanext-repeating"
 
 
 
@@ -89,7 +76,7 @@ accordance with the DCAT standard.
 
 Install it along with its dependencies::
 
-    pip install -e "git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat"
+    pip install -e "git+https://github.com/keitaroinc/ckanext-dcat.git#egg=ckanext-dcat"
     pip install -r /usr/lib/ckan/default/src/ckanext-dcat/requirements.txt
 
 
@@ -166,7 +153,7 @@ To install ckanext-datagovmk:
 
 Create the database tables running:
 
- paster --plugin=ckanext-datagovmk initdb -c ../path/to/ini/file
+ ckan -c ../path/to/ini/file datagovmk initdb
 
 Populate custom tables using:
 
@@ -229,18 +216,14 @@ do::
 Running the Tests
 -----------------
 
-Run a local dev SMTP server because it is needed for some of the tests::
-
-    sudo python -m smtpd -n -c DebuggingServer localhost:6675
-
 To run the tests, do::
 
-    nosetests --nologcapture --with-pylons=test.ini
+    pytest --ckan-ini=test.ini ckanext/datagovmk/tests/
 
 To run the tests and produce a coverage report, first make sure you have
 coverage installed in your virtualenv (``pip install coverage``) then run::
 
-    nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.datagovmk --cover-inclusive --cover-erase --cover-tests
+    pytest --cov --ckan-ini=test.ini ckanext/datagovmk/tests/
 
 
 ---------------------------------

@@ -26,8 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </p>
         {% if h.check_access('ckanext_showcase_admin_add') %}
         <p>
-            {% trans url=h.url_for(controller='ckanext.showcase.controller:ShowcaseController',
-            action='manage_showcase_admins') %}Sysadmins can manage Showcase Admins from the <a href='{{ url }}'>Showcase
+            {% trans url=h.url_for('showcase_blueprint.admins') %}Sysadmins can manage Showcase Admins from the <a href='{{ url }}'>Showcase
                 configuration page</a>.{% endtrans %}
         </p>
         {% endif %}

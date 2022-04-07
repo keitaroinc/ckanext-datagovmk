@@ -31,7 +31,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               {{ super() }}
             {% endblock %}
 
-            <div class="row {% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}">
+            <div class="row {% if self.secondary()|trim == '' or c.action=='resource.read' %} no-nav{% endif %}">
               {#
               The pre_primary block can be used to add content to before the
               rendering of the main content columns of the page.

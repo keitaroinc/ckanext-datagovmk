@@ -15,8 +15,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import datetime
-
 import ckan.logic as logic
 import ckan.lib.helpers as h
 
@@ -25,7 +23,7 @@ from ckan.model.meta import metadata, mapper, Session
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
 
-from sqlalchemy import types, ForeignKey, Column, Table, desc, or_
+from sqlalchemy import types, ForeignKey, Column, Table, or_, text
 
 
 __all__ = [
@@ -38,12 +36,14 @@ sort_groups_table = Table(
     'sort_groups',
     metadata,
     Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-    Column('group_id', types.UnicodeText, ForeignKey('group.id', ondelete='CASCADE')),
+    Column('group_id', types.UnicodeText,
+           ForeignKey('group.id', ondelete='CASCADE')),
     Column('title_mk', types.UnicodeText),
     Column('title_en', types.UnicodeText),
     Column('title_sq', types.UnicodeText)
 
 )
+
 
 class SortGroups(DomainObject):
 
@@ -69,22 +69,25 @@ class SortGroups(DomainObject):
             )
 
         if q:
-            q = q.encode('utf-8')
+            q = q
             if current_lang == 'mk':
                 query = query.filter(
-                    or_(cls.title_mk.contains(q), cls.title_mk.ilike(r"%{}%".format(q)))
+                    or_(cls.title_mk.contains(q),
+                        cls.title_mk.ilike("%{}%".format(q)))
                 )
             elif current_lang == 'en':
                 query = query.filter(
-                    or_(cls.title_en.contains(q), cls.title_en.ilike(r"%{}%".format(q)))
+                    or_(cls.title_en.contains(q),
+                        cls.title_en.ilike("%{}%".format(q)))
                 )
             else:
                 query = query.filter(
-                    or_(cls.title_sq.contains(q), cls.title_sq.ilike(r"%{}%".format(q)))
+                    or_(cls.title_sq.contains(q),
+                        cls.title_sq.ilike("%{}%".format(q)))
                 )
 
         if order_by:
-            query = query.order_by(order_by)
+            query = query.order_by(text(order_by))
 
         if limit:
             query = query.limit(limit)
@@ -101,7 +104,7 @@ class SortGroups(DomainObject):
         Session.commit()
 
         return obj.first()
-        
+
     @classmethod
     def delete(cls, filter):
         obj = Session.query(cls).filter_by(**filter).first()

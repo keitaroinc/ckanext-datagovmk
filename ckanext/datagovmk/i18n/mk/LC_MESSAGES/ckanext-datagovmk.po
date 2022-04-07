@@ -633,10 +633,10 @@ msgstr "Што претставуваат групи?"
 
 #: ckanext/datagovmk/templates/group/snippets/helper.html:8
 msgid ""
-" Groups are sets of data on a specific subject, enabling simple search of"
-" data sets with similar context. "
+"Groups are sets of data on a specific subject, enabling simple search of"
+" data sets with similar context."
 msgstr ""
-" Групи се збирки на податочни сетови од одредена тема, овозможувајќи "
+"Групи се збирки на податочни сетови од одредена тема, овозможувајќи "
 "поедноставно пронаоѓање на податочни сетови од сличен контекст."
 
 #: ckanext/datagovmk/templates/home/index.html:29
@@ -746,11 +746,11 @@ msgstr "Што се организации?"
 
 #: ckanext/datagovmk/templates/organization/snippets/helper.html:8
 msgid ""
-" Organizations are bodies and public institutions that create, manage and"
+"Organizations are bodies and public institutions that create, manage and"
 " publish collections of datasets in an open data format, organized in "
-"special data sets on the portal. "
+"special data sets on the portal."
 msgstr ""
-" Организации се органи и институции од јавниот сектор кои податоците кои "
+"Организации се органи и институции од јавниот сектор кои податоците кои "
 "ги создаваат во остварувањето на своите надлежности ги објавуваат во "
 "формат  на отворени податоци организирани во посебни податочни сетови на "
 "порталот."
@@ -943,9 +943,7 @@ msgstr "Што се извештаи?"
 
 #: ckanext/datagovmk/templates/report/snippets/helper.html:8
 msgid ""
-" Reports are used to check the validity of the links, as well as to "
-"identify unavailable links across a portal. This section also previews "
-"the quality of the open data across organizations, groups and data sets. "
+"Reports are used to check the validity of the links, as well as to identify unavailable links across a portal. This section also previews the quality of the open data across organizations, groups and data sets."
 msgstr ""
 "Извештаите се употребуваат за да се провери валидноста на линковите како "
 "и недостапните линкови низ порталот. Тука е достапен преглед на "

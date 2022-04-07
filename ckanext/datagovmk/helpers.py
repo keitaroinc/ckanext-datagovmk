@@ -57,7 +57,7 @@ def get_recently_updated_datasets(limit=5):
             'rows': limit,
         })['results']
 
-    except toolkit.ValidationError, search.SearchError:
+    except (toolkit.ValidationError, search.SearchError):
         return []
     else:
         pkgs = []
@@ -197,7 +197,7 @@ def get_storage_path_for(dirname):
     if not os.path.exists(target_path):
         try:
             os.makedirs(target_path)
-        except OSError, exc:
+        except OSError as exc:
             log.error('Storage directory creation failed. Error: %s' % exc)
             target_path = os.path.join(storage_path, 'storage')
             if not os.path.exists(target_path):
@@ -259,6 +259,7 @@ def get_org_title(id):
     returns: the translated title of the organization
     :rtype: str
     """
+
     org = toolkit.get_action('organization_show')(data_dict={'id': id})
 
     return translate_field(org, 'title')
@@ -362,28 +363,29 @@ def get_config_option_show(value_for, lang):
 
     if value_for == "about":
         if lang == "mk":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_mk'
             })
         elif lang == "en":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_en'
             })
         else:
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_about_sq'
             })
+
     elif value_for == "intro":
         if lang == "mk":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_mk'
             })
         elif lang == "en":
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_en'
             })
         else:
-            text = toolkit.get_action('config_option_show')({},{
+            text = toolkit.get_action('config_option_show')({'ignore_auth': True},{
                 'key':'ckan.site_intro_text_sq'
             })
     return text 

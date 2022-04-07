@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from ckan.common import config
-from ckan.lib.base import render_jinja2
+from ckan.plugins.toolkit import render
 from ckan.lib import helpers as h
 from ckan.lib import mailer
 
@@ -36,9 +36,7 @@ def get_activation_link(user):
     :returns: activation link
     :rtype: str
     """
-    controller_path = 'ckanext.datagovmk.controller:DatagovmkUserController'
-    return h.url_for(controller=controller_path,
-                     action='perform_activation',
+    return h.url_for('override_user.perform_activation',
                      id=user.id,
                      key=user.reset_key,
                      qualified=True)
@@ -54,13 +52,13 @@ def request_activation(user):
     site_title = config.get('ckan.site_title')
     site_url = config.get('ckan.site_url')
 
-    body = render_jinja2('emails/confirm_user_email.txt', {
+    body = render('emails/confirm_user_email.txt', {
         'activation_link': get_activation_link(user),
         'site_url': site_url,
         'site_title': site_title,
         'user_name': user.name
     })
-    subject = render_jinja2('emails/confirm_user_subject.txt', {
+    subject = render('emails/confirm_user_subject.txt', {
         'site_title': site_title
     })
     subject = subject.split('\n')[0]

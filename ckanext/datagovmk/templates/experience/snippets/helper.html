@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </p>
         {% if h.check_access('ckanext_experience_admin_add') %}
         <p>
-            {% trans url=h.url_for(controller='ckanext.experience.controller:ExperienceController', action='manage_experience_admins') %}
+            {% trans url=h.url_for('experience_blueprint.admins') %}
             Sysadmins can manage Experience Admins from the <a href='{{ url }}'>Experience configuration page</a>.{% endtrans %}
         </p>
         {% endif %}

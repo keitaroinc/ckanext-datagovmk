@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% import "macros/form.html" as form %}
 
-{% resource 'datagovmk/js/authority_representative.js' %}
+{% asset 'datagovmk/authority_representative' %}
 
 {% set authority_file_url = data.authority_file_url %}
 {% set is_upload = authority_file_url and not authority_file_url.startswith('http') %}

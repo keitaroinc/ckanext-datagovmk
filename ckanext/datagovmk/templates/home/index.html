@@ -45,11 +45,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 <span class="fa fa-newspaper-o"></span>
                 <span>{{ _('News') }}</span>
               </h2>
-              <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+              <a href="{{ h.url_for('pages.news_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
             </div>
             <div class="panel-body">
               {% for item in news %}
-              <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='news_show', page='/' + item.name) }}">
+              <a class="item" href="{{ h.url_for('pages.news_show', page='/' + item.name) }}">
                 {% if item.image %}
                 <span class="image-wrap">
                   <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}
@@ -72,11 +72,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 <span class="fa fa-sticky-note"></span>
                 <span>{{ _('Blog') }}</span>
               </h2>
-              <a href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
+              <a href="{{ h.url_for('pages.blog_show', page='/') }}" class="btn btn-primary btn-primary-outline">{{ _('Archive') }}</a>
             </div>
             <div class="panel-body">
               {% for item in blogs %}
-              <a class="item" href="{{ h.url_for(controller='ckanext.pages.controller:PagesController', action='blog_show', page='/' + item.name) }}">
+              <a class="item" href="{{ h.url_for('pages.blog_show', page='/' + item.name) }}">
                 {% if item.image %}
                 <span class="image-wrap">
                   <img class="image" src="{{ item.image }}" alt="photo"> {% endif %}

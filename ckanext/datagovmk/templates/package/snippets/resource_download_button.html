@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-{% resource 'datagovmk/js/modules/increment-downloads.js' %}
+{% asset 'datagovmk/increment-downloads' %}
 
 <div class="btn-group resource-download">
   <a class="btn btn-success resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}" {% if res.url_type == 'upload' %} data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}" {% endif %}>
@@ -36,16 +36,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </button>
         <ul class="dropdown-menu">
           <li>
-            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
+            <a href="{{ h.url_for('datastore.dump', resource_id=res.id, bom=True) }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
               <span>CSV</span>
             </a>
-            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='tsv', bom=True) }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
+            <a href="{{ h.url_for('datastore.dump', resource_id=res.id, format='tsv', bom=True) }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
               <span>TSV</span>
             </a>
-            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='json') }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
+            <a href="{{ h.url_for('datastore.dump', resource_id=res.id, format='json') }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
               <span>JSON</span>
             </a>
-            <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='xml') }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
+            <a href="{{ h.url_for('datastore.dump', resource_id=res.id, format='xml') }}" target="_blank" data-module="datagovmk-increment-downloads" data-module-resource_id="{{ res.id }}">
               <span>XML</span>
             </a>
           </li>

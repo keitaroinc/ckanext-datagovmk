@@ -16,25 +16,29 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-
+import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.datagovmk.helpers as helpers
-import json
 from ckan.lib.plugins import DefaultTranslation
 from ckan.logic import get_action
-from routes.mapper import SubMapper
 from ckanext.datagovmk import actions
 from ckanext.datagovmk import auth
-from ckanext.datagovmk.logic import import_spatial_data
+import ckanext.datagovmk.cli as cli
 from ckanext.datagovmk.utils import populate_location_name_from_spatial_uri
 from ckanext.datagovmk import monkey_patch
 from ckan.lib import email_notifications
 from ckan.lib import base
-from ckan.common import config
+from ckan.plugins.toolkit import config
+
+from ckanext.datagovmk.views import (bulk_download,
+                                     report_issue,
+                                     override_user,
+                                     override_dataset,
+                                     override_stats)
 
 
-monkey_patch.activity_streams()
+# monkey_patch.activity_streams()
 monkey_patch.validators()
 
 
@@ -84,6 +88,7 @@ def _notifications_for_activities(activities, user_dict):
 
     return notifications
 
+
 email_notifications._notifications_for_activities = _notifications_for_activities
 
 
@@ -91,19 +96,21 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IBlueprint)
 
     # IConfigurer
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'datagovmk')
+        toolkit.add_resource('assets', 'datagovmk')
 
-        config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
+        # config_['licenses_group_url'] = '{0}/licenses.json'.format(config_['ckan.site_url'].rstrip('/'))
+        # print(config)
 
     # ITemplateHelpers
     def get_helpers(self):
@@ -149,7 +156,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         package_create = get_action('package_create')
         package_update = get_action('package_update')
-        #resource_delete = get_action('resource_delete')
+
         return {
             'datagovmk_get_related_datasets': actions.get_related_datasets,
             'datagovmk_prepare_zip_resources': actions.prepare_zip_resources,
@@ -162,9 +169,9 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'user_create': actions.user_create,
             'user_update': actions.user_update,
             'user_activity_list': actions.user_activity_list,
-            'user_activity_list_html': actions.user_activity_list_html,
+            # 'user_activity_list_html': actions.user_activity_list_html,
             'dashboard_activity_list': actions.dashboard_activity_list,
-            'dashboard_activity_list_html': actions.dashboard_activity_list_html,
+            # 'dashboard_activity_list_html': actions.dashboard_activity_list_html,
             'package_search': actions.package_search,
             'resource_show': actions.resource_show,
             'organization_show': actions.organization_show,
@@ -191,7 +198,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def update_config_schema(self, schema):
         ignore_missing = toolkit.get_validator('ignore_missing')
-        validators = [ignore_missing, unicode]
+        validators = [ignore_missing]
 
         schema.update({
             'footer_links': validators,
@@ -205,62 +212,20 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         return schema
 
-    # IRoutes
-    def before_map(self, map):
-        map.connect(
-            '/api/i18n/{lang}',
-            controller='ckanext.datagovmk.controller:ApiController',
-            action='i18n_js_translations'
-        )
-        map.connect('/api/download/{package_id}/resources',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_resources_metadata')
-        map.connect('/api/download/{package_id}/metadata',
-                    controller='ckanext.datagovmk.controller:BulkDownloadController',
-                    action='download_package_metadata')
+    # IBlueprint
+    def get_blueprint(self):
+        return [bulk_download, report_issue, override_user,
+                override_dataset, override_stats]
 
-        # Override the resource download links, so we can count the number of downloads.
-        with SubMapper(map, controller='ckanext.datagovmk.controller:DownloadController') as m:
-            m.connect('resource_download',
-                      '/dataset/{id}/resource/{resource_id}/download',
-                      action='resource_download')
-            m.connect('resource_download',
-                      '/dataset/{id}/resource/{resource_id}/download/{filename}',
-                      action='resource_download')
-            m.connect('download_zip',
-                      '/download/zip/{zip_id}',
-                      action='download_zip')
-            m.connect('search',
-                      '/dataset',
-                      action='search')
-
-        # map user routes
-        with SubMapper(map, controller='ckanext.datagovmk.controller:DatagovmkUserController') as m:
-            m.connect('register', '/user/register', action='datagovmk_register')
-            m.connect('/user/activate/{id:.*}', action='perform_activation')
-
-        map.connect('/issues/report_site_issue',
-                    controller='ckanext.datagovmk.controller:ReportIssueController',
-                    action='report_issue_form')
-
-        map.connect('/datastore/dump/{resource_id}',
-                    controller='ckanext.datagovmk.controller:OverrideDatastoreController',
-                    action='dump')
-
-        map.connect('/stats',
-                    controller="ckanext.datagovmk.controller:StatsController",
-                    action="index")
-
-        return map
 
     # IPackageController
     def before_index(self, pkg_dict):
         if 'title_translated' in pkg_dict:
             titles = pkg_dict['title_translated']
             titles_json = json.loads(titles)
-            pkg_dict['title_en'] = titles_json.get('en','').lower()
-            pkg_dict['title_mk'] = titles_json.get('mk','').lower()
-            pkg_dict['title_sq'] = titles_json.get('sq','').lower()
+            pkg_dict['title_en'] = titles_json.get('en', '').lower()
+            pkg_dict['title_mk'] = titles_json.get('mk', '').lower()
+            pkg_dict['title_sq'] = titles_json.get('sq', '').lower()
         stats = actions.get_package_stats(pkg_dict['id'])
         if stats:
             pkg_dict['extras_file_size'] = str(stats.get('file_size') or '0').rjust(24, '0')
@@ -271,7 +236,6 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def before_view(self, pkg_dict):
         return pkg_dict
-
 
     def before_search(self, search_params):
         """ Before making a search with package_search, make sure to exclude
@@ -284,3 +248,7 @@ class DatagovmkPlugin(plugins.SingletonPlugin, DefaultTranslation):
             search_params.update({'fq': fq + ' -extras_org_catalog_enabled:true'})
 
         return search_params
+
+    # IClick
+    def get_commands(self):
+        return cli.get_commands()

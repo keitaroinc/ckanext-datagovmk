@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 ckan.module('datagovmk-increment-downloads', function($) {
-    console.log('test')
+
     return {
         initialize: function() {
             this.el.on('click', function(e) {

@@ -17,8 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from xml.dom.minidom import getDOMImplementation
 import csv
-from io import BytesIO
-import cStringIO
+from io import BytesIO, StringIO
 import json
 import codecs
 import re
@@ -38,7 +37,7 @@ import smtplib
 from socket import error as socket_error
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.MIMEBase import MIMEBase
+from email.mime.base import MIMEBase
 from smtplib import SMTPRecipientsRefused
 from ckan.plugins.toolkit import _
 
@@ -217,7 +216,7 @@ def export_dict_to_xml(value_dict, root_name):
 
     root = doc.documentElement
 
-    for prop, value in value_dict.iteritems():
+    for prop, value in value_dict.items():
         _add_element(doc, root, prop, value)
 
     xml = doc.toprettyxml()
@@ -241,7 +240,7 @@ def _add_element(doc, parent_el, element_name, value):
     elif isinstance(value, dict):
         dict_el = doc.createElement(element_name)
         parent_el.appendChild(dict_el)
-        for prop, val in value.iteritems():
+        for prop, val in value.items():
             _add_element(doc, dict_el, prop, val)
     else:
         _add_simple_element(doc, parent_el, element_name, value)
@@ -250,10 +249,10 @@ def _add_element(doc, parent_el, element_name, value):
 def _add_simple_element(doc, parent_el, element_name, value):
     el = doc.createElement(element_name)
 
-    if not isinstance(value, str) and not isinstance(value, unicode):
+    if not isinstance(value, str) and not isinstance(value, str):
         value = str(value)
-    if not isinstance(value, unicode):
-        value = unicode(value, 'utf-8')
+    if not isinstance(value, str):
+        value = str(value)
     txt = doc.createTextNode(value)
     el.appendChild(txt)
     parent_el.appendChild(el)
@@ -267,11 +266,9 @@ def to_utf8_str(value):
     :returns: UTF-8 representation of the provided value.
     """
     if isinstance(value, str):
-        return unicode(value, 'utf-8')
-    elif isinstance(value, unicode):
         return value
     else:
-        return unicode(str(value), 'utf-8')
+        return str(value)
 
 
 class UnicodeWriter:
@@ -282,16 +279,15 @@ class UnicodeWriter:
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
+        self.queue = StringIO()
         self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
         self.stream = f
         self.encoder = codecs.getincrementalencoder(encoding)()
 
     def writerow(self, row):
-        self.writer.writerow([s.encode("utf-8") for s in row])
+        self.writer.writerow([s for s in row])
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
-        data = data.decode("utf-8")
         # ... and reencode it into the target encoding
         data = self.encoder.encode(data)
         # write to the target stream
@@ -313,7 +309,7 @@ def export_dict_to_csv(value_dict):
     """
     stream = BytesIO()
 
-    fieldnames = [prop for prop,_ in value_dict.iteritems()]
+    fieldnames = [prop for prop,_ in value_dict.items()]
 
     writer = UnicodeWriter(stream)
 

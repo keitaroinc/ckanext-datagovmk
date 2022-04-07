@@ -12,20 +12,16 @@
 <section class="additional-info">
     {% block download_metadata %}
     <div class="btn-group pull-right">
-        <a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController', action='download_package_metadata', format='json', package_id=c.pkg_dict['id']) }}"
+        <a href="{{ h.url_for('bulk_download.download_package_metadata', format='json', package_id=c.pkg_dict['id']) }}"
            class="btn btn-success"><i class="fa fa-download"></i> {{ _('Download Dataset Metadata') }} </a>
         <button href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                            action='download_package_metadata', format='json', package_id=c.pkg_dict['id']) }}">JSON</a></li>
-            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                            action='download_package_metadata', format='xml', package_id=c.pkg_dict['id']) }}">XML</a></li>
-            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                            action='download_package_metadata', format='rdf', package_id=c.pkg_dict['id']) }}">RDF</a></li>
-            <li><a href="{{ h.url_for(controller='ckanext.datagovmk.controller:BulkDownloadController',
-                            action='download_package_metadata', format='csv', package_id=c.pkg_dict['id']) }}">CSV</a></li>
+            <li><a href="{{ h.url_for('bulk_download.download_package_metadata', format='json', package_id=c.pkg_dict['id']) }}">JSON</a></li>
+            <li><a href="{{ h.url_for('bulk_download.download_package_metadata', format='xml', package_id=c.pkg_dict['id']) }}">XML</a></li>
+            <li><a href="{{ h.url_for('bulk_download.download_package_metadata', format='rdf', package_id=c.pkg_dict['id']) }}">RDF</a></li>
+            <li><a href="{{ h.url_for('bulk_download.download_package_metadata', format='csv', package_id=c.pkg_dict['id']) }}">CSV</a></li>
         </ul>
       </div>
     {% endblock%}
