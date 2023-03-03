@@ -12,7 +12,7 @@
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.9.4",
     "gulp-less": "^3.5.0",
-    "npm": "^6.0.1"
+    "npm": "^6.14.18"
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",
